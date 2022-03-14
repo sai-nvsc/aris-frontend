@@ -1,5 +1,3 @@
-import { useTheme } from "@emotion/react";
-import { Button, CssBaseline } from "@mui/material";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import scarecrow from "../../assets/scarecrow.png";

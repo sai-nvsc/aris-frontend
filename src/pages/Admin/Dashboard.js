@@ -24,13 +24,11 @@ import {
   ValueAxis,
   AreaSeries,
   LineSeries,
-  Legend,
 } from "@devexpress/dx-react-chart-material-ui";
 import { Stack, Animation } from "@devexpress/dx-react-chart";
 //DOH data
 import { confidence as dataa } from "../extra/demo-data";
 import { incidence as data } from "../extra/demo-data";
-import { barangay as dataaa } from "../extra/demo-data";
 import { bitecase as bite } from "../extra/demo-data";
 import CssBaseline from "@mui/material/CssBaseline";
 import Footer from "../../components/Layouts/Footer";

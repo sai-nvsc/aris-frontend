@@ -19,8 +19,7 @@ import DateAdapterMoment from "@mui/lab/AdapterMoment";
 // import { addPerson, getAllPerson } from "../../redux/action/PersonActions";
 
 const AddPetVaxxDetail = () => {
-  const { user } = useSelector((state) => state.user);
-  const { pets, loading } = useSelector((state) => state.pets);
+  const { pets } = useSelector((state) => state.pets);
   const dispatch = useDispatch();
   const [open, setopen] = useState(false);
   const [values, setvalues] = useState({

@@ -27,7 +27,6 @@ import {
   getClinics,
   requestAppointment,
 } from "../../../redux/slices/AppointmentSlice";
-import { getActiveBiteCase } from "../../../redux/slices/BiteCaseSlice";
 import { setCurrentLocation } from "../../../redux/slices/UserSlices";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
@@ -39,9 +38,7 @@ const CreateAppointment = () => {
   const { loadingClinics, clinics, ...rest } = useSelector(
     (state) => state.appointments
   );
-  const { latitude, longitude, location_loading } = useSelector(
-    (state) => state.user
-  );
+  const { latitude, longitude } = useSelector((state) => state.user);
   const [value, setvalue] = useState({
     purpose: "",
     time_slot: "",

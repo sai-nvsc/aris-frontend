@@ -9,8 +9,6 @@ import {
   FormControlLabel,
   FormLabel,
   Grid,
-  ImageList,
-  ImageListItem,
   Radio,
   RadioGroup,
 } from "@mui/material";
@@ -22,12 +20,10 @@ import { SendHealthReportThunk } from "../../../redux/slices/VaccineSlice";
 
 const SendHealthReport = () => {
   const { user } = useSelector((state) => state.user);
-  const { bites, vaxx } = useSelector((state) => state.vaccine);
+  const { bites } = useSelector((state) => state.vaccine);
   const dispatch = useDispatch();
-  const [imagePreview, setimagePreview] = useState([]);
-  const [images, setImages] = useState([]);
   const [open, setopen] = useState(false);
-  
+
   const [values, setvalues] = useState({
     bite_case: bites[0]._id,
     user: user._id,
@@ -36,25 +32,25 @@ const SendHealthReport = () => {
     desc: "",
   });
 
-  const onChange = (e) => {
-    console.log(e.target.files);
-    const files = Array.from(e.target.files);
-    setimagePreview([]);
-    setImages([]);
-    console.log(files[0]);
-    files.forEach((file) => {
-      const reader = new FileReader();
+  // const onChange = (e) => {
+  //   console.log(e.target.files);
+  //   const files = Array.from(e.target.files);
+  //   setimagePreview([]);
+  //   setImages([]);
+  //   console.log(files[0]);
+  //   files.forEach((file) => {
+  //     const reader = new FileReader();
 
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setimagePreview((oldArray) => [...oldArray, reader.result]);
-          setImages((oldArray) => [...oldArray, reader.result]);
-        }
-      };
+  //     reader.onload = () => {
+  //       if (reader.readyState === 2) {
+  //         setimagePreview((oldArray) => [...oldArray, reader.result]);
+  //         setImages((oldArray) => [...oldArray, reader.result]);
+  //       }
+  //     };
 
-      reader.readAsDataURL(file);
-    });
-  };
+  //     reader.readAsDataURL(file);
+  //   });
+  // };
 
   const onInputChange = (e) => {
     setvalues({ ...values, [e.target.name]: e.target.value });
@@ -101,8 +97,8 @@ const SendHealthReport = () => {
       type: "",
       desc: "",
     });
-    setimagePreview([]);
-    setImages([]);
+    // setimagePreview([]);
+    // setImages([]);
   };
   const handleOpen = () => {
     setopen(true);
@@ -163,33 +159,7 @@ const SendHealthReport = () => {
                   value={values.desc}
                 ></StyledTextField>
               </Grid>
-
-              <Grid item xs={12}>
-                <Button variant="contained" component="label">
-                  <input
-                    type="file"
-                    name="report_image"
-                    accept="images/*"
-                    multiple
-                    onChange={onChange}
-                    hidden
-                  />
-                  Upload Pictures
-                </Button>
-              </Grid>
             </Grid>
-            <ImageList cols={6} rowHeight={100}>
-              {imagePreview.map((img) => (
-                <ImageListItem key={img}>
-                  <img
-                    src={img}
-                    key={img}
-                    alt="things to be uploaded"
-                    loading="lazy"
-                  />
-                </ImageListItem>
-              ))}
-            </ImageList>
           </DialogContent>
           <DialogActions>
             <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>

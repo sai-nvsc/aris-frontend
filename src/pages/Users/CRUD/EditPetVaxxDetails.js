@@ -1,4 +1,4 @@
-import { Add, Edit } from "@mui/icons-material";
+import { Edit } from "@mui/icons-material";
 import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import {
@@ -10,18 +10,13 @@ import {
   Grid,
 } from "@mui/material";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { StyledTextField } from "../../../assets/styles";
-import {
-  AddVaxxDetailThunk,
-  EditPetVaccineThunk,
-} from "../../../redux/slices/PetSlice";
+import { EditPetVaccineThunk } from "../../../redux/slices/PetSlice";
 import moment from "moment";
 import DateAdapterMoment from "@mui/lab/AdapterMoment";
 
 const EditPetVaxxDetail = ({ data, id }) => {
-  const { user } = useSelector((state) => state.user);
-  const { pets, loading } = useSelector((state) => state.pets);
   const dispatch = useDispatch();
   const [open, setopen] = useState(false);
   const [values, setvalues] = useState({
