@@ -1,0 +1,192 @@
+{
+    "Header": {
+      "title": "Welcome to A.R.I.S",
+      "paragraph": "Save your pets, your family, and yourself from Rabies by keeping your pet's rabies vaccinations up to date and saving the people around you."
+    },
+    "About": {
+      "paragraph1": "Vaccination has undeniably been very beneficial in promoting a healthy global population. In terms of computational approaches, immunoinformatics systems such as ARIS have paved the way for a better understanding of the rabies virus. This could be a significant step forward in addressing a critical global health challenge per population.",
+      "paragraph": "A.R.I.S (Anti-Rabies Immunoinformatics System) is a system that aims to provide anti-rabies immunization services to animal bite centers and other facilities that are legible to administer anti rabies vaccines in Taguig City. As a result, the system is solely capable of administering anti-rabies vaccines. The system is a requirement for the subject course IT Capstone of BSIT Fourth Year students from TUP-Taguig. ",
+      "Why": [
+        "Lorem ipsum dolor",
+        "Tempor incididunt",
+        "Lorem ipsum dolor",
+        "Incididunt ut labore"
+      ],
+      "Why2": [
+        "Aliquip ex ea commodo",
+        "Lorem ipsum dolor",
+        "Exercitation ullamco",
+        "Lorem ipsum dolor"
+      ]
+    },
+    "Gallery": [
+      {
+        "title": "Project Title",
+        "largeImage": "img/portfolio/01-large.jpg",
+        "smallImage": "img/portfolio/01-small.jpg"
+      },
+      {
+        "title": "Project Title",
+        "largeImage": "img/portfolio/02-large.jpg",
+        "smallImage": "img/portfolio/02-small.jpg"
+      },
+      {
+        "title": "Project Title",
+        "largeImage": "img/portfolio/03-large.jpg",
+        "smallImage": "img/portfolio/03-small.jpg"
+      },
+      {
+        "title": "Project Title",
+        "largeImage": "img/portfolio/04-large.jpg",
+        "smallImage": "img/portfolio/04-small.jpg"
+      },
+      {
+        "title": "Project Title",
+        "largeImage": "img/portfolio/05-large.jpg",
+        "smallImage": "img/portfolio/05-small.jpg"
+      },
+      {
+        "title": "Project Title",
+        "largeImage": "img/portfolio/06-large.jpg",
+        "smallImage": "img/portfolio/06-small.jpg"
+      },
+      {
+        "title": "Project Title",
+        "largeImage": "img/portfolio/07-large.jpg",
+        "smallImage": "img/portfolio/07-small.jpg"
+      },
+      {
+        "title": "Project Title",
+        "largeImage": "img/portfolio/08-large.jpg",
+        "smallImage": "img/portfolio/08-small.jpg"
+      },
+      {
+        "title": "Project Title",
+        "largeImage": "img/portfolio/09-large.jpg",
+        "smallImage": "img/portfolio/09-small.jpg"
+      }
+    ],
+    "Services": [
+      {
+        "img": "img/icons/step1.png",
+        "name": "Wash the Wound Immediately",
+        "text": "Wash the wound with soap or detergent as soon as possible under running tap water for at least 10 minutes. "
+      },
+      {
+        "img": "img/icons/step2.png",
+        "name": "Dry the Wound",
+        "text": "After thorough washing, pat the wound dry with a clean cloth."
+      },
+      {
+        "img": "img/icons/step3.png",
+        "name": "Apply disinfectant",
+        "text": "Apply disinfectant - e.g. povidone iodine, spirit, etc. - after thoroughly washing and drying the wound."
+      },
+      {
+        "img": "img/icons/step4.png",
+        "name": "Don't Apply Irritants",
+        "text": "Irritants, such as bleach, Chilli, soil, oils, turmeric, lime, salt, and plant juice are just a few examples that should not be applied on the wounds."
+      },
+      {
+        "img": "img/icons/step5.png",
+        "name": "Avoid Touching the Wound with Bare Hands",
+        "text": "Don't touch the wound with bare hands."
+      },
+      {
+        "img": "img/icons/step6.png",
+        "name": "Postpone Suturing if Possible",
+        "text": "If suturing is at all necessary, it should be performed after cleaning and infiltrating RIG at the depth of wound and only minimum number of loose suture should be applied."
+      },
+     {
+       "img": "img/icons/step7.png",
+        "name": "Don't cauterize",
+        "text": "Don't burn the skin or flesh of (a wound) using a heated instrument or caustic chemical in order to stop bleeding or to prevent infection."
+      },
+      {
+        "img": "img/icons/step8.png",
+         "name": "Watch for Signs of Infection",
+         "text": "Seek help if you suspect infection or possible exposure to rabies, or if the wound is severe"
+       }
+    ],
+    "Testimonials": [
+      {
+        "img": "img/testimonials/01.jpg",
+        "text": "What is rabies?",
+        "name": "Rabies is a virus-borne disease that is spread from animals to humans. There are two types of rabies symptoms: frantic and paralytic. The most common form of human rabies is frantic rabies."
+      },
+      {
+        "img": "img/testimonials/02.jpg",
+        "text": "How is rabies transmitted?",
+        "name": "The rabies virus invades the nervous system of mammals. It is primarily transmitted from the rabid animal's saliva when it bites or scratches someone. Licks to wounds or grazed and broken skin, or to the lining of the mouth and nose, can also transmit the disease."
+      },
+      {
+        "img": "img/testimonials/03.jpg",
+        "text": "How does rabies develop in humans?",
+        "name": "The rabies virus enters the human body via the innermost layer of tissue called subcutaneous tissue. It migrates along nerves to the spinal cord and brain at an estimated speed of 12-24 mm a day. The incubation period for a person infected with rabies can be as long as 1 year."
+      },
+      {
+        "img": "img/testimonials/05.jpg",
+        "text": "What are the signs and symptoms of rabies?",
+        "name": "The first symptoms of rabies are similar to those of the flu such as general weakness or discomfort, fever, and headache. As the rabies virus incubates inside the body, the person may experience an itching sensation around the bite area. Patients will later experience delirium, abnormal behavior, hydrophobia, and insomnia."
+      },  
+      {
+        "img": "img/testimonials/06.jpg",
+        "text": "What are the symptoms of rabies in a dog or animal?",
+        "name": "Dogs infected with the rabies virus develop the following symptoms:. Restlessness, Incoordination and paralysis, Lethargy, Hoarse barking or inability to do so, Hyper salivation and excessive salivation."
+      },
+      {
+        "img": "img/testimonials/04.jpg",
+        "text": "Can rabies be transmitted from human to human?",
+        "name": "It is extremely rare, but precautions still need to be taken to avoid coming into contact with the saliva and other bodily fluids of infected persons."
+      }
+    ],
+    "Team": [
+      {
+        "img": "img/team/01.jpg",
+        "name": "Ashley Jullien Supnet",
+        "job": "Web Developer"
+      },
+      {
+        "img": "img/team/02.jpg",
+        "name": "Mathew Jose Matanguihan",
+        "job": "Mobile Developer"
+      },
+      {
+        "img": "img/team/03.jpg",
+        "name": "Jenny Gel Castor",
+        "job": "Web Designer"
+      },
+      {
+        "img": "img/team/04.jpg",
+        "name": "Sairyl Navasca",
+        "job": "Lead Developer"
+      }
+    ],
+    "Contact": {
+      "address": "14. East Service Road, Western Bicutan, 1630, Taguig City ",
+      "phone": "+1 123 456 1234",
+      "email": "aris@company.com",
+      "facebook": "fb.com",
+      "twitter": "twitter.com",
+      "youtube": "youtube.com"
+    },
+    "Features": [
+      {
+        "icon": "fa fa-list-alt",
+        "title": "Vaccination Tracker",
+        "text": "It enables you to track your vaccination status from time to time."
+      },
+      {
+        "icon": "fa fa-calendar",
+        "title": "Appointment System",
+        "text": "It enables you to set an appointment ahead of time for future and emergency purposes."
+      },
+      {
+        "icon": "fa fa-hospital-o",
+        "title": "Nearby Treatment Centers",
+        "text": "It enables you to see the nearby Treatment Centers on your location."
+      }
+    
+    ]
+  }
+  
