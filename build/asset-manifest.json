@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.95db3424.css",
-    "main.js": "/static/js/main.71fb06d4.js",
+    "main.js": "/static/js/main.4cc6df34.js",
     "static/js/787.db9b214f.chunk.js": "/static/js/787.db9b214f.chunk.js",
     "static/media/paw.gif": "/static/media/paw.483d17d1ef5c2960e44f.gif",
     "static/media/1.svg": "/static/media/1.065e2d5958c7e208ff026ca48edd1057.svg",
@@ -9,7 +9,6 @@
     "static/media/roboto-all-700-normal.woff": "/static/media/roboto-all-700-normal.ef6d1d09b20b877fee4e.woff",
     "static/media/roboto-all-400-normal.woff": "/static/media/roboto-all-400-normal.376ea5d93f71583052f6.woff",
     "static/media/roboto-all-300-normal.woff": "/static/media/roboto-all-300-normal.8fc5f5f22c9951113696.woff",
-    "static/media/5.svg": "/static/media/5.21bb2e6f3c395ad4b6bb4ac6399675e9.svg",
     "static/media/4.svg": "/static/media/4.a0778114421a122bebbb328093e4525a.svg",
     "static/media/scarecrow.png": "/static/media/scarecrow.144423900f483cf20dfd.png",
     "static/media/roboto-latin-500-normal.woff2": "/static/media/roboto-latin-500-normal.869888415d0b1a99ae5c.woff2",
@@ -46,11 +45,11 @@
     "static/media/wave.svg": "/static/media/wave.d77c9b187e48ee118e647e63e1856fdd.svg",
     "index.html": "/index.html",
     "main.95db3424.css.map": "/static/css/main.95db3424.css.map",
-    "main.71fb06d4.js.map": "/static/js/main.71fb06d4.js.map",
+    "main.4cc6df34.js.map": "/static/js/main.4cc6df34.js.map",
     "787.db9b214f.chunk.js.map": "/static/js/787.db9b214f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.95db3424.css",
-    "static/js/main.71fb06d4.js"
+    "static/js/main.4cc6df34.js"
   ]
 }
