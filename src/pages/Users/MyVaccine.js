@@ -22,7 +22,7 @@ const MyVaccine = () => {
   useEffect(() => {
     dispatch(GetBiteCasesThunk({ id: user._id }));
     return () => {};
-  }, [dispatch]);
+  }, [dispatch, user._id]);
   return (
     <Box
       sx={{

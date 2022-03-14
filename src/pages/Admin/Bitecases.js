@@ -18,7 +18,6 @@ import {
   InputLabel,
   MenuItem,
   Modal,
-  Paper,
   Popover,
   Radio,
   RadioGroup,
@@ -55,7 +54,7 @@ const Bitecases = () => {
     dispatch(GetAllCaseThunk({ id: user.clinic }));
     return () => {};
   }, [dispatch, user]);
-  
+
   const [values, setvalues] = useState({
     user: "",
     exposure_category: "",
@@ -64,7 +63,7 @@ const Bitecases = () => {
     type_of_exposure: "",
     route: "",
     source_of_exposure: "",
-    bodypart:"",
+    bodypart: "",
     anti_tetanus: "",
     vaccine: "",
     status_of_vaccination: "",
@@ -95,11 +94,8 @@ const Bitecases = () => {
       "history_of_exposure.source_of_exposure",
       values.source_of_exposure
     );
-    formData.append(
-      "history_of_exposure.bodypart",
-      values.bodypart
-    );
-    
+    formData.append("history_of_exposure.bodypart", values.bodypart);
+
     formData.append("anti_tetanus", values.anti_tetanus);
     formData.append("vaccine", values.vaccine);
     formData.append("status_of_vaccination", values.status_of_vaccination);
@@ -274,7 +270,6 @@ const Bitecases = () => {
         pt: 8,
         pb: 6,
         minHeight: "100vh",
-
       }}
     >
       <PersistentDrawerLeft />
@@ -708,7 +703,7 @@ const Bitecases = () => {
                 />
               </Grid> */}
 
-<Grid item xs={6} sm={6} md={6}>
+              <Grid item xs={6} sm={6} md={6}>
                 <FormControl
                   required
                   fullWidth

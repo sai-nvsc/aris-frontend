@@ -6,7 +6,6 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import {
   Badge,
@@ -30,36 +29,15 @@ import MoreVert from "@mui/icons-material/MoreVert";
 import { AdminNavMenu } from "../../helpers/admin_nav";
 
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import FolderSharedRoundedIcon from "@mui/icons-material/FolderSharedRounded";
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import WarehouseIcon from "@mui/icons-material/Warehouse";
 import AssessmentIcon from "@mui/icons-material/Assessment";
 import CampaignIcon from "@mui/icons-material/Campaign";
-import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
 const drawerWidth = 265;
-
-const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
-  ({ theme, open }) => ({
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: `-${drawerWidth}px`,
-    ...(open && {
-      transition: theme.transitions.create("margin", {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      marginLeft: 0,
-    }),
-  })
-);
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",

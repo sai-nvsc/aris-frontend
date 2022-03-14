@@ -24,7 +24,7 @@ import Footer from "../../components/Layouts/Footer";
 import SendHealthReport from "./CRUD/SendHealthReport";
 import { Comments } from "./Comments";
 
-const MyVaccine_Details = () => {
+const MyVaccineDetails = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const params = useParams();
@@ -323,4 +323,4 @@ const MyVaccine_Details = () => {
   );
 };
 
-export default MyVaccine_Details;
+export default MyVaccineDetails;

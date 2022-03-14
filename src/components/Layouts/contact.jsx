@@ -1,7 +1,7 @@
 import { useState } from "react";
 import emailjs from "emailjs-com";
 import Copyright from "./Copyright";
-import { Container, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 const initialState = {
   clinic_name: "",

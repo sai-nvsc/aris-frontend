@@ -9,7 +9,6 @@ import {
   Container,
   CssBaseline,
   Grid,
-  Pagination,
   Snackbar,
   Typography,
 } from "@mui/material";
@@ -19,7 +18,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { clearSuccess, GetAllPetsThunk } from "../../redux/slices/PetSlice";
 import CreatePet from "./CRUD/CreatePets";
-import { Link } from "react-router-dom";
 import { StyledLink } from "../../assets/styles";
 import { clearError } from "../../redux/slices/UserSlices";
 import Footer from "../../components/Layouts/Footer";

@@ -1,28 +1,13 @@
 import React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { styled } from "@mui/material/styles";
-import {
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  Container,
-  Divider,
-  Grid,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Box, Container, Grid, Paper, Typography } from "@mui/material";
 import {
   Chart,
   ArgumentAxis,
   AreaSeries,
   ValueAxis,
   LineSeries,
-  PieSeries,
-  Title,
   Legend,
 } from "@devexpress/dx-react-chart-material-ui";
 import { Stack, Animation } from "@devexpress/dx-react-chart";
@@ -30,7 +15,6 @@ import { Stack, Animation } from "@devexpress/dx-react-chart";
 import { confidence as dataa } from "../extra/demo-data";
 import { incidence as data } from "../extra/demo-data";
 
-import { barangay as dataaa } from "../extra/demo-data";
 import { bitecase as bite } from "../extra/demo-data";
 
 import Footer from "../../components/Layouts/Footer";
@@ -55,10 +39,6 @@ const Item = (props) => (
   <Legend.Item sx={{ flexDirection: "column" }} {...props} />
 );
 
-const ValueLabel = (props) => {
-  const { text } = props;
-  return <ValueAxis.Label {...props} text={`${text}%`} />;
-};
 const ChartRootBase = styled(Chart.Root)(() => ({
   [`&.${classes.chart}`]: {
     paddingRight: "20px",
@@ -66,10 +46,6 @@ const ChartRootBase = styled(Chart.Root)(() => ({
 }));
 const ChartRoot = (props) => (
   <ChartRootBase className={classes.chart} {...props} />
-);
-
-const TitleText = (props) => (
-  <Title.Text {...props} sx={{ whiteSpace: "pre" }} />
 );
 
 const StyledChart = styled(Chart)(() => ({
@@ -92,7 +68,6 @@ const Analytics = () => {
         pt: 7,
         pb: 12,
         minHeight: "100vh",
-
       }}
     >
       <CssBaseline />

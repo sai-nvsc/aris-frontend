@@ -18,7 +18,6 @@ import {
 import PersistentDrawerLeft from "../../components/Layouts/UserSidebar";
 import { DataGrid } from "@mui/x-data-grid";
 import Footer from "../../components/Layouts/Footer";
-import { style } from "@mui/system";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -29,7 +28,6 @@ import {
 
 import EditPet from "./CRUD/EditPets";
 import Delete from "../../components/Layouts/Dialogs/Delete";
-import { StyledButton } from "../../assets/styles";
 import AddPetVaxxDetail from "./CRUD/AddPetVaxxDetail";
 import EditPetVaxxDetail from "./CRUD/EditPetVaxxDetails";
 const moment = require("moment");
@@ -55,10 +53,7 @@ const handleRowClick = (param, e) => {
 const PetsProfile = () => {
   const [open, setOpen] = useState(false);
   const params = useParams();
-  const { pets, loading, success, errors, ...rest } = useSelector(
-    (state) => state.pets
-  );
-  const [row, setrow] = useState(pets ? pets[0].vaccine_history : []);
+  const { pets, loading, success, errors } = useSelector((state) => state.pets);
   const dispatch = useDispatch();
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

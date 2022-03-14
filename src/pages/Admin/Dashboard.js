@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PersistentDrawerLeft from "../../components/Layouts/AdminSidebar";
-import {
-  StyledLink,
-} from "../../assets/styles";
+import { StyledLink } from "../../assets/styles";
 import { styled } from "@mui/material/styles";
 
 //eslint-disable-next-line
 import {
   Box,
   Card,
-  CardActions,
   CardActionArea,
   CardContent,
   CardMedia,
@@ -27,17 +24,9 @@ import {
   ValueAxis,
   AreaSeries,
   LineSeries,
-  PieSeries,
-  Title,
   Legend,
 } from "@devexpress/dx-react-chart-material-ui";
-import {
-  Stack,
-  Animation,
-  EventTracker,
-  HoverState,
-  SelectionState,
-} from "@devexpress/dx-react-chart";
+import { Stack, Animation } from "@devexpress/dx-react-chart";
 //DOH data
 import { confidence as dataa } from "../extra/demo-data";
 import { incidence as data } from "../extra/demo-data";
@@ -45,14 +34,13 @@ import { barangay as dataaa } from "../extra/demo-data";
 import { bitecase as bite } from "../extra/demo-data";
 import CssBaseline from "@mui/material/CssBaseline";
 import Footer from "../../components/Layouts/Footer";
-import { GetAllCaseThunk, GetAllCasesThunk } from "../../redux/slices/BiteCaseSlice";
+import { GetAllCasesThunk } from "../../redux/slices/BiteCaseSlice";
 //icons
 const bell = require("../../assets/8.svg").default;
 const apt = require("../../assets/2.svg").default;
 const inv = require("../../assets/3.svg").default;
 const chart = require("../../assets/4.svg").default;
 const px = require("../../assets/1.svg").default;
-const bc = require("../../assets/5.svg").default;
 
 //Charts
 const PREFIX = "ARIS";
@@ -69,22 +57,6 @@ const ChartRootBase = styled(Chart.Root)(() => ({
 const ChartRoot = (props) => (
   <ChartRootBase className={classes.chart} {...props} />
 );
-const Root = (props) => (
-  <Legend.Root
-    {...props}
-    sx={{ display: "flex", margin: "auto", flexDirection: "row" }}
-  />
-);
-const Label = (props) => (
-  <Legend.Label sx={{ pt: 1, whiteSpace: "wrap" }} {...props} />
-);
-const Item = (props) => (
-  <Legend.Item sx={{ flexDirection: "column" }} {...props} />
-);
-const ValueLabel = (props) => {
-  const { text } = props;
-  return <ValueAxis.Label {...props} text={`${text}%`} />;
-};
 
 const StyledChart = styled(Chart)(() => ({
   [`&.${classes.chart}`]: {
@@ -142,7 +114,6 @@ const cards = [
 const Dashboard = () => {
   const { bitecase } = useSelector((state) => state.bitecase);
   const { cases } = useSelector((state) => state.cases);
-  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -173,7 +144,6 @@ const Dashboard = () => {
         pt: 6,
         pb: 5,
         minHeight: "100vh",
-
       }}
     >
       <CssBaseline />
@@ -202,7 +172,7 @@ const Dashboard = () => {
                     valueField="bites"
                     argumentField="year"
                   />
-{/*              <Legend  position="bottom" rootComponent={Root} itemComponent={Item} labelComponent={Label} />*/}
+                  {/*              <Legend  position="bottom" rootComponent={Root} itemComponent={Item} labelComponent={Label} />*/}
                   <Animation />
                 </StyledChart>
               </StyledLink>
@@ -361,12 +331,12 @@ const Dashboard = () => {
                   {bitecase ? bitecase.length : 0}
                 </Typography>
               </StyledLink>
-             </Paper>
-      
+            </Paper>
+
             <Paper
               elevation={12}
               style={{ margin: "0px 0px 8px 0px", border: "2px solid #ff8a80" }}
-            > 
+            >
               <StyledLink to="/admin/bitecases">
                 <Typography component="h2" align="center">
                   {/* change ko to wherein all bitecases in all clinics maffetch */}
@@ -377,7 +347,6 @@ const Dashboard = () => {
                 </Typography>
               </StyledLink>
             </Paper>
-
           </Grid>
         </Grid>
       </Container>

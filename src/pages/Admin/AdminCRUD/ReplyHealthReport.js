@@ -9,7 +9,6 @@ import {
   DialogTitle,
   DialogContent,
   Grid,
-  Paper,
   Typography,
 } from "@mui/material";
 import { StyledTextField } from "../../../assets/styles";

@@ -14,11 +14,9 @@ import Px from "../Admin/Px";
 import ViewBiteCase from "../Admin/AdminCRUD/ViewBiteCase";
 
 const AdminOutlets = () => {
-  const { user, loading, isAuthenticated, errors, role } = useSelector(
-    (state) => state.user
-  );
+  const { loading, isAuthenticated, role } = useSelector((state) => state.user);
   return (
-    <> 
+    <>
       {loading === false && isAuthenticated && role === "admin" ? (
         <Routes>
           <Route index element={<Dashboard />} />
@@ -32,7 +30,6 @@ const AdminOutlets = () => {
 
           <Route path="/bitecase/get/:id" element={<ViewBiteCase />} />
           <Route path="/px" element={<Px />} />
-
         </Routes>
       ) : (
         isAuthenticated === false && <Navigate to={"/login-admin"} />

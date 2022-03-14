@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -61,8 +61,6 @@ const Accounts = () => {
   //pagination
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - admin.length) : 0;
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -111,7 +109,6 @@ const Accounts = () => {
         pt: 8,
         pb: 6,
         minHeight: "100vh",
-
       }}
     >
       <PersistentDrawerLeft />

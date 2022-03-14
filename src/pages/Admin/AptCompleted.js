@@ -1,4 +1,4 @@
-import { Card, Grid, Skeleton, Typography } from "@mui/material";
+import { Grid, Skeleton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import moment from "moment";
@@ -19,34 +19,35 @@ const AppointmentsCompleted = ({ completed }) => {
                   backgroundColor: "white",
                 }}
               >
-                <Typography variant="h4" sx={{ margin: 2}}>
-                {appointment.user[0].first_name} {appointment.user[0].last_name}
+                <Typography variant="h4" sx={{ margin: 2 }}>
+                  {appointment.user[0].first_name}{" "}
+                  {appointment.user[0].last_name}
                 </Typography>
                 <Typography
                   variant="subtitle1"
                   color="text.secondary"
-                  sx={{ marginLeft: 2}}
+                  sx={{ marginLeft: 2 }}
                 >
                   Date: {moment(appointment.date).format("MMMM DD, YYYY")}
                 </Typography>
                 <Typography
                   variant="subtitle1"
                   color="text.secondary"
-                  sx={{ marginLeft: 2}}
+                  sx={{ marginLeft: 2 }}
                 >
                   Time: {appointment.time_slot}
                 </Typography>
                 <Typography
                   variant="subtitle1"
                   color="text.secondary"
-                  sx={{ marginLeft: 2}}
+                  sx={{ marginLeft: 2 }}
                 >
                   Purpose: {appointment.purpose}
                 </Typography>
                 <Typography
                   variant="subtitle1"
                   color="text.secondary"
-                  sx={{ marginLeft: 2}}
+                  sx={{ marginLeft: 2 }}
                 >
                   Status: {appointment.status}
                 </Typography>

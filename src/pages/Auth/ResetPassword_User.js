@@ -79,6 +79,19 @@ const ResetPasswordUser = () => {
             </Alert>
           </Snackbar>
         )}
+        {password_error !== "" && (
+          <Snackbar
+            open={true}
+            autoHideDuration={3000}
+            onClose={onClose}
+            name="error"
+          >
+            <Alert severity="error" variant="filled">
+              <AlertTitle>Error Login</AlertTitle>
+              {password_error}
+            </Alert>
+          </Snackbar>
+        )}
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <Box
             sx={{

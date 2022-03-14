@@ -5,7 +5,6 @@ import { Header } from "../components/Layouts/header";
 import { Features } from "../components/Layouts/features";
 import { About } from "../components/Layouts/about";
 import { Services } from "../components/Layouts/services";
-import { Gallery } from "../components/Layouts/gallery";
 import { Testimonials } from "../components/Layouts/testimonials";
 import { Team } from "../components/Layouts/Team";
 import { Contact } from "../components/Layouts/contact";

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Edit } from "@mui/icons-material";
-import { Box, Container, Grid, Modal, Paper, Typography } from "@mui/material";
+import { Box, Container, Grid, Modal, Typography } from "@mui/material";
 import {
   StyledTextField,
   StyledButton,

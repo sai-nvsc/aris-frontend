@@ -8,15 +8,11 @@ import {
   Container,
   Grid,
   Modal,
-  Paper,
   Snackbar,
   Typography,
   TextField,
 } from "@mui/material";
-import {
-  StyledTextField,
-  StyledButton,
-} from "../../assets/styles";
+import { StyledTextField, StyledButton } from "../../assets/styles";
 import { Edit } from "@mui/icons-material";
 import DateAdapterMoment from "@mui/lab/AdapterMoment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
@@ -24,13 +20,20 @@ import DatePicker from "@mui/lab/DatePicker";
 import Footer from "../../components/Layouts/Footer";
 import PersistentDrawerLeft from "../../components/Layouts/AdminSidebar";
 import { useDispatch, useSelector } from "react-redux";
-import { AddInvThunk, GetAllInvThunk, clearError, clearSuccess } from "../../redux/slices/InventorySlice";
+import {
+  AddInvThunk,
+  GetAllInvThunk,
+  clearError,
+  clearSuccess,
+} from "../../redux/slices/InventorySlice";
 import Delete from "../../components/Layouts/Dialogs/Delete";
-import EditInventory from "../Admin/AdminCRUD/EditInventory"
+import EditInventory from "../Admin/AdminCRUD/EditInventory";
 import moment from "moment";
 
 const Inventory = () => {
-  const { inventory, loading, errors, success } = useSelector((state) => state.inventory);
+  const { inventory, loading, errors, success } = useSelector(
+    (state) => state.inventory
+  );
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -53,8 +56,8 @@ const Inventory = () => {
     formData.append("stock", values.stock);
     formData.append("exp_date", values.exp_date);
     formData.append("clinic", user.clinic);
-   
-    dispatch(AddInvThunk({ data: formData }));    
+
+    dispatch(AddInvThunk({ data: formData }));
   };
 
   function refreshPage() {
@@ -75,46 +78,88 @@ const Inventory = () => {
     return () => {};
   }, [dispatch, user]);
 
-
-//Datagrid
-const columns = [
-  { field: "brand_name", headerName: "Brand Name", flex: 1, headerAlign: 'center', align:'center'},
-  { field: "generic_name", headerName: "Generic Name", flex: 1, headerAlign: 'center', align:'center'},
-  { field: "batch_no", headerName: "Batch No.", flex: 1, headerAlign: 'center', align:'center' },
-  { field: "stock", headerName: "Stock", flex: 1, headerAlign: 'center', align:'center'},
-  { field: "exp_date", headerName: "Expiration Date", flex: 1, headerAlign: 'center', align:'center',
-    renderCell: (cellValues) => {
-      return moment(cellValues.row.exp_date).format(
-        "MMM. DD, YYYY"
-      );
+  //Datagrid
+  const columns = [
+    {
+      field: "brand_name",
+      headerName: "Brand Name",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
     },
-  },
-  { field: "Edit", headerName: "Edit", flex: 1, headerAlign: 'center', align:'center',
-    renderCell: (cellValues) => {
-      return <EditInventory id={inventory.id} data={cellValues.row} startIcon={<Edit style={{ color: "#ff8a80" }} />} />;
+    {
+      field: "generic_name",
+      headerName: "Generic Name",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
     },
-    sortable: false,
-  },
-  { field: "Delete", headerName: "Delete", flex: 1, headerAlign: 'center', align:'center',
-    sortable: false,
-    renderCell: (cellValues) => {
-      return (
-        <Delete
-          id={inventory._id}
-          //name={"this entry"}
-          collection="bitecases"
-          data={cellValues.row}
-        />
-      );
+    {
+      field: "batch_no",
+      headerName: "Batch No.",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
     },
-  },
-];
-const handleCellClick = (param, e) => {
-  e.stopPropagation();
-};
-const handleRowClick = (param, e) => {
-  e.stopPropagation();
-};
+    {
+      field: "stock",
+      headerName: "Stock",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "exp_date",
+      headerName: "Expiration Date",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      renderCell: (cellValues) => {
+        return moment(cellValues.row.exp_date).format("MMM. DD, YYYY");
+      },
+    },
+    {
+      field: "Edit",
+      headerName: "Edit",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      renderCell: (cellValues) => {
+        return (
+          <EditInventory
+            id={inventory.id}
+            data={cellValues.row}
+            startIcon={<Edit style={{ color: "#ff8a80" }} />}
+          />
+        );
+      },
+      sortable: false,
+    },
+    {
+      field: "Delete",
+      headerName: "Delete",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      sortable: false,
+      renderCell: (cellValues) => {
+        return (
+          <Delete
+            id={inventory._id}
+            //name={"this entry"}
+            collection="bitecases"
+            data={cellValues.row}
+          />
+        );
+      },
+    },
+  ];
+  const handleCellClick = (param, e) => {
+    e.stopPropagation();
+  };
+  const handleRowClick = (param, e) => {
+    e.stopPropagation();
+  };
 
   return (
     <Box
@@ -123,38 +168,37 @@ const handleRowClick = (param, e) => {
         pt: 8,
         pb: 6,
         minHeight: "100vh",
-
       }}
     >
       <PersistentDrawerLeft />
       <CssBaseline />
       <Container maxWidth="xl">
-      {success && (
-      <Snackbar
-        open={success}
-        autoHideDuration={3000}
-        onClose={onClose}
-        name="sucess"
-      >
-        <Alert severity="success" variant="filled">
-          <AlertTitle>Success</AlertTitle>
-          {success}
-        </Alert>
-      </Snackbar>
-    )}
-    {errors && (
-      <Snackbar
-        open={errors}
-        autoHideDuration={3000}
-        onClose={onClose}
-        name="error"
-      >
-        <Alert severity="error" variant="filled">
-          <AlertTitle>Error</AlertTitle>
-          {errors}
-        </Alert>
-      </Snackbar>
-    )}
+        {success && (
+          <Snackbar
+            open={success}
+            autoHideDuration={3000}
+            onClose={onClose}
+            name="sucess"
+          >
+            <Alert severity="success" variant="filled">
+              <AlertTitle>Success</AlertTitle>
+              {success}
+            </Alert>
+          </Snackbar>
+        )}
+        {errors && (
+          <Snackbar
+            open={errors}
+            autoHideDuration={3000}
+            onClose={onClose}
+            name="error"
+          >
+            <Alert severity="error" variant="filled">
+              <AlertTitle>Error</AlertTitle>
+              {errors}
+            </Alert>
+          </Snackbar>
+        )}
         <Grid
           container
           direction="row"
@@ -189,42 +233,42 @@ const handleRowClick = (param, e) => {
           </Grid>
         </Grid>
 
-    <Grid item xs container flexDirection={"column"}>
-    <Box
-    sx={{
-      bgcolor: "background.paper",
-      pt: 8,
-      pb: 6,
+        <Grid item xs container flexDirection={"column"}>
+          <Box
+            sx={{
+              bgcolor: "background.paper",
+              pt: 8,
+              pb: 6,
 
-      '& .restock': {
-        backgroundColor: '#ff8a80',
-        color: '#000',
-      },
-      '& .clear': {
-        backgroundColor: '#fff',
-        color: '#000',
-      },
-    }}>
-    <div style={{ height: 525, width: "auto" }}>
-
-      {!loading && inventory && (
-        <DataGrid
-            rows={inventory}             
-            columns={columns}
-            getRowId={(row) => row._id}
-            onCellClick={handleCellClick}
-            onRowClick={handleRowClick}
-            components={{ Toolbar: GridToolbar }}
-            getCellClassName={(params) => {
-              if (params.field.stock === 'stock') {
-                return '';
-              }
-              return params.value <= 5 ? 'restock' : 'clear';
+              "& .restock": {
+                backgroundColor: "#ff8a80",
+                color: "#000",
+              },
+              "& .clear": {
+                backgroundColor: "#fff",
+                color: "#000",
+              },
             }}
-          />
-        )}
-        </div>
-        </Box>
+          >
+            <div style={{ height: 525, width: "auto" }}>
+              {!loading && inventory && (
+                <DataGrid
+                  rows={inventory}
+                  columns={columns}
+                  getRowId={(row) => row._id}
+                  onCellClick={handleCellClick}
+                  onRowClick={handleRowClick}
+                  components={{ Toolbar: GridToolbar }}
+                  getCellClassName={(params) => {
+                    if (params.field.stock === "stock") {
+                      return "";
+                    }
+                    return params.value <= 5 ? "restock" : "clear";
+                  }}
+                />
+              )}
+            </div>
+          </Box>
         </Grid>
       </Container>
 
@@ -238,7 +282,6 @@ const handleRowClick = (param, e) => {
         top="50%"
         position="absolute"
       >
-      
         <Box
           sx={{
             display: "flex",
@@ -251,7 +294,6 @@ const handleRowClick = (param, e) => {
           }}
         >
           <Container maxWidth="lg">
-            
             <Typography
               component="h1"
               variant="h4"
@@ -351,9 +393,8 @@ const handleRowClick = (param, e) => {
                 variant="contained"
                 onClick={handleSubmit}
               >
-                Add 
+                Add
               </StyledButton>
-
             </Box>
           </Container>
         </Box>

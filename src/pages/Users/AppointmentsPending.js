@@ -3,7 +3,6 @@ import { Box } from "@mui/system";
 import React from "react";
 import moment from "moment";
 import CreateAppointment from "./CRUD/CreateAppointment";
-import { StyledButton } from "../../assets/styles";
 import Cancellation from "../../components/Layouts/Dialogs/Cancellation";
 
 const AppointmentsPending = ({ pending }) => {
@@ -67,9 +66,7 @@ const AppointmentsPending = ({ pending }) => {
                 >
                   Status: {appointment.status}
                 </Typography>
-                <Box
-                  sx={{ justifyContent: "flex-end", display: "flex", m: 2 }}
-                >
+                <Box sx={{ justifyContent: "flex-end", display: "flex", m: 2 }}>
                   <Cancellation
                     name={appointment.clinicId[0].name}
                     date={moment(appointment.date).format("MMMM DD, YYYY")}

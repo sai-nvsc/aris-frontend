@@ -1,7 +1,6 @@
 import {
   Box,
   Card,
-  CardActions,
   CardContent,
   Container,
   CssBaseline,
@@ -19,9 +18,7 @@ import PersistentDrawerLeft from "../../components/Layouts/UserSidebar";
 
 const Announcements = () => {
   const dispatch = useDispatch();
-  const { announcement, loading, errors, success } = useSelector(
-    (state) => state.announcement
-  );
+  const { announcement, loading } = useSelector((state) => state.announcement);
 
   const bull = (
     <Box
@@ -34,7 +31,7 @@ const Announcements = () => {
   useEffect(() => {
     dispatch(ViewAllAnnouncement());
     return () => {};
-  }, []);
+  });
   return (
     <Box
       sx={{
