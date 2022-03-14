@@ -9,7 +9,6 @@ import Inventory from "../Admin/Inventory";
 import Analytics from "../Admin/Analytics";
 import Announcements from "../Admin/Announcement";
 import Accounts from "../Admin/Accounts";
-import Px from "../Admin/Px";
 
 import ViewBiteCase from "../Admin/AdminCRUD/ViewBiteCase";
 
@@ -27,9 +26,7 @@ const AdminOutlets = () => {
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/announcements" element={<Announcements />} />
           <Route path="/auth" element={<Accounts />} />
-
           <Route path="/bitecase/get/:id" element={<ViewBiteCase />} />
-          <Route path="/px" element={<Px />} />
         </Routes>
       ) : (
         isAuthenticated === false && <Navigate to={"/login-admin"} />
