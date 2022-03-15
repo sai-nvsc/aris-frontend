@@ -121,7 +121,7 @@ export const EligibilityCheck = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_HOST}/api/appointments/check/eligibility`
+        `${process.env.REACT_APP_API_HOST}api/appointments/check/eligibility`
       );
       return response.data;
     } catch (error) {
