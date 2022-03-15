@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-axios.defaults.withCredentials = true;
+axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
+  "token"
+)}`;
 export const GetAllAnnThunk = createAsyncThunk(
   "announcement/all",
   async (obj, { rejectWithValue }) => {
