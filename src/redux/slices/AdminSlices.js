@@ -101,6 +101,7 @@ const adminSlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
       state.role = null;
+      localStorage.removeItem("token");
     },
     [LogoutAdminThunk.rejected]: (state, action) => {
       state.loading = false;
@@ -126,6 +127,7 @@ const adminSlice = createSlice({
       state.success = action.payload.success;
       //state.role = action.payload.role;
       state.admin = [...state.admin, action.payload.admin];
+      localStorage.setItem("token", action.payload.token);
     },
     [CreateAdminThunk.rejected]: (state, action) => {
       state.isAuthenticated = false;

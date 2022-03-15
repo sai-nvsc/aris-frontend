@@ -205,6 +205,7 @@ const userSlice = createSlice({
       state.loading = false;
       state.user = action.payload.user;
       state.role = action.payload.role;
+      localStorage.setItem("token", action.payload.token);
     },
     [LoginUserThunk.rejected]: (state, action) => {
       state.isAuthenticated = false;
@@ -305,6 +306,7 @@ const userSlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
       state.role = null;
+      localStorage.removeItem("token");
     },
     [LogoutUserThunk.rejected]: (state, action) => {
       state.loading = false;
