@@ -31,7 +31,7 @@ const Announcements = () => {
   useEffect(() => {
     dispatch(ViewAllAnnouncement());
     return () => {};
-  });
+  }, [dispatch]);
   return (
     <Box
       sx={{
