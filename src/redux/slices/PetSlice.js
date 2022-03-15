@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
+axios.defaults.withCredentials = true;
 export const GetAllPetsThunk = createAsyncThunk(
   "pets/all",
   async (obj, { rejectWithValue }) => {

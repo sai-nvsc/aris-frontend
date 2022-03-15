@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
+axios.defaults.withCredentials = true;
 /* Ang AsyncThunk ay similar sa steState ni react context. Is is called kapag may gusto kang bag
  *
  *
