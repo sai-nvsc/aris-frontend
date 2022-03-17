@@ -222,6 +222,7 @@ const userSlice = createSlice({
       state.loading = false;
       state.user = action.payload.user;
       state.role = action.payload.role;
+      localStorage.setItem("token", action.payload.token);
     },
     [LoginAdminThunk.rejected]: (state, action) => {
       state.isAuthenticated = false;
@@ -237,6 +238,7 @@ const userSlice = createSlice({
       state.loading = false;
       state.role = action.payload.role;
       state.user = action.payload.user;
+      localStorage.setItem("token", action.payload.token);
     },
     [SignUpUserThunk.rejected]: (state, action) => {
       state.isAuthenticated = false;
