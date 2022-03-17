@@ -18,6 +18,30 @@ export const GetAllCasesThunk = createAsyncThunk(
   }
 );
 
+export const GetCategoriesThunk = createAsyncThunk(
+  "bitecase/categories",
+      async (obj, { rejectWithValue }) => {
+        try {
+          const response = await axios.post(`${process.env.REACT_APP_API_HOST}api/bitecase/cat/`, obj);
+          return response.data;
+        } catch (error) {
+          return rejectWithValue(error.response.data.message);
+        }
+      }
+    );
+
+export const GetCatPerClinicThunk = createAsyncThunk(
+  "bitecase/cat-clinic",
+      async (obj, { rejectWithValue }) => {
+        try {
+          const response = await axios.post(`${process.env.REACT_APP_API_HOST}api/bitecase/catperclinic/`, obj);
+           return response.data;
+        } catch (error) {
+          return rejectWithValue(error.response.data.message);
+        }
+      }
+    );
+
 export const GetAllCaseThunk = createAsyncThunk(
   "bitecase/all",
   async (obj, { rejectWithValue }) => {
@@ -132,6 +156,35 @@ const BiteCaseSlice = createSlice({
       state.cases = action.payload.cases;
     },
     [GetAllCasesThunk.rejected]: (state, action) => {
+      state.loading = false;
+      state.errors = action.payload;
+    }, 
+    [GetCategoriesThunk.pending]: (state) => {
+      state.loading = true;
+    },
+    [GetCategoriesThunk.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.cat1 = action.payload.cat.cat1;
+      state.cat2 = action.payload.cat.cat2;
+      state.cat3 = action.payload.cat.cat3;
+      state.cat = action.payload.cat;
+    },
+    [GetCategoriesThunk.rejected]: (state, action) => {
+      state.loading = false;
+      state.errors = action.payload;
+    },
+
+    [GetCatPerClinicThunk.pending]: (state) => {
+      state.loading = true;
+    },
+    [GetCatPerClinicThunk.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.category1 = action.payload.category.category1;
+      state.category2 = action.payload.category.category2;
+      state.category3 = action.payload.category.category3;
+      state.category = action.payload.category;
+    },
+    [GetCatPerClinicThunk.rejected]: (state, action) => {
       state.loading = false;
       state.errors = action.payload;
     },

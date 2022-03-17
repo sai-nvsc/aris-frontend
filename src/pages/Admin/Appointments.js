@@ -1,30 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Alert, AlertTitle, Box, Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Grid, InputLabel, MenuItem, Select, Snackbar, Typography } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Alert, AlertTitle,Box, Container, Grid, Snackbar, Typography } from "@mui/material";
 import PersistentDrawerLeft from "../../components/Layouts/AdminSidebar";
 import Footer from "../../components/Layouts/Footer";
+import DateAdapterMoment from "@mui/lab/AdapterMoment";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import moment from "moment";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { clearError, clearSuccess, getAdminApts } from "../../redux/slices/AppointmentSlice";
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { StyledButton, StyledTextField } from "../../assets/styles";
+import { clearError, clearSuccess, getAdminApts, createAppointment, } from "../../redux/slices/AppointmentSlice";
 import { Cancel } from "@mui/icons-material";
+import { BsCalendarPlusFill } from "react-icons/bs";
+import DatePicker from "@mui/lab/DatePicker";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import AcceptAppointment from "../Admin/AdminCRUD/AcceptAppointment"
 import CancelApt from "../Admin/Admin_CancelApt";
-import moment from "moment";
 
 const Appointments = () => {
-   const { success, errors, appointments, loading } = useSelector((state) => state.appointments);
+  const { success, errors, appointments, loading } = useSelector((state) => state.appointments);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
- /*  useEffect(() => {
-    dispatch(getAdminAppointments({ id: user.clinic }));
-    return () => {};
-  }, [dispatch, user]);
- */
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const onClose = (e) => {
     dispatch(clearSuccess());
     dispatch(clearError());
   };
+
   useEffect(() => {
     dispatch(getAdminApts({ id: user.clinic }));
     return () => {};
@@ -80,6 +85,40 @@ const handleCellClick = (param, e) => {
 const handleRowClick = (param, e) => {
   e.stopPropagation();
 };
+
+//Create Apt
+const [values, setValues] = useState({
+  user: "",
+  time_slot: "",
+  date: moment(),
+  purpose: "",
+  status: "Ongoing",
+});
+
+const handleChange = (e) => {
+  setValues({ ...values, [e.target.name]: e.target.value });
+};
+
+const formHandler = (e) => {
+  e.preventDefault();
+  const formData = new FormData();
+  formData.append("clinicId", user.clinic);
+  formData.append("user", values.user);
+  formData.append("time_slot", values.time_slot);
+  formData.append("date", moment(values.date).toISOString());
+  formData.append("purpose", values.purpose);
+  formData.append("status", values.status);
+  dispatch(createAppointment({data: formData}));
+
+  setOpen(false);
+  setValues({
+    user: "",
+    time_slot: "",
+    date: moment(),
+    purpose: "",
+    status: "Ongoing",
+  });
+};
   
   return (
     <Box
@@ -120,6 +159,15 @@ const handleRowClick = (param, e) => {
         )}
 
       <Container maxWidth="xl">
+      <Grid
+          container
+          direction="row"
+          display="flex"
+          alignItems="center"
+          justifyContent="space-around"
+        >
+
+        <Grid item>
         <Typography
           component="h1"
           variant="h2"
@@ -129,8 +177,25 @@ const handleRowClick = (param, e) => {
         >
           Appointments
         </Typography>
+        </Grid>
 
-  <Grid item xs container flexDirection={"column"}>
+    <Grid item>
+        <StyledButton
+          variant="contained"
+          startIcon={<BsCalendarPlusFill />}
+          onClick={handleOpen}
+          sx={{
+            float: "right"
+          }}
+        >
+          Create Appointment
+        </StyledButton>
+  </Grid>
+  </Grid>
+  </Container>
+
+<Container sx={{ py: 7 }} maxWidth="xl">
+  <Grid item md container flexDirection={"column"}>
     <Box
     sx={{
       bgcolor: "background.paper",
@@ -154,6 +219,10 @@ const handleRowClick = (param, e) => {
             onCellClick={handleCellClick}
             onRowClick={handleRowClick}
             components={ {Toolbar: GridToolbar}}
+            sx={{
+              display:"flex",
+              flexWrap:"wrap"
+            }}
           
             getCellClassName={(params) => {
               if (params.field.status === 'status') {
@@ -166,8 +235,105 @@ const handleRowClick = (param, e) => {
         </div>
         </Box>
         </Grid>
-
       </Container>
+
+
+      <Dialog fullWidth open={open} onClose={handleClose} maxWidth="lg">
+        <DialogTitle>Create Appointment</DialogTitle>
+        <form encType="multipart/form-data" noValidate onSubmit={formHandler}>
+          <DialogContent>
+            <Grid container spacing={2} sx={{ p: 2 }}>
+              <Grid item xs={12} sm={12} md={6}>
+                <StyledTextField
+                  required
+                  fullWidth
+                  id="user"
+                  label="Patient"
+                  name="user"
+                  size="small"
+                  onChange={handleChange}
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={12} md={6}>
+              <LocalizationProvider dateAdapter={DateAdapterMoment}>
+                <DatePicker
+                  disablePast
+                  label="Date"
+                  openTo="month"
+                  views={["year", "month", "day"]}
+                  value={moment(values.date)}
+                  name="date"
+                  InputProps={{ readOnly: true }}
+                  onChange={(newDate) =>
+                    setValues({
+                      ...values, date: newDate.toDate().toISOString(),
+                    })
+                  }
+                  renderInput={(params) => (
+                    <StyledTextField
+                      {...params}
+                      fullWidth
+                      required
+                      size="small"
+                    />
+                  )}
+                />
+              </LocalizationProvider>
+              </Grid>
+             
+              <Grid item xs={12} sm={12} md={6}>
+              <FormControl
+                fullWidth
+                required
+              >
+                <InputLabel>Time Slot</InputLabel>
+                <Select
+                  name="time_slot"
+                  value={values.time_slot}
+                  label="TimeSlot"
+                  size="small"
+                  onChange={handleChange}
+                >
+                  {appointments && appointments.map((time) => {
+                      return (
+                        <MenuItem key={time} value={time.time_slot}>
+                          {time.time_slot}
+                        </MenuItem>
+                      );
+                    })}
+                </Select>
+              </FormControl>
+              </Grid>
+
+              <Grid item xs={12} sm={12} md={6}>
+              <StyledTextField
+                required
+                size="small"
+                fullWidth
+                label="Purpose"
+                name="purpose"
+                onChange={handleChange}
+              />
+            </Grid>          
+            </Grid>
+          </DialogContent>
+
+          <DialogActions>
+            <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
+              Set
+            </Button>
+            <Button
+              variant="outlined"
+              sx={{ mt: 3, mb: 2 }}
+              onClick={handleClose}
+            >
+              Cancel
+            </Button>
+          </DialogActions>
+        </form>
+      </Dialog>
+
       <Footer />
     </Box>
   );

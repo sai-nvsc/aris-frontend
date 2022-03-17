@@ -1,24 +1,24 @@
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import {
-    Button,
-    Dialog,
-    DialogActions,
-    DialogTitle,
-    DialogContent,
-    Grid, 
-    Typography } from "@mui/material";
-    import { useDispatch } from "react-redux";
-  import React, { useState } from "react";
-  import moment from "moment";
-  import { AcceptAptThunk } from "../../../redux/slices/AppointmentSlice";
-  import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+  Button,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+  DialogContent,
+  Grid, 
+  Typography } from "@mui/material";
+import moment from "moment";
+import { AcceptAptThunk } from "../../../redux/slices/AppointmentSlice";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
   
-  const Accept = ({ data }) => {
-      const [open, setOpen] = React.useState(false);
-      const handleOpen = () => setOpen(true);
-      const handleClose = () => setOpen(false);
-      const dispatch = useDispatch();
+const Accept = ({ data }) => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const dispatch = useDispatch();
   
-  const [values, setvalues] = useState({
+const [values, setvalues] = useState({
     status: "Ongoing"
   }); 
   

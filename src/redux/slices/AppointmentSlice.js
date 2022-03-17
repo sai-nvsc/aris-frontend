@@ -15,6 +15,20 @@ axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
   }
 ); */
 
+export const createAppointment = createAsyncThunk(
+  "appointment/new/create",
+  async (obj, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_HOST}api/appointments/add`, obj.data
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 export const getAdminApts = createAsyncThunk(
   "appointments/admin-appointment",
   async (obj, { rejectWithValue }) => {
@@ -187,7 +201,6 @@ const AppointmentSlice = createSlice({
       state.succes = action.payload.message;
       state.errors = null;
       state.appointments = [...state.appointments, action.payload.appointments];
-      //state.appointments = action.payload.appointments;
     },
     [cancelApt.pending]: (state) => {
       state.loading = true;
@@ -196,10 +209,22 @@ const AppointmentSlice = createSlice({
       state.loading = false;
       state.success = action.payload.message;
       state.appointments = [...state.appointments, action.payload.appointments];
-      //state.appointments = action.payload.appointments;
     },
     [cancelApt.rejected]: (state, action) => {
       state.appointment_cancellation_loading = false;
+      state.errors = action.payload;
+    },
+    [createAppointment.pending]: (state) => {
+      state.loading = true;
+    },
+    [createAppointment.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.success = action.payload.success;
+      state.errors = null;
+      state.appointments = [...state.appointments, action.payload.appointment];
+    },
+    [createAppointment.rejected]: (state, action) => {
+      state.loading = false;
       state.errors = action.payload;
     },
 

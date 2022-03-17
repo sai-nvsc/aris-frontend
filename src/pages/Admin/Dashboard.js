@@ -24,15 +24,19 @@ import {
   ValueAxis,
   AreaSeries,
   LineSeries,
+  PieSeries,
+  Title,
+  Legend,
 } from "@devexpress/dx-react-chart-material-ui";
-import { Stack, Animation } from "@devexpress/dx-react-chart";
+import {  Stack, Animation } from "@devexpress/dx-react-chart";
 //DOH data
 import { confidence as dataa } from "../extra/demo-data";
 import { incidence as data } from "../extra/demo-data";
+//import { barangay as dataaa } from "../extra/demo-data";
 import { bitecase as bite } from "../extra/demo-data";
 import CssBaseline from "@mui/material/CssBaseline";
 import Footer from "../../components/Layouts/Footer";
-import { GetAllCasesThunk } from "../../redux/slices/BiteCaseSlice";
+import {  GetAllCasesThunk, GetCategoriesThunk, GetCatPerClinicThunk } from "../../redux/slices/BiteCaseSlice";
 //icons
 const bell = require("../../assets/8.svg").default;
 const apt = require("../../assets/2.svg").default;
@@ -55,6 +59,22 @@ const ChartRootBase = styled(Chart.Root)(() => ({
 const ChartRoot = (props) => (
   <ChartRootBase className={classes.chart} {...props} />
 );
+const Root = (props) => (
+  <Legend.Root
+    {...props}
+    sx={{ display: "flex", margin: "auto", flexDirection: "row" }}
+  />
+);
+const Label = (props) => (
+  <Legend.Label sx={{ pt: 1, whiteSpace: "wrap" }} {...props} />
+);
+const Item = (props) => (
+  <Legend.Item sx={{ flexDirection: "column" }} {...props} />
+);
+const ValueLabel = (props) => {
+  const { text } = props;
+  return <ValueAxis.Label {...props} text={`${text}%`} />;
+};
 
 const StyledChart = styled(Chart)(() => ({
   [`&.${classes.chart}`]: {
@@ -112,6 +132,8 @@ const cards = [
 const Dashboard = () => {
   const { bitecase } = useSelector((state) => state.bitecase);
   const { cases } = useSelector((state) => state.cases);
+  const { category1, category2, category3, cat1, cat2, cat3 }= useSelector((state) => state.category);
+  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -123,6 +145,17 @@ const Dashboard = () => {
     dispatch(GetAllCasesThunk());
     return () => {};
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(GetCategoriesThunk());
+    return () => {};
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(GetCatPerClinicThunk({id: user.clinic}));
+    return () => {};
+  }, [dispatch, user]);
+
 
   //Popover
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -142,6 +175,7 @@ const Dashboard = () => {
         pt: 6,
         pb: 5,
         minHeight: "100vh",
+
       }}
     >
       <CssBaseline />
@@ -170,7 +204,7 @@ const Dashboard = () => {
                     valueField="bites"
                     argumentField="year"
                   />
-                  {/*              <Legend  position="bottom" rootComponent={Root} itemComponent={Item} labelComponent={Label} />*/}
+{/*              <Legend  position="bottom" rootComponent={Root} itemComponent={Item} labelComponent={Label} />*/}
                   <Animation />
                 </StyledChart>
               </StyledLink>
@@ -240,26 +274,27 @@ const Dashboard = () => {
                   />
                   <LineSeries
                     name="CAT1"
-                    valueField="tvNews"
+                    valueField="cat1"
                     argumentField="year"
                   />
                   <LineSeries
                     name="CAT2"
-                    valueField="church"
+                    valueField="cat2"
                     argumentField="year"
                   />
                   <LineSeries
                     name="CAT3"
-                    valueField="military"
+                    valueField="cat3"
                     argumentField="year"
                   />
                   {/* <Legend  position="bottom" rootComponent={Root} itemComponent={Item} labelComponent={Label} /> */}
                   <Animation />
                 </StyledChart>
+
               </StyledLink>
             </Paper>
           </Grid>
-
+               
           {/**   <Grid item  xl={3} md={4} sm={6}xs={12}>
             <Paper
               elevation={12}
@@ -281,6 +316,7 @@ const Dashboard = () => {
             </Paper>
           </Grid>
     */}
+ 
           <Grid item xl={3} md={4} sm={6} xs={12}>
             <Paper
               elevation={12}
@@ -328,23 +364,44 @@ const Dashboard = () => {
                 <Typography align="center" variant="h1">
                   {bitecase ? bitecase.length : 0}
                 </Typography>
-              </StyledLink>
-            </Paper>
 
+                <Typography align="center" variant="h4">
+                  C1: {category1 ? category1.length : 0}
+                </Typography>
+                <Typography align="center" variant="h4">
+                  C2: {category2 ? category2.length : 0}
+                </Typography>
+                <Typography align="center" variant="h4">
+                  C3: {category3 ? category3.length : 0}
+                </Typography>
+
+              </StyledLink>
+             </Paper>
+      
             <Paper
               elevation={12}
               style={{ margin: "0px 0px 8px 0px", border: "2px solid #ff8a80" }}
-            >
+            > 
               <StyledLink to="/admin/bitecases">
                 <Typography component="h2" align="center">
-                  {/* change ko to wherein all bitecases in all clinics maffetch */}
                   Total Bite Cases in Taguig City
                 </Typography>
                 <Typography align="center" variant="h1">
                   {cases ? cases.length : 0}
                 </Typography>
+
+                <Typography align="center" variant="h4">
+                  C1: {cat1 ? cat1.length : 0}
+                </Typography>
+                <Typography align="center" variant="h4">
+                  C2: {cat2 ? cat2.length : 0}
+                </Typography>
+                <Typography align="center" variant="h4">
+                  C3: {cat3 ? cat3.length : 0}
+                </Typography>
               </StyledLink>
             </Paper>
+
           </Grid>
         </Grid>
       </Container>
