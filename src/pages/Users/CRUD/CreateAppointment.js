@@ -11,6 +11,7 @@ import {
   FormLabel,
   Grid,
   InputLabel,
+  Link,
   MenuItem,
   Radio,
   RadioGroup,
@@ -30,6 +31,7 @@ import {
 import { setCurrentLocation } from "../../../redux/slices/UserSlices";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
+import { FaMapPin } from "react-icons/fa";
 const CreateAppointment = () => {
   const [open, setopen] = useState(false);
   const [clinic_choice, setclinic_choice] = useState("Nearby");
@@ -57,7 +59,6 @@ const CreateAppointment = () => {
   const handleChange = (e) => {
     if (e.target.name === "clinic") {
       setselected_clinic(e.target.value);
-      console.log(selected_clinic);
     } else {
       setvalue({ ...value, [e.target.name]: e.target.value });
     }
@@ -181,6 +182,14 @@ const CreateAppointment = () => {
                   </Select>
                 </FormControl>
               </Grid>
+            )}
+            {Object.keys(selected_clinic).length > 0 && (
+              <Link
+                href={`https://www.google.com/maps/search/?api=1&query=${selected_clinic.location.coordinates[1]},${selected_clinic.location.coordinates[0]}`}
+                target="_blank"
+              >
+                View in Map <FaMapPin />
+              </Link>
             )}
             <Grid item sm={12}>
               <LocalizationProvider dateAdapter={DateAdapterMoment}>

@@ -56,7 +56,6 @@ const Inventory = () => {
     formData.append("stock", values.stock);
     formData.append("exp_date", values.exp_date);
     formData.append("clinic", user.clinic);
-
     dispatch(AddInvThunk({ data: formData }));
   };
 

@@ -19,6 +19,8 @@ export const store = configureStore({
     admin: AdminReducer,
     announcement: AnnouncementReducer,
     cases: BiteCaseReducer,
+    category: BiteCaseReducer,
+    cat: BiteCaseReducer,
   },
 });
 

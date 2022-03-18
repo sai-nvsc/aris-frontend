@@ -13,10 +13,10 @@ import {
   import CheckCircleIcon from '@mui/icons-material/CheckCircle';
   
   const Accept = ({ data }) => {
-      const [open, setOpen] = React.useState(false);
-      const handleOpen = () => setOpen(true);
-      const handleClose = () => setOpen(false);
-      const dispatch = useDispatch();
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const dispatch = useDispatch();
   
   const [values, setvalues] = useState({
     status: "Ongoing"
