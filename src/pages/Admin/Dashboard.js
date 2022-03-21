@@ -39,6 +39,9 @@ import {
   GetAllCasesThunk,
   GetCatPerClinicThunk,
 } from "../../redux/slices/BiteCaseSlice";
+import { getCountsClinic } from "../../redux/slices/AnalyticsSlice";
+import { ClinicGenderCountGraph } from "../../data/Analytics/BiteCasePerGender";
+import { ClinicCategoryCountGraph } from "../../data/Analytics/BiteCasePerCategory";
 //icons
 const bell = require("../../assets/8.svg").default;
 const apt = require("../../assets/2.svg").default;
@@ -117,11 +120,7 @@ const cards = [
 
 const Dashboard = () => {
   const { bitecase } = useSelector((state) => state.bitecase);
-  const { category1, category2, category3 } = useSelector(
-    (state) => state.category
-  );
-  const { female, male } = useSelector((state) => state.gender);
-
+  const { clinic_counts } = useSelector((state) => state.analytics);
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -132,6 +131,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(GetAllCasesThunk());
+    dispatch(getCountsClinic());
     return () => {};
   }, [dispatch]);
 
@@ -312,27 +312,42 @@ const Dashboard = () => {
                   Total Bite Cases [Clinic]
                 </Typography>
                 <Typography align="center" variant="h1">
-                  {bitecase ? bitecase.length : 0}
+                  {clinic_counts ? clinic_counts.bitecase : 0}
                 </Typography>
 
                 <Typography align="center" variant="h4">
-                  C1: {category1 ? category1.length : 0}
+                  <ClinicCategoryCountGraph />
                 </Typography>
                 <Typography align="center" variant="h4">
-                  C2: {category2 ? category2.length : 0}
+                  <ClinicGenderCountGraph />
                 </Typography>
-                <Typography align="center" variant="h4">
-                  C3: {category3 ? category3.length : 0}
-                </Typography>
+              </StyledLink>
+            </Paper>
+          </Grid>
+          <Grid item xl={3} md={4} sm={6} xs={12}>
+            <Paper
+              elevation={12}
+              style={{ margin: "0px 0px 8px 0px", border: "2px solid #ff8a80" }}
+            >
+              <StyledLink to="/admin/bitecases">
                 <Typography component="h2" align="center">
-                  Total Bite Cases per Gender [Clinic]
+                  Total Bite Cases [On-going]
                 </Typography>
                 <Typography align="center" variant="h1">
-                  {bitecase ? bitecase.length : 0}
+                  {clinic_counts ? clinic_counts.on_going : 0}
                 </Typography>
 
-                <Typography align="center" variant="h4">
-                  M: {male ? male.length : 0} F: {female ? female.length : 0}
+                <Typography align="center" component="h2">
+                  Total Bite Cases [Cleared]
+                </Typography>
+                <Typography align="center" variant="h1">
+                  {clinic_counts ? clinic_counts.cleared : 0}
+                </Typography>
+                <Typography align="center" component="h2">
+                  Total Bite Cases [Untracked]
+                </Typography>
+                <Typography align="center" variant="h1">
+                  {clinic_counts ? clinic_counts.untracked : 0}
                 </Typography>
               </StyledLink>
             </Paper>

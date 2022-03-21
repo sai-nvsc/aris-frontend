@@ -222,7 +222,7 @@ a:focus,
   display: table;
   width: 100%;
   padding: 0;
-  background: url(../img/intro-bg.jpg) center center no-repeat;
+  background: url(../img/intro-bg.png) center center no-repeat;
   background-color: #e5e5e5;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -235,7 +235,7 @@ a:focus,
 .intro h1 {
   font-family: "Raleway", sans-serif;
   color: #ffffff;
-  -webkit-text-stroke: 1.5px #ff8a80;
+  /* -webkit-text-stroke: 1.5px #ff8a80; */
   font-size: 140px;
   font-weight: 700;
   text-transform: uppercase;

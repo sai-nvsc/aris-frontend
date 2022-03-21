@@ -218,6 +218,25 @@ const Analytics = () => {
               </>
             </Paper>
           </Grid>
+          {/* Total Exposures by Brgy per Year */}
+          <Grid item xl={12} md={12} lg={12} sm={12} xs={12}>
+            <Paper elevation={12}>
+              <>
+                <iframe
+                  title="tebpy"
+                  style={{
+                    background: "#FFFFFF",
+                    border: "none",
+                    borderRadius: "2px",
+                    maxWidth: "100%",
+                  }}
+                  width="1400"
+                  height="720"
+                  src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6238a131-e005-4e8c-8847-02cbb4e1a1f1&maxDataAge=300&theme=light&autoRefresh=true"
+                ></iframe>
+              </>
+            </Paper>
+          </Grid>
         </Grid>
       </Container>
       <Divider light>

@@ -29,6 +29,8 @@ import {
   StyledTableRow,
   StyledButton,
 } from "../../assets/styles";
+import { Edit } from "@mui/icons-material";
+import EditAccount from "../Admin/AdminCRUD/EditAccount";
 import AdminDelete from "../../components/Layouts/Dialogs/AdminDelete";
 import PersistentDrawerLeft from "../../components/Layouts/AdminSidebar";
 import Footer from "../../components/Layouts/Footer";
@@ -181,7 +183,6 @@ const Accounts = () => {
             <Table sx={{ minWidth: 600 }} aria-label="simple table">
               <TableHead>
                 <StyledTableRow>
-                  {/* <StyledTableCell>ID</StyledTableCell> */}
                   <StyledTableCell>Admin Name</StyledTableCell>
                   <StyledTableCell>Role</StyledTableCell>
                   <StyledTableCell>Email</StyledTableCell>
@@ -200,7 +201,7 @@ const Accounts = () => {
                       <StyledTableCell>{acc.email}</StyledTableCell>
                       <StyledTableCell>{acc.username}</StyledTableCell>
                       <StyledTableCell>
-                        {/* <EditAccount accEdit={us} startIcon={<Edit />}/> */}
+                        <EditAccount accEdit={acc} startIcon={<Edit />} />
                       </StyledTableCell>
                       <StyledTableCell>
                         <AdminDelete

@@ -1,7 +1,7 @@
 {
     "Header": {
       "title": "Welcome to A.R.I.S",
-      "paragraph": "Save your pets, your family, and yourself from Rabies by keeping your pet's rabies vaccinations up to date and saving the people around you."
+      "paragraph": "Save your pets, your family, and yourself, act in time to fight against Rabies."
     },
     "About": {
       "paragraph1": "Vaccination has undeniably been very beneficial in promoting a healthy global population. In terms of computational approaches, immunoinformatics systems such as ARIS have paved the way for a better understanding of the rabies virus. This could be a significant step forward in addressing a critical global health challenge per population.",
@@ -142,6 +142,11 @@
     ],
     "Team": [
       {
+        "img": "img/team/04.jpg",
+        "name": "Sairyl Navasca",
+        "job": "Lead Developer"
+      },
+      {
         "img": "img/team/01.jpg",
         "name": "Ashley Jullien Supnet",
         "job": "Web Developer"
@@ -154,16 +159,11 @@
       {
         "img": "img/team/03.jpg",
         "name": "Jenny Gel Castor",
-        "job": "Web Designer"
-      },
-      {
-        "img": "img/team/04.jpg",
-        "name": "Sairyl Navasca",
-        "job": "Lead Developer"
-      }
+        "job": "Mobile Developer"
+      }     
     ],
     "Contact": {
-      "address": "14. East Service Road, Western Bicutan, 1630, Taguig City ",
+      "address": "Km 14. East Service Road, Western Bicutan, 1630, Taguig City ",
       "phone": "+1 123 456 1234",
       "email": "aris@company.com",
       "facebook": "fb.com",

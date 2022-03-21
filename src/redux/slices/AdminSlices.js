@@ -74,6 +74,21 @@ export const DeleteAccThunk = createAsyncThunk(
   }
 );
 
+export const EditAccountThunk = createAsyncThunk(
+  "admin/editaccount",
+  async (obj, { rejectWithValue }) => {
+    try {
+      const response = await axios.patch(
+        `/api/admin/auth/update_account/${obj.id}`,
+        obj.data
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 const initialState = {
   admin: null,
   isAuthenticated: null,
@@ -155,6 +170,20 @@ const adminSlice = createSlice({
       state.loading = false;
       state.succes = null;
       state.errors = action.payload;
+    },
+    [EditAccountThunk.pending]: (state) => {
+      state.loading = true;
+    },
+    [EditAccountThunk.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.success = action.payload.success;
+      state.admin = [...state.admin, action.payload.admin];
+      state.errors = null;
+    },
+    [EditAccountThunk.rejected]: (state, action) => {
+      state.loading = false;
+      state.success = null;
+      state.errors = JSON.parse(action.payload);
     },
     /* [ResetPasswordThunk.pending]: (state) => {
         state.loading = true;

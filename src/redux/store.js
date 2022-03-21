@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import UserReducer from "./slices/UserSlices";
 import AdminReducer from "./slices/AdminSlices";
-
+import AnalyticsReducer from "./slices/AnalyticsSlice";
 import PetReducer from "./slices/PetSlice";
 import InventoryReducer from "./slices/InventorySlice";
 import VaccineReducer from "./slices/VaccineSlice";
@@ -22,6 +22,7 @@ export const store = configureStore({
     category: BiteCaseReducer,
     gender: BiteCaseReducer,
     allgender: BiteCaseReducer,
+    analytics: AnalyticsReducer,
   },
 });
 
