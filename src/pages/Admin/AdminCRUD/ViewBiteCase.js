@@ -22,10 +22,8 @@ import {
   Select,
   Table,
   TableBody,
-  TableCell,
   TableContainer,
   TableHead,
-  TableRow,
   Divider,
   Typography,
 } from "@mui/material";
@@ -100,10 +98,10 @@ const ViewBiteCase = () => {
     >
       <CssBaseline />
       <PersistentDrawerLeft />
-      <Container maxWidth="xl" >
-        {!loading && (          
-          <Grid container spacing={2} >
-           {/*  <div>
+      <Container maxWidth="xl">
+        {!loading && (
+          <Grid container spacing={2}>
+            {/*  <div>
         <PDFDownloadLink document={<ViewBiteCase/>} fileName="Certificate">
         {({loading}) => (loading ? <StyledButton>Loading...</StyledButton> : <StyledButton>Download Certificate</StyledButton>)}
         </PDFDownloadLink>
@@ -112,7 +110,7 @@ const ViewBiteCase = () => {
               Exposure Case# {bites[0].bite_case_no}
             </Typography>
             <Grid item sm={12}>
-      {/*   <Document>
+              {/*   <Document>
           <Page size="A6"> */}
               <ProfileCard>
                 <Grid container spacing={2}>
@@ -124,7 +122,7 @@ const ViewBiteCase = () => {
                     sx={{
                       borderRadius: 4,
                     }}
-                   >
+                  >
                     <Box
                       component="div"
                       sx={{
@@ -136,11 +134,8 @@ const ViewBiteCase = () => {
                         marginLeft: 8,
                       }}
                     >
-                      <Box component="div" >
-                        <Typography
-                          variant="subtitle1"
-                          color="text.secondary"
-                        >
+                      <Box component="div">
+                        <Typography variant="subtitle1" color="text.secondary">
                           Name:
                         </Typography>
                         <Typography
@@ -153,28 +148,19 @@ const ViewBiteCase = () => {
                           </b>
                         </Typography>
 
-                        <Typography
-                          variant="subtitle1"
-                          color="text.secondary"
-                        >
+                        <Typography variant="subtitle1" color="text.secondary">
                           Sex:
                         </Typography>
                         <Typography variant="h5" component="div">
                           <b>{bites[0].user[0].sex} </b>
                         </Typography>
-                        <Typography
-                          variant="subtitle1"
-                          color="text.secondary"
-                        >
+                        <Typography variant="subtitle1" color="text.secondary">
                           Barangay:
                         </Typography>
                         <Typography variant="h5" component="div">
                           <b>{bites[0].user[0].address} </b>
                         </Typography>
-                        <Typography
-                          variant="subtitle1"
-                          color="text.secondary"
-                        >
+                        <Typography variant="subtitle1" color="text.secondary">
                           Birthday:
                         </Typography>
                         <Typography variant="h5" component="div">
@@ -184,19 +170,13 @@ const ViewBiteCase = () => {
                             )}{" "}
                           </b>
                         </Typography>
-                        <Typography
-                          variant="subtitle1"
-                          color="text.secondary"
-                        >
+                        <Typography variant="subtitle1" color="text.secondary">
                           Contact No.:
                         </Typography>
                         <Typography variant="h5" component="div">
                           <b>{bites[0].user[0].phone_number}</b>
                         </Typography>
-                        <Typography
-                          variant="subtitle1"
-                          color="text.secondary"
-                        >
+                        <Typography variant="subtitle1" color="text.secondary">
                           Email:
                         </Typography>
                         <Typography variant="h5" component="div">
@@ -213,10 +193,7 @@ const ViewBiteCase = () => {
                       alt="ARIS QR CODE"
                       sx={{ height: "90%" }}
                     />
-                    <Typography
-                      variant="subtitle1"
-                      color="text.secondary"
-                    >
+                    <Typography variant="subtitle1" color="text.secondary">
                       Bite Case ID
                     </Typography>
                   </Grid>
@@ -224,39 +201,31 @@ const ViewBiteCase = () => {
                 <br />
                 <Divider>Exposure Detail</Divider>
                 <Grid container spacing={2}>
-                  <Grid item
+                  <Grid
+                    item
                     sm={12}
                     md={6}
                     sx={{
                       borderRadius: 4,
                     }}
                   >
-                    <Typography
-                      variant="subtitle1"
-                      color="text.secondary"
-                    >
+                    <Typography variant="subtitle1" color="text.secondary">
                       Date of Exposure:
                     </Typography>
-                    <Typography variant="h5" >
+                    <Typography variant="h5">
                       <b>
                         {moment(bites[0].history_of_exposure.date).format(
                           "MMMM D, YYYY"
                         )}{" "}
                       </b>
                     </Typography>
-                    <Typography
-                      variant="subtitle1"
-                      color="text.secondary"
-                    >
+                    <Typography variant="subtitle1" color="text.secondary">
                       Place of Incident:
                     </Typography>
                     <Typography variant="h5">
                       <b>Barangay {bites[0].history_of_exposure.place} </b>
                     </Typography>
-                    <Typography
-                      variant="subtitle1"
-                      color="text.secondary"
-                    >
+                    <Typography variant="subtitle1" color="text.secondary">
                       Type of Exposure:
                     </Typography>
                     <Typography variant="h5">
@@ -265,50 +234,34 @@ const ViewBiteCase = () => {
                         {bites[0].history_of_exposure.type_of_exposure}{" "}
                       </b>
                     </Typography>
-                 
-                    <Typography
-                      variant="subtitle1"
-                      color="text.secondary"
-                    >
+
+                    <Typography variant="subtitle1" color="text.secondary">
                       Exposure Category:
                     </Typography>
                     <Typography variant="h5">
                       <b>{bites[0].exposure_category} </b>
                     </Typography>
-                    </Grid>
+                  </Grid>
                   <Grid item sm={12} md={6}>
-
-                    <Typography
-                      variant="subtitle1"                    
-                      color="text.secondary"
-                    >
+                    <Typography variant="subtitle1" color="text.secondary">
                       Vaccination Status:
                     </Typography>
                     <Typography variant="h5">
                       <b>{bites[0].status_of_vaccination}</b>
                     </Typography>
-                    <Typography
-                      variant="subtitle1"                   
-                      color="text.secondary"
-                    >
+                    <Typography variant="subtitle1" color="text.secondary">
                       Animal Status:
                     </Typography>
                     <Typography variant="h5">
                       <b>{bites[0].animal_status} </b>
                     </Typography>
-                    <Typography
-                      variant="subtitle1"                    
-                      color="text.secondary"
-                    >
+                    <Typography variant="subtitle1" color="text.secondary">
                       Patient Status:
                     </Typography>
                     <Typography variant="h5">
                       <b>{bites[0].patient_status} </b>
                     </Typography>
-                    <Typography
-                      variant="subtitle1"                    
-                      color="text.secondary"
-                    >
+                    <Typography variant="subtitle1" color="text.secondary">
                       Classification:
                     </Typography>
                     <Typography variant="h5">
@@ -317,10 +270,11 @@ const ViewBiteCase = () => {
                   </Grid>
                 </Grid>
 
-
-              <Grid item><br/></Grid>
+                <Grid item>
+                  <br />
+                </Grid>
               </ProfileCard>
-             {/*  </Page>
+              {/*  </Page>
           </Document> */}
             </Grid>
 
@@ -340,7 +294,10 @@ const ViewBiteCase = () => {
               <br />
               <ProfileCard>
                 <TableContainer component={Paper}>
-                  <Table sx={{ minWidth: 650, alignContent:"center" }} size="small">
+                  <Table
+                    sx={{ minWidth: 650, alignContent: "center" }}
+                    size="small"
+                  >
                     <TableHead>
                       <StyledTableRow>
                         <StyledTableCell>Day</StyledTableCell>
@@ -358,26 +315,18 @@ const ViewBiteCase = () => {
                         vaxx &&
                         vaxx.map((vaccine) => (
                           <StyledTableRow key={vaccine._id}>
-                            <StyledTableCell>
-                              {vaccine.day}
-                            </StyledTableCell>
+                            <StyledTableCell>{vaccine.day}</StyledTableCell>
                             <StyledTableCell>
                               {moment(vaccine.date_injected).format(
                                 "MMM. D, YYYY"
                               )}
                             </StyledTableCell>
-                            <StyledTableCell>
-                              {vaccine.vaccine}
-                            </StyledTableCell>
-                            <StyledTableCell>
-                              {vaccine.lot}
-                            </StyledTableCell>
+                            <StyledTableCell>{vaccine.vaccine}</StyledTableCell>
+                            <StyledTableCell>{vaccine.lot}</StyledTableCell>
                             <StyledTableCell>
                               {vaccine.admin[0].admin_name}
                             </StyledTableCell>
-                            <StyledTableCell>
-                              {vaccine.remarks}
-                            </StyledTableCell>
+                            <StyledTableCell>{vaccine.remarks}</StyledTableCell>
                             <StyledTableCell>
                               <EditVaxx
                                 eVax={vaccine}
@@ -410,8 +359,7 @@ const ViewBiteCase = () => {
               <Box
                 component="main"
                 sx={{ display: "flex", justifyContent: "end" }}
-              >
-              </Box>
+              ></Box>
               <Comments reports={reports} />
             </Grid>
           </Grid>
@@ -598,7 +546,6 @@ const ViewBiteCase = () => {
             </Container>
           </Box>
         </Modal>
-
       </Container>
       <Footer />
     </Box>

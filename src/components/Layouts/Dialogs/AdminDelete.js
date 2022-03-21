@@ -10,10 +10,7 @@ import {
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  DeletePetThunk,
-  DeletePetVaccineThunk,
-} from "../../../redux/slices/PetSlice";
+import { DeletePetVaccineThunk } from "../../../redux/slices/PetSlice";
 import { DeleteInvThunk } from "../../../redux/slices/InventorySlice";
 import { DeleteCaseThunk } from "../../../redux/slices/BiteCaseSlice";
 import { DeleteAccThunk } from "../../../redux/slices/AdminSlices";
@@ -68,8 +65,7 @@ const Delete = ({ id, name, collection, ...rest }) => {
         startIcon={<DeleteForever color="error" />}
         color="error"
         onClick={dialogOpen}
-      >
-      </Button>
+      ></Button>
       <Dialog onClose={handleClose} open={OpemModal}>
         <DialogTitle>Delete {name} ?</DialogTitle>
         <DialogContent>

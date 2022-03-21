@@ -46,10 +46,6 @@ const Item = (props) => (
   <Legend.Item sx={{ flexDirection: "column" }} {...props} />
 );
 
-const ValueLabel = (props) => {
-  const { text } = props;
-  return <ValueAxis.Label {...props} text={`${text}%`} />;
-};
 const ChartRootBase = styled(Chart.Root)(() => ({
   [`&.${classes.chart}`]: {
     paddingRight: "20px",
@@ -79,59 +75,153 @@ const Analytics = () => {
         pt: 7,
         pb: 12,
         minHeight: "100vh",
-
       }}
     >
       <CssBaseline />
       <PersistentDrawerLeft />
-    <Divider light><Chip label="Latest Statistics from ARIS" color="primary"></Chip></Divider>
-   <Container sx={{ py: 5 }} maxWidth="xl">
-    <Grid container item xs={12} spacing={2}>
-      {/* Total Bite Cases  */}
+      <Divider light>
+        <Chip label="Latest Statistics from ARIS" color="primary"></Chip>
+      </Divider>
+      <Container sx={{ py: 5 }} maxWidth="xl">
+        <Grid container item xs={12} spacing={2}>
+          {/* Total Bite Cases  */}
           <Grid item xl={12} md={12} lg={12} sm={12} xs={12}>
             <Paper elevation={12}>
-              <><iframe title="tbc" style={{ background: "#FFFFFF", border: "none", borderRadius: "2px", maxWidth: "100%"}}  width="1400" height="720" src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6234b3a6-6ae5-4c02-8fae-830b77d176eb&maxDataAge=300&theme=light&autoRefresh=true"></iframe></> 
-          </Paper>  
+              <>
+                <iframe
+                  title="tbc"
+                  style={{
+                    background: "#FFFFFF",
+                    border: "none",
+                    borderRadius: "2px",
+                    maxWidth: "100%",
+                  }}
+                  width="1400"
+                  height="720"
+                  src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6234b3a6-6ae5-4c02-8fae-830b77d176eb&maxDataAge=300&theme=light&autoRefresh=true"
+                ></iframe>
+              </>
+            </Paper>
           </Grid>
-      {/* Total Bite Cases Per Category  */}  
+          {/* Total Bite Cases Per Category  */}
           <Grid item xl={3} md={6} sm={12} xs={12}>
             <Paper elevation={12}>
-              <><iframe title="tbcpc" style={{ background: "#FFFFFF", border: "none", borderRadius: "2px", maxWidth: "100%"}}  width="800" height="600" src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6234e0e6-ceb9-4b03-8a49-ae864ed0b9ed&maxDataAge=3600&theme=light&autoRefresh=true"></iframe></> 
-          </Paper>  
+              <>
+                <iframe
+                  title="tbcpc"
+                  style={{
+                    background: "#FFFFFF",
+                    border: "none",
+                    borderRadius: "2px",
+                    maxWidth: "100%",
+                  }}
+                  width="800"
+                  height="600"
+                  src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6234e0e6-ceb9-4b03-8a49-ae864ed0b9ed&maxDataAge=3600&theme=light&autoRefresh=true"
+                ></iframe>
+              </>
+            </Paper>
           </Grid>
-      {/* Total Bite Cases Per Gender  */}  
+          {/* Total Bite Cases Per Gender  */}
           <Grid item xl={3} md={6} sm={12} xs={12}>
             <Paper elevation={12}>
-              <><iframe title="tbcpg" style={{ background: "#FFFFFF", border: "none", borderRadius: "2px", maxWidth: "100%"}}  width="800" height="600" src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6234d221-6ae5-4a31-8a64-830b77ea5baa&maxDataAge=300&theme=light&autoRefresh=true"></iframe></> 
-          </Paper>  
+              <>
+                <iframe
+                  title="tbcpg"
+                  style={{
+                    background: "#FFFFFF",
+                    border: "none",
+                    borderRadius: "2px",
+                    maxWidth: "100%",
+                  }}
+                  width="800"
+                  height="600"
+                  src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6234d221-6ae5-4a31-8a64-830b77ea5baa&maxDataAge=300&theme=light&autoRefresh=true"
+                ></iframe>
+              </>
+            </Paper>
           </Grid>
-      {/* Total Bite Cases by Source */}
+          {/* Total Bite Cases by Source */}
           <Grid item xl={3} md={6} sm={12} xs={12}>
             <Paper elevation={12}>
-              <><iframe title="tbcs" style={{ background: "#FFFFFF", border: "none", borderRadius: "2px", maxWidth: "100%"}}  width="800" height="600" src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6234d829-38ca-40ec-8644-4566dd5918bd&maxDataAge=300&theme=light&autoRefresh=true"></iframe></> 
-          </Paper>  
+              <>
+                <iframe
+                  title="tbcs"
+                  style={{
+                    background: "#FFFFFF",
+                    border: "none",
+                    borderRadius: "2px",
+                    maxWidth: "100%",
+                  }}
+                  width="800"
+                  height="600"
+                  src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6234d829-38ca-40ec-8644-4566dd5918bd&maxDataAge=300&theme=light&autoRefresh=true"
+                ></iframe>
+              </>
+            </Paper>
           </Grid>
-      {/* Total Bite Cases by Type */}
+          {/* Total Bite Cases by Type */}
           <Grid item xl={3} md={6} sm={12} xs={12}>
             <Paper elevation={12}>
-              <><iframe title="tbct" style={{ background: "#FFFFFF", border: "none", borderRadius: "2px", maxWidth: "100%"}}  width="800" height="600" src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6234daf9-ceb9-4460-8bba-ae864ecb6a58&maxDataAge=300&theme=light&autoRefresh=true"></iframe></> 
-          </Paper>  
+              <>
+                <iframe
+                  title="tbct"
+                  style={{
+                    background: "#FFFFFF",
+                    border: "none",
+                    borderRadius: "2px",
+                    maxWidth: "100%",
+                  }}
+                  width="800"
+                  height="600"
+                  src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6234daf9-ceb9-4460-8bba-ae864ecb6a58&maxDataAge=300&theme=light&autoRefresh=true"
+                ></iframe>
+              </>
+            </Paper>
           </Grid>
-      {/* Cases per Brgy by Source */}
+          {/* Cases per Brgy by Source */}
           <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
-          <Paper elevation={12}>
-              <><iframe title="cpbsorce" style={{ background: "#FFFFFF", border: "none", borderRadius: "2px", maxWidth: "100%"}}  width="800" height="600" src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6237e564-ceb9-4dcd-8187-ae864e112cf8&maxDataAge=300&theme=light&autoRefresh=true"></iframe></> 
-          </Paper>  
+            <Paper elevation={12}>
+              <>
+                <iframe
+                  title="cpbsorce"
+                  style={{
+                    background: "#FFFFFF",
+                    border: "none",
+                    borderRadius: "2px",
+                    maxWidth: "100%",
+                  }}
+                  width="800"
+                  height="600"
+                  src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6237e564-ceb9-4dcd-8187-ae864e112cf8&maxDataAge=300&theme=light&autoRefresh=true"
+                ></iframe>
+              </>
+            </Paper>
           </Grid>
-      {/* Cases per Brgy by Type */}
+          {/* Cases per Brgy by Type */}
           <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
-          <Paper elevation={12}>
-              <><iframe title="cpbtype" style={{ background: "#FFFFFF", border: "none", borderRadius: "2px", maxWidth: "100%"}}  width="800" height="600" src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6237e7b7-ba30-423b-8bf7-3581ceb9f952&maxDataAge=300&theme=light&autoRefresh=true"></iframe></> 
-          </Paper>  
+            <Paper elevation={12}>
+              <>
+                <iframe
+                  title="cpbtype"
+                  style={{
+                    background: "#FFFFFF",
+                    border: "none",
+                    borderRadius: "2px",
+                    maxWidth: "100%",
+                  }}
+                  width="800"
+                  height="600"
+                  src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6237e7b7-ba30-423b-8bf7-3581ceb9f952&maxDataAge=300&theme=light&autoRefresh=true"
+                ></iframe>
+              </>
+            </Paper>
           </Grid>
-    </Grid>
-    </Container>
-<Divider light><Chip label="Latest Statistics from DOH" color="primary"></Chip></Divider>
+        </Grid>
+      </Container>
+      <Divider light>
+        <Chip label="Latest Statistics from DOH" color="primary"></Chip>
+      </Divider>
       <Container sx={{ py: 5 }} maxWidth="xl">
         <Grid container item xs={12} spacing={2}>
           <Grid item xl={12} md={12} sm={12} xs={12}>
@@ -154,7 +244,7 @@ const Analytics = () => {
                   valueField="bites"
                   argumentField="year"
                 />
-{/*              <Legend  position="bottom" rootComponent={Root} itemComponent={Item} labelComponent={Label} />*/}{" "}
+                {/*              <Legend  position="bottom" rootComponent={Root} itemComponent={Item} labelComponent={Label} />*/}{" "}
                 <Animation />
               </StyledChart>
               <Typography m={2} component="h2" align="center">
@@ -191,18 +281,21 @@ const Analytics = () => {
                 //max={50}
                 //labelComponent={ValueLabel}
                 />
-                  <LineSeries
-                    name="CAT1"
-                    valueField="cat1"
-                    argumentField="year" />
-                  <LineSeries
-                    name="CAT2"
-                    valueField="cat2"
-                    argumentField="year" />
-                  <LineSeries
-                    name="CAT3"
-                    valueField="cat3"
-                    argumentField="year" />
+                <LineSeries
+                  name="CAT1"
+                  valueField="cat1"
+                  argumentField="year"
+                />
+                <LineSeries
+                  name="CAT2"
+                  valueField="cat2"
+                  argumentField="year"
+                />
+                <LineSeries
+                  name="CAT3"
+                  valueField="cat3"
+                  argumentField="year"
+                />
                 <Legend
                   position="bottom"
                   rootComponent={Root}
@@ -233,10 +326,11 @@ const Analytics = () => {
                 <ArgumentAxis tickFormat={format} />
                 <ValueAxis />
                 <AreaSeries
-                    name="Cat scratches"
-                    valueField="mobile"
-                    argumentField="year" />
-                  <Stack stacks={stacks} />
+                  name="Cat scratches"
+                  valueField="mobile"
+                  argumentField="year"
+                />
+                <Stack stacks={stacks} />
                 <Animation />
               </StyledChart>
               <Typography m={2} component="h2" align="center">
