@@ -34,8 +34,9 @@ import { bitecase as bite } from "../extra/demo-data";
 import CssBaseline from "@mui/material/CssBaseline";
 import Footer from "../../components/Layouts/Footer";
 import {
+  AllCasesPerGenderThunk,
+  ClinicCasesPerGenderThunk,
   GetAllCasesThunk,
-  GetCategoriesThunk,
   GetCatPerClinicThunk,
 } from "../../redux/slices/BiteCaseSlice";
 //icons
@@ -116,10 +117,10 @@ const cards = [
 
 const Dashboard = () => {
   const { bitecase } = useSelector((state) => state.bitecase);
-  const { cases } = useSelector((state) => state.cases);
-  const { category1, category2, category3, cat1, cat2, cat3 } = useSelector(
+  const { category1, category2, category3 } = useSelector(
     (state) => state.category
   );
+  const { female, male } = useSelector((state) => state.gender);
 
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -135,12 +136,17 @@ const Dashboard = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(GetCategoriesThunk());
+    dispatch(GetCatPerClinicThunk({ id: user.clinic }));
+    return () => {};
+  }, [dispatch, user]);
+
+  useEffect(() => {
+    dispatch(AllCasesPerGenderThunk());
     return () => {};
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(GetCatPerClinicThunk({ id: user.clinic }));
+    dispatch(ClinicCasesPerGenderThunk({ id: user.clinic }));
     return () => {};
   }, [dispatch, user]);
 
@@ -181,16 +187,12 @@ const Dashboard = () => {
 
                 <StyledChart data={bite} className={classes.chart}>
                   <ArgumentAxis tickFormat={format} />
-                  <ValueAxis
-                  //max={50}
-                  //labelComponent={ValueLabel}
-                  />
+                  <ValueAxis />
                   <LineSeries
                     name="Bite Cases"
                     valueField="bites"
                     argumentField="year"
                   />
-                  {/*              <Legend  position="bottom" rootComponent={Root} itemComponent={Item} labelComponent={Label} />*/}
                   <Animation />
                 </StyledChart>
               </StyledLink>
@@ -254,10 +256,7 @@ const Dashboard = () => {
 
                 <StyledChart data={data} className={classes.chart}>
                   <ArgumentAxis tickFormat={format} />
-                  <ValueAxis
-                  //max={50}
-                  //labelComponent={ValueLabel}
-                  />
+                  <ValueAxis />
                   <LineSeries
                     name="CAT1"
                     valueField="cat1"
@@ -273,34 +272,11 @@ const Dashboard = () => {
                     valueField="cat3"
                     argumentField="year"
                   />
-                  {/* <Legend  position="bottom" rootComponent={Root} itemComponent={Item} labelComponent={Label} /> */}
                   <Animation />
                 </StyledChart>
               </StyledLink>
             </Paper>
           </Grid>
-
-          {/**   <Grid item  xl={3} md={4} sm={6}xs={12}>
-            <Paper
-              elevation={12}
-              style={{ margin: "0px 0px 8px 0px", border: "2px solid #ff8a80" }}
-            >
-             <StyledLink to="/admin/analytics">
-                <Typography component="h2" align="center">
-                  Total Rabies Cases in Taguig City (2012 - 2018)
-                </Typography>
-                <StyledChart data={dataaa} className={classes.chart}>
-                  <PieSeries
-                    valueField="val"
-                    argumentField="barangay"
-                    innerRadius={0.5}
-                  />
-                  <Animation />
-                </StyledChart>
-              </StyledLink>
-            </Paper>
-          </Grid>
-    */}
 
           <Grid item xl={3} md={4} sm={6} xs={12}>
             <Paper
@@ -319,17 +295,6 @@ const Dashboard = () => {
                     valueField="mobile"
                     argumentField="year"
                   />
-                  {/*   <AreaSeries
-                    name="Dog bites"
-                    valueField="pc"
-                    argumentField="year"
-                  />
-                  <AreaSeries
-                    name="Others"
-                    valueField="console"
-                    argumentField="year"
-                  /> */}
-                  {/* <Legend position="bottom" rootComponent={Root} itemComponent={Item} labelComponent={Label} /> */}
                   <Stack stacks={stacks} />
                   <Animation />
                 </StyledChart>
@@ -344,7 +309,7 @@ const Dashboard = () => {
             >
               <StyledLink to="/admin/bitecases">
                 <Typography component="h2" align="center">
-                  Total Bite Cases
+                  Total Bite Cases [Clinic]
                 </Typography>
                 <Typography align="center" variant="h1">
                   {bitecase ? bitecase.length : 0}
@@ -359,37 +324,23 @@ const Dashboard = () => {
                 <Typography align="center" variant="h4">
                   C3: {category3 ? category3.length : 0}
                 </Typography>
-              </StyledLink>
-            </Paper>
-
-            <Paper
-              elevation={12}
-              style={{ margin: "0px 0px 8px 0px", border: "2px solid #ff8a80" }}
-            >
-              <StyledLink to="/admin/bitecases">
                 <Typography component="h2" align="center">
-                  Total Bite Cases in Taguig City
+                  Total Bite Cases per Gender [Clinic]
                 </Typography>
                 <Typography align="center" variant="h1">
-                  {cases ? cases.length : 0}
+                  {bitecase ? bitecase.length : 0}
                 </Typography>
 
                 <Typography align="center" variant="h4">
-                  C1: {cat1 ? cat1.length : 0}
-                </Typography>
-                <Typography align="center" variant="h4">
-                  C2: {cat2 ? cat2.length : 0}
-                </Typography>
-                <Typography align="center" variant="h4">
-                  C3: {cat3 ? cat3.length : 0}
+                  M: {male ? male.length : 0} F: {female ? female.length : 0}
                 </Typography>
               </StyledLink>
             </Paper>
           </Grid>
         </Grid>
       </Container>
-      <Divider light></Divider>
 
+      <Divider light></Divider>
       <Container sx={{ py: 7 }} maxWidth="xl">
         <Grid container spacing={3}>
           {cards.map((card) => (

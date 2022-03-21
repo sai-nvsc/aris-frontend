@@ -20,7 +20,8 @@ export const store = configureStore({
     announcement: AnnouncementReducer,
     cases: BiteCaseReducer,
     category: BiteCaseReducer,
-    cat: BiteCaseReducer,
+    gender: BiteCaseReducer,
+    allgender: BiteCaseReducer,
   },
 });
 

@@ -29,7 +29,7 @@ import {
   StyledTableRow,
   StyledButton,
 } from "../../assets/styles";
-import Delete from "../../components/Layouts/Dialogs/Delete";
+import AdminDelete from "../../components/Layouts/Dialogs/AdminDelete";
 import PersistentDrawerLeft from "../../components/Layouts/AdminSidebar";
 import Footer from "../../components/Layouts/Footer";
 import {
@@ -203,7 +203,7 @@ const Accounts = () => {
                         {/* <EditAccount accEdit={us} startIcon={<Edit />}/> */}
                       </StyledTableCell>
                       <StyledTableCell>
-                        <Delete
+                        <AdminDelete
                           id={acc._id}
                           name={acc.admin_name}
                           collection="admins"

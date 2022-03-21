@@ -22,7 +22,8 @@ import {
   StyledButton,
 } from "../../assets/styles";
 import { Edit } from "@mui/icons-material";
-import Delete from "../../components/Layouts/Dialogs/Delete";
+import AddIcon from '@mui/icons-material/Add';
+import AdminDelete from "../../components/Layouts/Dialogs/AdminDelete";
 import PersistentDrawerLeft from "../../components/Layouts/AdminSidebar";
 import Footer from "../../components/Layouts/Footer";
 import EditAnn from "../Admin/AdminCRUD/EditAnn"
@@ -142,7 +143,7 @@ const Announcement = () => {
           </Grid>
 
           <Grid item>
-            <StyledButton onClick={handleOpen} margin="10">
+            <StyledButton onClick={handleOpen} margin="10" startIcon={<AddIcon/>}>
               New Announcement
             </StyledButton>
             <StyledButton onClick={refreshPage}>⟳</StyledButton>
@@ -172,7 +173,7 @@ const Announcement = () => {
         <CardActions>
         <EditAnn annEdit={ann} startIcon={<Edit />}/>
 
-        <Delete
+        <AdminDelete
           id={ann._id}
         //name={ann.brand_name}
           collection="announcements"
@@ -238,7 +239,7 @@ const Announcement = () => {
                   label="Description"
                   name="desc"
                   multiline
-                  maxRows={10}
+                  rows={8} 
                   size="small"
                   onChange={handleChange}
                 />
@@ -286,7 +287,7 @@ const Announcement = () => {
                 variant="contained"
                 onClick={handleSubmit}
               >
-                Add 
+                Post 
               </StyledButton>
 
             </Box>

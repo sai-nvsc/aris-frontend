@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Delete from "../../components/Layouts/Dialogs/Delete";
+import AdminDelete from "../../components/Layouts/Dialogs/AdminDelete";
 import CssBaseline from "@mui/material/CssBaseline";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Edit, PreviewOutlined } from "@mui/icons-material";
@@ -139,6 +139,7 @@ const Bitecases = () => {
       flex: 1,
       headerAlign: "center",
       align: "center",
+      minWidth: 140,
       valueGetter: (cellValues) => {
         return (
           cellValues.row.user[0].first_name +
@@ -154,6 +155,7 @@ const Bitecases = () => {
       flex: 1,
       headerAlign: "center",
       align: "center",
+      minWidth: 60,
     },
     {
       field: "date",
@@ -161,6 +163,7 @@ const Bitecases = () => {
       flex: 1,
       headerAlign: "center",
       align: "center",
+      minWidth: 140,
       type: "date",
       valueGetter: (cellValues) =>
         moment(cellValues.row.history_of_exposure.date).format("MMM. DD, YYYY"),
@@ -172,6 +175,7 @@ const Bitecases = () => {
       flex: 1,
       headerAlign: "center",
       align: "center",
+      minWidth: 90,
       valueGetter: (cellValues) => {
         return cellValues.row.history_of_exposure.source_of_exposure;
       },
@@ -183,6 +187,7 @@ const Bitecases = () => {
       flex: 1,
       headerAlign: "center",
       align: "center",
+      minWidth: 90,
       renderCell: (cellValues) => {
         return cellValues.row.history_of_exposure.type_of_exposure;
       },
@@ -193,6 +198,7 @@ const Bitecases = () => {
       flex: 1,
       headerAlign: "center",
       align: "center",
+      minWidth: 100,
     },
     {
       field: "status_of_vaccination",
@@ -200,6 +206,7 @@ const Bitecases = () => {
       flex: 1,
       headerAlign: "center",
       align: "center",
+      minWidth: 90,
     },
     {
       field: "View",
@@ -207,6 +214,7 @@ const Bitecases = () => {
       flex: 1,
       headerAlign: "center",
       align: "center",
+      minWidth: 90,
       sortable: false,
       renderCell: (cellValues) => {
         return (
@@ -227,6 +235,7 @@ const Bitecases = () => {
       flex: 1,
       headerAlign: "center",
       align: "center",
+      minWidth: 90,
       sortable: false,
       renderCell: (cellValues) => {
         return (
@@ -244,10 +253,11 @@ const Bitecases = () => {
       flex: 1,
       headerAlign: "center",
       align: "center",
+      minWidth: 90,
       sortable: false,
       renderCell: (cellValues) => {
         return (
-          <Delete
+          <AdminDelete
             id={cellValues.id}
             collection="bitecases"
             data={cellValues.row}
@@ -269,7 +279,7 @@ const Bitecases = () => {
         bgcolor: "background.paper",
         pt: 8,
         pb: 6,
-        minHeight: "100vh",
+        minHeight: "110vh",
       }}
     >
       <PersistentDrawerLeft />
@@ -333,8 +343,8 @@ const Bitecases = () => {
             <StyledButton onClick={refreshPage}>⟳</StyledButton>
           </Grid>
         </Grid>
-
-        <Grid item xs container flexDirection={"column"}>
+        <br />
+        <Grid item sm flexDirection={"column"}>
           <Box
             sx={{
               bgcolor: "background.paper",
@@ -351,7 +361,7 @@ const Bitecases = () => {
               },
             }}
           >
-            <div style={{ height: 520, width: "auto" }}>
+            <div style={{ height: 520, width: "100%" }}>
               {!loading && bitecase && (
                 <DataGrid
                   rows={bitecase}

@@ -73,7 +73,6 @@ const EditInventory = ({ data, id }) => {
         onClick={handleOpen}
         startIcon={<Edit style={{ color: "#ff8a80" }} />}
       >
-        Edit
       </EditButton>
 
       <Modal

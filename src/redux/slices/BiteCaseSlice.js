@@ -18,18 +18,6 @@ export const GetAllCasesThunk = createAsyncThunk(
   }
 );
 
-export const GetCategoriesThunk = createAsyncThunk(
-  "bitecase/categories",
-      async (obj, { rejectWithValue }) => {
-        try {
-          const response = await axios.post("/api/bitecase/cat/", obj);
-          return response.data;
-        } catch (error) {
-          return rejectWithValue(error.response.data.message);
-        }
-      }
-    );
-
 export const GetCatPerClinicThunk = createAsyncThunk(
   "bitecase/cat-clinic",
       async (obj, { rejectWithValue }) => {
@@ -41,6 +29,30 @@ export const GetCatPerClinicThunk = createAsyncThunk(
         }
       }
     );
+
+export const ClinicCasesPerGenderThunk = createAsyncThunk(
+  "bitecase/gendercase",
+      async (obj, { rejectWithValue }) => {
+        try {
+          const response = await axios.post("/api/bitecase/cases-per-gender/", obj);
+           return response.data;
+        } catch (error) {
+          return rejectWithValue(error.response.data.message);
+        }
+      }
+    );  
+
+  export const AllCasesPerGenderThunk = createAsyncThunk(
+    "bitecase/allgendercase",
+        async (obj, { rejectWithValue }) => {
+          try {
+            const response = await axios.post("/api/bitecase/all-cases-per-gender/", obj);
+              return response.data;
+          } catch (error) {
+            return rejectWithValue(error.response.data.message);
+          }
+        }
+      ); 
 
 export const GetAllCaseThunk = createAsyncThunk(
   "bitecase/all",
@@ -160,21 +172,7 @@ const BiteCaseSlice = createSlice({
       state.loading = false;
       state.errors = action.payload;
     },
-    [GetCategoriesThunk.pending]: (state) => {
-      state.loading = true;
-    },
-    [GetCategoriesThunk.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.cat1 = action.payload.cat.cat1;
-      state.cat2 = action.payload.cat.cat2;
-      state.cat3 = action.payload.cat.cat3;
-      state.cat = action.payload.cat;
-    },
-    [GetCategoriesThunk.rejected]: (state, action) => {
-      state.loading = false;
-      state.errors = action.payload;
-    },
-
+    
     [GetCatPerClinicThunk.pending]: (state) => {
       state.loading = true;
     },
@@ -186,6 +184,33 @@ const BiteCaseSlice = createSlice({
       state.category = action.payload.category;
     },
     [GetCatPerClinicThunk.rejected]: (state, action) => {
+      state.loading = false;
+      state.errors = action.payload;
+    },
+    [ClinicCasesPerGenderThunk.pending]: (state) => {
+      state.loading = true;
+    },
+    [ClinicCasesPerGenderThunk.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.male = action.payload.gender.male;
+      state.female = action.payload.gender.female;
+      state.gender = action.payload.gender;
+    },
+    [ClinicCasesPerGenderThunk.rejected]: (state, action) => {
+      state.loading = false;
+      state.errors = action.payload;
+    },
+
+    [AllCasesPerGenderThunk.pending]: (state) => {
+      state.loading = true;
+    },
+    [AllCasesPerGenderThunk.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.m = action.payload.allgender.m;
+      state.f = action.payload.allgender.f;
+      state.allgender = action.payload.allgender;
+    },
+    [AllCasesPerGenderThunk.rejected]: (state, action) => {
       state.loading = false;
       state.errors = action.payload;
     },

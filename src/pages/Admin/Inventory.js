@@ -10,8 +10,8 @@ import {
   Modal,
   Snackbar,
   Typography,
-  TextField,
 } from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
 import { StyledTextField, StyledButton } from "../../assets/styles";
 import { Edit } from "@mui/icons-material";
 import DateAdapterMoment from "@mui/lab/AdapterMoment";
@@ -20,20 +20,13 @@ import DatePicker from "@mui/lab/DatePicker";
 import Footer from "../../components/Layouts/Footer";
 import PersistentDrawerLeft from "../../components/Layouts/AdminSidebar";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  AddInvThunk,
-  GetAllInvThunk,
-  clearError,
-  clearSuccess,
-} from "../../redux/slices/InventorySlice";
-import Delete from "../../components/Layouts/Dialogs/Delete";
-import EditInventory from "../Admin/AdminCRUD/EditInventory";
+import { AddInvThunk, GetAllInvThunk, clearError, clearSuccess } from "../../redux/slices/InventorySlice";
+import AdminDelete from "../../components/Layouts/Dialogs/AdminDelete";
+import EditInventory from "../Admin/AdminCRUD/EditInventory"
 import moment from "moment";
 
 const Inventory = () => {
-  const { inventory, loading, errors, success } = useSelector(
-    (state) => state.inventory
-  );
+  const { inventory, loading, errors, success } = useSelector((state) => state.inventory);
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -55,8 +48,8 @@ const Inventory = () => {
     formData.append("batch_no", values.batch_no);
     formData.append("stock", values.stock);
     formData.append("exp_date", values.exp_date);
-    formData.append("clinic", user.clinic);
-    dispatch(AddInvThunk({ data: formData }));
+    formData.append("clinic", user.clinic); 
+    dispatch(AddInvThunk({ data: formData }));    
   };
 
   function refreshPage() {
@@ -77,88 +70,46 @@ const Inventory = () => {
     return () => {};
   }, [dispatch, user]);
 
-  //Datagrid
-  const columns = [
-    {
-      field: "brand_name",
-      headerName: "Brand Name",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
+
+//Datagrid
+const columns = [
+  { field: "brand_name", headerName: "Brand Name", flex: 1, headerAlign: 'center', align:'center',minWidth: 110,},
+  { field: "generic_name", headerName: "Generi Name", flex: 1, headerAlign: 'center', align:'center', minWidth: 110,},
+  { field: "batch_no", headerName: "Lot No.", flex: 1, headerAlign: 'center', align:'center',minWidth: 100, },
+  { field: "stock", headerName: "Stock", flex: 1, headerAlign: 'center', align:'center',minWidth: 80,},
+  { field: "exp_date", headerName: "Exp. Date", flex: 1, headerAlign: 'center', align:'center', minWidth: 140,
+    renderCell: (cellValues) => {
+      return moment(cellValues.row.exp_date).format(
+        "MMM. DD, YYYY"
+      );
     },
-    {
-      field: "generic_name",
-      headerName: "Generic Name",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
+  },
+  { field: "Edit", headerName: "Edit", flex: 1, headerAlign: 'center', align:'center',minWidth: 85,
+    renderCell: (cellValues) => {
+      return <EditInventory id={inventory.id} data={cellValues.row} startIcon={<Edit style={{ color: "#ff8a80" }} />} />;
     },
-    {
-      field: "batch_no",
-      headerName: "Batch No.",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
+    sortable: false,
+  },
+  { field: "Delete", headerName: "Delete", flex: 1, headerAlign: 'center', align:'center', minWidth: 90,
+    sortable: false,
+    renderCell: (cellValues) => {
+      return (
+        <AdminDelete
+          id={inventory._id}
+          //name={"this entry"}
+          collection="bitecases"
+          data={cellValues.row}
+        />
+      );
     },
-    {
-      field: "stock",
-      headerName: "Stock",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-    },
-    {
-      field: "exp_date",
-      headerName: "Expiration Date",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      renderCell: (cellValues) => {
-        return moment(cellValues.row.exp_date).format("MMM. DD, YYYY");
-      },
-    },
-    {
-      field: "Edit",
-      headerName: "Edit",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      renderCell: (cellValues) => {
-        return (
-          <EditInventory
-            id={inventory.id}
-            data={cellValues.row}
-            startIcon={<Edit style={{ color: "#ff8a80" }} />}
-          />
-        );
-      },
-      sortable: false,
-    },
-    {
-      field: "Delete",
-      headerName: "Delete",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      sortable: false,
-      renderCell: (cellValues) => {
-        return (
-          <Delete
-            id={inventory._id}
-            //name={"this entry"}
-            collection="bitecases"
-            data={cellValues.row}
-          />
-        );
-      },
-    },
-  ];
-  const handleCellClick = (param, e) => {
-    e.stopPropagation();
-  };
-  const handleRowClick = (param, e) => {
-    e.stopPropagation();
-  };
+  },
+];
+const handleCellClick = (param, e) => {
+  e.stopPropagation();
+};
+const handleRowClick = (param, e) => {
+  e.stopPropagation();
+};
 
   return (
     <Box
@@ -167,37 +118,38 @@ const Inventory = () => {
         pt: 8,
         pb: 6,
         minHeight: "100vh",
+
       }}
     >
       <PersistentDrawerLeft />
       <CssBaseline />
       <Container maxWidth="xl">
-        {success && (
-          <Snackbar
-            open={success}
-            autoHideDuration={3000}
-            onClose={onClose}
-            name="sucess"
-          >
-            <Alert severity="success" variant="filled">
-              <AlertTitle>Success</AlertTitle>
-              {success}
-            </Alert>
-          </Snackbar>
-        )}
-        {errors && (
-          <Snackbar
-            open={errors}
-            autoHideDuration={3000}
-            onClose={onClose}
-            name="error"
-          >
-            <Alert severity="error" variant="filled">
-              <AlertTitle>Error</AlertTitle>
-              {errors}
-            </Alert>
-          </Snackbar>
-        )}
+      {success && (
+      <Snackbar
+        open={success}
+        autoHideDuration={3000}
+        onClose={onClose}
+        name="sucess"
+      >
+        <Alert severity="success" variant="filled">
+          <AlertTitle>Success</AlertTitle>
+          {success}
+        </Alert>
+      </Snackbar>
+    )}
+    {errors && (
+      <Snackbar
+        open={errors}
+        autoHideDuration={3000}
+        onClose={onClose}
+        name="error"
+      >
+        <Alert severity="error" variant="filled">
+          <AlertTitle>Error</AlertTitle>
+          {errors}
+        </Alert>
+      </Snackbar>
+    )}
         <Grid
           container
           direction="row"
@@ -218,56 +170,49 @@ const Inventory = () => {
           </Grid>
 
           <Grid item>
-            <TextField
-              id="outlined-basic"
-              label="Search Here..."
-              variant="outlined"
-            />
-          </Grid>
-          <Grid item>
-            <StyledButton onClick={handleOpen} margin="10">
+            <StyledButton onClick={handleOpen} margin="10" startIcon={<AddIcon/>}>
               Add Item
             </StyledButton>
             <StyledButton onClick={refreshPage}>⟳</StyledButton>
           </Grid>
         </Grid>
 
-        <Grid item xs container flexDirection={"column"}>
-          <Box
-            sx={{
-              bgcolor: "background.paper",
-              pt: 8,
-              pb: 6,
+    <Grid item sm flexDirection={"column"}>
+    <Box
+    sx={{
+      bgcolor: "background.paper",
+      pt: 8,
+      pb: 6,
 
-              "& .restock": {
-                backgroundColor: "#ff8a80",
-                color: "#000",
-              },
-              "& .clear": {
-                backgroundColor: "#fff",
-                color: "#000",
-              },
+      '& .restock': {
+        backgroundColor: '#ff8a80',
+        color: '#000',
+      },
+      '& .clear': {
+        backgroundColor: '#fff',
+        color: '#000',
+      },
+    }}>
+    <div style={{ height: 525, width: "auto" }}>
+
+      {!loading && inventory && (
+        <DataGrid
+            rows={inventory}             
+            columns={columns}
+            getRowId={(row) => row._id}
+            onCellClick={handleCellClick}
+            onRowClick={handleRowClick}
+            components={{ Toolbar: GridToolbar }}
+            getCellClassName={(params) => {
+              if (params.field.stock === 'stock') {
+                return '';
+              }
+              return params.value <= 5 ? 'restock' : 'clear';
             }}
-          >
-            <div style={{ height: 525, width: "auto" }}>
-              {!loading && inventory && (
-                <DataGrid
-                  rows={inventory}
-                  columns={columns}
-                  getRowId={(row) => row._id}
-                  onCellClick={handleCellClick}
-                  onRowClick={handleRowClick}
-                  components={{ Toolbar: GridToolbar }}
-                  getCellClassName={(params) => {
-                    if (params.field.stock === "stock") {
-                      return "";
-                    }
-                    return params.value <= 5 ? "restock" : "clear";
-                  }}
-                />
-              )}
-            </div>
-          </Box>
+          />
+        )}
+        </div>
+        </Box>
         </Grid>
       </Container>
 
@@ -281,6 +226,7 @@ const Inventory = () => {
         top="50%"
         position="absolute"
       >
+      
         <Box
           sx={{
             display: "flex",
@@ -293,6 +239,7 @@ const Inventory = () => {
           }}
         >
           <Container maxWidth="lg">
+            
             <Typography
               component="h1"
               variant="h4"
@@ -392,8 +339,9 @@ const Inventory = () => {
                 variant="contained"
                 onClick={handleSubmit}
               >
-                Add
+                Add 
               </StyledButton>
+
             </Box>
           </Container>
         </Box>

@@ -65,9 +65,8 @@ const EditAnn = ({ annEdit }) => {
   };
 
   return (
-    <>
-      <EditButton variant="outlined" onClick={handleOpen} startIcon={<Edit />}>
-        Edit
+<>
+    <EditButton onClick={handleOpen} startIcon={<Edit />}>
       </EditButton>
 
       <Modal

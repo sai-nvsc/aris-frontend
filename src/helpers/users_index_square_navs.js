@@ -35,7 +35,7 @@ export const user_services = [
   },
   {
     title: "ARIS Reports",
-    path: "/stat/reports",
+    path: "/user/reports",
     icon: <HiDocumentReport size="10em" />,
   },
 ];

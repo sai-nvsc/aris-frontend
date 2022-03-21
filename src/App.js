@@ -1,3 +1,4 @@
+import 'react-app-polyfill/stable';
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "@mui/material";

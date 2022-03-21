@@ -11,6 +11,7 @@ import MyVaccine from "../Users/MyVaccine";
 import MyVaccineDetails from "../Users/MyVaccine_Details";
 import PetsProfile from "../Users/PetsProfile";
 import UserProfile from "../Users/UserProfile";
+import Analytics from "../Users/Analytics";
 
 const UserOutlet = () => {
   const { loading, isAuthenticated, role } = useSelector((state) => state.user);
@@ -42,6 +43,8 @@ const UserOutlet = () => {
           <Route path="/myvaxx/:id" element={<MyVaccineDetails />} />
           <Route path="/mypets/:id" element={<PetsProfile />} />
           <Route path="/view/announcements" element={<Announcements />} />
+          <Route path="/reports" element={<Analytics />} />
+
         </Routes>
       ) : (
         isAuthenticated === false && <Navigate to="/login" />

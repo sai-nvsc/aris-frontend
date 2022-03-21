@@ -14,7 +14,8 @@ import { Cancel } from "@mui/icons-material";
 import { BsCalendarPlusFill } from "react-icons/bs";
 import DatePicker from "@mui/lab/DatePicker";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import AcceptAppointment from "../Admin/AdminCRUD/AcceptAppointment"
+import AcceptAppointment from "../Admin/AdminCRUD/AcceptAppointment";
+import CompleteAppointment from "../Admin/AdminCRUD/CompleteAppointment";
 import CancelApt from "../Admin/Admin_CancelApt";
 
 const Appointments = () => {
@@ -43,6 +44,7 @@ const columns = [
     flex: 1,
     headerAlign: "center",
     align: "center",
+    minWidth: 200,
     valueGetter: (cellValues) => {
       return (
         cellValues.row.user[0].first_name +
@@ -52,7 +54,7 @@ const columns = [
     },
     sortComparator: (v1, v2) => v1.localeCompare(v2),
   },
- { field: "date", headerName: "Date", flex: 1, headerAlign: 'center', align:'center',
+ { field: "date", headerName: "Date", flex: 1, headerAlign: 'center', align:'center', minWidth: 140,
     renderCell: (cellValues) => {
       return moment(cellValues.row.date).format(
         "MMM. DD, YYYY"
@@ -60,18 +62,23 @@ const columns = [
     },
     sortComparator: (v1, v2) => v1.localeCompare(v2),
   },
-  { field: "time_slot", headerName: "Time Slot", flex: 1, headerAlign: 'center', align:'center'},
-  { field: "purpose", headerName: "Pursose", flex: 1, headerAlign: 'center', align:'center' },
-  { field: "status", headerName: "Status", flex: 1, headerAlign: 'center', align:'center'},
+  { field: "time_slot", headerName: "Time Slot", flex: 1, headerAlign: 'center', align:'center', minWidth: 190},
+  { field: "purpose", headerName: "Purpose", flex: "auto", headerAlign: 'center', align:'center', minWidth: 110},
+  { field: "status", headerName: "Status", flex: 1, headerAlign: 'center', align:'center', minWidth: 115},
  
-  { field: "accept", headerName: "Accept", flex: 1, headerAlign: 'center', align:'center',
+  { field: "accept", headerName: "Accept", flex: 1, headerAlign: 'center', align:'center', minWidth: 93,
     renderCell: (cellValues) => {
       return <AcceptAppointment id={appointments.id} data={cellValues.row} startIcon={<CheckCircleIcon style={{ color: "#ff8a80" }}/>} />;
     },
     sortable: false,
   },
-
-  { field: "Cancel", headerName: "Cancel", flex: 1, headerAlign: 'center', align:'center',
+  { field: "done", headerName: "Done", flex: 1, headerAlign: 'center', align:'center', minWidth: 80,
+  renderCell: (cellValues) => {
+    return <CompleteAppointment id={appointments.id} data={cellValues.row} startIcon={<CheckCircleIcon style={{ color: "#ff8a80" }}/>} />;
+  },
+  sortable: false,
+},
+  { field: "Cancel", headerName: "Cancel", flex: 1, headerAlign: 'center', align:'center',minWidth: 90,
     sortable: false,
     renderCell: (cellValues) => {
       return <CancelApt id={appointments.id} data={cellValues.row} startIcon={<Cancel style={{ color: "#ff8a80" }}/>} />;
@@ -126,7 +133,7 @@ const formHandler = (e) => {
         bgcolor: "background.paper",
         pt: 8,
         pb: 6,
-        minHeight: "100vh",
+        minHeight: "110vh",
       }}
     >
       <PersistentDrawerLeft />
@@ -159,14 +166,12 @@ const formHandler = (e) => {
         )}
 
       <Container maxWidth="xl">
-      <Grid
-          container
+      <Grid container
           direction="row"
           display="flex"
           alignItems="center"
           justifyContent="space-around"
         >
-
         <Grid item>
         <Typography
           component="h1"
@@ -179,7 +184,7 @@ const formHandler = (e) => {
         </Typography>
         </Grid>
 
-    <Grid item>
+      <Grid item>
         <StyledButton
           variant="contained"
           startIcon={<BsCalendarPlusFill />}
@@ -190,12 +195,12 @@ const formHandler = (e) => {
         >
           Create Appointment
         </StyledButton>
-  </Grid>
-  </Grid>
+      </Grid>
+    </Grid>
   </Container>
 
-<Container sx={{ py: 7 }} maxWidth="xl">
-  <Grid item md container flexDirection={"column"}>
+<Container sx={{ py: 5 }} maxWidth="xl">
+  <Grid item sm flexDirection={"column"}>
     <Box
     sx={{
       bgcolor: "background.paper",
@@ -218,11 +223,7 @@ const formHandler = (e) => {
             getRowId={(row) => row._id}
             onCellClick={handleCellClick}
             onRowClick={handleRowClick}
-            components={ {Toolbar: GridToolbar}}
-            sx={{
-              display:"flex",
-              flexWrap:"wrap"
-            }}
+            components={{Toolbar: GridToolbar}}
           
             getCellClassName={(params) => {
               if (params.field.status === 'status') {

@@ -14,11 +14,11 @@ import {
   DeletePetThunk,
   DeletePetVaccineThunk,
 } from "../../../redux/slices/PetSlice";
-
+import { DeleteInvThunk } from "../../../redux/slices/InventorySlice";
+import { DeleteCaseThunk } from "../../../redux/slices/BiteCaseSlice";
+import { DeleteAccThunk } from "../../../redux/slices/AdminSlices";
+import { DeleteAnnThunk } from "../../../redux/slices/AnnouncementSlice";
 import { DeleteVaxxThunk } from "../../../redux/slices/VaccineSlice";
-// import { deletePerson } from "../../redux/action/PersonActions";
-// import { deleteShow } from "../../redux/action/ShowActions";
-
 const Delete = ({ id, name, collection, ...rest }) => {
   const [OpemModal, setOpemModal] = useState(false);
   const dispatch = useDispatch();
@@ -33,12 +33,24 @@ const Delete = ({ id, name, collection, ...rest }) => {
 
   const handleYes = () => {
     switch (collection) {
-      case "pets":
-        dispatch(DeletePetThunk({ id: id }));
-        navigate("/user/mypets");
+      case "inventory":
+        dispatch(DeleteInvThunk({ id: id }));
+        navigate("/admin/inventory");
+        break;
+      case "bitecases":
+        dispatch(DeleteCaseThunk({ id: id }));
+        navigate("/admin/bitecases");
+        break;
+      case "admins":
+        dispatch(DeleteAccThunk({ id: id }));
+        navigate("/admin/auth");
         break;
       case "pet_vaccine":
         dispatch(DeletePetVaccineThunk({ id: id, data: rest.data }));
+        break;
+      case "announcements":
+        dispatch(DeleteAnnThunk({ id: id }));
+        navigate("/admin/announcements");
         break;
       case "vaxx":
         dispatch(DeleteVaxxThunk({ id: id }));
@@ -54,11 +66,9 @@ const Delete = ({ id, name, collection, ...rest }) => {
     <>
       <Button
         startIcon={<DeleteForever color="error" />}
-        variant="outlined"
         color="error"
         onClick={dialogOpen}
       >
-        Delete
       </Button>
       <Dialog onClose={handleClose} open={OpemModal}>
         <DialogTitle>Delete {name} ?</DialogTitle>

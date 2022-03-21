@@ -14,7 +14,6 @@ import {
   Snackbar,
   Typography,
 } from "@mui/material";
-
 import PersistentDrawerLeft from "../../components/Layouts/UserSidebar";
 import { DataGrid } from "@mui/x-data-grid";
 import Footer from "../../components/Layouts/Footer";
@@ -25,7 +24,6 @@ import {
   clearSuccess,
   GetPetDetailsThunk,
 } from "../../redux/slices/PetSlice";
-
 import EditPet from "./CRUD/EditPets";
 import Delete from "../../components/Layouts/Dialogs/Delete";
 import AddPetVaxxDetail from "./CRUD/AddPetVaxxDetail";
