@@ -119,7 +119,6 @@ const cards = [
 ];
 
 const Dashboard = () => {
-  const { bitecase } = useSelector((state) => state.bitecase);
   const { clinic_counts } = useSelector((state) => state.analytics);
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
