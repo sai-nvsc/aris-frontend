@@ -8,7 +8,7 @@ export const GetAllAnnThunk = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_HOST}/api/announcement/`,
+        `${process.env.REACT_APP_API_HOST}api/announcement/`,
         obj
       );
       return response.data;
