@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { styled } from "@mui/material/styles";
 import {
@@ -26,6 +26,10 @@ import { incidence as data } from "../extra/demo-data";
 import { bitecase as bite } from "../extra/demo-data";
 import Footer from "../../components/Layouts/Footer";
 import PersistentDrawerLeft from "../../components/Layouts/UserSidebar";
+import { useDispatch, useSelector } from "react-redux";
+import { getBarangayCount } from "../../redux/slices/AnalyticsSlice";
+import MapAnalytics from "../../data/Analytics/MapAnalytics";
+import Legends from "../../data/Analytics/Legends";
 
 const PREFIX = "Demo";
 const classes = {
@@ -68,6 +72,12 @@ const stacks = [
 ];
 
 const Analytics = () => {
+  const dispatch = useDispatch();
+  const { loading, barangayCount } = useSelector((state) => state.analytics);
+  useEffect(() => {
+    dispatch(getBarangayCount());
+    return () => {};
+  }, [dispatch]);
   return (
     <Box
       sx={{
@@ -87,8 +97,7 @@ const Analytics = () => {
           {/* Total Bite Cases  */}
           <Grid item xl={12} md={12} lg={12} sm={12} xs={12}>
             <Paper elevation={12}>
-              <>
-                <iframe
+              {/** <iframe
                   title="tbc"
                   style={{
                     background: "#FFFFFF",
@@ -99,8 +108,14 @@ const Analytics = () => {
                   width="1400"
                   height="720"
                   src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6234b3a6-6ae5-4c02-8fae-830b77d176eb&maxDataAge=300&theme=light&autoRefresh=true"
-                ></iframe>
-              </>
+                ></iframe>*/}
+
+              {!loading && barangayCount && (
+                <>
+                  <MapAnalytics barangay={barangayCount} />
+                  <Legends />
+                </>
+              )}
             </Paper>
           </Grid>
           {/* Total Bite Cases Per Category  */}

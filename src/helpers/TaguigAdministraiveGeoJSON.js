@@ -114,8 +114,7 @@ const taguig_barangay = {
         ADM3_PCODE: "PH137607000",
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607001",
-        ADM4_EN: "Tanyag (Bagong Tanyag)",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
+        ADM4_EN: "Tanyag",
       },
     },
     {
@@ -507,7 +506,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607002",
         ADM4_EN: "Bagumbayan",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -535,7 +533,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607003",
         ADM4_EN: "Bambang",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -562,7 +559,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607004",
         ADM4_EN: "Calzada",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -590,7 +586,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607005",
         ADM4_EN: "Hagonoy",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -616,7 +611,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607006",
         ADM4_EN: "Ibayo-Tipas",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -641,7 +635,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607007",
         ADM4_EN: "Ligid-Tipas",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -869,7 +862,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607008",
         ADM4_EN: "Lower Bicutan",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -989,7 +981,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607009",
         ADM4_EN: "Maharlika Village",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -1189,7 +1180,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607010",
         ADM4_EN: "Napindan",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -1218,7 +1208,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607011",
         ADM4_EN: "Palingon",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -1324,7 +1313,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607012",
         ADM4_EN: "Santa Ana",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -1351,7 +1339,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607013",
         ADM4_EN: "Central Signal Village (Signal Village)",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -1439,7 +1426,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607014",
         ADM4_EN: "Tuktukan",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -1519,7 +1505,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607015",
         ADM4_EN: "Upper Bicutan",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -1666,7 +1651,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607016",
         ADM4_EN: "Ususan",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -1695,7 +1679,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607017",
         ADM4_EN: "Wawa",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -1958,7 +1941,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607018",
         ADM4_EN: "Western Bicutan",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -2092,7 +2074,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607019",
         ADM4_EN: "Central Bicutan",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -2120,7 +2101,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607021",
         ADM4_EN: "Katuparan",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -2261,7 +2241,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607022",
         ADM4_EN: "New Lower Bicutan",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -2320,7 +2299,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607023",
         ADM4_EN: "North Daang Hari",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -2347,7 +2325,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607024",
         ADM4_EN: "North Signal Village",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -2570,7 +2547,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607025",
         ADM4_EN: "Pinagsama",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -2596,7 +2572,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607026",
         ADM4_EN: "San Miguel",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -2673,7 +2648,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607027",
         ADM4_EN: "South Daang Hari",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -2700,7 +2674,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607028",
         ADM4_EN: "South Signal Village",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
     {
@@ -3169,7 +3142,6 @@ const taguig_barangay = {
         ADM3_EN: "TAGUIG CITY",
         ADM4_PCODE: "PH137607020",
         ADM4_EN: "Fort Bonifacio",
-        TOTAL: Math.floor(Math.random() * 100 + 1),
       },
     },
   ],

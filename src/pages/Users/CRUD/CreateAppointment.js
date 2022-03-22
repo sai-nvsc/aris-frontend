@@ -28,7 +28,7 @@ import {
   getClinics,
   requestAppointment,
 } from "../../../redux/slices/AppointmentSlice";
-import { setCurrentLocation } from "../../../redux/slices/UserSlices";
+
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import { FaMapPin } from "react-icons/fa";
@@ -40,7 +40,7 @@ const CreateAppointment = () => {
   const { loadingClinics, clinics, ...rest } = useSelector(
     (state) => state.appointments
   );
-  const { latitude, longitude } = useSelector((state) => state.user);
+
   const [value, setvalue] = useState({
     purpose: "",
     time_slot: "",
@@ -49,11 +49,13 @@ const CreateAppointment = () => {
   const [selected_clinic, setselected_clinic] = useState({});
 
   const handleRadoChange = (e) => {
+    setvalue({
+      purpose: "",
+      time_slot: "",
+      date: moment(),
+    });
+    setselected_clinic({});
     setclinic_choice(e.target.value);
-
-    if (e.target.value === "Nearby") {
-    } else {
-    }
   };
 
   const handleChange = (e) => {
@@ -88,28 +90,33 @@ const CreateAppointment = () => {
 
   const handleModal = () => {
     dispatch(EligibilityCheck());
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        dispatch(
-          setCurrentLocation({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          })
-        );
-      });
-    } else {
-      dispatch(
-        setCurrentLocation({
-          latitude: "",
-          longitude: "",
-        })
-      );
-    }
-    dispatch(getClinics({ lat: latitude, lng: longitude }));
+
+    console.log(localStorage.getItem("latitude"));
+    dispatch(
+      getClinics({
+        lat: localStorage.getItem("latitude"),
+        lng: localStorage.getItem("longitude"),
+      })
+    );
     setopen(true);
   };
 
   useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        localStorage.setItem("latitude", position.coords.latitude);
+        localStorage.setItem("longitude", position.coords.longitude);
+        // dispatch(
+        //   setCurrentLocation({
+        //     latitude: position.coords.latitude,
+        //     longitude: position.coords.longitude,
+        //   })
+        // );
+      });
+    } else {
+      localStorage.setItem("latitude", "");
+      localStorage.setItem("longitude", "");
+    }
     return () => {};
   }, []);
   return (

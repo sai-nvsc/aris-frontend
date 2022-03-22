@@ -8,7 +8,7 @@ export const GetAllPetsThunk = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_HOST}/api/pet/`,
+        `${process.env.REACT_APP_API_HOST}api/pet/`,
         obj
       );
       return response.data;
