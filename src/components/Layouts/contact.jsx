@@ -1,7 +1,13 @@
 import { useState } from "react";
-import emailjs from "emailjs-com";
+// import emailjs from "emailjs-com";
 import Copyright from "./Copyright";
-import { Typography } from "@mui/material";
+import { Alert, AlertTitle, Snackbar, Typography } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  clearError,
+  clearSuccess,
+  RequestPartnershipThunk,
+} from "../../redux/slices/Clinic";
 
 const initialState = {
   clinic_name: "",
@@ -15,7 +21,8 @@ export const Contact = (props) => {
     { clinic_name, email, message, contact_number, contact_person },
     setState,
   ] = useState(initialState);
-
+  const { success, error } = useSelector((state) => state.clinic);
+  const dispatch = useDispatch();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setState((prevState) => ({ ...prevState, [name]: value }));
@@ -25,25 +32,66 @@ export const Contact = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(clinic_name, email, message);
-    emailjs
-      .sendForm(
-        "service_9xzngdb",
-        "template_u4ipcrc",
-        e.target,
-        "pVGefAq8_Qnz-1YuH"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-          clearState();
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
+    const formData = new FormData();
+    formData.append("clinic_name", clinic_name);
+    formData.append("email", email);
+    formData.append("message", message);
+    formData.append("contact_number", contact_number);
+    formData.append("contact_person", contact_person);
+    dispatch(RequestPartnershipThunk(formData));
+    // emailjs
+    //   .sendForm(
+    //     "service_9xzngdb",
+    //     "template_u4ipcrc",
+    //     e.target,
+    //     "pVGefAq8_Qnz-1YuH"
+    //   )
+    //   .then(
+    //     (result) => {
+    //       console.log(result.text);
+    //       clearState();
+    //     },
+    //     (error) => {
+    //       console.log(error.text);
+    //     }
+    //   );
+  };
+
+  const onClose = (e) => {
+    if (success) {
+      clearState();
+    }
+    dispatch(clearSuccess());
+    dispatch(clearError());
   };
   return (
     <div>
+      {success && (
+        <Snackbar
+          open={true}
+          autoHideDuration={3000}
+          name="success"
+          onClose={onClose}
+        >
+          <Alert severity="success" variant="filled">
+            <AlertTitle>Success</AlertTitle>
+            {success}
+          </Alert>
+        </Snackbar>
+      )}
+      {error && (
+        <Snackbar
+          open={true}
+          autoHideDuration={3000}
+          name="error"
+          onClose={onClose}
+        >
+          <Alert severity="success" variant="filled">
+            <AlertTitle>Error</AlertTitle>
+            {error}
+          </Alert>
+        </Snackbar>
+      )}
       <div id="contact">
         <div className="container">
           <div className="col-md-8">

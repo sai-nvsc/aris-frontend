@@ -20,39 +20,42 @@ export const GetAllCasesThunk = createAsyncThunk(
 
 export const GetCatPerClinicThunk = createAsyncThunk(
   "bitecase/cat-clinic",
-      async (obj, { rejectWithValue }) => {
-        try {
-          const response = await axios.post("/api/bitecase/catperclinic/", obj);
-           return response.data;
-        } catch (error) {
-          return rejectWithValue(error.response.data.message);
-        }
-      }
-    );
+  async (obj, { rejectWithValue }) => {
+    try {
+      const response = await axios.post("/api/bitecase/catperclinic/", obj);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
 
 export const ClinicCasesPerGenderThunk = createAsyncThunk(
   "bitecase/gendercase",
-      async (obj, { rejectWithValue }) => {
-        try {
-          const response = await axios.post("/api/bitecase/cases-per-gender/", obj);
-           return response.data;
-        } catch (error) {
-          return rejectWithValue(error.response.data.message);
-        }
-      }
-    );  
+  async (obj, { rejectWithValue }) => {
+    try {
+      const response = await axios.post("/api/bitecase/cases-per-gender/", obj);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
 
-  export const AllCasesPerGenderThunk = createAsyncThunk(
-    "bitecase/allgendercase",
-        async (obj, { rejectWithValue }) => {
-          try {
-            const response = await axios.post("/api/bitecase/all-cases-per-gender/", obj);
-              return response.data;
-          } catch (error) {
-            return rejectWithValue(error.response.data.message);
-          }
-        }
-      ); 
+export const AllCasesPerGenderThunk = createAsyncThunk(
+  "bitecase/allgendercase",
+  async (obj, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        "/api/bitecase/all-cases-per-gender/",
+        obj
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
 
 export const GetAllCaseThunk = createAsyncThunk(
   "bitecase/all",
@@ -136,7 +139,7 @@ export const getActiveBiteCase = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data.messa);
+      return rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -160,7 +163,7 @@ const BiteCaseSlice = createSlice({
     },
   },
   extraReducers: {
-//analytics
+    //analytics
     [GetAllCasesThunk.pending]: (state) => {
       state.loading = true;
     },
@@ -172,7 +175,7 @@ const BiteCaseSlice = createSlice({
       state.loading = false;
       state.errors = action.payload;
     },
-    
+
     [GetCatPerClinicThunk.pending]: (state) => {
       state.loading = true;
     },
@@ -214,7 +217,6 @@ const BiteCaseSlice = createSlice({
       state.loading = false;
       state.errors = action.payload;
     },
-
 
     [GetAllCaseThunk.pending]: (state) => {
       state.loading = true;

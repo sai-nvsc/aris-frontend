@@ -8,6 +8,7 @@ import VaccineReducer from "./slices/VaccineSlice";
 import BiteCaseReducer from "./slices/BiteCaseSlice";
 import AppointmentReducer from "./slices/AppointmentSlice";
 import AnnouncementReducer from "./slices/AnnouncementSlice";
+import ClinicReducer from "./slices/Clinic";
 export const store = configureStore({
   reducer: {
     user: UserReducer,
@@ -23,6 +24,7 @@ export const store = configureStore({
     gender: BiteCaseReducer,
     allgender: BiteCaseReducer,
     analytics: AnalyticsReducer,
+    clinic: ClinicReducer,
   },
 });
 
