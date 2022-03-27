@@ -1,15 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
-  "token"
-)}`;
+// axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
+//   "token"
+// )}`;
 export const GetAllAnnThunk = createAsyncThunk(
   "announcement/all",
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_HOST}api/announcement/`,
-        obj
+        obj,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -24,7 +27,10 @@ export const AddAnnThunk = createAsyncThunk(
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_HOST}api/announcement/add`,
-        obj.data
+        obj.data,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -39,7 +45,10 @@ export const EditAnnThunk = createAsyncThunk(
     try {
       const response = await axios.patch(
         `${process.env.REACT_APP_API_HOST}api/announcement/update/${obj.id}`,
-        obj.data
+        obj.data,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -53,7 +62,10 @@ export const DeleteAnnThunk = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.delete(
-        `${process.env.REACT_APP_API_HOST}api/announcement/delete/${obj.id}`
+        `${process.env.REACT_APP_API_HOST}api/announcement/delete/${obj.id}`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -67,7 +79,10 @@ export const ViewAllAnnouncement = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_HOST}api/announcement/view/announcements`
+        `${process.env.REACT_APP_API_HOST}api/announcement/view/announcements`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {

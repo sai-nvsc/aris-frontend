@@ -18,9 +18,7 @@ export const createAppointment = createAsyncThunk(
   "appointment/new/create",
   async (obj, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
-        "/api/appointments/add", obj.data
-      );
+      const response = await axios.post("/api/appointments/add", obj.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -101,7 +99,6 @@ export const requestAppointment = createAsyncThunk(
   }
 );
 
-
 export const cancelAppointment = createAsyncThunk(
   "appointment/cancel",
   async (obj, { rejectWithValue }) => {
@@ -165,20 +162,6 @@ const AppointmentSlice = createSlice({
     },
   },
   extraReducers: {
-    /*   [getAdminAppointments.pending]: (state) => {
-      state.loading = true;
-    },
-    [getAdminAppointments.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.pending = action.payload.appointments.pending;
-      state.completed = action.payload.appointments.completed;
-      //state.cancelled = action.payload.appointments.cancelled;
-      //state.appointments = action.payload.appointments;
-    },
-    [getAdminAppointments.rejected]: (state, action) => {
-      state.loading = false;
-      state.errors = action.payload;
-    }, */
     //Admin
     [getAdminApts.pending]: (state) => {
       state.loading = true;

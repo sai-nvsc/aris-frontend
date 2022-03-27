@@ -1,14 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
-  "token"
-)}`;
+// axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
+//   "token"
+// )}`;
 export const GetAuthDetails = createAsyncThunk(
   "admin/auth",
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_HOST}api/auth/me`
+        `${process.env.REACT_APP_API_HOST}api/auth/me`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -22,7 +25,10 @@ export const LogoutAdminThunk = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_HOST}api/admin/auth/logout`
+        `${process.env.REACT_APP_API_HOST}api/admin/auth/logout`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -36,7 +42,10 @@ export const GetAllAccountsThunk = createAsyncThunk(
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_HOST}api/admin/auth/`,
-        obj
+        obj,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -51,7 +60,10 @@ export const CreateAdminThunk = createAsyncThunk(
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_HOST}api/admin/auth/register`,
-        formdata
+        formdata,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -65,7 +77,10 @@ export const DeleteAccThunk = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.delete(
-        `${process.env.REACT_APP_API_HOST}api/admin/auth/delAcc/${obj.id}`
+        `${process.env.REACT_APP_API_HOST}api/admin/auth/delAcc/${obj.id}`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -80,7 +95,10 @@ export const EditAccountThunk = createAsyncThunk(
     try {
       const response = await axios.patch(
         `/api/admin/auth/update_account/${obj.id}`,
-        obj.data
+        obj.data,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -114,11 +132,11 @@ const adminSlice = createSlice({
       state.loading = true;
     },
     [LogoutAdminThunk.fulfilled]: (state) => {
+      localStorage.removeItem("token");
       state.loading = false;
       state.isAuthenticated = false;
       state.user = null;
       state.role = null;
-      localStorage.removeItem("token");
     },
     [LogoutAdminThunk.rejected]: (state, action) => {
       state.loading = false;
@@ -140,11 +158,11 @@ const adminSlice = createSlice({
     },
     [CreateAdminThunk.fulfilled]: (state, action) => {
       state.isAuthenticated = true;
+      localStorage.setItem("token", action.payload.token);
       state.loading = false;
       state.success = action.payload.success;
       //state.role = action.payload.role;
       state.admin = [...state.admin, action.payload.admin];
-      localStorage.setItem("token", action.payload.token);
     },
     [CreateAdminThunk.rejected]: (state, action) => {
       state.isAuthenticated = false;

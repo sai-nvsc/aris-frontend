@@ -44,7 +44,6 @@ const UserOutlet = () => {
           <Route path="/mypets/:id" element={<PetsProfile />} />
           <Route path="/view/announcements" element={<Announcements />} />
           <Route path="/reports" element={<Analytics />} />
-
         </Routes>
       ) : (
         isAuthenticated === false && <Navigate to="/login" />

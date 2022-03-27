@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
-  "token"
-)}`;
+// axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
+//   "token"
+// )}`;
 /* Ang AsyncThunk ay similar sa steState ni react context. Is is called kapag may gusto kang bag
  *
  *
@@ -15,6 +15,7 @@ export const LoginUserThunk = createAsyncThunk(
         `${process.env.REACT_APP_API_HOST}api/user/auth/login`,
         formdata
       );
+      localStorage.setItem("token", response.data.token);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -28,8 +29,12 @@ export const GetAuthDetails = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_HOST}api/auth/me`
+        `${process.env.REACT_APP_API_HOST}api/auth/me`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
+      // localStorage.setItem("token", response.data.token);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -45,6 +50,7 @@ export const LoginAdminThunk = createAsyncThunk(
         `${process.env.REACT_APP_API_HOST}api/admin/auth/login`,
         formdata
       );
+      localStorage.setItem("token", response.data.token);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -61,6 +67,7 @@ export const SignUpUserThunk = createAsyncThunk(
         `${process.env.REACT_APP_API_HOST}api/user/auth/register`,
         formdata
       );
+      localStorage.setItem("token", response.data.token);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -103,8 +110,12 @@ export const LogoutUserThunk = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_HOST}api/user/auth/logout`
+        `${process.env.REACT_APP_API_HOST}api/user/auth/logout`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
+      localStorage.removeItem("token");
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -117,7 +128,10 @@ export const UpdateProfileThunk = createAsyncThunk(
     try {
       const response = await axios.patch(
         `${process.env.REACT_APP_API_HOST}api/user/auth/update_profile/${obj.id}`,
-        obj.data
+        obj.data,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -132,7 +146,10 @@ export const UpdatePasswordThunk = createAsyncThunk(
     try {
       const response = await axios.patch(
         `${process.env.REACT_APP_API_HOST}api/user/auth/update_password/${obj.id}`,
-        obj.data
+        obj.data,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -147,7 +164,10 @@ export const UpdateAvatarThunk = createAsyncThunk(
     try {
       const response = await axios.patch(
         `${process.env.REACT_APP_API_HOST}api/user/auth/update_avatar/${obj.id}`,
-        obj.data
+        obj.data,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -162,7 +182,10 @@ export const GetAllUserThunk = createAsyncThunk(
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_HOST}api/user/auth/`,
-        obj
+        obj,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -207,7 +230,7 @@ const userSlice = createSlice({
       state.loading = false;
       state.user = action.payload.user;
       state.role = action.payload.role;
-      localStorage.setItem("token", action.payload.token);
+      // localStorage.setItem("token", action.payload.token);
     },
     [LoginUserThunk.rejected]: (state, action) => {
       state.isAuthenticated = false;
@@ -222,7 +245,7 @@ const userSlice = createSlice({
       state.loading = false;
       state.user = action.payload.user;
       state.role = action.payload.role;
-      localStorage.setItem("token", action.payload.token);
+      // localStorage.setItem("token", action.payload.token);
     },
     [LoginAdminThunk.rejected]: (state, action) => {
       state.isAuthenticated = false;
@@ -238,7 +261,7 @@ const userSlice = createSlice({
       state.loading = false;
       state.role = action.payload.role;
       state.user = action.payload.user;
-      localStorage.setItem("token", action.payload.token);
+      // localStorage.setItem("token", action.payload.token);
     },
     [SignUpUserThunk.rejected]: (state, action) => {
       state.isAuthenticated = false;
@@ -310,7 +333,7 @@ const userSlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
       state.role = null;
-      localStorage.removeItem("token");
+      // localStorage.removeItem("token");
     },
     [LogoutUserThunk.rejected]: (state, action) => {
       state.loading = false;

@@ -1,15 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
-  "token"
-)}`;
+// axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
+//   "token"
+// )}`;
 
 export const getGenderCountPerClinicThunk = createAsyncThunk(
   "analytics/clinic/gender",
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_HOST}api/analytics/get/ClinicGenderCount`
+        `${process.env.REACT_APP_API_HOST}api/analytics/get/ClinicGenderCount`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -23,7 +26,10 @@ export const getCategoryCountPerClinicThunk = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_HOST}api/analytics/get/ClinicCategoryCount`
+        `${process.env.REACT_APP_API_HOST}api/analytics/get/ClinicCategoryCount`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -37,7 +43,10 @@ export const getGenderCountThunk = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_HOST}api/analytics/get/genderCount`
+        `${process.env.REACT_APP_API_HOST}api/analytics/get/genderCount`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -50,7 +59,10 @@ export const getCountsClinic = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_HOST}api/analytics/get/BiteCountsPerClinic`
+        `${process.env.REACT_APP_API_HOST}api/analytics/get/BiteCountsPerClinic`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -63,7 +75,10 @@ export const getBarangayCount = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_HOST}api/analytics/get/barangayCount`
+        `${process.env.REACT_APP_API_HOST}api/analytics/get/barangayCount`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {

@@ -1,15 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
-  "token"
-)}`;
+// axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
+//   "token"
+// )}`;
 export const AddVaxxThunk = createAsyncThunk(
   "vaxx/add",
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_HOST}api/bitecase/post-vaxx/add`,
-        obj.data
+        obj.data,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -24,7 +27,10 @@ export const EditVaxxThunk = createAsyncThunk(
     try {
       const response = await axios.patch(
         `${process.env.REACT_APP_API_HOST}api/bitecase/post-vaxx/updateVaxx/${obj.id}`,
-        obj.data
+        obj.data,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -38,7 +44,10 @@ export const DeleteVaxxThunk = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.delete(
-        `${process.env.REACT_APP_API_HOST}api/bitecase/post-vaxx/delete/${obj.id}`
+        `${process.env.REACT_APP_API_HOST}api/bitecase/post-vaxx/delete/${obj.id}`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -52,7 +61,10 @@ export const GetBiteCasesThunk = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_HOST}api/bitecase/get/${obj.id}`
+        `${process.env.REACT_APP_API_HOST}api/bitecase/get/${obj.id}`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       console.log(response.data);
       return response.data;
@@ -66,7 +78,10 @@ export const GetVaxxPerBiteCasThunk = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_HOST}api/bitecase/post-vaxx/get/bitecase/${obj.id}`
+        `${process.env.REACT_APP_API_HOST}api/bitecase/post-vaxx/get/bitecase/${obj.id}`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -80,7 +95,10 @@ export const GetBiteCaseDetailThunk = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_HOST}api/bitecase/get/bite/${obj.id}`
+        `${process.env.REACT_APP_API_HOST}api/bitecase/get/bite/${obj.id}`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -95,7 +113,10 @@ export const SendHealthReportThunk = createAsyncThunk(
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_HOST}api/bitecase/file/report`,
-        obj
+        obj,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -110,7 +131,10 @@ export const ReplyThunk = createAsyncThunk(
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_HOST}api/bitecase/file/report/reply`,
-        obj
+        obj,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
