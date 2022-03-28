@@ -9,7 +9,10 @@ export const GetAllCasesThunk = createAsyncThunk(
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_HOST}api/bitecase/all/`,
-        obj
+        obj,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -22,7 +25,9 @@ export const GetCatPerClinicThunk = createAsyncThunk(
   "bitecase/cat-clinic",
   async (obj, { rejectWithValue }) => {
     try {
-      const response = await axios.post("/api/bitecase/catperclinic/", obj);
+      const response = await axios.post("/api/bitecase/catperclinic/", obj, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      });
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -34,7 +39,13 @@ export const ClinicCasesPerGenderThunk = createAsyncThunk(
   "bitecase/gendercase",
   async (obj, { rejectWithValue }) => {
     try {
-      const response = await axios.post("/api/bitecase/cases-per-gender/", obj);
+      const response = await axios.post(
+        "/api/bitecase/cases-per-gender/",
+        obj,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
+      );
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -48,7 +59,10 @@ export const AllCasesPerGenderThunk = createAsyncThunk(
     try {
       const response = await axios.post(
         "/api/bitecase/all-cases-per-gender/",
-        obj
+        obj,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -63,7 +77,10 @@ export const GetAllCaseThunk = createAsyncThunk(
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_HOST}api/bitecase/`,
-        obj
+        obj,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -77,7 +94,10 @@ export const GetCaseDetailsThunk = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_HOST}api/bitecase/get/${obj.id}`
+        `${process.env.REACT_APP_API_HOST}api/bitecase/get/${obj.id}`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -92,7 +112,10 @@ export const AddCaseThunk = createAsyncThunk(
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_HOST}api/bitecase/add`,
-        obj.data
+        obj.data,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -107,7 +130,10 @@ export const EditCaseThunk = createAsyncThunk(
     try {
       const response = await axios.patch(
         `${process.env.REACT_APP_API_HOST}api/bitecase/update/${obj.id}`,
-        obj.data
+        obj.data,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -121,7 +147,10 @@ export const DeleteCaseThunk = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.delete(
-        `${process.env.REACT_APP_API_HOST}api/bitecase/delete/${obj.id}`
+        `${process.env.REACT_APP_API_HOST}api/bitecase/delete/${obj.id}`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -135,7 +164,10 @@ export const getActiveBiteCase = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_HOST}api/bitecase/user/get`
+        `${process.env.REACT_APP_API_HOST}api/bitecase/user/get`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {

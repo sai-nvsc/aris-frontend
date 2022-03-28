@@ -46,6 +46,7 @@ import {
   UpdatePasswordThunk,
   UpdateProfileThunk,
 } from "../../redux/slices/UserSlices";
+import { getUsersAnalyticsCounts } from "../../redux/slices/AnalyticsSlice";
 
 export const UserProfile = () => {
   const {
@@ -57,6 +58,7 @@ export const UserProfile = () => {
     update_password_loading,
     avatar_loading,
   } = useSelector((state) => state.user);
+  const { user_analytics } = useSelector((state) => state.analytics);
   const [passwordmatcherror, setpasswordmatcherror] = useState(false);
 
   const dispatch = useDispatch();
@@ -129,8 +131,9 @@ export const UserProfile = () => {
     setpasswordmatcherror(false);
   };
   useEffect(() => {
+    dispatch(getUsersAnalyticsCounts());
     return () => {};
-  }, []);
+  }, [dispatch]);
   return (
     <Box
       sx={{
@@ -234,9 +237,13 @@ export const UserProfile = () => {
                   alignItems="center"
                 >
                   <PetProfileLabel>Bite Cases</PetProfileLabel>
-                  <PetProfileValue>1</PetProfileValue>
-                  <PetProfileLabel>Reports</PetProfileLabel>
-                  <PetProfileValue>1</PetProfileValue>
+                  <PetProfileValue>
+                    {user_analytics ? user_analytics.bitecase : 0}
+                  </PetProfileValue>
+                  <PetProfileLabel>Pets</PetProfileLabel>
+                  <PetProfileValue>
+                    {user_analytics ? user_analytics.pet : 0}
+                  </PetProfileValue>
                 </Box>
               </Box>
             </ProfileCard>

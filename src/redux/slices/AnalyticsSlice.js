@@ -87,10 +87,28 @@ export const getBarangayCount = createAsyncThunk(
   }
 );
 
+export const getUsersAnalyticsCounts = createAsyncThunk(
+  "analytics/useranalytics/counts",
+  async (obj, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_HOST}api/analytics/get/users_analytics_count`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 const initialState = {
   clinic_GenderCount: null,
   clinic_categoryCount: null,
   clinic_counts: null,
+  user_analytics: null,
   genderCount: null,
   barangayCount: null,
   loading: false,
@@ -155,6 +173,17 @@ const AnalyticsSlice = createSlice({
       state.barangayCount = action.payload.barangayCount;
     },
     [getBarangayCount.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    [getUsersAnalyticsCounts.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [getUsersAnalyticsCounts.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.user_analytics = action.payload.userAnalyticsCount;
+    },
+    [getUsersAnalyticsCounts.pending]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
