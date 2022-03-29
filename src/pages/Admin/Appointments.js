@@ -225,7 +225,7 @@ const Appointments = () => {
         minHeight: "110vh",
       }}
     >
-      <PersistentDrawerLeft title="Announcements" />
+      <PersistentDrawerLeft title="Appointments" />
       <CssBaseline />
       {success && (
         <Snackbar

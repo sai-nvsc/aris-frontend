@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import AdminDelete from "../../components/Layouts/Dialogs/AdminDelete";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -50,7 +51,7 @@ const Bitecases = () => {
   );
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(GetAllCaseThunk({ id: user.clinic }));
     return () => {};
@@ -109,7 +110,7 @@ const Bitecases = () => {
   };
 
   //modals
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const onClose = (e) => {
@@ -122,7 +123,7 @@ const Bitecases = () => {
   }
 
   //Popover
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -277,6 +278,11 @@ const Bitecases = () => {
     e.stopPropagation();
   };
 
+  const PressedEnter = (e) => {
+    if (e.code === "Enter" && e.target.value !== "") {
+      navigate(`/admin/bitecase/get/${e.target.value}`);
+    }
+  };
   return (
     <Box
       sx={{
@@ -329,6 +335,17 @@ const Bitecases = () => {
               gutterBottom
             >
               Bite Cases
+            </Typography>
+          </Grid>
+
+          <Grid item>
+            <Typography component="span">
+              Scan Bite Case QR Code:{" "}
+              <StyledTextField
+                size="small"
+                label="Press 'Enter' After Scan"
+                onKeyUp={PressedEnter}
+              />
             </Typography>
           </Grid>
 
@@ -422,7 +439,7 @@ const Bitecases = () => {
                   required
                   fullWidth
                   id="user"
-                  label="Patient"
+                  label="Patient(Scan ARIS QR Code)"
                   name="user"
                   size="small"
                   //autoComplete="user"

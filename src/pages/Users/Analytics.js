@@ -112,7 +112,10 @@ const Analytics = () => {
 
               {!loading && barangayCount && (
                 <>
-                  <MapAnalytics barangay={barangayCount} />
+                  <MapAnalytics
+                    barangay={barangayCount}
+                    title="Taguig Total Animal Bite Cases per Barangay"
+                  />
                   <Legends />
                 </>
               )}

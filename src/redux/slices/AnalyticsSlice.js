@@ -104,10 +104,46 @@ export const getUsersAnalyticsCounts = createAsyncThunk(
   }
 );
 
+export const getExposureCountPerClinicThunk = createAsyncThunk(
+  "analytics/clinic/exposurecount",
+  async (obj, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_HOST}api/analytics/get/ExpoTypeCountsPerClinic`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const getSourceExposureCountPerClinicThunk = createAsyncThunk(
+  "analytics/clinic/sourceexposurecount",
+  async (obj, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_HOST}api/analytics/get/SourceExpoCountsPerClinic`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 const initialState = {
   clinic_GenderCount: null,
   clinic_categoryCount: null,
+  clinic_exposureCount: null,
   clinic_counts: null,
+  clinic_source_exposureCount: null,
   user_analytics: null,
   genderCount: null,
   barangayCount: null,
@@ -184,6 +220,28 @@ const AnalyticsSlice = createSlice({
       state.user_analytics = action.payload.userAnalyticsCount;
     },
     [getUsersAnalyticsCounts.pending]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    [getExposureCountPerClinicThunk.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [getExposureCountPerClinicThunk.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.clinic_exposureCount = action.payload.exposureTypeCount;
+    },
+    [getExposureCountPerClinicThunk.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    [getSourceExposureCountPerClinicThunk.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [getSourceExposureCountPerClinicThunk.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.clinic_source_exposureCount = action.payload.sourceExposureCount;
+    },
+    [getSourceExposureCountPerClinicThunk.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },

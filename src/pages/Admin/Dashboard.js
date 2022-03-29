@@ -43,6 +43,10 @@ import {
 import { getCountsClinic } from "../../redux/slices/AnalyticsSlice";
 import { ClinicGenderCountGraph } from "../../data/Analytics/BiteCasePerGender";
 import { ClinicCategoryCountGraph } from "../../data/Analytics/BiteCasePerCategory";
+import {
+  BiteCasePerExpoType,
+  BiteCasePerSourceExposure,
+} from "../../data/Analytics/BiteCasePerExpoType";
 //icons
 const bell = require("../../assets/8.svg").default;
 const apt = require("../../assets/2.svg").default;
@@ -354,6 +358,12 @@ const Dashboard = () => {
                 <Typography align="center" variant="h1">
                   {clinic_counts ? clinic_counts.untracked : 0}
                 </Typography>
+                <Typography align="center" variant="h4">
+                  <BiteCasePerExpoType />
+                </Typography>
+                <Typography align="center" variant="h4">
+                  <BiteCasePerSourceExposure />
+                </Typography>
               </StyledLink>
             </Paper>
           </Grid>
@@ -362,7 +372,7 @@ const Dashboard = () => {
               elevation={12}
               style={{ margin: "0px 0px 8px 0px", border: "2px solid #ff8a80" }}
             >
-              <StyledLink to="/admin/bitecases">
+              <StyledLink to="/admin/appointments">
                 <Typography component="h2" align="center">
                   Appoinments Pending
                 </Typography>

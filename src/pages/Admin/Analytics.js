@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { styled } from "@mui/material/styles";
 import {
@@ -24,10 +24,12 @@ import { confidence as dataa } from "../extra/demo-data";
 import { incidence as data } from "../extra/demo-data";
 //import { barangay as dataaa } from "../extra/demo-data";
 import { bitecase as bite } from "../extra/demo-data";
-
+import MapAnalytics from "../../data/Analytics/MapAnalytics";
+import Legends from "../../data/Analytics/Legends";
 import Footer from "../../components/Layouts/Footer";
 import PersistentDrawerLeft from "../../components/Layouts/AdminSidebar";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getBarangayCount } from "../../redux/slices/AnalyticsSlice";
 const PREFIX = "Demo";
 const classes = {
   chart: `${PREFIX}-chart`,
@@ -69,6 +71,13 @@ const stacks = [
 ];
 
 const Analytics = () => {
+  const dispatch = useDispatch();
+  const { loading, barangayCount } = useSelector((state) => state.analytics);
+  useEffect(() => {
+    dispatch(getBarangayCount());
+    return () => {};
+  }, [dispatch]);
+
   return (
     <Box
       sx={{
@@ -88,7 +97,7 @@ const Analytics = () => {
           {/* Total Bite Cases  */}
           <Grid item xl={12} md={12} lg={12} sm={12} xs={12}>
             <Paper elevation={12}>
-              <>
+              {/**<>
                 <iframe
                   title="tbc"
                   style={{
@@ -101,7 +110,16 @@ const Analytics = () => {
                   height="720"
                   src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6234b3a6-6ae5-4c02-8fae-830b77d176eb&maxDataAge=300&theme=light&autoRefresh=true"
                 ></iframe>
-              </>
+                </>*/}
+              {!loading && barangayCount && (
+                <>
+                  <MapAnalytics
+                    barangay={barangayCount}
+                    title="Taguig Total Animal Bite Cases per Barangay"
+                  />
+                  <Legends />
+                </>
+              )}
             </Paper>
           </Grid>
           {/* Total Bite Cases Per Category  */}
