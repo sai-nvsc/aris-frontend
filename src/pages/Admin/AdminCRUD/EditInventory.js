@@ -42,15 +42,7 @@ const EditInventory = ({ data, id }) => {
     formData.append("clinic", user.clinic);
 
     dispatch(EditInvThunk({ data: formData, id: data._id }));
-
     setOpen(false);
-    setvalues({
-      brand_name: data.brand_name,
-      generic_name: data.generic_name,
-      batch_no: data.batch_no,
-      stock: data.stock,
-      exp_date: data.exp_date,
-    });
   };
 
   const handleClose = () => {

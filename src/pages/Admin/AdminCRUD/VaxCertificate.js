@@ -1,154 +1,260 @@
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { GetVaxxPerBiteCasThunk} from "../../../redux/slices/VaccineSlice";
+import CssBaseline from "@mui/material/CssBaseline";
+import PrintIcon from '@mui/icons-material/Print';
+import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
+import {
+  Box,
+  Container,
+  Grid,
+  Divider,
+  Paper,
+  Table,
+  TableBody,
+  TableContainer,
+  TableHead,
+  Typography,
+  IconButton,
+} from "@mui/material";
+import {
+  ProfileCard,
+  StyledButton,
+  StyledTableCell,
+  StyledTableRow,
+  StyledLink
+} from "../../../assets/styles";
 import moment from "moment";
 import {
-    Button,
-    Dialog,
-    DialogActions,
-    DialogTitle,
-    DialogContent,
-    Grid, 
-    Typography } from "@mui/material";
-const Certificate = () => {
-const { user } = useSelector((state) => state.user);
-const { bites, loading, reports, vaxx } = useSelector((state) => state.vaccine);
-const dispatch = useDispatch();
-const params = useParams();
+  GetVaxxPerBiteCasThunk,
+} from "../../../redux/slices/VaccineSlice";
 
-useEffect(() => {
+
+const VaxCertificate = () => {
+  const { bites, loading, vaxx } = useSelector(
+    (state) => state.vaccine
+  );
+  const params = useParams();
+  const dispatch = useDispatch();
+
+  function print() {
+    window.print();
+}
+
+  useEffect(() => {
     dispatch(GetVaxxPerBiteCasThunk({ id: params.id }));
     return () => {};
   }, [dispatch, params]);
+  return (
+    <Box
+      sx={{
+        pb: 2,
+      }}
+    >
+      <CssBaseline />     
+      <Container maxWidth="md" >
+        <div>
+        <IconButton component={StyledLink} to="/admin/bitecases"><ArrowBackIosRoundedIcon/></IconButton>
+        <StyledButton id="printbtn" onClick={print} startIcon={<PrintIcon style={{ fontSize:"medium", color: "#fff" }} />}>Print or Download Certificate</StyledButton>
+        </div>
+        {!loading && (          
+          <Grid container spacing={1} >
+            <Grid item xs={12}>     
+              <ProfileCard elevation={15}>
+                <br/><Typography variant="h5"><b>CERTIFICATE OF ANTI-RABIES VACCINATION</b></Typography><br/>               
+                <Divider>Patient Information</Divider>
+                <Grid container spacing={2}>
+                  <Grid
+                    item
+                    sm={6}
+                    md={6}
+                    lg={6}
+                    sx={{
+                      borderRadius: 3,
+                    }}
+                   >                    
+                    <Box
+                      component="div"
+                      sx={{
+                        textAlign: "left",
+                        paddingLeft: 2,
+                        paddingBottom: 2,
+                        display: "flex",
+                        flexDirection: "row",
+                        marginLeft: "auto",
+                      }}
+                    >                      
+                      <Box component="div" >
+                        <Typography
+                          sx={{ textTransform: "capitalize" }}
+                        >
+                          Name: <b>
+                            {bites[0].user[0].first_name}{" "}
+                            {bites[0].user[0].last_name}{" "}
+                          </b>
+                        </Typography>
+                        <Typography>
+                          Sex: <b>{bites[0].user[0].sex}</b>
+                        </Typography>
+                        <Typography>
+                          Address: <b>{bites[0].user[0].address}</b>
+                        </Typography>                      
+                        <Typography>
+                          Birthday: <b>{moment(bites[0].user[0].birthday).format("MMMM DD, YYYY")}{" "}</b>
+                        </Typography>                       
+                        <Typography>
+                          Contact No.: <b>{bites[0].user[0].phone_number}</b>
+                        </Typography>                        
+                        <Typography>
+                          Email: <b>{bites[0].user[0].email}</b>
+                        </Typography>                       
+                      </Box>
+                    </Box>
+                  </Grid>
 
-//Datagrid
-const columns = [
-    {
-      field: "name",
-      headerName: "Name",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      minWidth: 140,
-      valueGetter: (cellValues) => {
-        return (
-          cellValues.row.user[0].first_name +
-          " " +
-          cellValues.row.user[0].last_name
-        );
-      },
-      sortComparator: (v1, v2) => v1.localeCompare(v2),
-    },
-    {
-      field: "exposure_category",
-      headerName: "Cat.",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      minWidth: 60,
-    },
-    {
-      field: "date",
-      headerName: "Date",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      minWidth: 140,
-      type: "date",
-      valueGetter: (cellValues) =>
-        moment(cellValues.row.history_of_exposure.date).format("MMM. DD, YYYY"),
-      sortComparator: (v1, v2) => new Date(v1) - new Date(v2),
-    },
-    {
-      field: "source_of_exposure",
-      headerName: "Source",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      minWidth: 90,
-      valueGetter: (cellValues) => {
-        return cellValues.row.history_of_exposure.source_of_exposure;
-      },
-      sortComparator: (v1, v2) => v1.localeCompare(v2),
-    },
-    {
-      field: "type_of_exposure",
-      headerName: "Type",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      minWidth: 90,
-      renderCell: (cellValues) => {
-        return cellValues.row.history_of_exposure.type_of_exposure;
-      },
-    },
-    {
-      field: "vaccine",
-      headerName: "Vaccine",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      minWidth: 100,
-    },
-    {
-      field: "status_of_vaccination",
-      headerName: "Status",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      minWidth: 90,
-    },
+                  <Grid item sm={6} md={6}>
+                    <Box
+                      component="img"
+                      src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${params.id}`}
+                      alt="ARIS QR CODE"
+                      sx={{ height: "85%" }}
+                    />
+                    <Typography
+                      variant="subtitle1"
+                      color="text.secondary"
+                    >
+                      Bite Case ID
+                    </Typography>
+                  </Grid>
+                </Grid>
+                <Divider>Exposure Details</Divider>
+                <Grid container spacing={2}>
+                  <Grid item
+                    sm={6}
+                    md={6}
+                    sx={{
+                      borderRadius: 4,
+                    }}
+                  >
+                    <Typography
+                      variant="subtitle1"
+                      color="text.secondary"
+                    >
+                      Date of Exposure:
+                    </Typography>
+                    <Typography variant="h6" >
+                      <b>
+                        {moment(bites[0].history_of_exposure.date).format(
+                          "MMMM D, YYYY"
+                        )}{" "}
+                      </b>
+                    </Typography>
+                    <Typography
+                      variant="subtitle1"
+                      color="text.secondary"
+                    >
+                      Place of Incident:
+                    </Typography>
+                    <Typography variant="h6">
+                      <b>Barangay {bites[0].history_of_exposure.place} </b>
+                    </Typography>
+                    <Typography
+                      variant="subtitle1"
+                      color="text.secondary"
+                    >
+                      Type of Exposure:
+                    </Typography>
+                    <Typography variant="h6">
+                      <b>
+                        {bites[0].history_of_exposure.source_of_exposure}{" "}
+                        {bites[0].history_of_exposure.type_of_exposure}{" "}on{" "} 
+                        {bites[0].history_of_exposure.bodypart}
+                      </b>
+                    </Typography>
+                  </Grid>
+                  <Grid item sm={6} md={6}>
+                    <Typography
+                      variant="subtitle1"
+                      color="text.secondary"
+                    >
+                      Exposure Category:
+                    </Typography>
+                    <Typography variant="h6">
+                      <b>{bites[0].exposure_category} </b>
+                    </Typography>
+                   
+                    <Typography
+                      variant="subtitle1"                   
+                      color="text.secondary"
+                    >
+                      Animal Status:
+                    </Typography>
+                    <Typography variant="h6">
+                      <b>{bites[0].animal_status} </b>
+                    </Typography>
+                    <Typography
+                      variant="subtitle1"                    
+                      color="text.secondary"
+                    >
+                      Classification:
+                    </Typography>
+                    <Typography variant="h6">
+                      <b>{bites[0].classification} </b>
+                    </Typography>
+                  </Grid>                
+                </Grid>
+                <Divider>Exposure Vaccination Record</Divider>
+              <TableContainer component={Paper}>
+                  <Table sx={{ alignContent:"center" }} size="small">
+                    <TableHead>
+                      <StyledTableRow>
+                        <StyledTableCell>Day</StyledTableCell>
+                        <StyledTableCell>Date Given</StyledTableCell>
+                        <StyledTableCell>Brand</StyledTableCell>
+                        <StyledTableCell>Lot#</StyledTableCell>
+                        <StyledTableCell>Vaccinator</StyledTableCell>
+                        <StyledTableCell>Remarks</StyledTableCell>
+                      </StyledTableRow>
+                    </TableHead>
+                    <TableBody>
+                      {!loading &&
+                        vaxx &&
+                        vaxx.map((vaccine) => (
+                          <StyledTableRow key={vaccine._id}>
+                            <StyledTableCell>
+                              {vaccine.day}
+                            </StyledTableCell>
+                            <StyledTableCell>
+                              {moment(vaccine.date_injected).format(
+                                "MMM. D, YYYY"
+                              )}
+                            </StyledTableCell>
+                            <StyledTableCell>
+                              {vaccine.vaccine}
+                            </StyledTableCell>
+                            <StyledTableCell>
+                              {vaccine.lot}
+                            </StyledTableCell>
+                            <StyledTableCell>
+                              {vaccine.admin[0].admin_name}
+                            </StyledTableCell>
+                            <StyledTableCell>
+                              {vaccine.remarks}
+                            </StyledTableCell>                           
+                          </StyledTableRow>
+                        ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer><br/>
+            </ProfileCard>
+            
+          </Grid>         
+          </Grid>
+        )}
+      </Container>
+    </Box>
     
-  ];
-  const handleCellClick = (param, e) => {
-    e.stopPropagation();
-  };
-  const handleRowClick = (param, e) => {
-    e.stopPropagation();
-  };
+  );
+};
 
-const [open, setOpen] = React.useState(false);
-const handleOpen = () => setOpen(true);
-const handleClose = () => setOpen(false);
-
- return (
-        <><Button
-         variant="contained"
-         sx={{
-             float: "center",
-             size: "small",
-         }}
-         onClick={handleOpen}
-     >
-         Print Certificate
-     </Button>
-     <Dialog fullWidth open={open} onClose={handleClose} maxWidth="lg">
-        <DialogTitle>Appointment Details</DialogTitle>
-             <DialogContent>
-                <div style={{ height: 525, width: "auto" }}>
-                {!loading && bites && (
-                    <DataGrid
-                        rows={bites}
-                        columns={columns}
-                        getRowId={(row) => row._id}
-                        onCellClick={handleCellClick}
-                        onRowClick={handleRowClick}
-                        components={{ Toolbar: GridToolbar }} />
-                )}
-                </div>
-             </DialogContent>
-             <DialogActions>
-                 <Button
-                     variant="outlined"
-                     sx={{ mt: 3, mb: 2 }}
-                     onClick={handleClose}
-                 >
-                     Close
-                 </Button>
-             </DialogActions>
-         </Dialog></>
- );
-}
-export default Certificate;
+export default VaxCertificate;

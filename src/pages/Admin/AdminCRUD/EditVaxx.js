@@ -54,16 +54,7 @@ const formHandler = (e) => {
     formData.append("admin", user._id);
     dispatch(EditVaxxThunk({ data: formData, id: eVax._id }));
     //refreshPage();
-
 setOpen(false);
-setvalues({
-    bitecase: eVax.bitecase,
-    date_injected: eVax.date_injected,
-    day: eVax.day,
-    vaccine: eVax.vaccine,
-    lot: eVax.lot,
-    remarks: eVax.remarks,
-    });
 };
 
 const handleClose = () => {

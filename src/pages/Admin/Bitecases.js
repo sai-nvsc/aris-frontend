@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import AdminDelete from "../../components/Layouts/Dialogs/AdminDelete";
 import CssBaseline from "@mui/material/CssBaseline";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { Edit, PreviewOutlined } from "@mui/icons-material";
+import { Edit } from "@mui/icons-material";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import PrintIcon from "@mui/icons-material/Print";
 import {
   Alert,
   AlertTitle,
@@ -23,12 +25,10 @@ import {
   RadioGroup,
   Select,
   Snackbar,
-  TextField,
   Typography,
   FormControlLabel,
 } from "@mui/material";
 import { StyledTextField, StyledButton, StyledLink } from "../../assets/styles";
-//import MaterialTable from 'material-table'
 import DateAdapterMoment from "@mui/lab/AdapterMoment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
@@ -39,9 +39,10 @@ import PersistentDrawerLeft from "../../components/Layouts/AdminSidebar";
 import {
   AddCaseThunk,
   GetAllCaseThunk,
+  clearError,
+  clearSuccess,
 } from "../../redux/slices/BiteCaseSlice";
 import EditBiteCase from "./AdminCRUD/EditBiteCase";
-import { clearError, clearSuccess } from "../../redux/slices/BiteCaseSlice";
 
 const Bitecases = () => {
   const { bitecase, loading, errors, success } = useSelector(
@@ -95,7 +96,6 @@ const Bitecases = () => {
       values.source_of_exposure
     );
     formData.append("history_of_exposure.bodypart", values.bodypart);
-
     formData.append("anti_tetanus", values.anti_tetanus);
     formData.append("vaccine", values.vaccine);
     formData.append("status_of_vaccination", values.status_of_vaccination);
@@ -105,6 +105,7 @@ const Bitecases = () => {
     formData.append("clinic", user.clinic);
 
     dispatch(AddCaseThunk({ data: formData }));
+    setOpen(false);
   };
 
   //modals
@@ -125,7 +126,6 @@ const Bitecases = () => {
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handlePopoverClose = () => {
     setAnchorEl(null);
   };
@@ -139,7 +139,7 @@ const Bitecases = () => {
       flex: 1,
       headerAlign: "center",
       align: "center",
-      minWidth: 140,
+      minWidth: 150,
       valueGetter: (cellValues) => {
         return (
           cellValues.row.user[0].first_name +
@@ -206,62 +206,66 @@ const Bitecases = () => {
       flex: 1,
       headerAlign: "center",
       align: "center",
-      minWidth: 90,
+      minWidth: 110,
+      renderCell: (cellValues) => {
+        if (cellValues.row.status_of_vaccination === "On-going") {
+          return (
+            <Chip
+              color="primary"
+              label={cellValues.row.status_of_vaccination}
+            ></Chip>
+          );
+        } else if (cellValues.row.status_of_vaccination === "Cleared") {
+          return (
+            <Chip
+              color="success"
+              label={cellValues.row.status_of_vaccination}
+            ></Chip>
+          );
+        } else if (cellValues.row.status_of_vaccination === "Untracked") {
+          return <Chip label={cellValues.row.status_of_vaccination}></Chip>;
+        }
+      },
     },
     {
-      field: "View",
-      headerName: "View",
+      field: "Actions",
+      headerName: "Actions",
       flex: 1,
       headerAlign: "center",
       align: "center",
-      minWidth: 90,
+      minWidth: 240,
       sortable: false,
       renderCell: (cellValues) => {
         return (
           <>
             <Button
               component={StyledLink}
+              to={`/admin/bitecase/print/${cellValues.row._id}`}
+            >
+              <Chip
+                color="secondary"
+                label={
+                  <PrintIcon style={{ fontSize: "medium", color: "#fff" }} />
+                }
+              ></Chip>
+            </Button>
+            <Button
+              component={StyledLink}
               to={`/admin/bitecase/get/${cellValues.row._id}`}
             >
-              <PreviewOutlined style={{ color: "#ff8a80" }} />
+              <VisibilityIcon style={{ fontSize: "medium", color: "#000" }} />
             </Button>
+            <EditBiteCase
+              id={bitecase.id}
+              data={cellValues.row}
+              startIcon={<Edit style={{ color: "#ff8a80" }} />}
+            />
+            <AdminDelete
+              id={cellValues.id}
+              collection="bitecases"
+              data={cellValues.row}
+            />
           </>
-        );
-      },
-    },
-    {
-      field: "Edit",
-      headerName: "Edit",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      minWidth: 90,
-      sortable: false,
-      renderCell: (cellValues) => {
-        return (
-          <EditBiteCase
-            id={bitecase.id}
-            data={cellValues.row}
-            startIcon={<Edit style={{ color: "#ff8a80" }} />}
-          />
-        );
-      },
-    },
-    {
-      field: "Delete",
-      headerName: "Delete",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      minWidth: 90,
-      sortable: false,
-      renderCell: (cellValues) => {
-        return (
-          <AdminDelete
-            id={cellValues.id}
-            collection="bitecases"
-            data={cellValues.row}
-          />
         );
       },
     },
@@ -279,10 +283,9 @@ const Bitecases = () => {
         bgcolor: "background.paper",
         pt: 8,
         pb: 6,
-        minHeight: "110vh",
       }}
     >
-      <PersistentDrawerLeft />
+      <PersistentDrawerLeft title="Bite Cases" />
       <CssBaseline />
       <Container maxWidth="xl">
         {success && (
@@ -330,30 +333,25 @@ const Bitecases = () => {
           </Grid>
 
           <Grid item>
-            <TextField
-              id="outlined-basic"
-              label="Search Here..."
-              variant="outlined"
-            />
-          </Grid>
-          <Grid item>
             <StyledButton onClick={handleOpen} margin="10">
               Add Record
             </StyledButton>
             <StyledButton onClick={refreshPage}>⟳</StyledButton>
           </Grid>
         </Grid>
-        <br />
         <Grid item sm flexDirection={"column"}>
           <Box
             sx={{
               bgcolor: "background.paper",
-              pt: 8,
+              pt: 2,
               pb: 6,
 
               "& .On-going": {
-                backgroundColor: "#ff8a80",
+                backgroundColor: "#ebebeb",
                 color: "#000",
+                "&:hover": {
+                  backgroundColor: "#fff",
+                },
               },
               "& .Cleared": {
                 backgroundColor: "#fff",
@@ -491,7 +489,8 @@ const Bitecases = () => {
                   <Typography sx={{ p: 1, display: "inline-block" }}>
                     {" "}
                     Cat. II - nibbling of uncovered skin, minor scratches or
-                    abrasions without bleeding (exposure)
+                    abrasions without bleeding (exposure), or licks on broken
+                    skin
                   </Typography>
                   <Typography sx={{ p: 1, display: "inline-block" }}>
                     {" "}
@@ -499,6 +498,13 @@ const Bitecases = () => {
                     scratches, contamination of mucous membrane or broken skin
                     with saliva from animal licks, exposures due to direct
                     contact with bats (severe exposure)
+                  </Typography>
+                  <Typography
+                    sx={{ p: 1, display: "inline-block", color: "red" }}
+                  >
+                    Categories II and III require treatment with immunoglobulin.
+                    All animal bites in forest or in the wild should be treated
+                    as Category III exposures.
                   </Typography>
                 </Popover>
               </Grid>
@@ -607,7 +613,7 @@ const Bitecases = () => {
                   required
                   fullWidth
                   id="bodypart"
-                  label="Body Part Affected"
+                  label="Site"
                   name="bodypart"
                   size="small"
                   autoFocus
@@ -615,6 +621,7 @@ const Bitecases = () => {
                 />
               </Grid>
 
+              {/* <Divider><Chip variant="filled">PEP</Chip></Divider> */}
               <Grid item xs={6} sm={6} md={6}>
                 <FormControl
                   required

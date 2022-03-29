@@ -41,15 +41,8 @@ const EditAnn = ({ annEdit }) => {
     formData.append("desc", values.desc);
     formData.append("date", values.date);
     formData.append("clinic", user.clinic);
-
     dispatch(EditAnnThunk({ data: formData, id: annEdit._id }));
-
     setOpen(false);
-    setvalues({
-      title: annEdit.title,
-      desc: annEdit.desc,
-      date: new Date(),
-    });
   };
 
   const handleClose = () => {
@@ -65,9 +58,8 @@ const EditAnn = ({ annEdit }) => {
   };
 
   return (
-<>
-    <EditButton onClick={handleOpen} startIcon={<Edit />}>
-      </EditButton>
+    <>
+      <EditButton onClick={handleOpen} startIcon={<Edit />}></EditButton>
 
       <Modal
         open={open}

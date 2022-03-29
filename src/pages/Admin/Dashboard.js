@@ -17,6 +17,7 @@ import {
   Popover,
   Typography,
   Divider,
+  Badge,
 } from "@mui/material";
 import {
   Chart,
@@ -80,43 +81,6 @@ const stacks = [
 ];
 
 //
-const cards = [
-  {
-    title: "Bite Cases",
-    desc: "View Bite Cases records...",
-    image: px,
-    alt: "Patients",
-    to: "/admin/bitecases",
-  },
-  {
-    title: "Appointments",
-    desc: "View Active/Pending appointments...",
-    image: apt,
-    alt: "Appointments",
-    to: "/admin/appointments",
-  },
-  {
-    title: "Inventory",
-    desc: "View clinic's inventory...",
-    image: inv,
-    alt: "Inventory",
-    to: "/admin/inventory",
-  },
-  {
-    title: "Analytics",
-    desc: "View rabies reports and analytics...",
-    image: chart,
-    alt: "Analytics",
-    to: "/admin/analytics",
-  },
-  {
-    title: "Announcements",
-    desc: "View latest announcements and updates...",
-    image: bell,
-    alt: "announcement",
-    to: "/admin/announcements",
-  },
-];
 
 const Dashboard = () => {
   const { clinic_counts } = useSelector((state) => state.analytics);
@@ -159,6 +123,48 @@ const Dashboard = () => {
     setAnchorEl(null);
   };
   const openPop = Boolean(anchorEl);
+  const cards = [
+    {
+      title: "Bite Cases",
+      desc: "View Bite Cases records...",
+      image: px,
+      alt: "Patients",
+      to: "/admin/bitecases",
+      alert: null,
+    },
+    {
+      title: "Appointments",
+      desc: "View Active/Pending appointments...",
+      image: apt,
+      alt: "Appointments",
+      to: "/admin/appointments",
+      alert: clinic_counts ? clinic_counts.appointments_pending : null,
+    },
+    {
+      title: "Inventory",
+      desc: "View clinic's inventory...",
+      image: inv,
+      alt: "Inventory",
+      to: "/admin/inventory",
+      alert: clinic_counts ? clinic_counts.inventory_stock_alert : null,
+    },
+    {
+      title: "Analytics",
+      desc: "View rabies reports and analytics...",
+      image: chart,
+      alt: "Analytics",
+      to: "/admin/analytics",
+      alert: null,
+    },
+    {
+      title: "Announcements",
+      desc: "View latest announcements and updates...",
+      image: bell,
+      alt: "announcement",
+      to: "/admin/announcements",
+      alert: null,
+    },
+  ];
 
   return (
     <Box
@@ -170,7 +176,7 @@ const Dashboard = () => {
       }}
     >
       <CssBaseline />
-      <PersistentDrawerLeft />
+      <PersistentDrawerLeft title="Admin Dashboard" />
 
       <Container sx={{ py: 5 }} maxWidth="xl">
         <Grid container item xs={12} spacing={2}>
@@ -351,6 +357,34 @@ const Dashboard = () => {
               </StyledLink>
             </Paper>
           </Grid>
+          <Grid item xl={3} md={4} sm={6} xs={12}>
+            <Paper
+              elevation={12}
+              style={{ margin: "0px 0px 8px 0px", border: "2px solid #ff8a80" }}
+            >
+              <StyledLink to="/admin/bitecases">
+                <Typography component="h2" align="center">
+                  Appoinments Pending
+                </Typography>
+                <Typography align="center" variant="h1">
+                  {clinic_counts ? clinic_counts.appointments_pending : 0}
+                </Typography>
+
+                <Typography align="center" component="h2">
+                  Appointments Completed
+                </Typography>
+                <Typography align="center" variant="h1">
+                  {clinic_counts ? clinic_counts.appointments_completed : 0}
+                </Typography>
+                <Typography align="center" component="h2">
+                  Appointments Cancelled
+                </Typography>
+                <Typography align="center" variant="h1">
+                  {clinic_counts ? clinic_counts.appointments_cancelled : 0}
+                </Typography>
+              </StyledLink>
+            </Paper>
+          </Grid>
         </Grid>
       </Container>
 
@@ -359,35 +393,37 @@ const Dashboard = () => {
         <Grid container spacing={3}>
           {cards.map((card) => (
             <Grid item key={card} xs={12} sm={6} md={4} lg={2.4} xl={2.4}>
-              <Card
-                sx={{
-                  height: "100%",
-                  width: "108%",
-                  display: "flex",
-                  position: "sticky",
-                  flexDirection: "column",
-                }}
-              >
-                <CardActionArea>
-                  <StyledLink to={card.to}>
-                    <CardMedia
-                      sx={{
-                        pt: "100%",
-                      }}
-                      image={card.image}
-                      alt={card.alt}
-                    />
-                    <CardContent sx={{ flexGrow: 1 }}>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        {card.title}
-                      </Typography>
-                      <Typography color="text.secondary">
-                        {card.desc}
-                      </Typography>
-                    </CardContent>
-                  </StyledLink>
-                </CardActionArea>
-              </Card>
+              <Badge color="primary" badgeContent={card.alert}>
+                <Card
+                  sx={{
+                    height: "100%",
+                    width: "108%",
+                    display: "flex",
+                    position: "sticky",
+                    flexDirection: "column",
+                  }}
+                >
+                  <CardActionArea>
+                    <StyledLink to={card.to}>
+                      <CardMedia
+                        sx={{
+                          pt: "100%",
+                        }}
+                        image={card.image}
+                        alt={card.alt}
+                      />
+                      <CardContent sx={{ flexGrow: 1 }}>
+                        <Typography gutterBottom variant="h5" component="h2">
+                          {card.title}
+                        </Typography>
+                        <Typography color="text.secondary">
+                          {card.desc}
+                        </Typography>
+                      </CardContent>
+                    </StyledLink>
+                  </CardActionArea>
+                </Card>
+              </Badge>
             </Grid>
           ))}
         </Grid>

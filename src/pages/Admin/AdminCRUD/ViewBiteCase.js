@@ -1,8 +1,8 @@
-//import ReactPDF, { Page, Document, PDFDownloadLink } from "@react-pdf/renderer";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
+import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import CssBaseline from "@mui/material/CssBaseline";
 import Footer from "../../../components/Layouts/Footer";
 import PersistentDrawerLeft from "../../../components/Layouts/AdminSidebar";
@@ -10,16 +10,20 @@ import AdminDelete from "../../../components/Layouts/Dialogs/AdminDelete";
 import EditVaxx from "../../Admin/AdminCRUD/EditVaxx";
 import { Edit } from "@mui/icons-material";
 import {
+  Alert,
+  AlertTitle,
   Box,
   Button,
   Container,
   Grid,
   FormControl,
+  IconButton,
   InputLabel,
   MenuItem,
   Modal,
   Paper,
   Select,
+  Snackbar,
   Table,
   TableBody,
   TableContainer,
@@ -33,6 +37,7 @@ import {
   StyledButton,
   StyledTableRow,
   StyledTableCell,
+  StyledLink,
 } from "../../../assets/styles";
 import moment from "moment";
 import DateAdapterMoment from "@mui/lab/AdapterMoment";
@@ -41,13 +46,17 @@ import DatePicker from "@mui/lab/DatePicker";
 import {
   GetVaxxPerBiteCasThunk,
   AddVaxxThunk,
+  clearError,
+  clearSuccess,
 } from "../../../redux/slices/VaccineSlice";
 import { Comments } from "../../Users/Comments";
+import EditBiteStatus from "../../Admin/AdminCRUD/EditBiteStatus";
 
 const ViewBiteCase = () => {
-  const { bites, loading, reports, vaxx } = useSelector(
+  const { bites, loading, reports, vaxx, errors, success } = useSelector(
     (state) => state.vaccine
   );
+
   const { user } = useSelector((state) => state.user);
   const params = useParams();
   const dispatch = useDispatch();
@@ -77,13 +86,17 @@ const ViewBiteCase = () => {
     formData.append("clinic", user.clinic);
     formData.append("admin", user._id);
     dispatch(AddVaxxThunk({ data: formData }));
+    setOpen(false);
   };
 
   //modal
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  const onClose = (e) => {
+    dispatch(clearSuccess());
+    dispatch(clearError());
+  };
   useEffect(() => {
     dispatch(GetVaxxPerBiteCasThunk({ id: params.id }));
     return () => {};
@@ -99,19 +112,47 @@ const ViewBiteCase = () => {
       <CssBaseline />
       <PersistentDrawerLeft />
       <Container maxWidth="xl">
+        {success && (
+          <Snackbar
+            open={success}
+            autoHideDuration={3000}
+            onClose={onClose}
+            name="success"
+          >
+            <Alert severity="success" variant="filled">
+              <AlertTitle>Success</AlertTitle>
+              {success}
+            </Alert>
+          </Snackbar>
+        )}
+        {errors && (
+          <Snackbar
+            open={errors}
+            autoHideDuration={3000}
+            onClose={onClose}
+            name="error"
+          >
+            <Alert severity="error" variant="filled">
+              <AlertTitle>Error</AlertTitle>
+              {errors}
+            </Alert>
+          </Snackbar>
+        )}
+
         {!loading && (
           <Grid container spacing={2}>
-            {/*  <div>
-        <PDFDownloadLink document={<ViewBiteCase/>} fileName="Certificate">
-        {({loading}) => (loading ? <StyledButton>Loading...</StyledButton> : <StyledButton>Download Certificate</StyledButton>)}
-        </PDFDownloadLink>
-            </div> */}
-            <Typography variant="h3" marginTop={3}>
+            <IconButton
+              component={StyledLink}
+              to="/admin/bitecases"
+              size="large"
+              sx={{ mt: 2 }}
+            >
+              <ArrowBackIosRoundedIcon />
+            </IconButton>
+            <Typography variant="h4" marginTop={2}>
               Exposure Case# {bites[0].bite_case_no}
             </Typography>
             <Grid item sm={12}>
-              {/*   <Document>
-          <Page size="A6"> */}
               <ProfileCard>
                 <Grid container spacing={2}>
                   <Grid
@@ -230,11 +271,11 @@ const ViewBiteCase = () => {
                     </Typography>
                     <Typography variant="h5">
                       <b>
-                        {bites[0].history_of_exposure.source_of_exposure} -{" "}
-                        {bites[0].history_of_exposure.type_of_exposure}{" "}
+                        {bites[0].history_of_exposure.source_of_exposure}{" "}
+                        {bites[0].history_of_exposure.type_of_exposure} on{" "}
+                        {bites[0].history_of_exposure.bodypart}
                       </b>
                     </Typography>
-
                     <Typography variant="subtitle1" color="text.secondary">
                       Exposure Category:
                     </Typography>
@@ -248,6 +289,10 @@ const ViewBiteCase = () => {
                     </Typography>
                     <Typography variant="h5">
                       <b>{bites[0].status_of_vaccination}</b>
+                      <EditBiteStatus
+                        edit={bites[0]}
+                        startIcon={<Edit style={{ color: "#ff8a80" }} />}
+                      />
                     </Typography>
                     <Typography variant="subtitle1" color="text.secondary">
                       Animal Status:
@@ -269,13 +314,10 @@ const ViewBiteCase = () => {
                     </Typography>
                   </Grid>
                 </Grid>
-
                 <Grid item>
                   <br />
                 </Grid>
               </ProfileCard>
-              {/*  </Page>
-          </Document> */}
             </Grid>
 
             <Grid item sm={12}>

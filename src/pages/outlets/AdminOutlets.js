@@ -11,6 +11,7 @@ import Announcements from "../Admin/Announcement";
 import Accounts from "../Admin/Accounts";
 
 import ViewBiteCase from "../Admin/AdminCRUD/ViewBiteCase";
+import VaxCertificate from "../Admin/AdminCRUD/VaxCertificate";
 
 const AdminOutlets = () => {
   const { loading, isAuthenticated, role } = useSelector((state) => state.user);
@@ -27,6 +28,7 @@ const AdminOutlets = () => {
           <Route path="/announcements" element={<Announcements />} />
           <Route path="/auth" element={<Accounts />} />
           <Route path="/bitecase/get/:id" element={<ViewBiteCase />} />
+          <Route path="/bitecase/print/:id" element={<VaxCertificate />} />
         </Routes>
       ) : (
         isAuthenticated === false && <Navigate to={"/login-admin"} />

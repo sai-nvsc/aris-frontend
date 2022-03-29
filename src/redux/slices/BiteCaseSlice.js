@@ -142,6 +142,21 @@ export const EditCaseThunk = createAsyncThunk(
   }
 );
 
+export const EditCaseStatusThunk = createAsyncThunk(
+  "bitecase/editstatus",
+  async (obj, { rejectWithValue }) => {
+    try {
+      const response = await axios.patch(
+        `/api/bitecase/update/${obj.id}`,
+        obj.data
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 export const DeleteCaseThunk = createAsyncThunk(
   "bitecase/delete",
   async (obj, { rejectWithValue }) => {
@@ -280,9 +295,19 @@ const BiteCaseSlice = createSlice({
     },
     [EditCaseThunk.fulfilled]: (state, action) => {
       state.loading = false;
-      state.succes = action.payload.message;
+      state.success = action.payload.message;
       state.errors = null;
       state.bitecase = [...state.bitecase, action.payload.bitecase];
+      //window.location.reload();
+    },
+    [EditCaseStatusThunk.pending]: (state) => {
+      state.loading = true;
+    },
+    [EditCaseStatusThunk.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.success = action.payload.message;
+      state.errors = null;
+      state.bites = action.payload.bitecase;
       //window.location.reload();
     },
     [DeleteCaseThunk.fulfilled]: (state, action) => {

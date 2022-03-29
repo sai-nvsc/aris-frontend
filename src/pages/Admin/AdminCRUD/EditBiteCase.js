@@ -85,30 +85,14 @@ const EditBiteCase = ({ data, id }) => {
     formData.append("patient_status", values.patient_status);
 
     dispatch(EditCaseThunk({ data: formData, id: data._id }));
-
     setOpen(false);
-    setvalues({
-      user: data.user[0]._id,
-      exposure_category: data.exposure_category,
-      date: data.history_of_exposure.date,
-      place: data.history_of_exposure.place,
-      type_of_exposure: data.history_of_exposure.type_of_exposure,
-      route: data.history_of_exposure.route,
-      source_of_exposure: data.history_of_exposure.source_of_exposure,
-      anti_tetanus: data.anti_tetanus,
-      vaccine: data.vaccine,
-      status_of_vaccination: data.status_of_vaccination,
-      classification: data.classification,
-      clinic: user.clinic,
-      patient_status: data.patient_status,
-    });
   };
 
   const handleClose = () => setOpen(false);
 
-  return (
-    <>
-      <EditButton onClick={handleOpen} startIcon={<Edit style={{ color: "#ff8a80" }} />}>
+return (
+  <>
+    <EditButton onClick={handleOpen} startIcon={<Edit style={{ color: "#ff8a80" }} />}>
       </EditButton>
 
       <Modal

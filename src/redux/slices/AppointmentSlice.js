@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
-  "token"
-)}`;
+// axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
+//   "token"
+// )}`;
 /* export const getAdminAppointments = createAsyncThunk(
   "appointments/admin-appointment",
   async (obj, { rejectWithValue }) => {
@@ -18,7 +18,9 @@ export const createAppointment = createAsyncThunk(
   "appointment/new/create",
   async (obj, { rejectWithValue }) => {
     try {
-      const response = await axios.post("/api/appointments/add", obj.data);
+      const response = await axios.post("/api/appointments/add", obj.data, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      });
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -31,7 +33,10 @@ export const getAdminApts = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_HOST}api/appointments/get/appointments`
+        `${process.env.REACT_APP_API_HOST}api/appointments/get/appointments`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -46,7 +51,10 @@ export const AcceptAptThunk = createAsyncThunk(
     try {
       const response = await axios.patch(
         `${process.env.REACT_APP_API_HOST}api/appointments/accept/${obj.id}`,
-        obj.data
+        obj.data,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -60,7 +68,10 @@ export const getMyAppointments = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_HOST}api/appointments/get/my-appointments`
+        `${process.env.REACT_APP_API_HOST}api/appointments/get/my-appointments`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -74,7 +85,10 @@ export const getClinics = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_HOST}api/clinic/get/clinic?latitude=${obj.lat}&longitude=${obj.lng}`
+        `${process.env.REACT_APP_API_HOST}api/clinic/get/clinic?latitude=${obj.lat}&longitude=${obj.lng}`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -89,7 +103,10 @@ export const requestAppointment = createAsyncThunk(
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_HOST}api/appointments/add/request`,
-        obj.data
+        obj.data,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
 
       return response.data;
@@ -104,7 +121,10 @@ export const cancelAppointment = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.patch(
-        `${process.env.REACT_APP_API_HOST}api/appointments/cancel/${obj.id}`
+        `${process.env.REACT_APP_API_HOST}api/appointments/cancel/${obj.id}`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -118,7 +138,10 @@ export const cancelApt = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.patch(
-        `${process.env.REACT_APP_API_HOST}api/appointments/cancel/${obj.id}`
+        `${process.env.REACT_APP_API_HOST}api/appointments/cancel/${obj.id}`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {
@@ -132,7 +155,10 @@ export const EligibilityCheck = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_HOST}api/appointments/check/eligibility`
+        `${process.env.REACT_APP_API_HOST}api/appointments/check/eligibility`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
       );
       return response.data;
     } catch (error) {

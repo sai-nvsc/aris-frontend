@@ -8,7 +8,7 @@ export const aris_theme = createTheme({
     },
     button: {
       main: "#ff8a80",
-      contrastText: "#0000",
+      contrastText: "#000",
     },
     secondary: {
       main: "#ef9a9a",

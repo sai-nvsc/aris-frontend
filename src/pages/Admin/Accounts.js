@@ -113,7 +113,7 @@ const Accounts = () => {
         minHeight: "100vh",
       }}
     >
-      <PersistentDrawerLeft />
+      <PersistentDrawerLeft title="Accounts" />
       <CssBaseline />
       <Container maxWidth="xl">
         {success && (

@@ -152,7 +152,14 @@ const initialState = {
 const VaccineSlices = createSlice({
   name: "vaxx",
   initialState,
-  reducers: {},
+  reducers: {
+    clearError: (state) => {
+      state.errors = null;
+    },
+    clearSuccess: (state) => {
+      state.success = null;
+    },
+  },
   extraReducers: {
     [GetBiteCasesThunk.pending]: (state) => {
       state.loading = true;
@@ -261,5 +268,5 @@ const VaccineSlices = createSlice({
     },
   },
 });
-
+export const { clearError, clearSuccess } = VaccineSlices.actions;
 export default VaccineSlices.reducer;

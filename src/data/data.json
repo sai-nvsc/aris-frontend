@@ -1,6 +1,6 @@
 {
     "Header": {
-      "title": "Welcome to A.R.I.S",
+      "title": "Welcome to ARIS",
       "paragraph": "Save your pets, your family, and yourself, act in time to fight against Rabies."
     },
     "About": {
@@ -136,8 +136,13 @@
       },
       {
         "img": "img/testimonials/04.jpg",
-        "text": "Can rabies be transmitted from human to human?",
-        "name": "It is extremely rare, but precautions still need to be taken to avoid coming into contact with the saliva and other bodily fluids of infected persons."
+        "text": "What is the earliest age at which my dog can be vaccinated?",
+        "name": "Every rabies vaccine has specific recommendations regarding which animals it is prepared for and when an animal should be vaccinated. In dog rabies endemic countries where vaccination is by annual mass vaccination campaigns, all dogs including those less than 3 months old should be vaccinated. "
+      }, 
+      {
+        "img": "img/testimonials/04.jpg",
+        "text": "Why eliminate rabies?",
+        "name": "Because rabies kills. Every year, an estimated 59,000 people die of one of the oldest and most terrifying diseases known to man which is rabies virus. "
       }
     ],
     "Team": [

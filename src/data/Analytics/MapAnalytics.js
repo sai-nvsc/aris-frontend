@@ -3,7 +3,7 @@ import "leaflet/dist/leaflet.css";
 import { features } from "../../helpers/TaguigAdministraiveGeoJSON";
 import "../../assets/Map.css";
 import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
-const MapAnalytics = ({ barangay }) => {
+const MapAnalytics = ({ barangay, title }) => {
   const [onselect, setOnselect] = useState({});
   const highlightFeature = (e) => {
     var layer = e.target;

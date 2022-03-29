@@ -3,47 +3,51 @@ import { useDispatch, useSelector } from "react-redux";
 import CssBaseline from "@mui/material/CssBaseline";
 import {
   Alert,
-  AlertTitle, 
-    Box,
-    Card,
-    CardActions,
-    CardContent, 
-    Container,
-    Divider,
-    Grid,
-    Modal,
-    Snackbar,
-    TextField,
-    Typography 
+  AlertTitle,
+  Box,
+  Card,
+  CardActions,
+  CardContent,
+  Container,
+  Divider,
+  Grid,
+  Modal,
+  Snackbar,
+  TextField,
+  Typography,
 } from "@mui/material";
-import Masonry from '@mui/lab/Masonry';
-import {
-  StyledTextField,
-  StyledButton,
-} from "../../assets/styles";
+import Masonry from "@mui/lab/Masonry";
+import { StyledTextField, StyledButton } from "../../assets/styles";
 import { Edit } from "@mui/icons-material";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 import AdminDelete from "../../components/Layouts/Dialogs/AdminDelete";
 import PersistentDrawerLeft from "../../components/Layouts/AdminSidebar";
 import Footer from "../../components/Layouts/Footer";
-import EditAnn from "../Admin/AdminCRUD/EditAnn"
+import EditAnn from "../Admin/AdminCRUD/EditAnn";
 import moment from "moment";
 import DateAdapterMoment from "@mui/lab/AdapterMoment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
-import { AddAnnThunk, GetAllAnnThunk, clearError, clearSuccess } from "../../redux/slices/AnnouncementSlice";
+import {
+  AddAnnThunk,
+  GetAllAnnThunk,
+  clearError,
+  clearSuccess,
+} from "../../redux/slices/AnnouncementSlice";
 
 const bull = (
   <Box
     component="span"
-    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
+    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
   >
     •
   </Box>
 );
 
 const Announcement = () => {
-  const { announcement, loading, errors, success } = useSelector((state) => state.announcement);
+  const { announcement, loading, errors, success } = useSelector(
+    (state) => state.announcement
+  );
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -62,7 +66,9 @@ const Announcement = () => {
     formData.append("desc", values.desc);
     formData.append("date", values.date);
     formData.append("clinic", user.clinic);
-    dispatch(AddAnnThunk({ data: formData }));    
+    dispatch(AddAnnThunk({ data: formData }));
+
+    setOpen(false);
   };
 
   useEffect(() => {
@@ -90,40 +96,39 @@ const Announcement = () => {
         pt: 8,
         pb: 6,
         minHeight: "100vh",
-
       }}
     >
-      <PersistentDrawerLeft />
+      <PersistentDrawerLeft title="Announcements" />
       <CssBaseline />
 
       <Container maxWidth="xl">
-      {success && (
-      <Snackbar
-        open={success}
-        autoHideDuration={3000}
-        onClose={onClose}
-        name="sucess"
-      >
-        <Alert severity="success" variant="filled">
-          <AlertTitle>Success</AlertTitle>
-          {success}
-        </Alert>
-      </Snackbar>
-    )}
-    {errors && (
-      <Snackbar
-        open={errors}
-        autoHideDuration={3000}
-        onClose={onClose}
-        name="error"
-      >
-        <Alert severity="error" variant="filled">
-          <AlertTitle>Error</AlertTitle>
-          {errors}
-        </Alert>
-      </Snackbar>
-    )}
-      <Grid
+        {success && (
+          <Snackbar
+            open={success}
+            autoHideDuration={3000}
+            onClose={onClose}
+            name="sucess"
+          >
+            <Alert severity="success" variant="filled">
+              <AlertTitle>Success</AlertTitle>
+              {success}
+            </Alert>
+          </Snackbar>
+        )}
+        {errors && (
+          <Snackbar
+            open={errors}
+            autoHideDuration={3000}
+            onClose={onClose}
+            name="error"
+          >
+            <Alert severity="error" variant="filled">
+              <AlertTitle>Error</AlertTitle>
+              {errors}
+            </Alert>
+          </Snackbar>
+        )}
+        <Grid
           container
           direction="row"
           display="flex"
@@ -143,47 +148,59 @@ const Announcement = () => {
           </Grid>
 
           <Grid item>
-            <StyledButton onClick={handleOpen} margin="10" startIcon={<AddIcon/>}>
+            <StyledButton
+              onClick={handleOpen}
+              margin="10"
+              startIcon={<AddIcon />}
+            >
               New Announcement
             </StyledButton>
             <StyledButton onClick={refreshPage}>⟳</StyledButton>
           </Grid>
         </Grid>
-      
-        <Box sx={{ pt: 4, }}>     
-      <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4, xl: 4 }} spacing={2}>
-      {!loading && 
-        announcement && 
-        announcement.map((ann) => (
-            <>
-            <Card
-                sx={{
-                  width:"100%",
-                  display: "block",
-                }}
-              >    
-            <CardContent sx={{ flexGrow: 1 }}>  
-            <Typography gutterBottom variant="h5" component="h2">{ann.title}</Typography>        
-          <Divider light></Divider><br/>
-          <Typography color="text.secondary">{bull}{ann.desc}</Typography>            
-          <br/>
-          <Typography color="text.secondary">Posted: {moment(ann.date).format("MMM. D, YYYY")}</Typography>
-        </CardContent>
 
-        <CardActions>
-        <EditAnn annEdit={ann} startIcon={<Edit />}/>
+        <Box sx={{ pt: 4 }}>
+          <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4, xl: 4 }} spacing={2}>
+            {!loading &&
+              announcement &&
+              announcement.map((ann) => (
+                <>
+                  <Card
+                    sx={{
+                      width: "100%",
+                      display: "block",
+                    }}
+                  >
+                    <CardContent sx={{ flexGrow: 1 }}>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        {ann.title}
+                      </Typography>
+                      <Divider light></Divider>
+                      <br />
+                      <Typography color="text.secondary">
+                        {bull}
+                        {ann.desc}
+                      </Typography>
+                      <br />
+                      <Typography color="text.secondary">
+                        Posted: {moment(ann.date).format("MMM. D, YYYY")}
+                      </Typography>
+                    </CardContent>
 
-        <AdminDelete
-          id={ann._id}
-        //name={ann.brand_name}
-          collection="announcements"
-          />
-    </CardActions>
-        </Card>
-            </>
-         ))}   
-      </Masonry>      
-    </Box>
+                    <CardActions>
+                      <EditAnn annEdit={ann} startIcon={<Edit />} />
+
+                      <AdminDelete
+                        id={ann._id}
+                        //name={ann.brand_name}
+                        collection="announcements"
+                      />
+                    </CardActions>
+                  </Card>
+                </>
+              ))}
+          </Masonry>
+        </Box>
       </Container>
 
       <Modal
@@ -195,9 +212,9 @@ const Announcement = () => {
         transform="translate(-50%, -50%)"
         top="50%"
         position="absolute"
-      >   
+      >
         <Box
-        autoComplete="off"
+          autoComplete="off"
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -208,7 +225,7 @@ const Announcement = () => {
             boxShadow: 3,
           }}
         >
-          <Container maxWidth="lg">    
+          <Container maxWidth="lg">
             <Typography
               component="h1"
               variant="h4"
@@ -219,7 +236,7 @@ const Announcement = () => {
             </Typography>
 
             <Grid container spacing={3}>
-              <Grid item sm={12} md={6}>
+              <Grid item xs={12}>
                 <StyledTextField
                   required
                   fullWidth
@@ -231,7 +248,7 @@ const Announcement = () => {
                 />
               </Grid>
 
-              <Grid item sm={12} md={6}>
+              <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -239,13 +256,13 @@ const Announcement = () => {
                   label="Description"
                   name="desc"
                   multiline
-                  rows={8} 
+                  rows={8}
                   size="small"
                   onChange={handleChange}
                 />
               </Grid>
 
-              <Grid item sm={12} md={6}>
+              <Grid item xs={12}>
                 <LocalizationProvider dateAdapter={DateAdapterMoment}>
                   <DatePicker
                     disabled="true"
@@ -281,15 +298,16 @@ const Announcement = () => {
                 backgroundColor: "white",
                 alignItems: "center",
               }}
-            > <br/>
+            >
+              {" "}
+              <br />
               <StyledButton
                 type="submit"
                 variant="contained"
                 onClick={handleSubmit}
               >
-                Post 
+                Post
               </StyledButton>
-
             </Box>
           </Container>
         </Box>
