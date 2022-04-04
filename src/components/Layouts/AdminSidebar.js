@@ -37,7 +37,7 @@ import CampaignIcon from "@mui/icons-material/Campaign";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-const drawerWidth = 265;
+const drawerWidth = 280;
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -68,11 +68,11 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 export default function PersistentDrawerLeft({ title }) {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
+  // const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const { user } = useSelector((state) => state.user);
 
-  const isMenuOpen = Boolean(anchorEl);
+  // const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleDrawerOpen = () => {
@@ -82,41 +82,22 @@ export default function PersistentDrawerLeft({ title }) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  // const handleProfileMenuOpen = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
 
   const handleMenuClose = () => {
-    setAnchorEl(null);
+    // setAnchorEl(null);
     handleMobileMenuClose();
   };
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
 
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
@@ -135,27 +116,49 @@ export default function PersistentDrawerLeft({ title }) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
+      {/* Badge = Healtreports */}
+      <MenuItem
+        component={StyledLink}
+        to="/admin/bitecases"
+        onClick={handleMenuClose}
+      >
+        <IconButton
+          size="large"
+          aria-label="show new health reports"
+          color="inherit"
+        >
+          <Badge badgeContent={1} color="error">
+            <Notifications />
           </Badge>
         </IconButton>
-        <p>Messages</p>
+        <p>Health Reports</p>
       </MenuItem>
-      <MenuItem>
+
+      {/* Email */}
+      <MenuItem onClick={handleMenuClose}>
         <IconButton
           size="large"
           aria-label="show 17 new notifications"
           color="inherit"
         >
-          <Badge badgeContent={17} color="error">
-            <Notifications />
-          </Badge>
+          {/* <Badge badgeContent={17} color="error"> */}
+          <MailIcon />
+          {/* </Badge> */}
         </IconButton>
-        <p>Notifications</p>
+        <a
+          href="https://accounts.google.com/signin/v2/identifier?flowName=GlifWebSignIn&flowEntry=ServiceLogin"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <p>Email</p>
+        </a>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+
+      <MenuItem
+        component={StyledLink}
+        to="/admin/profile"
+        onClick={handleMenuClose}
+      >
         <IconButton
           size="large"
           aria-label="account of current user"
@@ -203,7 +206,6 @@ export default function PersistentDrawerLeft({ title }) {
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
-      {renderMenu}
       <Drawer
         sx={{
           width: drawerWidth,
@@ -219,6 +221,7 @@ export default function PersistentDrawerLeft({ title }) {
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
+            <i>{user.username}</i>
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon />
             ) : (
@@ -230,7 +233,7 @@ export default function PersistentDrawerLeft({ title }) {
         <List>
           <ListItem>
             <ListItemButton component={StyledLink} to="/admin">
-              <ListItemIcon>
+              <ListItemIcon sx={{ color: "#f32727" }}>
                 <HomeRoundedIcon />
               </ListItemIcon>
               <ListItemText primary="Home" />
@@ -241,7 +244,7 @@ export default function PersistentDrawerLeft({ title }) {
             user.role === "vaccinator") && (
             <ListItem>
               <ListItemButton component={StyledLink} to="/admin/bitecases">
-                <ListItemIcon>
+                <ListItemIcon sx={{ color: "#f32727" }}>
                   <MonitorHeartIcon />
                 </ListItemIcon>
                 <ListItemText primary="Bite Cases" />
@@ -253,7 +256,7 @@ export default function PersistentDrawerLeft({ title }) {
             (user.role === "vaccinator" && (
               <ListItem>
                 <ListItemButton component={StyledLink} to="/admin/appointments">
-                  <ListItemIcon>
+                  <ListItemIcon sx={{ color: "#f32727" }}>
                     <DateRangeOutlinedIcon />
                   </ListItemIcon>
                   <ListItemText primary="Appointments" />
@@ -261,20 +264,21 @@ export default function PersistentDrawerLeft({ title }) {
               </ListItem>
             ))}
 
-          {user.role === "inventory" && (
-            <ListItem>
-              <ListItemButton component={StyledLink} to="/admin/inventory">
-                <ListItemIcon>
-                  <WarehouseIcon />
-                </ListItemIcon>
-                <ListItemText primary="Inventory" />
-              </ListItemButton>
-            </ListItem>
-          )}
+          {user.role === "inventory" ||
+            (user.role === "superadmin" && (
+              <ListItem>
+                <ListItemButton component={StyledLink} to="/admin/inventory">
+                  <ListItemIcon sx={{ color: "#f32727" }}>
+                    <WarehouseIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Inventory" />
+                </ListItemButton>
+              </ListItem>
+            ))}
 
           <ListItem>
             <ListItemButton component={StyledLink} to="/admin/analytics">
-              <ListItemIcon>
+              <ListItemIcon sx={{ color: "#f32727" }}>
                 <AssessmentIcon />
               </ListItemIcon>
               <ListItemText primary="Analytics" />
@@ -282,7 +286,7 @@ export default function PersistentDrawerLeft({ title }) {
           </ListItem>
           <ListItem>
             <ListItemButton component={StyledLink} to="/admin/announcements">
-              <ListItemIcon>
+              <ListItemIcon sx={{ color: "#f32727" }}>
                 <CampaignIcon />
               </ListItemIcon>
               <ListItemText primary="Announcements" />

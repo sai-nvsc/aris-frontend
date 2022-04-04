@@ -63,7 +63,7 @@ const EditInventory = ({ data, id }) => {
     <>
       <EditButton
         onClick={handleOpen}
-        startIcon={<Edit style={{ color: "#ff8a80" }} />}
+        startIcon={<Edit/>}
       >
       </EditButton>
 

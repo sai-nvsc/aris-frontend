@@ -125,6 +125,21 @@ export const SendHealthReportThunk = createAsyncThunk(
   }
 );
 
+export const EditCaseStatusThunk = createAsyncThunk(
+  "vaxx/editstatus",
+  async (obj, { rejectWithValue }) => {
+    try {
+      const response = await axios.patch(
+        `${process.env.REACT_APP_API_HOST}api/bitecase/update/${obj.id}`,
+        obj.data
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 export const ReplyThunk = createAsyncThunk(
   "vaxx/reply",
   async (obj, { rejectWithValue }) => {
@@ -263,6 +278,20 @@ const VaccineSlices = createSlice({
       window.location.reload();
     },
     [ReplyThunk.rejected]: (state, action) => {
+      state.loading = false;
+      state.errors = action.payload;
+    },
+    [EditCaseStatusThunk.pending]: (state) => {
+      state.loading = true;
+    },
+    [EditCaseStatusThunk.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.success = action.payload.message;
+      state.errors = null;
+      state.bites = action.payload.bitecase;
+      //window.location.reload();
+    },
+    [EditCaseStatusThunk.rejected]: (state, action) => {
       state.loading = false;
       state.errors = action.payload;
     },

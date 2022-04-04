@@ -13,29 +13,26 @@ import {
   Typography,
 } from "@mui/material";
 import { Edit } from "@mui/icons-material";
-import {
-  EditButton,
-  StyledButton,
-} from "../../../assets/styles";
-import { EditCaseStatusThunk } from "../../../redux/slices/BiteCaseSlice";
+import { EditButton, StyledButton } from "../../../assets/styles";
+import { EditCaseStatusThunk } from "../../../redux/slices/VaccineSlice";
 
 const EditBiteStatus = ({ edit, id }) => {
   const dispatch = useDispatch();
   const params = useParams();
 
-//modal
-const [open, setOpen] = React.useState(false);
-const handleOpen = () => setOpen(true);
+  //modal
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
 
-const [values, setvalues] = useState({   
+  const [values, setvalues] = useState({
     status_of_vaccination: edit.status_of_vaccination,
-});
+  });
 
-const handleChange = (e) => {
-setvalues({ ...values, [e.target.name]: e.target.value });
-};
+  const handleChange = (e) => {
+    setvalues({ ...values, [e.target.name]: e.target.value });
+  };
 
-const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("status_of_vaccination", values.status_of_vaccination);
@@ -43,12 +40,14 @@ const handleSubmit = (e) => {
     setOpen(false);
   };
 
-const handleClose = () => setOpen(false);
+  const handleClose = () => setOpen(false);
 
-return (
-<>
-    <EditButton onClick={handleOpen} startIcon={<Edit style={{ color: "#ff8a80" }} />}>
-      </EditButton>
+  return (
+    <>
+      <EditButton
+        onClick={handleOpen}
+        startIcon={<Edit style={{ color: "#ff8a80" }} />}
+      ></EditButton>
 
       <Modal
         open={open}

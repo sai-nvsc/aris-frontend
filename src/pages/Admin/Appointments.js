@@ -216,6 +216,10 @@ const Appointments = () => {
     setOpen(false);
   };
 
+function refreshPage() {
+  window.location.reload(false);
+}
+  
   return (
     <Box
       sx={{
@@ -274,20 +278,17 @@ const Appointments = () => {
             </Typography>
           </Grid>
 
-          <Grid item>
-            <StyledButton
-              variant="contained"
-              startIcon={<BsCalendarPlusFill />}
-              onClick={handleOpen}
-              sx={{
-                float: "right",
-              }}
-            >
-              Create Appointment
-            </StyledButton>
-          </Grid>
-        </Grid>
-      </Container>
+      <Grid item>
+        <StyledButton
+          startIcon={<BsCalendarPlusFill />}
+          onClick={handleOpen}
+        >
+          Create Appointment
+        </StyledButton>
+        <StyledButton onClick={refreshPage}>⟳</StyledButton>
+      </Grid>
+    </Grid>
+  </Container>
 
       <Container sx={{ py: 5 }} maxWidth="xl">
         <Grid item sm flexDirection={"column"}>

@@ -19,17 +19,16 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { EditAccountThunk } from "../../../redux/slices/AdminSlices";
 
-const EditAnn = ({ accEdit }) => {
+const EditAcc = ({ data, }) => {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
 
   const [values, setvalues] = useState({
-    admin_name: accEdit.admin_name,
-    role: accEdit.role,
-    email: accEdit.email,
-    username: accEdit.username,
-    //password: accEdit.password,
+    admin_name: data.admin_name,
+    role: data.role,
+    email: data.email,
+    username: data.username,
   });
 
   const onInputChange = (e) => {
@@ -44,28 +43,26 @@ const EditAnn = ({ accEdit }) => {
     formData.append("clinic", user.clinic);
     formData.append("email", values.email);
     formData.append("username", values.username);
-    //formData.append("password", values.password);
 
-    dispatch(EditAccountThunk({ data: formData, id: accEdit._id }));
+    dispatch(EditAccountThunk({ data: formData, id: data._id }));
 
     setOpen(false);
     setvalues({
-      admin_name: accEdit.admin_name,
-      role: accEdit.role,
-      email: accEdit.email,
-      username: accEdit.username,
-      //password: accEdit.password,
+      admin_name: data.admin_name,
+      role: data.role,
+      email: data.email,
+      username: data.username,
     });
   };
 
   const handleClose = () => {
     setOpen(false);
     setvalues({
-      admin_name: accEdit.admin_name,
-      role: accEdit.role,
-      email: accEdit.email,
-      username: accEdit.username,
-      //password: accEdit.password,
+      admin_name: data.admin_name,
+      role: data.role,
+      email: data.email,
+      username: data.username,
+      //password: data.password,
     });
   };
   const handleOpen = () => {
@@ -186,18 +183,6 @@ const EditAnn = ({ accEdit }) => {
                   />
                 </Grid>
 
-                {/* <Grid item xs={12} sm={12} md={6}>
-                <StyledTextField
-                  required
-                  fullWidth
-                  id="password"
-                  label="Password"
-                  name="password"
-                  size="small"
-                  value={values.password}
-                  onChange={onInputChange}
-                />
-              </Grid> */}
               </Grid>
 
               <Box
@@ -228,4 +213,4 @@ const EditAnn = ({ accEdit }) => {
   );
 };
 
-export default EditAnn;
+export default EditAcc;

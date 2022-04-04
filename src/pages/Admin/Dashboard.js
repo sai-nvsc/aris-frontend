@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import PersistentDrawerLeft from "../../components/Layouts/AdminSidebar";
 import { StyledLink } from "../../assets/styles";
 import { styled } from "@mui/material/styles";
-
 //eslint-disable-next-line
 import {
   Box,
@@ -47,6 +46,8 @@ import {
   BiteCasePerExpoType,
   BiteCasePerSourceExposure,
 } from "../../data/Analytics/BiteCasePerExpoType";
+import moment from "moment";
+
 //icons
 const bell = require("../../assets/8.svg").default;
 const apt = require("../../assets/2.svg").default;
@@ -84,7 +85,6 @@ const stacks = [
   },
 ];
 
-//
 
 const Dashboard = () => {
   const { clinic_counts } = useSelector((state) => state.analytics);
@@ -130,7 +130,7 @@ const Dashboard = () => {
   const cards = [
     {
       title: "Bite Cases",
-      desc: "View Bite Cases records...",
+      desc: "View Animal Bite/Scratch Cases Records...",
       image: px,
       alt: "Patients",
       to: "/admin/bitecases",
@@ -183,11 +183,13 @@ const Dashboard = () => {
       <PersistentDrawerLeft title="Admin Dashboard" />
 
       <Container sx={{ py: 5 }} maxWidth="xl">
+<Typography variant="h3" sx={{ textTransform: "capitalize",  }} align="center"><b><i>Welcome,</i> {user.role}{" "}{user.admin_name}</b></Typography>
+<br/>
         <Grid container item xs={12} spacing={2}>
           <Grid item xl={3} md={4} sm={6} xs={12}>
             <Paper
               elevation={12}
-              style={{ margin: "0px 0px 8px 0px", border: "2px solid #ff8a80" }}
+              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
             >
               <StyledLink to="/admin/analytics">
                 <Typography component="h2" align="center">
@@ -211,7 +213,7 @@ const Dashboard = () => {
           <Grid item xl={3} md={4} sm={6} xs={12}>
             <Paper
               elevation={12}
-              style={{ margin: "0px 0px 8px 0px", border: "2px solid #ff8a80" }}
+              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
             >
               <StyledLink to="/admin/analytics">
                 <Typography
@@ -222,7 +224,7 @@ const Dashboard = () => {
                   onMouseEnter={handlePopoverOpen}
                   onMouseLeave={handlePopoverClose}
                 >
-                  Human Rabies Exposures by Region per category, Philippines,
+                  Human Rabies Exposures by Region per Category, Philippines,
                   2018
                 </Typography>
                 <Popover
@@ -290,7 +292,7 @@ const Dashboard = () => {
           <Grid item xl={3} md={4} sm={6} xs={12}>
             <Paper
               elevation={12}
-              style={{ margin: "0px 0px 8px 0px", border: "2px solid #ff8a80" }}
+              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
             >
               <StyledLink to="/admin/analytics">
                 <Typography component="h2" align="center">
@@ -314,96 +316,121 @@ const Dashboard = () => {
           <Grid item xl={3} md={4} sm={6} xs={12}>
             <Paper
               elevation={12}
-              style={{ margin: "0px 0px 8px 0px", border: "2px solid #ff8a80" }}
+              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
             >
               <StyledLink to="/admin/bitecases">
-                <Typography component="h2" align="center">
-                  Total Bite Cases [Clinic]
+                <Typography variant="h6" align="center">
+                  Total Bite Cases
                 </Typography>
                 <Typography align="center" variant="h1">
                   {clinic_counts ? clinic_counts.bitecase : 0}
                 </Typography>
-
-                <Typography align="center" variant="h4">
-                  <ClinicCategoryCountGraph />
+                <Typography align="center" variant="h6" color="text.secondary">
+                  <i>As of {moment().format('MMMM DD, YYYY')}</i>
                 </Typography>
-                <Typography align="center" variant="h4">
-                  <ClinicGenderCountGraph />
-                </Typography>
+              
               </StyledLink>
             </Paper>
-          </Grid>
-          <Grid item xl={3} md={4} sm={6} xs={12}>
+     <br/>
             <Paper
               elevation={12}
-              style={{ margin: "0px 0px 8px 0px", border: "2px solid #ff8a80" }}
-            >
-              <StyledLink to="/admin/bitecases">
-                <Typography component="h2" align="center">
-                  Total Bite Cases [On-going]
-                </Typography>
-                <Typography align="center" variant="h1">
-                  {clinic_counts ? clinic_counts.on_going : 0}
-                </Typography>
-
-                <Typography align="center" component="h2">
-                  Total Bite Cases [Cleared]
-                </Typography>
-                <Typography align="center" variant="h1">
-                  {clinic_counts ? clinic_counts.cleared : 0}
-                </Typography>
-                <Typography align="center" component="h2">
-                  Total Bite Cases [Untracked]
-                </Typography>
-                <Typography align="center" variant="h1">
-                  {clinic_counts ? clinic_counts.untracked : 0}
-                </Typography>
-                <Typography align="center" variant="h4">
-                  <BiteCasePerExpoType />
-                </Typography>
-                <Typography align="center" variant="h4">
-                  <BiteCasePerSourceExposure />
-                </Typography>
-              </StyledLink>
-            </Paper>
-          </Grid>
-          <Grid item xl={3} md={4} sm={6} xs={12}>
-            <Paper
-              elevation={12}
-              style={{ margin: "0px 0px 8px 0px", border: "2px solid #ff8a80" }}
+              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
             >
               <StyledLink to="/admin/appointments">
-                <Typography component="h2" align="center">
-                  Appoinments Pending
+                <Typography variant="h6" align="center">
+                  Total Appointments
                 </Typography>
-                <Typography align="center" variant="h1">
-                  {clinic_counts ? clinic_counts.appointments_pending : 0}
+                <br/>
+                <Typography align="center" variant="h4">
+                  Pending: {clinic_counts ? clinic_counts.appointments_pending : 0}
                 </Typography>
-
-                <Typography align="center" component="h2">
-                  Appointments Completed
+               
+                <Typography align="center" variant="h4">
+                  Completed: {clinic_counts ? clinic_counts.appointments_completed : 0}
                 </Typography>
-                <Typography align="center" variant="h1">
-                  {clinic_counts ? clinic_counts.appointments_completed : 0}
-                </Typography>
-                <Typography align="center" component="h2">
-                  Appointments Cancelled
-                </Typography>
-                <Typography align="center" variant="h1">
-                  {clinic_counts ? clinic_counts.appointments_cancelled : 0}
+               
+                <Typography align="center" variant="h4">
+                  Cancelled: {clinic_counts ? clinic_counts.appointments_cancelled : 0}
                 </Typography>
               </StyledLink>
             </Paper>
           </Grid>
+
+          <Grid item xl={3} md={4} sm={6} xs={12}>
+            <Paper
+              elevation={12}
+              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
+            >
+              <StyledLink to="/admin/bitecases">
+                  <ClinicCategoryCountGraph />
+              </StyledLink>
+            </Paper>
+          </Grid>
+
+          <Grid item xl={3} md={4} sm={6} xs={12}>
+            <Paper
+              elevation={12}
+              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
+            >
+              <StyledLink to="/admin/bitecases">               
+                  <ClinicGenderCountGraph />
+              </StyledLink>
+            </Paper>
+          </Grid>
+         
+          <Grid item xl={3} md={4} sm={6} xs={12}>
+            <Paper
+              elevation={12}
+              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
+            >
+              <StyledLink to="/admin/bitecases">               
+              <BiteCasePerSourceExposure />
+              </StyledLink>
+            </Paper>
+          </Grid>
+
+        <Grid item xl={3} md={4} sm={6} xs={12}>
+            <Paper
+              elevation={12}
+              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
+            >
+              <StyledLink to="/admin/bitecases">               
+                <BiteCasePerExpoType />              
+              </StyledLink>
+            </Paper>
+          </Grid>
+
+          <Grid item xl={3} md={4} sm={6} xs={12}>
+            <Paper
+              elevation={12}
+              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
+            >
+              <StyledLink to="/admin/bitecases">
+                <Typography variant="h4" align="center">
+                  Total Exposures 
+                </Typography>
+                <Typography align="center" variant="h5">
+                  [On-going]{clinic_counts ? clinic_counts.on_going : 0}
+                </Typography>
+                <Typography align="center" variant="h5">
+                  [Cleared]{clinic_counts ? clinic_counts.cleared : 0}
+                </Typography>
+                <Typography align="center" variant="h5">
+                  [Untracked]{clinic_counts ? clinic_counts.untracked : 0}
+                </Typography>
+              
+              </StyledLink>
+            </Paper>
+          </Grid>
+         
         </Grid>
       </Container>
 
-      <Divider light></Divider>
+      <Divider light/>
       <Container sx={{ py: 7 }} maxWidth="xl">
         <Grid container spacing={3}>
           {cards.map((card) => (
             <Grid item key={card} xs={12} sm={6} md={4} lg={2.4} xl={2.4}>
-              <Badge color="primary" badgeContent={card.alert}>
                 <Card
                   sx={{
                     height: "100%",
@@ -423,9 +450,15 @@ const Dashboard = () => {
                         alt={card.alt}
                       />
                       <CardContent sx={{ flexGrow: 1 }}>
+                      <Badge color="primary" badgeContent={card.alert}  
+                        anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                        }}>
                         <Typography gutterBottom variant="h5" component="h2">
                           {card.title}
                         </Typography>
+                        </Badge>
                         <Typography color="text.secondary">
                           {card.desc}
                         </Typography>
@@ -433,7 +466,6 @@ const Dashboard = () => {
                     </StyledLink>
                   </CardActionArea>
                 </Card>
-              </Badge>
             </Grid>
           ))}
         </Grid>

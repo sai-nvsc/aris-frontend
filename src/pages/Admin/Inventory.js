@@ -71,7 +71,7 @@ const Inventory = () => {
     dispatch(clearSuccess());
     dispatch(clearError());
   };
-
+ 
   useEffect(() => {
     //console.log(user._id);
     dispatch(GetAllInvThunk({ id: user._id }));
@@ -86,15 +86,15 @@ const Inventory = () => {
       flex: 1,
       headerAlign: "center",
       align: "center",
-      minWidth: 110,
+      minWidth: 115,
     },
     {
       field: "generic_name",
-      headerName: "Generi Name",
+      headerName: "Generic Name",
       flex: 1,
       headerAlign: "center",
       align: "center",
-      minWidth: 110,
+      minWidth: 115,
     },
     {
       field: "batch_no",
@@ -110,7 +110,7 @@ const Inventory = () => {
       flex: 1,
       headerAlign: "center",
       align: "center",
-      minWidth: 80,
+      minWidth: 65,
     },
     {
       field: "exp_date",
@@ -124,41 +124,29 @@ const Inventory = () => {
       },
     },
     {
-      field: "Edit",
-      headerName: "Edit",
+      field: "actions",
+      headerName: "Actions",
       flex: 1,
       headerAlign: "center",
       align: "center",
       minWidth: 85,
       renderCell: (cellValues) => {
         return (
+          <>
           <EditInventory
             id={inventory.id}
             data={cellValues.row}
             startIcon={<Edit style={{ color: "#ff8a80" }} />}
           />
-        );
-      },
-      sortable: false,
-    },
-    {
-      field: "Delete",
-      headerName: "Delete",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      minWidth: 90,
-      sortable: false,
-      renderCell: (cellValues) => {
-        return (
           <AdminDelete
-            id={inventory._id}
-            //name={"this entry"}
-            collection="bitecases"
-            data={cellValues.row}
-          />
+          id={inventory._id}
+          //name={"this entry"}
+          collection="bitecases"
+          data={cellValues.row}
+        /></>
         );
       },
+      sortable: false,
     },
   ];
   const handleCellClick = (param, e) => {
@@ -174,7 +162,6 @@ const Inventory = () => {
         bgcolor: "background.paper",
         pt: 8,
         pb: 6,
-        minHeight: "100vh",
       }}
     >
       <PersistentDrawerLeft title="Clinic's Inventory" />
@@ -215,7 +202,6 @@ const Inventory = () => {
         >
           <Grid item>
             <Typography
-              component="h1"
               variant="h2"
               align="left"
               color="text.primary"
@@ -241,7 +227,7 @@ const Inventory = () => {
           <Box
             sx={{
               bgcolor: "background.paper",
-              pt: 8,
+              pt: 3,
               pb: 6,
 
               "& .restock": {
@@ -254,7 +240,8 @@ const Inventory = () => {
               },
             }}
           >
-            <div style={{ height: 525, width: "auto" }}>
+            
+            <div style={{ height: 450, width: "auto" }}>
               {!loading && inventory && (
                 <>
                   {stock_alert.length > 0 && (
@@ -416,6 +403,7 @@ const Inventory = () => {
           </Container>
         </Box>
       </Modal>
+<br/>
       <Footer />
     </Box>
   );

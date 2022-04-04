@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useDispatch, useSelector } from "react-redux";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import {
   Alert,
   AlertTitle,
@@ -11,25 +12,16 @@ import {
   InputLabel,
   MenuItem,
   Modal,
-  Paper,
   Select,
   Snackbar,
-  Table,
-  TableBody,
-  TableContainer,
-  TableHead,
-  TableFooter,
-  TableRow,
-  TablePagination,
   Typography,
 } from "@mui/material";
 import {
   StyledTextField,
-  StyledTableCell,
-  StyledTableRow,
   StyledButton,
 } from "../../assets/styles";
 import { Edit } from "@mui/icons-material";
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import EditAccount from "../Admin/AdminCRUD/EditAccount";
 import AdminDelete from "../../components/Layouts/Dialogs/AdminDelete";
 import PersistentDrawerLeft from "../../components/Layouts/AdminSidebar";
@@ -60,18 +52,85 @@ const Accounts = () => {
     window.location.reload(false);
   }
 
-  //pagination
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+  //Datagrid
+  const columns = [
+    {
+      field: "admin_name",
+      headerName: "Admin Name",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      minWidth: 110,
+    },
+    {
+      field: "role",
+      headerName: "Role",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      minWidth: 110,
+    },
+    {
+      field: "email",
+      headerName: "Email",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      minWidth: 100,
+    },
+    {
+      field: "username",
+      headerName: "Username",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      minWidth: 80,
+    },
+    {
+      field: "Edit",
+      headerName: "Edit",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      minWidth: 85,
+      renderCell: (cellValues) => {
+        return (
+          <EditAccount
+            id={admin.id}
+            data={cellValues.row}
+            startIcon={<Edit style={{ color: "#ff8a80" }} />}
+          />
+        );
+      },
+      sortable: false,
+    },
+    {
+      field: "Delete",
+      headerName: "Delete",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      minWidth: 90,
+      sortable: false,
+      renderCell: (cellValues) => {
+        return (
+          <AdminDelete
+              id={admin._id}
+              name={admin.admin_name}
+              collection="admins"
+              data={cellValues.row}
+          />
+        );
+      },
+    },
+  ];
+  const handleCellClick = (param, e) => {
+    e.stopPropagation();
+  };
+  const handleRowClick = (param, e) => {
+    e.stopPropagation();
   };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
 
   const [values, setvalues] = React.useState({
     admin_name: "",
@@ -152,7 +211,6 @@ const Accounts = () => {
         >
           <Grid item>
             <Typography
-              component="h1"
               variant="h2"
               align="left"
               color="text.primary"
@@ -161,85 +219,38 @@ const Accounts = () => {
               Accounts
             </Typography>
           </Grid>
+          
           <Grid item>
-            <StyledTextField
-              id="outlined-basic"
-              label="Search Here..."
-              variant="outlined"
-            />
-          </Grid>
-          <Grid item>
-            <StyledButton onClick={handleOpen} margin="10">
+            <StyledButton onClick={handleOpen} margin="10" startIcon={<GroupAddIcon/>}>
               Add Account
             </StyledButton>
             <StyledButton onClick={refreshPage}>⟳</StyledButton>
           </Grid>
         </Grid>
-      </Container>
 
-      <Container sx={{ py: 7 }} maxWidth="xl">
-        <Grid container spacing={3}>
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 600 }} aria-label="simple table">
-              <TableHead>
-                <StyledTableRow>
-                  <StyledTableCell>Admin Name</StyledTableCell>
-                  <StyledTableCell>Role</StyledTableCell>
-                  <StyledTableCell>Email</StyledTableCell>
-                  <StyledTableCell>Username</StyledTableCell>
-                  <StyledTableCell>Edit</StyledTableCell>
-                  <StyledTableCell>Delete</StyledTableCell>
-                </StyledTableRow>
-              </TableHead>
-              <TableBody>
-                {!loading &&
-                  admin &&
-                  admin.map((acc) => (
-                    <StyledTableRow>
-                      <StyledTableCell>{acc.admin_name}</StyledTableCell>
-                      <StyledTableCell>{acc.role}</StyledTableCell>
-                      <StyledTableCell>{acc.email}</StyledTableCell>
-                      <StyledTableCell>{acc.username}</StyledTableCell>
-                      <StyledTableCell>
-                        <EditAccount accEdit={acc} startIcon={<Edit />} />
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        <AdminDelete
-                          id={acc._id}
-                          name={acc.admin_name}
-                          collection="admins"
-                        />
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  ))}
-              </TableBody>
-
-              <TableFooter>
-                {!loading && admin && (
-                  <TableRow>
-                    <TablePagination
-                      rowsPerPageOptions={[10, 25, 50, 100]}
-                      colSpan={10}
-                      count={admin.length}
-                      rowsPerPage={rowsPerPage}
-                      page={page}
-                      SelectProps={{
-                        inputProps: {
-                          "aria-label": "rows per page",
-                        },
-                        native: true,
-                      }}
-                      onPageChange={handleChangePage}
-                      onRowsPerPageChange={handleChangeRowsPerPage}
-                    />
-                  </TableRow>
-                )}
-              </TableFooter>
-            </Table>
-          </TableContainer>
+        <Grid item sm flexDirection={"column"}>
+        <Box
+          sx={{
+            bgcolor: "background.paper",
+            pt: 3, pb: 6,
+            }}
+          >
+        <div style={{ height: 525, width: "auto" }}>
+              {!loading && admin && (             
+                  <DataGrid
+                    rows={admin}
+                    columns={columns}
+                    getRowId={(row) => row._id}
+                    onCellClick={handleCellClick}
+                    onRowClick={handleRowClick}
+                    components={{ Toolbar: GridToolbar }}
+                  />                
+              )}
+            </div>
+          </Box>         
         </Grid>
       </Container>
-
+        
       <Modal
         open={open}
         onClose={handleClose}
@@ -376,6 +387,7 @@ const Accounts = () => {
               </StyledButton>
             </Box>
           </Container>
+
         </Box>
       </Modal>
       <Footer />

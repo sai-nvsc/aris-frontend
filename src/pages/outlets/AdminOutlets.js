@@ -9,9 +9,11 @@ import Inventory from "../Admin/Inventory";
 import Analytics from "../Admin/Analytics";
 import Announcements from "../Admin/Announcement";
 import Accounts from "../Admin/Accounts";
+import Profile from "../Admin/AdminProfile";
 
 import ViewBiteCase from "../Admin/AdminCRUD/ViewBiteCase";
 import VaxCertificate from "../Admin/AdminCRUD/VaxCertificate";
+import ARIS from "../../components/Layouts/ARIS_Admin"
 
 const AdminOutlets = () => {
   const { loading, isAuthenticated, role } = useSelector((state) => state.user);
@@ -29,6 +31,10 @@ const AdminOutlets = () => {
           <Route path="/auth" element={<Accounts />} />
           <Route path="/bitecase/get/:id" element={<ViewBiteCase />} />
           <Route path="/bitecase/print/:id" element={<VaxCertificate />} />
+
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/ARIS" element={<ARIS />} />
+
         </Routes>
       ) : (
         isAuthenticated === false && <Navigate to={"/login-admin"} />

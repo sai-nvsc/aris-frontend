@@ -83,17 +83,15 @@ const EditBiteCase = ({ data, id }) => {
     formData.append("classification", values.classification);
     formData.append("clinic", user.clinic);
     formData.append("patient_status", values.patient_status);
-
     dispatch(EditCaseThunk({ data: formData, id: data._id }));
     setOpen(false);
   };
 
   const handleClose = () => setOpen(false);
 
-return (
-  <>
-    <EditButton onClick={handleOpen} startIcon={<Edit style={{ color: "#ff8a80" }} />}>
-      </EditButton>
+  return (
+    <>
+      <EditButton onClick={handleOpen} startIcon={<Edit />}></EditButton>
 
       <Modal
         open={open}
@@ -246,18 +244,18 @@ return (
                 </Grid>
 
                 <Grid item xs={6} sm={6} md={6}>
-                <StyledTextField
-                  required
-                  fullWidth
-                  id="bodypart"
-                  label="Body Part Affected"
-                  name="bodypart"
-                  size="small"
-                  autoFocus
-                  onChange={handleChange}
-                  value={values.bodypart}
-                />
-              </Grid>
+                  <StyledTextField
+                    required
+                    fullWidth
+                    id="bodypart"
+                    label="Body Part Affected"
+                    name="bodypart"
+                    size="small"
+                    autoFocus
+                    onChange={handleChange}
+                    value={values.bodypart}
+                  />
+                </Grid>
 
                 <Grid item sm={6} md={6}>
                   <FormControl

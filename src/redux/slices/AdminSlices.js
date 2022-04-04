@@ -94,7 +94,25 @@ export const EditAccountThunk = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.patch(
-        `/api/admin/auth/update_account/${obj.id}`,
+        `${process.env.REACT_APP_API_HOST}api/admin/auth/update_account/${obj.id}`,
+        obj.data,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const UpdatePasswordThunk = createAsyncThunk(
+  "admin/updatepassword",
+  async (obj, { rejectWithValue }) => {
+    try {
+      const response = await axios.patch(
+        `${process.env.REACT_APP_API_HOST}api/admin/auth/update_password/${obj.id}`,
         obj.data,
         {
           headers: { Authorization: "Bearer " + localStorage.getItem("token") },
@@ -195,7 +213,7 @@ const adminSlice = createSlice({
     [EditAccountThunk.fulfilled]: (state, action) => {
       state.loading = false;
       state.success = action.payload.success;
-      state.admin = [...state.admin, action.payload.admin];
+      state.admin = action.payload.admin;
       state.errors = null;
     },
     [EditAccountThunk.rejected]: (state, action) => {
@@ -203,18 +221,20 @@ const adminSlice = createSlice({
       state.success = null;
       state.errors = JSON.parse(action.payload);
     },
-    /* [ResetPasswordThunk.pending]: (state) => {
-        state.loading = true;
-      },
-      [ResetPasswordThunk.fulfilled]: (state, action) => {
-        state.loading = false;
-        state.errors = null;
-        state.success = action.payload.data;
-      },
-      [ResetPasswordThunk.rejected]: (state, action) => {
-        state.errors = action.payload;
-        state.loading = false;
-      }, */
+    [UpdatePasswordThunk.pending]: (state) => {
+      state.loading = true;
+    },
+    [UpdatePasswordThunk.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.success = action.payload.success;
+      state.admin = action.payload.admin;
+      state.errors = null;
+    },
+    [UpdatePasswordThunk.rejected]: (state, action) => {
+      state.loading = false;
+      state.success = null;
+      state.errors = action.payload;
+    },
   },
 });
 export const { clearError, clearSuccess } = adminSlice.actions;

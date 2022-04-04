@@ -139,7 +139,7 @@ export const UpdateProfileThunk = createAsyncThunk(
     }
   }
 );
-
+ 
 export const UpdatePasswordThunk = createAsyncThunk(
   "user/updatepassword",
   async (obj, { rejectWithValue }) => {

@@ -5,7 +5,7 @@ import {
   getSourceExposureCountPerClinicThunk,
 } from "../../redux/slices/AnalyticsSlice";
 import "chart.js/auto";
-import { Doughnut } from "react-chartjs-2";
+import { Doughnut, Pie } from "react-chartjs-2";
 export const BiteCasePerExpoType = () => {
   const dispatch = useDispatch();
   const { loading, clinic_exposureCount } = useSelector(
@@ -34,10 +34,10 @@ export const BiteCasePerExpoType = () => {
         label: "Bite Case per Exposure Type",
         data: clinic_exposureCount ? clinic_exposureCount : [],
         backgroundColor: [
-          "rgba(75, 192, 192, 2)",
-          "rgba(153, 102, 255, 2)",
-          "rgba(255, 159, 64, 2)",
-          "rgba(56, 43, 173)",
+          "rgba(247, 125, 125, 2)",
+          "rgba(243, 39, 39, 2)",
+          "rgba(252, 216, 216, 2)",
+          "rgba(25, 20, 20, 2)",
         ],
       },
     ],
@@ -47,7 +47,7 @@ export const BiteCasePerExpoType = () => {
     return () => {};
   }, [dispatch]);
 
-  return <>{!loading && <Doughnut options={option} data={data} />}</>;
+  return <>{!loading && <Pie options={option} data={data} />}</>;
 };
 
 export const BiteCasePerSourceExposure = () => {
@@ -67,7 +67,7 @@ export const BiteCasePerSourceExposure = () => {
     plugins: {
       title: {
         display: true,
-        text: "Bite Cases per Sourcce of Exposure",
+        text: "Bite Cases per Source of Exposure",
       },
     },
   };
@@ -78,9 +78,9 @@ export const BiteCasePerSourceExposure = () => {
         label: "Bite Case per Source of Exposure",
         data: clinic_source_exposureCount ? clinic_source_exposureCount : [],
         backgroundColor: [
-          "rgba(75, 192, 192, 2)",
-          "rgba(153, 102, 255, 2)",
-          "rgba(255, 159, 64, 2)",
+          "rgba(247, 125, 125, 2)", //cat
+          "rgba(243, 39, 39, 2)", //dog
+          "rgba(252, 216, 216, 2)", //others
           "rgba(56, 43, 173)",
         ],
       },

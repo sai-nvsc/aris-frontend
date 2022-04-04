@@ -35,7 +35,7 @@ export const ClinicGenderCountGraph = () => {
       {
         label: "Bite Case per Gender",
         data: clinic_GenderCount ? clinic_GenderCount : [],
-        backgroundColor: ["rgba(255, 128, 138, 2)", "rgba(56, 43, 173)"],
+        backgroundColor: ["rgba(25, 20, 20, 2)","rgba(255, 128, 138,2)",],
       },
     ],
   };

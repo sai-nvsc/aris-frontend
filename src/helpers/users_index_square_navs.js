@@ -6,37 +6,47 @@ import { HiDocumentReport } from "react-icons/hi";
 import { AiFillHome } from "react-icons/ai";
 import { RiLogoutBoxFill } from "react-icons/ri";
 import { useDispatch } from "react-redux";
-import { List, ListItem, ListItemIcon } from "@mui/material";
+import { List, ListItem, ListItemIcon, Typography } from "@mui/material";
 import { LogoutUserThunk } from "../redux/slices/UserSlices";
+import HdrAutoIcon from '@mui/icons-material/HdrAuto';
 
 import { StyledLink, StyledListItem } from "../assets/styles";
 
 export const user_services = [
   {
+    title: "Profile",
+    path: "/user/myprofile",
+    icon: <BsPersonFill size="10em" />,
+    sub: "View my profile details...",
+  },
+  {
     title: "Anti-Rabies Vaccination",
     path: "/user/myvaxx",
     icon: <RiFolderHistoryFill size="10em" />,
+    sub: "View vaccination History...",
   },
   {
-    title: "My Profile",
-    path: "/user/myprofile",
-    icon: <BsPersonFill size="10em" />,
-  },
-  {
-    title: "My Apppointments",
+    title: "Apppointments",
     path: "/user/schedules",
     icon: <BsFillCalendarCheckFill size="10em" />,
+    sub: "View or Create appointments...",
   },
-  { title: "My Pets", path: "mypets", icon: <MdPets size="10em" /> },
+  { title: "Pets", 
+    path: "mypets", 
+    icon: <MdPets size="10em" />,
+    sub: "View my pets vaccination history...",
+  },
   {
     title: "Announcements",
     path: "/user/view/announcements",
     icon: <MdAnnouncement size="10em" />,
+    sub: "View latest news and announcements...",
   },
   {
     title: "ARIS Reports",
     path: "/user/reports",
     icon: <HiDocumentReport size="10em" />,
+    sub: "View latest anti rabies statistics and reports...",
   },
 ];
 
@@ -52,6 +62,11 @@ export const UserNavMenu = ({ handleDrawerClose }) => {
       icon: <AiFillHome />,
       path: "/user/",
       onclick: handleDrawerClose,
+    },    
+    {
+      title: "ARIS",
+      icon: <HdrAutoIcon />,
+      path: "/user/ARIS",
     },
     {
       title: "Logout",
@@ -59,6 +74,7 @@ export const UserNavMenu = ({ handleDrawerClose }) => {
       path: "#",
       onclick: Logout,
     },
+
   ];
 
   return (
@@ -73,6 +89,9 @@ export const UserNavMenu = ({ handleDrawerClose }) => {
                 primary={item.title}
                 sx={{ fontWeight: "bold" }}
               />
+                <Typography>
+                {item.sub}
+              </Typography>                        
             </ListItem>
           </StyledLink>
         ))}

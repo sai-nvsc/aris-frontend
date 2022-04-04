@@ -142,20 +142,20 @@ export const EditCaseThunk = createAsyncThunk(
   }
 );
 
-export const EditCaseStatusThunk = createAsyncThunk(
-  "bitecase/editstatus",
-  async (obj, { rejectWithValue }) => {
-    try {
-      const response = await axios.patch(
-        `/api/bitecase/update/${obj.id}`,
-        obj.data
-      );
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response.data.message);
-    }
-  }
-);
+// export const EditCaseStatusThunk = createAsyncThunk(
+//   "bitecase/editstatus",
+//   async (obj, { rejectWithValue }) => {
+//     try {
+//       const response = await axios.patch(
+//         `${process.env.REACT_APP_API_HOST}api/bitecase/update/${obj.id}`,
+//         obj.data
+//       );
+//       return response.data;
+//     } catch (error) {
+//       return rejectWithValue(error.response.data.message);
+//     }
+//   }
+// );
 
 export const DeleteCaseThunk = createAsyncThunk(
   "bitecase/delete",
@@ -297,19 +297,19 @@ const BiteCaseSlice = createSlice({
       state.loading = false;
       state.success = action.payload.message;
       state.errors = null;
-      state.bitecase = [...state.bitecase, action.payload.bitecase];
+      state.bitecase = action.payload.bitecase;
       //window.location.reload();
     },
-    [EditCaseStatusThunk.pending]: (state) => {
-      state.loading = true;
-    },
-    [EditCaseStatusThunk.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.success = action.payload.message;
-      state.errors = null;
-      state.bites = action.payload.bitecase;
-      //window.location.reload();
-    },
+    // [EditCaseStatusThunk.pending]: (state) => {
+    //   state.loading = true;
+    // },
+    // [EditCaseStatusThunk.fulfilled]: (state, action) => {
+    //   state.loading = false;
+    //   state.success = action.payload.message;
+    //   state.errors = null;
+    //   state.bites = action.payload.bitecase;
+    //   //window.location.reload();
+    // },
     [DeleteCaseThunk.fulfilled]: (state, action) => {
       const new_case = state.bitecase;
       new_case.splice(

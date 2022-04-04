@@ -6,6 +6,7 @@ import { List, ListItem, ListItemIcon } from "@mui/material";
 import { LogoutUserThunk } from "../redux/slices/UserSlices";
 import { StyledLink, StyledListItem } from "../assets/styles";
 import { AccountCircleOutlined } from "@mui/icons-material";
+import HdrAutoIcon from '@mui/icons-material/HdrAuto';
 
 export const AdminNavMenu = ({ handleDrawerClose }) => {
   const dispatch = useDispatch();
@@ -18,13 +19,17 @@ export const AdminNavMenu = ({ handleDrawerClose }) => {
     {
       title: "My Account",
       icon: <AccountCircleOutlined />,
-      path: "#",
-      //laman: contact devs & edit account
+      path: "/admin/profile",
     },
     {
       title: "Admin",
       icon: <SupervisedUserCircleIcon />,
       path: "/admin/auth",
+    }, 
+    {
+      title: "ARIS",
+      icon: <HdrAutoIcon />,
+      path: "/admin/ARIS",
     },
     {
       title: "Logout",
@@ -32,6 +37,7 @@ export const AdminNavMenu = ({ handleDrawerClose }) => {
       path: "#",
       onclick: AdminLogout,
     },
+   
   ];
 
   return (
@@ -40,7 +46,7 @@ export const AdminNavMenu = ({ handleDrawerClose }) => {
         {admin_nav.map((item) => (
           <StyledLink to={item.path} key={item.title}>
             <ListItem button key={item.title} onClick={item.onclick}>
-              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemIcon sx={{color:"#f32727"}}>{item.icon}</ListItemIcon>
 
               <StyledListItem
                 primary={item.title}

@@ -109,7 +109,7 @@ const CreatePet = () => {
   return (
     //   Render Block
     <>
-      <Button variant="contained" onClick={handleOpen} startIcon={<Add />}>
+      <Button variant="contained" onClick={handleOpen} startIcon={<Add />} sx={{float:"right"}}>
         Add Pet
       </Button>
       <Dialog fullWidth open={open} onClose={handleClose}>

@@ -5,8 +5,9 @@ import AdminDelete from "../../components/Layouts/Dialogs/AdminDelete";
 import CssBaseline from "@mui/material/CssBaseline";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Edit } from "@mui/icons-material";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import PrintIcon from "@mui/icons-material/Print";
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import PrintIcon from '@mui/icons-material/Print';
+import AddIcon from '@mui/icons-material/Add';
 import {
   Alert,
   AlertTitle,
@@ -243,12 +244,7 @@ const Bitecases = () => {
               component={StyledLink}
               to={`/admin/bitecase/print/${cellValues.row._id}`}
             >
-              <Chip
-                color="secondary"
-                label={
-                  <PrintIcon style={{ fontSize: "medium", color: "#fff" }} />
-                }
-              ></Chip>
+              <PrintIcon style={{ fontSize:"medium", color: "#000" }} />
             </Button>
             <Button
               component={StyledLink}
@@ -350,7 +346,7 @@ const Bitecases = () => {
           </Grid>
 
           <Grid item>
-            <StyledButton onClick={handleOpen} margin="10">
+            <StyledButton onClick={handleOpen} margin="10" startIcon={<AddIcon/>}>
               Add Record
             </StyledButton>
             <StyledButton onClick={refreshPage}>⟳</StyledButton>
@@ -394,6 +390,13 @@ const Bitecases = () => {
                     }
                     return params.value === "On-going" ? "On-going" : "Cleared";
                   }}
+                  sx={{
+                    boxShadow: 2,
+                    '& .MuiDataGrid-cell:hover': {
+                    color: '#f32727',
+                  },
+                  }}
+                  
                 />
               )}
             </div>

@@ -6,17 +6,22 @@ import {
   TableRow,
   ListItemText,
   Typography,
-  Grid,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { Link } from "react-router-dom";
 
 export const StyledButton = styled(Button)({
-  background: "#ff8a80", //button color
-  color: "black", //text-color
+  background: "#f32727", //button color
+  color: "white", //text-color
   marginTop: 5,
   marginBottom: 2,
-  marginRight: 5,
+  marginRight: 4,
+  borderRadius:4,
+
+  "&:hover": {
+    background: "#ffb8b2",
+    borderColor: "black",
+    color:"black"  },
 });
 
 export const StyledTextField = styled(TextField)({
@@ -101,7 +106,7 @@ export const BiteCaseLabel = styled(Typography)({
 });
 
 export const PetProfileLabel = styled(Typography)({
-  fontSize: 12,
+  fontSize: 20,
   color: "gray",
   fontWeight: 500,
   // fontFamily:
@@ -110,7 +115,7 @@ export const PetProfileLabel = styled(Typography)({
 });
 
 export const PetProfileValue = styled(Typography)({
-  fontSize: 20,
+  fontSize: 30,
   fontWeight: "bold",
   marginBottom: 4,
   letterSpacing: "1px",
@@ -123,7 +128,7 @@ export const Subheader = styled(Typography)({
 });
 
 export const ProfileHeading = styled(Typography)({
-  fontSize: 25,
+  fontSize: 50,
   fontWeight: "bold",
   letterSpacing: "0.5px",
   marginTop: 8,
@@ -139,4 +144,58 @@ export const ProfileCard = styled(Card)({
   borderRadius: 12,
   minWidth: 256,
   textAlign: "center",
+  boxShadow: "-1px 1px 3px 2px lightgray"
+});
+
+
+export const AdminProfileCard = styled(Card)({
+  marginTop: 40,
+  transition: "0.3s",
+  width: "100%",
+  overflow: "initial",
+  background: "#ffffff",
+  borderRadius: 12,
+  minWidth: 256,
+  textAlign: "center",
+  boxShadow: "-1px 1px 3px 2px lightgray",
+  
+});
+
+export const AdminHeading = styled(Typography)({
+  fontSize: 100,
+  fontWeight: "bold",
+  letterSpacing: "0.5px",
+  marginTop: 8,
+  marginBottom: 1,
+});
+
+export const LogButton = styled(Button)({
+  background: "#ff8a80", //button color
+  color: "black", //text-color
+  marginTop: 5,
+  marginBottom: 2,
+  marginRight: 4,
+  borderRadius:4,
+
+  "&:hover": {
+    background: "#f32727",
+    borderColor: "black",
+    color:"white", //text-color
+  },
+});
+
+export const LogLink = styled(Link)({
+  textDecoration: "none",
+  //background: "white",
+  color: "black",
+  fontSize:"20px",
+  textShadow: "-2px 2px 10px #ff8a80",
+
+  "&:hover": {
+    //background: "#FFBFB9",
+    borderColor: "black",
+    color:"#f32727", //text-color
+    textDecoration:"underline",
+    textShadow: "-2px 2px 10px #fff",
+  },
 });

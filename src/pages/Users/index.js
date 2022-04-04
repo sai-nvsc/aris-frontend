@@ -5,6 +5,7 @@ import {
   CssBaseline,
   Grid,
   Paper,
+  Typography
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import React, { useEffect } from "react";
@@ -23,25 +24,26 @@ const UserIndex = () => {
         display: "flex",
         flexDirection: "column",
         minHeight: "100vh",
+        bgcolor:"background.paper"
       }}
     >
       <CssBaseline />
       <PersistentDrawerLeft title="Home" />
-      <Container component="main" sx={{ mt: 8, mb: 2 }}>
+      <Container component="main" sx={{ mt: 10, mb: 2 }} maxWidth="xl">
         <Grid container spacing={1}>
           {user_services.map((service) => (
-            <Grid item sm={12} md={4} key={service.title}>
+            <Grid item xs={12} sm={12} md={6} lg={6} xl={4} key={service.title}>
               <Button
-                sx={{ height: 200, p: 0 }}
+                sx={{ height: 250, p: 0 }}
                 fullWidth
                 component={Link}
                 to={service.path}
               >
                 <Paper
-                  elevation={3}
+                  elevation={12}
                   sx={{
                     backgroundColor: "white",
-                    height: 200,
+                    height: 240,
                     width: "100%",
                     p: 2,
                     display: "flex",
@@ -51,6 +53,7 @@ const UserIndex = () => {
                 >
                   {service.icon}
                   {service.title}
+                  <Typography sx={{ display: 'inline', fontSize: "16px", alignItems:"center" }} component="span" color= "text.secondary">{service.sub}</Typography>
                 </Paper>
               </Button>
             </Grid>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import wave from "../../assets/wave.svg";
+import pawwave2 from "../../assets/pawwave2.svg";
 import {
   Alert,
   AlertTitle,
@@ -7,6 +7,7 @@ import {
   Checkbox,
   Container,
   CssBaseline,
+  Divider,
   FormControl,
   FormControlLabel,
   Grid,
@@ -15,7 +16,7 @@ import {
   Typography,
 } from "@mui/material";
 import Footer from "../../components/Layouts/Footer";
-import { StyledButton, StyledTextField } from "../../assets/styles";
+import { LogButton, StyledTextField } from "../../assets/styles";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -65,6 +66,7 @@ const LoginAdmin = () => {
         display: "flex",
         flexDirection: "column",
         minHeight: "100vh",
+        bgcolor: "#ff8a80"
       }}
     >
       <CssBaseline />
@@ -101,8 +103,8 @@ const LoginAdmin = () => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            backgroundColor: "white",
-            backgroundImage: `url(${wave})`,
+            //backgroundColor: "white",
+            backgroundImage: `url(${pawwave2})`,
             backgroundRepeat: "no-repeat",
             alignItems: "center",
             p: 2,
@@ -140,25 +142,26 @@ const LoginAdmin = () => {
                 autoComplete="current-password"
               />
               <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
+                control={<Checkbox value="remember" color="secondary" />}
                 label="Remember me"
               />
-              <StyledButton
+              <LogButton
                 type="submit"
                 fullWidth
                 variant="contained"
                 disabled={loading}
               >
                 Log In
-              </StyledButton>
-              <StyledButton
+              </LogButton>
+              <Divider sx={{m:2}}>or</Divider>
+              <LogButton
                 type="submit"
                 fullWidth
                 variant="contained"
                 href="/login"
               >
                 Log In as User
-              </StyledButton>
+              </LogButton>
             </form>
           </FormControl>
 

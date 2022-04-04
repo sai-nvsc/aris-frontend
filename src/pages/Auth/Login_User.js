@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import wave from "../../assets/wave.svg";
+import pawwave2 from "../../assets/pawwave2.svg";
 import {
   Alert,
   AlertTitle,
@@ -7,28 +7,21 @@ import {
   Checkbox,
   Container,
   CssBaseline,
+  Divider,
   FormControl,
   FormControlLabel,
   Grid,
-  Link,
   Snackbar,
   Typography,
 } from "@mui/material";
 import Footer from "../../components/Layouts/Footer";
-import { StyledButton, StyledTextField } from "../../assets/styles";
+import { LogButton, StyledTextField, LogLink } from "../../assets/styles";
 import { useDispatch, useSelector } from "react-redux";
 import {
   clearError,
   clearSuccess,
   LoginUserThunk,
 } from "../../redux/slices/UserSlices";
-/* import {
-  clearError,
-  clearSuccess,
-  LoginAdminThunk,
-} from "../../redux/slices/AdminSlices";
- */
-
 import { useNavigate } from "react-router-dom";
 
 const LoginUser = () => {
@@ -71,6 +64,7 @@ const LoginUser = () => {
         display: "flex",
         flexDirection: "column",
         minHeight: "100vh",
+        backgroundColor: "#ff8a80",
       }}
     >
       <CssBaseline />
@@ -108,7 +102,7 @@ const LoginUser = () => {
             display: "flex",
             flexDirection: "column",
             backgroundColor: "white",
-            backgroundImage: `url(${wave})`,
+            backgroundImage: `url(${pawwave2})`,
             backgroundRepeat: "no-repeat",
             alignItems: "center",
             p: 2,
@@ -146,39 +140,40 @@ const LoginUser = () => {
                 autoComplete="current-password"
               />
               <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
+                control={<Checkbox value="remember" color="secondary" />}
                 label="Remember me"
               />
-              <StyledButton
+              <LogButton
                 type="submit"
                 fullWidth
                 variant="contained"
                 disabled={loading}
               >
                 Log In
-              </StyledButton>
+              </LogButton>
+              <Divider sx={{m:2}}>or</Divider>
 
-              <StyledButton
+              <LogButton
                 type="submit"
                 fullWidth
                 variant="contained"
                 href="/login-admin"
               >
                 Log In as Admin
-              </StyledButton>
+              </LogButton>
             </form>
           </FormControl>
 
           <Grid container>
             <Grid item xs>
-              <Link href="/forgot-password" variant="body2">
+              <LogLink to="/forgot-password">
                 Forgot password?
-              </Link>
+              </LogLink>
             </Grid>
             <Grid item>
-              <Link href="/register" variant="body2">
+              <LogLink to="/register">
                 {"Don't have an account? Sign Up"}
-              </Link>
+              </LogLink>
             </Grid>
           </Grid>
         </Box>

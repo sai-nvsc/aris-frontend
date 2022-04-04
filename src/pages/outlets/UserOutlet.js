@@ -12,6 +12,7 @@ import MyVaccineDetails from "../Users/MyVaccine_Details";
 import PetsProfile from "../Users/PetsProfile";
 import UserProfile from "../Users/UserProfile";
 import Analytics from "../Users/Analytics";
+import ARIS from "../../components/Layouts/ARIS_user"
 
 const UserOutlet = () => {
   const { loading, isAuthenticated, role } = useSelector((state) => state.user);
@@ -44,6 +45,7 @@ const UserOutlet = () => {
           <Route path="/mypets/:id" element={<PetsProfile />} />
           <Route path="/view/announcements" element={<Announcements />} />
           <Route path="/reports" element={<Analytics />} />
+          <Route path="/ARIS" element={<ARIS />} />
         </Routes>
       ) : (
         isAuthenticated === false && <Navigate to="/login" />

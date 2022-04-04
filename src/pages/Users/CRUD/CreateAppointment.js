@@ -67,7 +67,7 @@ const CreateAppointment = () => {
   };
 
   const handleSubmit = () => {
-    console.log("nagsubmit");
+    //console.log("nagsubmit");
     const formData = new FormData();
     formData.append("clinicId", selected_clinic._id);
     formData.append("time_slot", value.time_slot);
@@ -191,11 +191,11 @@ const CreateAppointment = () => {
               </Grid>
             )}
             {Object.keys(selected_clinic).length > 0 && (
-              <Link
+              <Link sx={{ml:2,mt:1}}
                 href={`https://www.google.com/maps/search/?api=1&query=${selected_clinic.location.coordinates[1]},${selected_clinic.location.coordinates[0]}`}
                 target="_blank"
               >
-                View in Map <FaMapPin />
+                <FaMapPin/>View in Map 
               </Link>
             )}
             <Grid item sm={12}>
@@ -206,7 +206,7 @@ const CreateAppointment = () => {
                   openTo="month"
                   views={["year", "month", "day"]}
                   value={moment(value.date)}
-                  name="birthday"
+                  name="date"
                   InputProps={{ readOnly: true }}
                   onChange={(newDate) =>
                     setvalue({

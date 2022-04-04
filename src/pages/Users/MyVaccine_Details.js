@@ -4,6 +4,7 @@ import {
   Box,
   Typography,
   Grid,
+  IconButton,
   Table,
   TableContainer,
   Paper,
@@ -16,13 +17,14 @@ import {
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { ProfileCard } from "../../assets/styles";
+import { ProfileCard, StyledLink } from "../../assets/styles";
 import PersistentDrawerLeft from "../../components/Layouts/UserSidebar";
 import { GetVaxxPerBiteCasThunk } from "../../redux/slices/VaccineSlice";
 import moment from "moment";
 import Footer from "../../components/Layouts/Footer";
 import SendHealthReport from "./CRUD/SendHealthReport";
 import { Comments } from "./Comments";
+import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 
 const MyVaccineDetails = () => {
   const dispatch = useDispatch();
@@ -46,9 +48,18 @@ const MyVaccineDetails = () => {
       <CssBaseline />
       <PersistentDrawerLeft title="Vaccine History" />
       <Container component="main" sx={{ mt: 8, mb: 2 }}>
-        <Typography variant="h3">Vaccination Details</Typography>
         {!loading && (
           <Grid container spacing={2}>
+            <IconButton
+            component={StyledLink}
+            to="/user/myvaxx"
+            size="large"
+            sx={{ mt: 2 }}
+          >
+              <ArrowBackIosRoundedIcon />
+            </IconButton>
+        <Typography variant="h4" marginTop={2}>Vaccination Details</Typography>
+        
             <Grid item sm={12}>
               <ProfileCard>
                 <Grid container spacing={2}>
@@ -57,7 +68,7 @@ const MyVaccineDetails = () => {
                     sm={12}
                     md={6}
                     sx={{
-                      borderRadius: 4,
+                      borderRadius: 3,
                     }}
                   >
                     <Box
@@ -130,7 +141,7 @@ const MyVaccineDetails = () => {
                           component="div"
                           color="text.secondary"
                         >
-                          Contact No.::
+                          Contact No.:
                         </Typography>
                         <Typography variant="h5" component="div">
                           <b>{user.phone_number} </b>

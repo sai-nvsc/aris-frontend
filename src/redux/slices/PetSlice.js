@@ -191,9 +191,9 @@ const PetSlice = createSlice({
     },
     [EditPetsThunk.fulfilled]: (state, action) => {
       state.loading = false;
-      state.succes = action.payload.message;
+      state.success = action.payload.message;
+      state.pets = action.payload.pet;
       state.errors = null;
-      window.location.reload();
     },
     [GetPetDetailsThunk.pending]: (state) => {
       state.loading = true;
