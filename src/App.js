@@ -1,4 +1,4 @@
-import 'react-app-polyfill/stable';
+import "react-app-polyfill/stable";
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "@mui/material";
@@ -20,6 +20,8 @@ import NotFound from "./pages/extra/NotFound";
 import UserOutlet from "./pages/outlets/UserOutlet";
 import AdminOutlets from "./pages/outlets/AdminOutlets";
 import LoginAdmin from "./pages/Auth/Login_Admin";
+import VerificationPage from "./pages/Auth/VerificationPage";
+import AccountVerification from "./pages/Users/AccountVerification";
 // import Footer from "./components/Layouts/Footer";
 
 function App() {
@@ -41,11 +43,17 @@ function App() {
               <Route path="/login" element={<LoginUser />} />
               <Route path="/register" element={<RegisterUser />} />
               <Route path="/forgot-password" element={<ForgotPasswordUser />} />
+              <Route path="/verify-user" element={<VerificationPage />} />
               <Route
                 path="/reset-password/:resetToken"
                 element={<ResetPasswordUser />}
               />
               <Route path="/login-admin" element={<LoginAdmin />} />
+              <Route
+                path="/account/verify/:token"
+                element={<AccountVerification />}
+              />
+
               <Route path="/admin/*" element={<AdminOutlets />} />
               <Route path="/user/*" element={<UserOutlet />} />
               <Route path="*" element={<NotFound />} />

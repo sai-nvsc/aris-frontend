@@ -8,7 +8,7 @@ import { RiLogoutBoxFill } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { List, ListItem, ListItemIcon, Typography } from "@mui/material";
 import { LogoutUserThunk } from "../redux/slices/UserSlices";
-import HdrAutoIcon from '@mui/icons-material/HdrAuto';
+import HdrAutoIcon from "@mui/icons-material/HdrAuto";
 
 import { StyledLink, StyledListItem } from "../assets/styles";
 
@@ -31,8 +31,9 @@ export const user_services = [
     icon: <BsFillCalendarCheckFill size="10em" />,
     sub: "View or Create appointments...",
   },
-  { title: "Pets", 
-    path: "mypets", 
+  {
+    title: "Pets",
+    path: "mypets",
     icon: <MdPets size="10em" />,
     sub: "View my pets vaccination history...",
   },
@@ -62,11 +63,12 @@ export const UserNavMenu = ({ handleDrawerClose }) => {
       icon: <AiFillHome />,
       path: "/user/",
       onclick: handleDrawerClose,
-    },    
+    },
     {
       title: "ARIS",
       icon: <HdrAutoIcon />,
       path: "/user/ARIS",
+      onclick: handleDrawerClose,
     },
     {
       title: "Logout",
@@ -74,7 +76,6 @@ export const UserNavMenu = ({ handleDrawerClose }) => {
       path: "#",
       onclick: Logout,
     },
-
   ];
 
   return (
@@ -89,9 +90,7 @@ export const UserNavMenu = ({ handleDrawerClose }) => {
                 primary={item.title}
                 sx={{ fontWeight: "bold" }}
               />
-                <Typography>
-                {item.sub}
-              </Typography>                        
+              <Typography>{item.sub}</Typography>
             </ListItem>
           </StyledLink>
         ))}

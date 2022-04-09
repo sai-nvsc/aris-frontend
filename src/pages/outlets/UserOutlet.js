@@ -12,10 +12,12 @@ import MyVaccineDetails from "../Users/MyVaccine_Details";
 import PetsProfile from "../Users/PetsProfile";
 import UserProfile from "../Users/UserProfile";
 import Analytics from "../Users/Analytics";
-import ARIS from "../../components/Layouts/ARIS_user"
+import ARIS from "../../components/Layouts/ARIS_user";
 
 const UserOutlet = () => {
-  const { loading, isAuthenticated, role } = useSelector((state) => state.user);
+  const { loading, isAuthenticated, role, user } = useSelector(
+    (state) => state.user
+  );
 
   // useEffect(() => {
   //   if ("geolocation" in navigator) {
@@ -33,7 +35,10 @@ const UserOutlet = () => {
   // }, []);
   return (
     <>
-      {loading === false && isAuthenticated && role === "user" ? (
+      {loading === false &&
+      isAuthenticated &&
+      role === "user" &&
+      user.verified_at ? (
         <Routes>
           <Route index element={<Dashboard />} />
           <Route path="*" element={<NotFound />} />
@@ -44,9 +49,17 @@ const UserOutlet = () => {
           <Route path="/myvaxx/:id" element={<MyVaccineDetails />} />
           <Route path="/mypets/:id" element={<PetsProfile />} />
           <Route path="/view/announcements" element={<Announcements />} />
+
           <Route path="/reports" element={<Analytics />} />
           <Route path="/ARIS" element={<ARIS />} />
         </Routes>
+      ) : loading === false &&
+        isAuthenticated === true &&
+        (user.verified_at === null || user.verificationToken === null) &&
+        role === "user" ? (
+        <Navigate to="/verify-user" />
+      ) : loading === false && isAuthenticated && role !== "user" ? (
+        <Navigate to={"/login"} />
       ) : (
         isAuthenticated === false && <Navigate to="/login" />
       )}

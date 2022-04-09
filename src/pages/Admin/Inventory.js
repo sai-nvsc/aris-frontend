@@ -31,9 +31,8 @@ import EditInventory from "../Admin/AdminCRUD/EditInventory";
 import moment from "moment";
 
 const Inventory = () => {
-  const { inventory, loading, errors, success, stock_alert } = useSelector(
-    (state) => state.inventory
-  );
+  const { inventory, loading, errors, success, stock_alert, expiration_alert } =
+    useSelector((state) => state.inventory);
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -71,7 +70,7 @@ const Inventory = () => {
     dispatch(clearSuccess());
     dispatch(clearError());
   };
- 
+
   useEffect(() => {
     //console.log(user._id);
     dispatch(GetAllInvThunk({ id: user._id }));
@@ -133,17 +132,18 @@ const Inventory = () => {
       renderCell: (cellValues) => {
         return (
           <>
-          <EditInventory
-            id={inventory.id}
-            data={cellValues.row}
-            startIcon={<Edit style={{ color: "#ff8a80" }} />}
-          />
-          <AdminDelete
-          id={inventory._id}
-          //name={"this entry"}
-          collection="bitecases"
-          data={cellValues.row}
-        /></>
+            <EditInventory
+              id={inventory.id}
+              data={cellValues.row}
+              startIcon={<Edit style={{ color: "#ff8a80" }} />}
+            />
+            <AdminDelete
+              id={inventory._id}
+              //name={"this entry"}
+              collection="bitecases"
+              data={cellValues.row}
+            />
+          </>
         );
       },
       sortable: false,
@@ -240,7 +240,6 @@ const Inventory = () => {
               },
             }}
           >
-            
             <div style={{ height: 450, width: "auto" }}>
               {!loading && inventory && (
                 <>
@@ -253,6 +252,17 @@ const Inventory = () => {
                             stock_alert.length - 1
                           } other/s are low in stock`
                         : "is low on stock"}
+                    </Alert>
+                  )}
+                  {expiration_alert.length > 0 && (
+                    <Alert severity="error">
+                      <AlertTitle>Vaccine Expiring</AlertTitle>
+                      {expiration_alert[0].brand_name}{" "}
+                      {expiration_alert.length > 1
+                        ? `and ${
+                            expiration_alert.length - 1
+                          } other/s are expiring`
+                        : "is expiring"}
                     </Alert>
                   )}
                   <DataGrid
@@ -403,7 +413,7 @@ const Inventory = () => {
           </Container>
         </Box>
       </Modal>
-<br/>
+      <br />
       <Footer />
     </Box>
   );

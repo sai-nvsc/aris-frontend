@@ -139,7 +139,7 @@ export const UpdateProfileThunk = createAsyncThunk(
     }
   }
 );
- 
+
 export const UpdatePasswordThunk = createAsyncThunk(
   "user/updatepassword",
   async (obj, { rejectWithValue }) => {
@@ -193,12 +193,46 @@ export const GetAllUserThunk = createAsyncThunk(
     }
   }
 );
+export const VerificationThunk = createAsyncThunk(
+  "user/verification",
+  async (obj, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_HOST}api/user/auth/verify/${obj.verificationToken}`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+export const ResendVerificationThunk = createAsyncThunk(
+  "user/resend/verification",
+  async (obj, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_HOST}api/user/auth/account/verify/resend`,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
 const initialState = {
   user: null,
   loading: false,
   errors: null,
   success: null,
   isAuthenticated: null,
+  resend_loading: false,
+  verification_loading: true,
   role: null,
   location_loading: true,
   latitude: "",
@@ -372,6 +406,28 @@ const userSlice = createSlice({
     },
     [GetAllUserThunk.rejected]: (state, action) => {
       state.loading = false;
+      state.errors = action.payload;
+    },
+    [ResendVerificationThunk.pending]: (state, action) => {
+      state.resend_loading = true;
+    },
+    [ResendVerificationThunk.fulfilled]: (state, action) => {
+      state.resend_loading = false;
+      state.success = action.payload.success;
+    },
+    [ResendVerificationThunk.rejected]: (state, action) => {
+      state.resend_loading = false;
+      state.errors = action.payload;
+    },
+    [VerificationThunk.pending]: (state, action) => {
+      state.verification_loading = true;
+    },
+    [VerificationThunk.fulfilled]: (state, action) => {
+      state.verification_loading = false;
+      state.success = action.payload.success;
+    },
+    [VerificationThunk.rejected]: (state, action) => {
+      state.verification_loading = false;
       state.errors = action.payload;
     },
   },

@@ -93,6 +93,7 @@ export const DeleteInvThunk = createAsyncThunk(
 const initialState = {
   inventory: null,
   stock_alert: null,
+  expiration_alert: null,
   loading: false,
   errors: null,
   success: null,
@@ -116,6 +117,7 @@ const InventorySlice = createSlice({
       state.loading = false;
       state.inventory = action.payload.inventory;
       state.stock_alert = action.payload.stock_alert;
+      state.expiration_alert = action.payload.expiration_alert;
     },
     [GetAllInvThunk.rejected]: (state, action) => {
       state.loading = false;

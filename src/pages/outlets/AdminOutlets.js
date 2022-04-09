@@ -13,7 +13,7 @@ import Profile from "../Admin/AdminProfile";
 
 import ViewBiteCase from "../Admin/AdminCRUD/ViewBiteCase";
 import VaxCertificate from "../Admin/AdminCRUD/VaxCertificate";
-import ARIS from "../../components/Layouts/ARIS_Admin"
+import ARIS from "../../components/Layouts/ARIS_Admin";
 
 const AdminOutlets = () => {
   const { loading, isAuthenticated, role } = useSelector((state) => state.user);
@@ -34,8 +34,9 @@ const AdminOutlets = () => {
 
           <Route path="/profile" element={<Profile />} />
           <Route path="/ARIS" element={<ARIS />} />
-
         </Routes>
+      ) : loading === false && isAuthenticated && role !== "admin" ? (
+        <Navigate to={"/login"} />
       ) : (
         isAuthenticated === false && <Navigate to={"/login-admin"} />
       )}
