@@ -15,6 +15,7 @@ import {
   MenuItem,
   Radio,
   RadioGroup,
+  FormHelperText,
   Select,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -69,7 +70,7 @@ const CreateAppointment = () => {
   const handleSubmit = () => {
     //console.log("nagsubmit");
     const formData = new FormData();
-    formData.append("clinicId", selected_clinic._id);
+    formData.append("clinicId", selected_clinic._id ? selected_clinic._id : "");
     formData.append("time_slot", value.time_slot);
     formData.append("date", moment(value.date).toISOString());
     formData.append("purpose", value.purpose);
@@ -187,15 +188,22 @@ const CreateAppointment = () => {
                           );
                         })}
                   </Select>
+                  {rest.errors && rest.errors.clinicId ? (
+                    <FormHelperText>{rest.errors.clinicId}</FormHelperText>
+                  ) : (
+                    ""
+                  )}
                 </FormControl>
               </Grid>
             )}
             {Object.keys(selected_clinic).length > 0 && (
-              <Link sx={{ml:2,mt:1}}
+              <Link
+                sx={{ ml: 2, mt: 1 }}
                 href={`https://www.google.com/maps/search/?api=1&query=${selected_clinic.location.coordinates[1]},${selected_clinic.location.coordinates[0]}`}
                 target="_blank"
               >
-                <FaMapPin/>View in Map 
+                <FaMapPin />
+                View in Map
               </Link>
             )}
             <Grid item sm={12}>
@@ -220,6 +228,9 @@ const CreateAppointment = () => {
                       fullWidth
                       required
                       size="small"
+                      helperText={
+                        rest.errors && rest.errrors.date ? rest.errors.date : ""
+                      }
                     />
                   )}
                 />
@@ -247,6 +258,11 @@ const CreateAppointment = () => {
                       );
                     })}
                 </Select>
+                {rest.errors && rest.errors.time_slot ? (
+                  <FormHelperText>{rest.errors.time_slot}</FormHelperText>
+                ) : (
+                  ""
+                )}
               </FormControl>
             </Grid>
 
@@ -257,6 +273,9 @@ const CreateAppointment = () => {
                 label="Purpose"
                 name="purpose"
                 onChange={handleChange}
+                helperText={
+                  rest.errors && rest.errrors.purpose ? rest.errors.purpose : ""
+                }
               />
             </Grid>
           </Grid>
