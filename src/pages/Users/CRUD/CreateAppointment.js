@@ -38,7 +38,7 @@ const CreateAppointment = () => {
   const [clinic_choice, setclinic_choice] = useState("Nearby");
   const dispatch = useDispatch();
 
-  const { loadingClinics, clinics, ...rest } = useSelector(
+  const { loadingClinics, clinics, errors, ...rest } = useSelector(
     (state) => state.appointments
   );
 
@@ -188,8 +188,8 @@ const CreateAppointment = () => {
                           );
                         })}
                   </Select>
-                  {rest.errors && rest.errors.clinicId ? (
-                    <FormHelperText>{rest.errors.clinicId}</FormHelperText>
+                  {errors && errors.clinicId ? (
+                    <FormHelperText>{errors.clinicId}</FormHelperText>
                   ) : (
                     ""
                   )}
@@ -228,9 +228,7 @@ const CreateAppointment = () => {
                       fullWidth
                       required
                       size="small"
-                      helperText={
-                        rest.errors && rest.errrors.date ? rest.errors.date : ""
-                      }
+                      helperText={errors && errors.date ? errors.date : ""}
                     />
                   )}
                 />
@@ -258,8 +256,8 @@ const CreateAppointment = () => {
                       );
                     })}
                 </Select>
-                {rest.errors && rest.errors.time_slot ? (
-                  <FormHelperText>{rest.errors.time_slot}</FormHelperText>
+                {errors && errors.time_slot ? (
+                  <FormHelperText>{errors.time_slot}</FormHelperText>
                 ) : (
                   ""
                 )}
@@ -273,6 +271,7 @@ const CreateAppointment = () => {
                 label="Purpose"
                 name="purpose"
                 onChange={handleChange}
+                helperText={errors && errors.purpose ? errors.purpose : ""}
               />
             </Grid>
           </Grid>
