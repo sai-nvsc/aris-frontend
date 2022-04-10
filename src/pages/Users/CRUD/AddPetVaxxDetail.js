@@ -19,7 +19,8 @@ import DateAdapterMoment from "@mui/lab/AdapterMoment";
 // import { addPerson, getAllPerson } from "../../redux/action/PersonActions";
 
 const AddPetVaxxDetail = () => {
-  const { pets, errors } = useSelector((state) => state.pets);
+  const { pets } = useSelector((state) => state.pets);
+  const [errors, seterrors] = useState({ vaxx: "" });
   const dispatch = useDispatch();
   const [open, setopen] = useState(false);
   const [values, setvalues] = useState({
@@ -41,13 +42,17 @@ const AddPetVaxxDetail = () => {
       "date_of_vaccination",
       new Date(values.date_of_vaccination).toISOString()
     );
-    formData.append("pet", pets[0]._id);
-    dispatch(AddVaxxDetailThunk(formData));
-    setopen(false);
-    setvalues({
-      vaccine_name: "",
-      date_of_vaccination: new Date(),
-    });
+    if (values.vaccine_name !== "") {
+      formData.append("pet", pets[0]._id);
+      dispatch(AddVaxxDetailThunk(formData));
+      setopen(false);
+      setvalues({
+        vaccine_name: "",
+        date_of_vaccination: new Date(),
+      });
+    } else {
+      seterrors({ ...errors, vaxx: "Please Provide Vaccine Name" });
+    }
   };
 
   const handleClose = () => {
@@ -79,11 +84,9 @@ const AddPetVaxxDetail = () => {
                   margin="normal"
                   required
                   fullWidth
-                  error={errors && errors.vaccine_name ? true : false}
+                  error={errors.vaxx !== "" ? true : false}
                   label="Vaccine Name"
-                  helperText={
-                    errors && errors.vaccine_name ? errors.vaccine_name : ""
-                  }
+                  helperText={errors.vaxx}
                   value={values.vaccine_name}
                   onChange={onInputChange}
                 />
