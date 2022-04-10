@@ -157,7 +157,10 @@ const CreateAppointment = () => {
             </Grid>
             {!loadingClinics && (
               <Grid item sm={12}>
-                <FormControl fullWidth>
+                <FormControl
+                  fullWidth
+                  error={errors && errors.clinicId ? true : false}
+                >
                   <InputLabel>Vaccination Facility</InputLabel>
                   <Select
                     name="clinic"
@@ -189,7 +192,9 @@ const CreateAppointment = () => {
                         })}
                   </Select>
                   {errors && errors.clinicId ? (
-                    <FormHelperText>{errors.clinicId}</FormHelperText>
+                    <FormHelperText>
+                      Please Select a Clinic from the list
+                    </FormHelperText>
                   ) : (
                     ""
                   )}
@@ -227,6 +232,7 @@ const CreateAppointment = () => {
                       {...params}
                       fullWidth
                       required
+                      error={errors && errors.date ? true : false}
                       size="small"
                       helperText={errors && errors.date ? errors.date : ""}
                     />
@@ -238,6 +244,7 @@ const CreateAppointment = () => {
               <FormControl
                 fullWidth
                 disabled={Object.keys(selected_clinic).length === 0}
+                error={errors && errors.time_slot ? true : false}
               >
                 <InputLabel>Time Slot</InputLabel>
                 <Select
@@ -270,6 +277,7 @@ const CreateAppointment = () => {
                 fullWidth
                 label="Purpose"
                 name="purpose"
+                error={errors && errors.purpose ? true : false}
                 onChange={handleChange}
                 helperText={errors && errors.purpose ? errors.purpose : ""}
               />
