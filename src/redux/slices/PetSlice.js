@@ -237,7 +237,7 @@ const PetSlice = createSlice({
     },
     [AddVaxxDetailThunk.rejected]: (state, action) => {
       state.vaxx_loading = false;
-      state.errors = action.payload;
+      state.errors = JSON.parse(action.payload);
     },
     [DeletePetVaccineThunk.pending]: (state) => {
       state.delete_vaccine_loading = true;

@@ -19,7 +19,7 @@ import DateAdapterMoment from "@mui/lab/AdapterMoment";
 // import { addPerson, getAllPerson } from "../../redux/action/PersonActions";
 
 const AddPetVaxxDetail = () => {
-  const { pets } = useSelector((state) => state.pets);
+  const { pets, errors } = useSelector((state) => state.pets);
   const dispatch = useDispatch();
   const [open, setopen] = useState(false);
   const [values, setvalues] = useState({
@@ -79,7 +79,11 @@ const AddPetVaxxDetail = () => {
                   margin="normal"
                   required
                   fullWidth
+                  error={errors && errors.vaccine_name ? true : false}
                   label="Vaccine Name"
+                  helperText={
+                    errors && errors.vaccine_name ? errors.vaccine_name : ""
+                  }
                   value={values.vaccine_name}
                   onChange={onInputChange}
                 />
