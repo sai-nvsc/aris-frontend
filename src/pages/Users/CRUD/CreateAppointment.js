@@ -273,9 +273,6 @@ const CreateAppointment = () => {
                 label="Purpose"
                 name="purpose"
                 onChange={handleChange}
-                helperText={
-                  rest.errors && rest.errrors.purpose ? rest.errors.purpose : ""
-                }
               />
             </Grid>
           </Grid>
