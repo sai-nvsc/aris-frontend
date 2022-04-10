@@ -274,7 +274,7 @@ const AppointmentSlice = createSlice({
     },
     [requestAppointment.rejected]: (state, action) => {
       state.appointment_request_loading = false;
-      state.errors = action.payload;
+      state.errors = JSON.parse(action.payload);
     },
     [cancelAppointment.pending]: (state) => {
       state.appointment_cancellation_loading = true;
