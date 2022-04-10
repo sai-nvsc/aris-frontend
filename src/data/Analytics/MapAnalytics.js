@@ -85,8 +85,8 @@ const MapAnalytics = ({ barangay, title }) => {
           <div className="">
             {!onselect.Barangay && (
               <div className="census-info-hover">
-                <strong>Taguig Animal BiteCases</strong>
-                <p>Hover on each county for more details</p>
+                <strong>Taguig City Animal Bite Cases</strong>
+                <p>Hover on each tile for more details</p>
               </div>
             )}
             {onselect.Barangay && (

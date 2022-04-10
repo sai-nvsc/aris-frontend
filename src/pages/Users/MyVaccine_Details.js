@@ -17,7 +17,7 @@ import {
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { ProfileCard, StyledLink } from "../../assets/styles";
+import { ProfileCard, StyledButton, StyledLink } from "../../assets/styles";
 import PersistentDrawerLeft from "../../components/Layouts/UserSidebar";
 import { GetVaxxPerBiteCasThunk } from "../../redux/slices/VaccineSlice";
 import moment from "moment";
@@ -59,10 +59,11 @@ const MyVaccineDetails = () => {
               <ArrowBackIosRoundedIcon />
             </IconButton>
         <Typography variant="h4" marginTop={2}>Vaccination Details</Typography>
-        
+
             <Grid item sm={12}>
               <ProfileCard>
                 <Grid container spacing={2}>
+
                   <Grid
                     item
                     sm={12}
@@ -70,7 +71,8 @@ const MyVaccineDetails = () => {
                     sx={{
                       borderRadius: 3,
                     }}
-                  >
+                  ><Divider>Patient Information</Divider>
+
                     <Box
                       component="div"
                       sx={{
@@ -163,6 +165,8 @@ const MyVaccineDetails = () => {
                     >
                       Bite Case ID
                     </Typography>
+                    <Grid item xs sx={{float:"center", mb: 2}}><StyledButton component={StyledLink} to={`/user/myvaxx/print/${bites[0]._id}`}>Print/Download my vaccine card</StyledButton></Grid>
+
                   </Grid>
                 </Grid>
                 <Divider>Exposure Detail</Divider>
@@ -218,7 +222,7 @@ const MyVaccineDetails = () => {
                       component="div"
                       color="text.secondary"
                     >
-                      Body Part affected:
+                      Site:
                     </Typography>
                     <Typography variant="h5" component="div">
                       <b>{bites[0].history_of_exposure.bodypart} </b>
@@ -266,6 +270,7 @@ const MyVaccineDetails = () => {
                     <Typography variant="h5" component="div">
                       <b>{bites[0].patient_status} </b>
                     </Typography>
+                    <br/>
                   </Grid>
                 </Grid>
               </ProfileCard>

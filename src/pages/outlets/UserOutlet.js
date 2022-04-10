@@ -13,6 +13,7 @@ import PetsProfile from "../Users/PetsProfile";
 import UserProfile from "../Users/UserProfile";
 import Analytics from "../Users/Analytics";
 import ARIS from "../../components/Layouts/ARIS_user";
+import VaxCertificate from "../Users/MyCertificate";
 
 const UserOutlet = () => {
   const { loading, isAuthenticated, role, user } = useSelector(
@@ -52,6 +53,7 @@ const UserOutlet = () => {
 
           <Route path="/reports" element={<Analytics />} />
           <Route path="/ARIS" element={<ARIS />} />
+          <Route path="/myvaxx/print/:id" element={<VaxCertificate />} />
         </Routes>
       ) : loading === false &&
         isAuthenticated === true &&

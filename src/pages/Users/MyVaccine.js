@@ -14,6 +14,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PersistentDrawerLeft from "../../components/Layouts/UserSidebar";
 import { GetBiteCasesThunk } from "../../redux/slices/VaccineSlice";
+import moment from "moment";
 
 const MyVaccine = () => {
   const dispatch = useDispatch();
@@ -52,7 +53,7 @@ const MyVaccine = () => {
                     >
                       <CardContent>
                         <Typography component="div" variant="h4">
-                          Bite Case #: {bite.bite_case_no}
+                          Exposure Case #: {bite.bite_case_no}
                         </Typography>
                         <Typography
                           variant="subtitle1"
@@ -66,7 +67,7 @@ const MyVaccine = () => {
                           color="text.secondary"
                           component="div"
                         >
-                          Date Registered: {bite.history_of_exposure.date}
+                          Date Registered: {moment(bite.history_of_exposure.date).format("MMMM DD, YYYY, h:mm A")}
                         </Typography>
                         <Typography
                           variant="subtitle1"
@@ -74,6 +75,13 @@ const MyVaccine = () => {
                           component="div"
                         >
                           Category: {bite.exposure_category}
+                        </Typography>
+                        <Typography
+                          variant="subtitle1"
+                          color="text.secondary"
+                          component="div"
+                        >
+                          Source: {bite.history_of_exposure.source_of_exposure}{" "}{bite.history_of_exposure.type_of_exposure}
                         </Typography>
                         <Typography
                           variant="subtitle1"

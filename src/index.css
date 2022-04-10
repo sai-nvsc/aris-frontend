@@ -16,6 +16,10 @@ code {
   #printbtn{
     display : none;
   }
+
+  #backbtn{
+    display : none;
+  }
 }
 a {
   text-decoration: none;

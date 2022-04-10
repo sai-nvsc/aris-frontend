@@ -23,11 +23,11 @@ import {
   StyledTableCell,
   StyledTableRow,
   StyledLink
-} from "../../../assets/styles";
+} from "../../assets/styles";
 import moment from "moment";
 import {
   GetVaxxPerBiteCasThunk,
-} from "../../../redux/slices/VaccineSlice"; 
+} from "../../redux/slices/VaccineSlice"; 
 
 
 const VaxCertificate = () => {
@@ -54,7 +54,7 @@ const VaxCertificate = () => {
       <CssBaseline />     
       <Container maxWidth="md" >
         <div>
-        <IconButton id="backbtn" component={StyledLink} to="/admin/bitecases"><ArrowBackIosRoundedIcon/></IconButton>
+        <IconButton id="backbtn" component={StyledLink} to="/user/myvaxx"><ArrowBackIosRoundedIcon/></IconButton>
         <StyledButton id="printbtn" onClick={print} startIcon={<PrintIcon style={{ fontSize:"medium", color: "#fff" }} />}>Print or Download Certificate</StyledButton>
         </div>
         {!loading && (          
