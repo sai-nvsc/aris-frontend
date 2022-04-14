@@ -29,8 +29,6 @@ import {
   Typography,
   FormControlLabel,
   Dialog,
-  DialogTitle,
-  DialogContent,
 } from "@mui/material";
 import { StyledTextField, StyledButton, StyledLink } from "../../assets/styles";
 import DateAdapterMoment from "@mui/lab/AdapterMoment";
