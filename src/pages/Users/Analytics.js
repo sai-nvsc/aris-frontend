@@ -88,7 +88,7 @@ const Analytics = () => {
       }}
     >
       <CssBaseline />
-      <PersistentDrawerLeft />
+      <PersistentDrawerLeft title="ARIS Statistic Reports" />
       <Divider light>
         <Chip label="Latest Statistics from ARIS" color="primary"></Chip>
       </Divider>

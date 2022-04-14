@@ -61,6 +61,7 @@ const AddPetVaxxDetail = () => {
       vaccine_name: "",
       date_of_vaccination: new Date(),
     });
+    seterrors({ ...errors, vaxx: "" });
   };
   const handleOpen = () => {
     setopen(true);

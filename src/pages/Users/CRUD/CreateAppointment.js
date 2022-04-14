@@ -17,6 +17,9 @@ import {
   RadioGroup,
   FormHelperText,
   Select,
+  Snackbar,
+  Alert,
+  AlertTitle,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { BsCalendarPlusFill } from "react-icons/bs";
@@ -25,6 +28,8 @@ import DateAdapterMoment from "@mui/lab/AdapterMoment";
 import { useDispatch, useSelector } from "react-redux";
 import { StyledButton, StyledTextField } from "../../../assets/styles";
 import {
+  clearError,
+  clearSuccess,
   EligibilityCheck,
   getClinics,
   requestAppointment,
@@ -45,7 +50,7 @@ const CreateAppointment = () => {
   const [value, setvalue] = useState({
     purpose: "",
     time_slot: "",
-    date: moment(),
+    date: moment().startOf("day"),
   });
   const [selected_clinic, setselected_clinic] = useState({});
 
@@ -53,7 +58,7 @@ const CreateAppointment = () => {
     setvalue({
       purpose: "",
       time_slot: "",
-      date: moment(),
+      date: moment().startOf("day"),
     });
     setselected_clinic({});
     setclinic_choice(e.target.value);
@@ -72,13 +77,11 @@ const CreateAppointment = () => {
     const formData = new FormData();
     formData.append("clinicId", selected_clinic._id ? selected_clinic._id : "");
     formData.append("time_slot", value.time_slot);
-    formData.append("date", moment(value.date).toISOString());
+    formData.append("date", value.date);
     formData.append("purpose", value.purpose);
     formData.append("status", "Pending");
-
     dispatch(requestAppointment({ data: formData }));
   };
-
   const handleErrorClose = () => {
     setopen(false);
   };
@@ -86,7 +89,11 @@ const CreateAppointment = () => {
   const handleClose = () => {
     setopen(false);
     setselected_clinic({});
-    setvalue({ purpose: "", time_slot: "" });
+    setvalue({ purpose: "", time_slot: "", date: moment().startOf("day") });
+  };
+  const onClose = (e) => {
+    dispatch(clearSuccess());
+    dispatch(clearError());
   };
 
   const handleModal = () => {
@@ -129,6 +136,33 @@ const CreateAppointment = () => {
       >
         Set an Appointment
       </Button>
+      {rest.appt_error && (
+        <Snackbar
+          open={rest.appt_error}
+          autoHideDuration={2000}
+          onClose={onClose}
+          name="error"
+        >
+          <Alert severity="error" variant="filled">
+            <AlertTitle>Error Adding Appointment</AlertTitle>
+            {rest.appt_error}
+          </Alert>
+        </Snackbar>
+      )}
+      {rest.success && (
+        <Snackbar
+          open={rest.success}
+          autoHideDuration={2000}
+          onClose={onClose}
+          name="sucess"
+        >
+          <Alert severity="success" variant="filled">
+            <AlertTitle>Success</AlertTitle>
+            {rest.success}
+          </Alert>
+        </Snackbar>
+      )}
+
       <Dialog open={open} onClose={handleClose} fullWidth>
         <DialogTitle>Set an Appointment</DialogTitle>
         <DialogContent>
@@ -224,7 +258,7 @@ const CreateAppointment = () => {
                   onChange={(newDate) =>
                     setvalue({
                       ...value,
-                      date: newDate.toDate().toISOString(),
+                      date: newDate.startOf("day").toDate(),
                     })
                   }
                   renderInput={(params) => (

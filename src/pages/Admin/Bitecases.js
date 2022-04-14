@@ -5,9 +5,9 @@ import AdminDelete from "../../components/Layouts/Dialogs/AdminDelete";
 import CssBaseline from "@mui/material/CssBaseline";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Edit } from "@mui/icons-material";
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import PrintIcon from '@mui/icons-material/Print';
-import AddIcon from '@mui/icons-material/Add';
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import PrintIcon from "@mui/icons-material/Print";
+import AddIcon from "@mui/icons-material/Add";
 import {
   Alert,
   AlertTitle,
@@ -21,7 +21,6 @@ import {
   Grid,
   InputLabel,
   MenuItem,
-  Modal,
   Popover,
   Radio,
   RadioGroup,
@@ -29,6 +28,9 @@ import {
   Snackbar,
   Typography,
   FormControlLabel,
+  Dialog,
+  DialogTitle,
+  DialogContent,
 } from "@mui/material";
 import { StyledTextField, StyledButton, StyledLink } from "../../assets/styles";
 import DateAdapterMoment from "@mui/lab/AdapterMoment";
@@ -244,7 +246,7 @@ const Bitecases = () => {
               component={StyledLink}
               to={`/admin/bitecase/print/${cellValues.row._id}`}
             >
-              <PrintIcon style={{ fontSize:"medium", color: "#000" }} />
+              <PrintIcon style={{ fontSize: "medium", color: "#000" }} />
             </Button>
             <Button
               component={StyledLink}
@@ -346,7 +348,11 @@ const Bitecases = () => {
           </Grid>
 
           <Grid item>
-            <StyledButton onClick={handleOpen} margin="10" startIcon={<AddIcon/>}>
+            <StyledButton
+              onClick={handleOpen}
+              margin="10"
+              startIcon={<AddIcon />}
+            >
               Add Record
             </StyledButton>
             <StyledButton onClick={refreshPage}>⟳</StyledButton>
@@ -392,11 +398,10 @@ const Bitecases = () => {
                   }}
                   sx={{
                     boxShadow: 2,
-                    '& .MuiDataGrid-cell:hover': {
-                    color: '#f32727',
-                  },
+                    "& .MuiDataGrid-cell:hover": {
+                      color: "#f32727",
+                    },
                   }}
-                  
                 />
               )}
             </div>
@@ -404,16 +409,7 @@ const Bitecases = () => {
         </Grid>
       </Container>
 
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-        justifyContent="center"
-        transform="translate(-50%, -50%)"
-        top="50%"
-        position="absolute"
-      >
+      <Dialog open={open} onClose={handleClose} maxWidth="md">
         <Box
           sx={{
             display: "flex",
@@ -791,7 +787,7 @@ const Bitecases = () => {
             </Box>
           </Container>
         </Box>
-      </Modal>
+      </Dialog>
 
       <Footer />
     </Box>

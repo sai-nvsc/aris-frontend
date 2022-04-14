@@ -6,7 +6,7 @@ import {
   Tabs,
   Typography,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../../components/Layouts/Footer";
 import PersistentDrawerLeft from "../../components/Layouts/UserSidebar";
 import PropTypes from "prop-types";
@@ -49,11 +49,11 @@ function a11yProps(index) {
 }
 
 const Appointments = () => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const { success, errors, pending, completed, loading, ...rest } = useSelector(
+  const { appt_error, pending, completed, loading, ...rest } = useSelector(
     (state) => state.appointments
   );
   const dispatch = useDispatch();

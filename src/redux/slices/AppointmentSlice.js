@@ -171,6 +171,7 @@ const initialState = {
   pending: null,
   cancelled: null,
   errors: null,
+  appt_error: null,
   success: null,
   loadingClinics: true,
   eligibility_loading: false,
@@ -182,8 +183,9 @@ const AppointmentSlice = createSlice({
   reducers: {
     clearError: (state) => {
       state.errors = null;
+      state.appt_error = null;
     },
-    clearSucces: (state) => {
+    clearSuccess: (state) => {
       state.success = null;
     },
   },
@@ -210,7 +212,7 @@ const AppointmentSlice = createSlice({
       state.loading = false;
       state.succes = action.payload.message;
       state.errors = null;
-      state.appointments = [...state.appointments, action.payload.appointments];
+      state.appointments = action.payload.appointments;
       //state.appointments = action.payload.appointments;
     },
     [cancelApt.pending]: (state) => {
@@ -271,10 +273,17 @@ const AppointmentSlice = createSlice({
     [requestAppointment.fulfilled]: (state, action) => {
       state.appointment_request_loading = false;
       state.pending = action.payload.appointment;
+      state.errors = null;
+      state.appt_error = null;
+      state.success = action.payload.success;
     },
     [requestAppointment.rejected]: (state, action) => {
       state.appointment_request_loading = false;
-      state.errors = JSON.parse(action.payload);
+      try {
+        state.errors = JSON.parse(action.payload);
+      } catch (error) {
+        state.appt_error = action.payload;
+      }
     },
     [cancelAppointment.pending]: (state) => {
       state.appointment_cancellation_loading = true;

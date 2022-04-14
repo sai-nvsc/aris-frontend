@@ -9,13 +9,15 @@ import {
   Grid,
   InputLabel,
   MenuItem,
-  Modal,
   Radio,
   RadioGroup,
   Select,
   Typography,
   Divider,
   FormControlLabel,
+  Dialog,
+  DialogTitle,
+  DialogContent,
 } from "@mui/material";
 import { Edit } from "@mui/icons-material";
 import {
@@ -93,320 +95,309 @@ const EditBiteCase = ({ data, id }) => {
     <>
       <EditButton onClick={handleOpen} startIcon={<Edit />}></EditButton>
 
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-        justifyContent="center"
-        transform="translate(-50%, -50%)"
-        top="50%"
-        position="absolute"
-      >
-        <form encType="multipart/form-data" noValidate onSubmit={handleSubmit}>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              backgroundColor: "white",
-              alignItems: "center",
-              p: 2,
-              borderRadius: 5,
-              boxShadow: 3,
-            }}
+      <Dialog open={open} onClose={handleClose} maxWidth="md">
+        <DialogTitle>Edit Bite Case Exposure</DialogTitle>
+        <DialogContent>
+          <form
+            encType="multipart/form-data"
+            noValidate
+            onSubmit={handleSubmit}
           >
-            <Container maxWidth="lg">
-              <Typography
-                component="h1"
-                variant="h4"
-                color="text.primary"
-                marginBottom={3}
-              >
-                Edit Bite Case Record
-              </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                backgroundColor: "white",
+                alignItems: "center",
+                p: 2,
+                borderRadius: 5,
+                boxShadow: 3,
+              }}
+            >
+              <Container maxWidth="lg">
+                <Typography>Name {values.user[0].first_name}</Typography>
 
-              <Typography>Name {values.user[0].first_name}</Typography>
-
-              <Grid container spacing={3}>
-                <Grid item sm={6} md={6}>
-                  <StyledTextField
-                    required
-                    fullWidth
-                    id="user"
-                    label="Patient"
-                    name="user"
-                    size="small"
-                    //autoComplete="user"
-                    autoFocus
-                    onChange={handleChange}
-                    value={values.user}
-                  />
-                </Grid>
-
-                <Grid item sm={6} md={6}>
-                  <FormControl
-                    required
-                    fullWidth
-                    size="small"
-                    sx={{ backgroundColor: "white" }}
-                  >
-                    <InputLabel>Category</InputLabel>
-                    <Select
-                      label="Sex"
+                <Grid container spacing={3}>
+                  <Grid item sm={6} md={6}>
+                    <StyledTextField
+                      required
+                      fullWidth
+                      id="user"
+                      label="Patient"
+                      name="user"
+                      size="small"
+                      //autoComplete="user"
+                      autoFocus
                       onChange={handleChange}
-                      name="exposure_category"
-                      value={values.exposure_category}
-                    >
-                      <MenuItem value="1">1</MenuItem>
-                      <MenuItem value="2">2</MenuItem>
-                      <MenuItem value="3">3</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <br />
-                <br />
-                <br />
-                <Divider variant="middle" style={{ width: "100%" }}>
-                  <Chip label="History of Exposure" color="primary"></Chip>
-                </Divider>
-
-                <Grid item sm={6} md={6}>
-                  <LocalizationProvider dateAdapter={DateAdapterMoment}>
-                    <DatePicker
-                      disableFuture
-                      label="Date of Exposure"
-                      openTo="year"
-                      views={["year", "month", "day"]}
-                      value={moment(values.date)}
-                      name="date"
-                      InputProps={{ readOnly: true }}
-                      onChange={(newDate) =>
-                        setvalues({
-                          ...values,
-                          date: newDate.toDate().toISOString(),
-                        })
-                      }
-                      renderInput={(params) => (
-                        <StyledTextField
-                          {...params}
-                          fullWidth
-                          required
-                          size="small"
-                        />
-                      )}
+                      value={values.user}
                     />
-                  </LocalizationProvider>
-                </Grid>
+                  </Grid>
 
-                <Grid item sm={6} md={6}>
-                  <FormControl
-                    required
-                    fullWidth
-                    size="small"
-                    sx={{ backgroundColor: "white" }}
-                  >
-                    <InputLabel>Barangay</InputLabel>
-                    <Select
-                      label="Barangay"
-                      onChange={handleChange}
-                      name="place"
-                      value={values.place}
+                  <Grid item sm={6} md={6}>
+                    <FormControl
+                      required
+                      fullWidth
+                      size="small"
+                      sx={{ backgroundColor: "white" }}
                     >
-                      {taguig_baarangay.map((barangay) => (
-                        <MenuItem value={barangay} key={barangay}>
-                          {barangay}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Grid>
+                      <InputLabel>Category</InputLabel>
+                      <Select
+                        label="Sex"
+                        onChange={handleChange}
+                        name="exposure_category"
+                        value={values.exposure_category}
+                      >
+                        <MenuItem value="1">1</MenuItem>
+                        <MenuItem value="2">2</MenuItem>
+                        <MenuItem value="3">3</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <br />
+                  <br />
+                  <br />
+                  <Divider variant="middle" style={{ width: "100%" }}>
+                    <Chip label="History of Exposure" color="primary"></Chip>
+                  </Divider>
 
-                <Grid item sm={6} md={6}>
-                  <FormControl
-                    required
-                    fullWidth
-                    size="small"
-                    sx={{ backgroundColor: "white" }}
-                  >
-                    <InputLabel>Type</InputLabel>
-                    <Select
-                      label="type_of_exposure"
-                      onChange={handleChange}
-                      name="type_of_exposure"
-                      value={values.type_of_exposure}
-                    >
-                      <MenuItem value="Bite">Bite</MenuItem>
-                      <MenuItem value="Saliva">Saliva</MenuItem>
-                      <MenuItem value="Scratch">Scratch</MenuItem>
-                      <MenuItem value="Others">Others</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-
-                <Grid item xs={6} sm={6} md={6}>
-                  <StyledTextField
-                    required
-                    fullWidth
-                    id="bodypart"
-                    label="Body Part Affected"
-                    name="bodypart"
-                    size="small"
-                    autoFocus
-                    onChange={handleChange}
-                    value={values.bodypart}
-                  />
-                </Grid>
-
-                <Grid item sm={6} md={6}>
-                  <FormControl
-                    required
-                    fullWidth
-                    size="small"
-                    sx={{ backgroundColor: "white" }}
-                  >
-                    <InputLabel>Route</InputLabel>
-                    <Select
-                      label="Route"
-                      onChange={handleChange}
-                      name="route"
-                      value={values.route}
-                    >
-                      <MenuItem value="IM">IM</MenuItem>
-                      <MenuItem value="ID">ID</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-
-                <Grid item sm={6} md={6}>
-                  <FormControl
-                    required
-                    fullWidth
-                    size="small"
-                    sx={{ backgroundColor: "white" }}
-                  >
-                    <InputLabel>Source</InputLabel>
-                    <Select
-                      label="Source"
-                      onChange={handleChange}
-                      name="source_of_exposure"
-                      value={values.source_of_exposure}
-                    >
-                      <MenuItem value="Dog">Dog</MenuItem>
-                      <MenuItem value="Cat">Cat</MenuItem>
-                      <MenuItem value="Others">Others</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-
-                <Grid item sm={6} md={6}>
-                  <FormControl>
-                    <FormLabel>HRIG Administered?</FormLabel>
-                    <RadioGroup
-                      row
-                      name="anti_tetanus"
-                      onChange={handleChange}
-                      value={values.anti_tetanus}
-                    >
-                      <FormControlLabel
-                        value="true"
-                        control={<Radio />}
-                        label="Yes"
+                  <Grid item sm={6} md={6}>
+                    <LocalizationProvider dateAdapter={DateAdapterMoment}>
+                      <DatePicker
+                        disableFuture
+                        label="Date of Exposure"
+                        openTo="year"
+                        views={["year", "month", "day"]}
+                        value={moment(values.date)}
+                        name="date"
+                        InputProps={{ readOnly: true }}
+                        onChange={(newDate) =>
+                          setvalues({
+                            ...values,
+                            date: newDate.toDate().toISOString(),
+                          })
+                        }
+                        renderInput={(params) => (
+                          <StyledTextField
+                            {...params}
+                            fullWidth
+                            required
+                            size="small"
+                          />
+                        )}
                       />
-                      <FormControlLabel
-                        value="false"
-                        control={<Radio />}
-                        label="No"
-                      />
-                    </RadioGroup>
-                  </FormControl>
-                </Grid>
+                    </LocalizationProvider>
+                  </Grid>
 
-                <Grid item sm={6} md={6}>
-                  <StyledTextField
-                    required
-                    fullWidth
-                    id="vaccine"
-                    label="Vaccine"
-                    name="vaccine"
-                    size="small"
-                    autoFocus
-                    onChange={handleChange}
-                    value={values.vaccine}
-                  />
-                </Grid>
-
-                <Grid item sm={6} md={6}>
-                  <FormControl
-                    required
-                    fullWidth
-                    size="small"
-                    sx={{ backgroundColor: "white" }}
-                  >
-                    <InputLabel>Status</InputLabel>
-                    <Select
-                      label="Source"
-                      onChange={handleChange}
-                      name="status_of_vaccination"
-                      value={values.status_of_vaccination}
+                  <Grid item sm={6} md={6}>
+                    <FormControl
+                      required
+                      fullWidth
+                      size="small"
+                      sx={{ backgroundColor: "white" }}
                     >
-                      <MenuItem value="On-going">On-going</MenuItem>
-                      <MenuItem value="Cleared">Cleared</MenuItem>
-                      <MenuItem value="Untracked">Untracked</MenuItem>
-                    </Select>
-                  </FormControl>
+                      <InputLabel>Barangay</InputLabel>
+                      <Select
+                        label="Barangay"
+                        onChange={handleChange}
+                        name="place"
+                        value={values.place}
+                      >
+                        {taguig_baarangay.map((barangay) => (
+                          <MenuItem value={barangay} key={barangay}>
+                            {barangay}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </Grid>
+
+                  <Grid item sm={6} md={6}>
+                    <FormControl
+                      required
+                      fullWidth
+                      size="small"
+                      sx={{ backgroundColor: "white" }}
+                    >
+                      <InputLabel>Type</InputLabel>
+                      <Select
+                        label="type_of_exposure"
+                        onChange={handleChange}
+                        name="type_of_exposure"
+                        value={values.type_of_exposure}
+                      >
+                        <MenuItem value="Bite">Bite</MenuItem>
+                        <MenuItem value="Saliva">Saliva</MenuItem>
+                        <MenuItem value="Scratch">Scratch</MenuItem>
+                        <MenuItem value="Others">Others</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+
+                  <Grid item xs={6} sm={6} md={6}>
+                    <StyledTextField
+                      required
+                      fullWidth
+                      id="bodypart"
+                      label="Body Part Affected"
+                      name="bodypart"
+                      size="small"
+                      autoFocus
+                      onChange={handleChange}
+                      value={values.bodypart}
+                    />
+                  </Grid>
+
+                  <Grid item sm={6} md={6}>
+                    <FormControl
+                      required
+                      fullWidth
+                      size="small"
+                      sx={{ backgroundColor: "white" }}
+                    >
+                      <InputLabel>Route</InputLabel>
+                      <Select
+                        label="Route"
+                        onChange={handleChange}
+                        name="route"
+                        value={values.route}
+                      >
+                        <MenuItem value="IM">IM</MenuItem>
+                        <MenuItem value="ID">ID</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+
+                  <Grid item sm={6} md={6}>
+                    <FormControl
+                      required
+                      fullWidth
+                      size="small"
+                      sx={{ backgroundColor: "white" }}
+                    >
+                      <InputLabel>Source</InputLabel>
+                      <Select
+                        label="Source"
+                        onChange={handleChange}
+                        name="source_of_exposure"
+                        value={values.source_of_exposure}
+                      >
+                        <MenuItem value="Dog">Dog</MenuItem>
+                        <MenuItem value="Cat">Cat</MenuItem>
+                        <MenuItem value="Others">Others</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+
+                  <Grid item sm={6} md={6}>
+                    <FormControl>
+                      <FormLabel>HRIG Administered?</FormLabel>
+                      <RadioGroup
+                        row
+                        name="anti_tetanus"
+                        onChange={handleChange}
+                        value={values.anti_tetanus}
+                      >
+                        <FormControlLabel
+                          value="true"
+                          control={<Radio />}
+                          label="Yes"
+                        />
+                        <FormControlLabel
+                          value="false"
+                          control={<Radio />}
+                          label="No"
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                  </Grid>
+
+                  <Grid item sm={6} md={6}>
+                    <StyledTextField
+                      required
+                      fullWidth
+                      id="vaccine"
+                      label="Vaccine"
+                      name="vaccine"
+                      size="small"
+                      autoFocus
+                      onChange={handleChange}
+                      value={values.vaccine}
+                    />
+                  </Grid>
+
+                  <Grid item sm={6} md={6}>
+                    <FormControl
+                      required
+                      fullWidth
+                      size="small"
+                      sx={{ backgroundColor: "white" }}
+                    >
+                      <InputLabel>Status</InputLabel>
+                      <Select
+                        label="Source"
+                        onChange={handleChange}
+                        name="status_of_vaccination"
+                        value={values.status_of_vaccination}
+                      >
+                        <MenuItem value="On-going">On-going</MenuItem>
+                        <MenuItem value="Cleared">Cleared</MenuItem>
+                        <MenuItem value="Untracked">Untracked</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+
+                  <Grid item sm={6} md={6}>
+                    <StyledTextField
+                      required
+                      fullWidth
+                      id="classification"
+                      label="Classification"
+                      name="classification"
+                      size="small"
+                      autoFocus
+                      onChange={handleChange}
+                      value={values.classification}
+                    />
+                  </Grid>
+
+                  <Grid item sm={6} md={6}>
+                    <StyledTextField
+                      size="small"
+                      sx={{ backgroundColor: "white" }}
+                      label="Patient Status"
+                      name="patient_status"
+                      fullWidth
+                      onChange={handleChange}
+                      value={values.patient_status}
+                    />
+                  </Grid>
                 </Grid>
 
-                <Grid item sm={6} md={6}>
-                  <StyledTextField
-                    required
-                    fullWidth
-                    id="classification"
-                    label="Classification"
-                    name="classification"
-                    size="small"
-                    autoFocus
-                    onChange={handleChange}
-                    value={values.classification}
-                  />
-                </Grid>
-
-                <Grid item sm={6} md={6}>
-                  <StyledTextField
-                    size="small"
-                    sx={{ backgroundColor: "white" }}
-                    label="Patient Status"
-                    name="patient_status"
-                    fullWidth
-                    onChange={handleChange}
-                    value={values.patient_status}
-                  />
-                </Grid>
-              </Grid>
-
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  backgroundColor: "white",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <StyledButton type="submit" variant="contained">
-                  Edit
-                </StyledButton>
-                <StyledButton
-                  variant="outlined"
-                  //sx={{ mt: 3, mb: 2 }}
-                  onClick={handleClose}
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    backgroundColor: "white",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
                 >
-                  Cancel
-                </StyledButton>
-              </Box>
-            </Container>
-          </Box>
-        </form>
-      </Modal>
+                  <StyledButton type="submit" variant="contained">
+                    Edit
+                  </StyledButton>
+                  <StyledButton
+                    variant="outlined"
+                    //sx={{ mt: 3, mb: 2 }}
+                    onClick={handleClose}
+                  >
+                    Cancel
+                  </StyledButton>
+                </Box>
+              </Container>
+            </Box>
+          </form>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
