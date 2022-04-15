@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Alert,
@@ -48,7 +48,7 @@ const Appointments = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const onClose = (e) => {
@@ -216,10 +216,10 @@ const Appointments = () => {
     setOpen(false);
   };
 
-function refreshPage() {
-  window.location.reload(false);
-}
-  
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
   return (
     <Box
       sx={{
@@ -278,17 +278,17 @@ function refreshPage() {
             </Typography>
           </Grid>
 
-      <Grid item>
-        <StyledButton
-          startIcon={<BsCalendarPlusFill />}
-          onClick={handleOpen}
-        >
-          Create Appointment
-        </StyledButton>
-        <StyledButton onClick={refreshPage}>⟳</StyledButton>
-      </Grid>
-    </Grid>
-  </Container>
+          <Grid item>
+            <StyledButton
+              startIcon={<BsCalendarPlusFill />}
+              onClick={handleOpen}
+            >
+              Create Appointment
+            </StyledButton>
+            <StyledButton onClick={refreshPage}>⟳</StyledButton>
+          </Grid>
+        </Grid>
+      </Container>
 
       <Container sx={{ py: 5 }} maxWidth="xl">
         <Grid item sm flexDirection={"column"}>

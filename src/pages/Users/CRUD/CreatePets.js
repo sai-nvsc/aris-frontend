@@ -13,7 +13,7 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StyledTextField } from "../../../assets/styles";
 import { AddPetsThunk } from "../../../redux/slices/PetSlice";
@@ -109,7 +109,12 @@ const CreatePet = () => {
   return (
     //   Render Block
     <>
-      <Button variant="contained" onClick={handleOpen} startIcon={<Add />} sx={{float:"right"}}>
+      <Button
+        variant="contained"
+        onClick={handleOpen}
+        startIcon={<Add />}
+        sx={{ float: "right" }}
+      >
         Add Pet
       </Button>
       <Dialog fullWidth open={open} onClose={handleClose}>

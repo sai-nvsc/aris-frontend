@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Edit } from "@mui/icons-material";
 import {
   Box,
@@ -19,10 +19,10 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { EditAccountThunk } from "../../../redux/slices/AdminSlices";
 
-const EditAcc = ({ data, }) => {
+const EditAcc = ({ data }) => {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const [values, setvalues] = useState({
     admin_name: data.admin_name,
@@ -182,7 +182,6 @@ const EditAcc = ({ data, }) => {
                     onChange={onInputChange}
                   />
                 </Grid>
-
               </Grid>
 
               <Box

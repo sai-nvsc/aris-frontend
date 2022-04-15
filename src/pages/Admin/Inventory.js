@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import {
@@ -63,7 +63,7 @@ const Inventory = () => {
     window.location.reload(false);
   }
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const onClose = (e) => {

@@ -13,7 +13,7 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StyledTextField } from "../../../assets/styles";
 import { EditPetsThunk } from "../../../redux/slices/PetSlice";

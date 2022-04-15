@@ -14,7 +14,7 @@ import {
   TableBody,
   Divider,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { ProfileCard, StyledButton, StyledLink } from "../../assets/styles";
@@ -51,19 +51,20 @@ const MyVaccineDetails = () => {
         {!loading && (
           <Grid container spacing={2}>
             <IconButton
-            component={StyledLink}
-            to="/user/myvaxx"
-            size="large"
-            sx={{ mt: 2 }}
-          >
+              component={StyledLink}
+              to="/user/myvaxx"
+              size="large"
+              sx={{ mt: 2 }}
+            >
               <ArrowBackIosRoundedIcon />
             </IconButton>
-        <Typography variant="h4" marginTop={2}>Vaccination Details</Typography>
+            <Typography variant="h4" marginTop={2}>
+              Vaccination Details
+            </Typography>
 
             <Grid item sm={12}>
               <ProfileCard>
                 <Grid container spacing={2}>
-
                   <Grid
                     item
                     sm={12}
@@ -71,7 +72,8 @@ const MyVaccineDetails = () => {
                     sx={{
                       borderRadius: 3,
                     }}
-                  ><Divider>Patient Information</Divider>
+                  >
+                    <Divider>Patient Information</Divider>
 
                     <Box
                       component="div"
@@ -165,8 +167,14 @@ const MyVaccineDetails = () => {
                     >
                       Bite Case ID
                     </Typography>
-                    <Grid item xs sx={{float:"center", mb: 2}}><StyledButton component={StyledLink} to={`/user/myvaxx/print/${bites[0]._id}`}>Print/Download my vaccine card</StyledButton></Grid>
-
+                    <Grid item xs sx={{ float: "center", mb: 2 }}>
+                      <StyledButton
+                        component={StyledLink}
+                        to={`/user/myvaxx/print/${bites[0]._id}`}
+                      >
+                        Print/Download my vaccine card
+                      </StyledButton>
+                    </Grid>
                   </Grid>
                 </Grid>
                 <Divider>Exposure Detail</Divider>
@@ -270,7 +278,7 @@ const MyVaccineDetails = () => {
                     <Typography variant="h5" component="div">
                       <b>{bites[0].patient_status} </b>
                     </Typography>
-                    <br/>
+                    <br />
                   </Grid>
                 </Grid>
               </ProfileCard>

@@ -1,6 +1,5 @@
 import { Grid, Skeleton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React from "react";
 import moment from "moment";
 const AppointmentsCompleted = ({ completed }) => {
   return (

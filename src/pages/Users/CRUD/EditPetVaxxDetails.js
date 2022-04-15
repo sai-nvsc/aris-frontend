@@ -9,7 +9,7 @@ import {
   DialogTitle,
   Grid,
 } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { StyledTextField } from "../../../assets/styles";
 import { EditPetVaccineThunk } from "../../../redux/slices/PetSlice";

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CssBaseline from "@mui/material/CssBaseline";
 import {
@@ -81,7 +81,7 @@ const Announcement = () => {
     window.location.reload(false);
   }
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const onClose = (e) => {

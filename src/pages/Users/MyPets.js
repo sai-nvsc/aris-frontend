@@ -9,6 +9,7 @@ import {
   Container,
   CssBaseline,
   Grid,
+  Skeleton,
   Snackbar,
   Typography,
 } from "@mui/material";
@@ -103,7 +104,7 @@ const MyPets = () => {
         display: "flex",
         flexDirection: "column",
         minHeight: "100vh",
-        bgcolor:"background.paper"
+        bgcolor: "background.paper",
       }}
     >
       <CssBaseline />
@@ -138,15 +139,19 @@ const MyPets = () => {
         )}
 
         <Typography variant="h3" className={classes.blogTitle}>
-          My Pets<CreatePet />
+          My Pets
+          <CreatePet />
         </Typography>
-        
+
         <Grid container spacing={3}>
-          {!loading &&
-            pets &&
+          {!loading && pets ? (
             pets.map((pet) => (
               <Grid item xs={12} sm={6} md={4} key={pet._id}>
-                <Card className={classes.card} to="petsprofile" sx={{backgroundColor:"#fff"}}>
+                <Card
+                  className={classes.card}
+                  to="petsprofile"
+                  sx={{ backgroundColor: "#fff" }}
+                >
                   <CardActionArea
                     LinkComponent={StyledLink}
                     to={`/user/mypets/${pet._id}`}
@@ -161,14 +166,28 @@ const MyPets = () => {
                       title={pet.name} //alt
                     />
                     <CardContent>
-                      <Typography gutterBottom variant="h5" component="h2" sx={{textTransform:"capitalize"}}>
+                      <Typography
+                        gutterBottom
+                        variant="h5"
+                        component="h2"
+                        sx={{ textTransform: "capitalize" }}
+                      >
                         {pet.name}
                       </Typography>
                     </CardContent>
                   </CardActionArea>
                 </Card>
               </Grid>
-            ))}
+            ))
+          ) : (
+            <Grid item xs={12} sm={6} md={4}>
+              <Skeleton animation="wave" />
+              <Skeleton animation="wave" />
+              <Skeleton animation="wave" />
+              <Skeleton animation="wave" />
+              <Skeleton animation="wave" />
+            </Grid>
+          )}
         </Grid>
       </Container>
       <Footer />

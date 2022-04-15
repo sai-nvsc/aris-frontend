@@ -1,6 +1,6 @@
 import { ReplyThunk } from "../../../redux/slices/VaccineSlice";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   Button,
@@ -70,7 +70,7 @@ const ReplyHealthReport = ({ reports, id }) => {
     });
   };
 
-  const [open, setOpenn] = React.useState(false);
+  const [open, setOpenn] = useState(false);
   const dialogOpen = () => setOpenn(true);
   const handleClose = () => setOpenn(false);
 

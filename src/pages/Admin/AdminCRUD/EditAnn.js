@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Edit } from "@mui/icons-material";
 import {
   Box,
@@ -22,7 +22,7 @@ import { EditAnnThunk } from "../../../redux/slices/AnnouncementSlice";
 const EditAnn = ({ annEdit }) => {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const [values, setvalues] = useState({
     title: annEdit.title,

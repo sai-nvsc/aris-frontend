@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
@@ -21,7 +21,7 @@ const EditBiteStatus = ({ edit, id }) => {
   const params = useParams();
 
   //modal
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
 
   const [values, setvalues] = useState({

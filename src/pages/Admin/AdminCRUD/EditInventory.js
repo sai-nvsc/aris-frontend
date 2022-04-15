@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Edit } from "@mui/icons-material";
 import { Box, Container, Grid, Modal, Typography } from "@mui/material";
 import {
@@ -16,7 +16,7 @@ import moment from "moment";
 const EditInventory = ({ data, id }) => {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const [values, setvalues] = useState({
     brand_name: data.brand_name,
@@ -61,11 +61,7 @@ const EditInventory = ({ data, id }) => {
 
   return (
     <>
-      <EditButton
-        onClick={handleOpen}
-        startIcon={<Edit/>}
-      >
-      </EditButton>
+      <EditButton onClick={handleOpen} startIcon={<Edit />}></EditButton>
 
       <Modal
         open={open}

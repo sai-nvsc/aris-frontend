@@ -1,13 +1,8 @@
-import {
-  Box,
-  Grid, 
-  Skeleton, 
-  Typography } from "@mui/material";
-import React from "react";
+import { Box, Grid, Skeleton, Typography } from "@mui/material";
 import moment from "moment";
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Cancellation from "../../components/Layouts/Dialogs/Cancellation";
-import AcceptAppointment from "../Admin/AdminCRUD/AcceptAppointment"
+import AcceptAppointment from "../Admin/AdminCRUD/AcceptAppointment";
 
 const AptPending = ({ pending }) => {
   return (
@@ -32,9 +27,12 @@ const AptPending = ({ pending }) => {
                   backgroundColor: "white",
                 }}
               >
-                {<Typography variant="h4" sx={{ margin: 2 }}>
-                  {appointment.user[0].first_name} {appointment.user[0].last_name}
-                </Typography>}
+                {
+                  <Typography variant="h4" sx={{ margin: 2 }}>
+                    {appointment.user[0].first_name}{" "}
+                    {appointment.user[0].last_name}
+                  </Typography>
+                }
                 <Typography
                   variant="subtitle1"
                   color="text.secondary"
@@ -71,20 +69,22 @@ const AptPending = ({ pending }) => {
                     display: "flex",
                     //flexDirection:"row",
                     flexWrap: "wrap",
-                    m: 2
+                    m: 2,
                   }}
                 >
-
-                <AcceptAppointment accept={appointment} startIcon={<CheckCircleIcon/>}/>
-             <div></div>
-                <Cancellation
-                  name={appointment.user[0].last_name}
-                  date={moment(appointment.date).format("MMMM DD, YYYY")}
-                  id={appointment._id} />
+                  <AcceptAppointment
+                    accept={appointment}
+                    startIcon={<CheckCircleIcon />}
+                  />
+                  <div></div>
+                  <Cancellation
+                    name={appointment.user[0].last_name}
+                    date={moment(appointment.date).format("MMMM DD, YYYY")}
+                    id={appointment._id}
+                  />
                 </Box>
-  
               </Box>
-            </Grid>   
+            </Grid>
           ))
         ) : (
           <Grid item sm={12}>

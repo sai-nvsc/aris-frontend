@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useDispatch, useSelector } from "react-redux";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
@@ -16,12 +16,9 @@ import {
   Snackbar,
   Typography,
 } from "@mui/material";
-import {
-  StyledTextField,
-  StyledButton,
-} from "../../assets/styles";
+import { StyledTextField, StyledButton } from "../../assets/styles";
 import { Edit } from "@mui/icons-material";
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import EditAccount from "../Admin/AdminCRUD/EditAccount";
 import AdminDelete from "../../components/Layouts/Dialogs/AdminDelete";
 import PersistentDrawerLeft from "../../components/Layouts/AdminSidebar";
@@ -40,7 +37,7 @@ const Accounts = () => {
   );
   const dispatch = useDispatch();
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const onClose = (e) => {
@@ -115,10 +112,10 @@ const Accounts = () => {
       renderCell: (cellValues) => {
         return (
           <AdminDelete
-              id={admin._id}
-              name={admin.admin_name}
-              collection="admins"
-              data={cellValues.row}
+            id={admin._id}
+            name={admin.admin_name}
+            collection="admins"
+            data={cellValues.row}
           />
         );
       },
@@ -131,8 +128,7 @@ const Accounts = () => {
     e.stopPropagation();
   };
 
-
-  const [values, setvalues] = React.useState({
+  const [values, setvalues] = useState({
     admin_name: "",
     role: "",
     clinic: user.clinic,
@@ -219,9 +215,13 @@ const Accounts = () => {
               Accounts
             </Typography>
           </Grid>
-          
+
           <Grid item>
-            <StyledButton onClick={handleOpen} margin="10" startIcon={<GroupAddIcon/>}>
+            <StyledButton
+              onClick={handleOpen}
+              margin="10"
+              startIcon={<GroupAddIcon />}
+            >
               Add Account
             </StyledButton>
             <StyledButton onClick={refreshPage}>⟳</StyledButton>
@@ -229,28 +229,29 @@ const Accounts = () => {
         </Grid>
 
         <Grid item sm flexDirection={"column"}>
-        <Box
-          sx={{
-            bgcolor: "background.paper",
-            pt: 3, pb: 6,
+          <Box
+            sx={{
+              bgcolor: "background.paper",
+              pt: 3,
+              pb: 6,
             }}
           >
-        <div style={{ height: 525, width: "auto" }}>
-              {!loading && admin && (             
-                  <DataGrid
-                    rows={admin}
-                    columns={columns}
-                    getRowId={(row) => row._id}
-                    onCellClick={handleCellClick}
-                    onRowClick={handleRowClick}
-                    components={{ Toolbar: GridToolbar }}
-                  />                
+            <div style={{ height: 525, width: "auto" }}>
+              {!loading && admin && (
+                <DataGrid
+                  rows={admin}
+                  columns={columns}
+                  getRowId={(row) => row._id}
+                  onCellClick={handleCellClick}
+                  onRowClick={handleRowClick}
+                  components={{ Toolbar: GridToolbar }}
+                />
               )}
             </div>
-          </Box>         
+          </Box>
         </Grid>
       </Container>
-        
+
       <Modal
         open={open}
         onClose={handleClose}
@@ -387,7 +388,6 @@ const Accounts = () => {
               </StyledButton>
             </Box>
           </Container>
-
         </Box>
       </Modal>
       <Footer />

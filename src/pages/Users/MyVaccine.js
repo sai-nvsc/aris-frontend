@@ -10,7 +10,7 @@ import {
   Link,
   Skeleton,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PersistentDrawerLeft from "../../components/Layouts/UserSidebar";
 import { GetBiteCasesThunk } from "../../redux/slices/VaccineSlice";
@@ -67,7 +67,10 @@ const MyVaccine = () => {
                           color="text.secondary"
                           component="div"
                         >
-                          Date Registered: {moment(bite.history_of_exposure.date).format("MMMM DD, YYYY, h:mm A")}
+                          Date Registered:{" "}
+                          {moment(bite.history_of_exposure.date).format(
+                            "MMMM DD, YYYY, h:mm A"
+                          )}
                         </Typography>
                         <Typography
                           variant="subtitle1"
@@ -81,7 +84,8 @@ const MyVaccine = () => {
                           color="text.secondary"
                           component="div"
                         >
-                          Source: {bite.history_of_exposure.source_of_exposure}{" "}{bite.history_of_exposure.type_of_exposure}
+                          Source: {bite.history_of_exposure.source_of_exposure}{" "}
+                          {bite.history_of_exposure.type_of_exposure}
                         </Typography>
                         <Typography
                           variant="subtitle1"

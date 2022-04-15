@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import pawwave2 from "../../assets/pawwave2.svg";
 import {
   Alert,
@@ -151,7 +151,7 @@ const LoginUser = () => {
               >
                 Log In
               </LogButton>
-              <Divider sx={{m:2}}>or</Divider>
+              <Divider sx={{ m: 2 }}>or</Divider>
 
               <LogButton
                 type="submit"
@@ -166,9 +166,7 @@ const LoginUser = () => {
 
           <Grid container>
             <Grid item xs>
-              <LogLink to="/forgot-password">
-                Forgot password?
-              </LogLink>
+              <LogLink to="/forgot-password">Forgot password?</LogLink>
             </Grid>
             <Grid item>
               <LogLink to="/register">

@@ -1,13 +1,18 @@
 import { Grid, Skeleton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React from "react";
 import moment from "moment";
 const CancelledAppoinment = ({ cancelled }) => {
   return (
     <>
       <Grid container spacing={4}>
         {cancelled === "loading" ? (
-          <Skeleton animation="wave" />
+          <Grid item sm={12}>
+            <Skeleton animation="wave" />
+            <Skeleton animation="wave" />
+            <Skeleton animation="wave" />
+            <Skeleton animation="wave" />
+            <Skeleton animation="wave" />
+          </Grid>
         ) : (
           cancelled.map((appointment) => (
             <Grid item sm={12} key={appointment._id}>

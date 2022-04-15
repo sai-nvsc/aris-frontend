@@ -1,6 +1,5 @@
 import { Avatar, Divider, Grid, Paper } from "@mui/material";
 import moment from "moment";
-import React from "react";
 import ReplyHealthReport from "../Admin/AdminCRUD/ReplyHealthReport";
 
 export const Comments = ({ reports }) => {

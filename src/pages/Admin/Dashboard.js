@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PersistentDrawerLeft from "../../components/Layouts/AdminSidebar";
 import { StyledLink } from "../../assets/styles";
@@ -85,7 +85,6 @@ const stacks = [
   },
 ];
 
-
 const Dashboard = () => {
   const { clinic_counts } = useSelector((state) => state.analytics);
   const { user } = useSelector((state) => state.user);
@@ -118,7 +117,7 @@ const Dashboard = () => {
   }, [dispatch, user]);
 
   //Popover
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -183,8 +182,16 @@ const Dashboard = () => {
       <PersistentDrawerLeft title="Admin Dashboard" />
 
       <Container sx={{ py: 5 }} maxWidth="xl">
-<Typography variant="h3" sx={{ textTransform: "capitalize",  }} align="center"><b><i>Welcome,</i> {user.role}{" "}{user.admin_name}</b></Typography>
-<br/>
+        <Typography
+          variant="h3"
+          sx={{ textTransform: "capitalize" }}
+          align="center"
+        >
+          <b>
+            <i>Welcome,</i> {user.role} {user.admin_name}
+          </b>
+        </Typography>
+        <br />
         <Grid container item xs={12} spacing={2}>
           <Grid item xl={3} md={4} sm={6} xs={12}>
             <Paper
@@ -326,12 +333,11 @@ const Dashboard = () => {
                   {clinic_counts ? clinic_counts.bitecase : 0}
                 </Typography>
                 <Typography align="center" variant="h6" color="text.secondary">
-                  <i>As of {moment().format('MMMM DD, YYYY')}</i>
+                  <i>As of {moment().format("MMMM DD, YYYY")}</i>
                 </Typography>
-              
               </StyledLink>
             </Paper>
-     <br/>
+            <br />
             <Paper
               elevation={12}
               style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
@@ -340,17 +346,20 @@ const Dashboard = () => {
                 <Typography variant="h6" align="center">
                   Total Appointments
                 </Typography>
-                <br/>
+                <br />
                 <Typography align="center" variant="h4">
-                  Pending: {clinic_counts ? clinic_counts.appointments_pending : 0}
+                  Pending:{" "}
+                  {clinic_counts ? clinic_counts.appointments_pending : 0}
                 </Typography>
-               
+
                 <Typography align="center" variant="h4">
-                  Completed: {clinic_counts ? clinic_counts.appointments_completed : 0}
+                  Completed:{" "}
+                  {clinic_counts ? clinic_counts.appointments_completed : 0}
                 </Typography>
-               
+
                 <Typography align="center" variant="h4">
-                  Cancelled: {clinic_counts ? clinic_counts.appointments_cancelled : 0}
+                  Cancelled:{" "}
+                  {clinic_counts ? clinic_counts.appointments_cancelled : 0}
                 </Typography>
               </StyledLink>
             </Paper>
@@ -362,7 +371,7 @@ const Dashboard = () => {
               style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
             >
               <StyledLink to="/admin/bitecases">
-                  <ClinicCategoryCountGraph />
+                <ClinicCategoryCountGraph />
               </StyledLink>
             </Paper>
           </Grid>
@@ -372,30 +381,30 @@ const Dashboard = () => {
               elevation={12}
               style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
             >
-              <StyledLink to="/admin/bitecases">               
-                  <ClinicGenderCountGraph />
+              <StyledLink to="/admin/bitecases">
+                <ClinicGenderCountGraph />
               </StyledLink>
             </Paper>
           </Grid>
-         
+
           <Grid item xl={3} md={4} sm={6} xs={12}>
             <Paper
               elevation={12}
               style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
             >
-              <StyledLink to="/admin/bitecases">               
-              <BiteCasePerSourceExposure />
+              <StyledLink to="/admin/bitecases">
+                <BiteCasePerSourceExposure />
               </StyledLink>
             </Paper>
           </Grid>
 
-        <Grid item xl={3} md={4} sm={6} xs={12}>
+          <Grid item xl={3} md={4} sm={6} xs={12}>
             <Paper
               elevation={12}
               style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
             >
-              <StyledLink to="/admin/bitecases">               
-                <BiteCasePerExpoType />              
+              <StyledLink to="/admin/bitecases">
+                <BiteCasePerExpoType />
               </StyledLink>
             </Paper>
           </Grid>
@@ -407,7 +416,7 @@ const Dashboard = () => {
             >
               <StyledLink to="/admin/bitecases">
                 <Typography variant="h4" align="center">
-                  Total Exposures 
+                  Total Exposures
                 </Typography>
                 <Typography align="center" variant="h5">
                   [On-going]{clinic_counts ? clinic_counts.on_going : 0}
@@ -418,54 +427,55 @@ const Dashboard = () => {
                 <Typography align="center" variant="h5">
                   [Untracked]{clinic_counts ? clinic_counts.untracked : 0}
                 </Typography>
-              
               </StyledLink>
             </Paper>
           </Grid>
-         
         </Grid>
       </Container>
 
-      <Divider light/>
+      <Divider light />
       <Container sx={{ py: 7 }} maxWidth="xl">
         <Grid container spacing={3}>
           {cards.map((card) => (
             <Grid item key={card} xs={12} sm={6} md={4} lg={2.4} xl={2.4}>
-                <Card
-                  sx={{
-                    height: "100%",
-                    width: "108%",
-                    display: "flex",
-                    position: "sticky",
-                    flexDirection: "column",
-                  }}
-                >
-                  <CardActionArea>
-                    <StyledLink to={card.to}>
-                      <CardMedia
-                        sx={{
-                          pt: "100%",
-                        }}
-                        image={card.image}
-                        alt={card.alt}
-                      />
-                      <CardContent sx={{ flexGrow: 1 }}>
-                      <Badge color="primary" badgeContent={card.alert}  
+              <Card
+                sx={{
+                  height: "100%",
+                  width: "108%",
+                  display: "flex",
+                  position: "sticky",
+                  flexDirection: "column",
+                }}
+              >
+                <CardActionArea>
+                  <StyledLink to={card.to}>
+                    <CardMedia
+                      sx={{
+                        pt: "100%",
+                      }}
+                      image={card.image}
+                      alt={card.alt}
+                    />
+                    <CardContent sx={{ flexGrow: 1 }}>
+                      <Badge
+                        color="primary"
+                        badgeContent={card.alert}
                         anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                        }}>
+                          vertical: "top",
+                          horizontal: "right",
+                        }}
+                      >
                         <Typography gutterBottom variant="h5" component="h2">
                           {card.title}
                         </Typography>
-                        </Badge>
-                        <Typography color="text.secondary">
-                          {card.desc}
-                        </Typography>
-                      </CardContent>
-                    </StyledLink>
-                  </CardActionArea>
-                </Card>
+                      </Badge>
+                      <Typography color="text.secondary">
+                        {card.desc}
+                      </Typography>
+                    </CardContent>
+                  </StyledLink>
+                </CardActionArea>
+              </Card>
             </Grid>
           ))}
         </Grid>

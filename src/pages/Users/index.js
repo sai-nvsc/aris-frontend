@@ -5,10 +5,10 @@ import {
   CssBaseline,
   Grid,
   Paper,
-  Typography
+  Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Footer from "../../components/Layouts/Footer";
 import PersistentDrawerLeft from "../../components/Layouts/UserSidebar";
 import { user_services } from "../../helpers/users_index_square_navs";
@@ -24,7 +24,7 @@ const UserIndex = () => {
         display: "flex",
         flexDirection: "column",
         minHeight: "100vh",
-        bgcolor:"background.paper"
+        bgcolor: "background.paper",
       }}
     >
       <CssBaseline />
@@ -53,7 +53,17 @@ const UserIndex = () => {
                 >
                   {service.icon}
                   {service.title}
-                  <Typography sx={{ display: 'inline', fontSize: "16px", alignItems:"center" }} component="span" color= "text.secondary">{service.sub}</Typography>
+                  <Typography
+                    sx={{
+                      display: "inline",
+                      fontSize: "16px",
+                      alignItems: "center",
+                    }}
+                    component="span"
+                    color="text.secondary"
+                  >
+                    {service.sub}
+                  </Typography>
                 </Paper>
               </Button>
             </Grid>

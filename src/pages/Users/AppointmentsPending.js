@@ -1,6 +1,5 @@
 import { Grid, Skeleton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React from "react";
 import moment from "moment";
 import CreateAppointment from "./CRUD/CreateAppointment";
 import Cancellation from "../../components/Layouts/Dialogs/Cancellation";
@@ -17,13 +16,13 @@ const AppointmentsPending = ({ pending }) => {
 
       <Grid container spacing={4}>
         {pending === "loading" ? (
-          <>
+          <Grid item sm={12}>
             <Skeleton animation="wave" />
             <Skeleton animation="wave" />
             <Skeleton animation="wave" />
             <Skeleton animation="wave" />
             <Skeleton animation="wave" />
-          </>
+          </Grid>
         ) : pending && pending.length > 0 ? (
           pending.map((appointment) => (
             <Grid item sm={12} key={appointment._id}>

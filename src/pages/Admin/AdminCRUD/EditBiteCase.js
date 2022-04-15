@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
@@ -38,7 +38,7 @@ const EditBiteCase = ({ data, id }) => {
   const dispatch = useDispatch();
 
   //modal
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
 
   const [values, setvalues] = useState({

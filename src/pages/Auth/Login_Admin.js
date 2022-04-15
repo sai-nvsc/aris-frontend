@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import pawwave2 from "../../assets/pawwave2.svg";
 import {
   Alert,
@@ -66,7 +66,7 @@ const LoginAdmin = () => {
         display: "flex",
         flexDirection: "column",
         minHeight: "100vh",
-        bgcolor: "#ff8a80"
+        bgcolor: "#ff8a80",
       }}
     >
       <CssBaseline />
@@ -153,7 +153,7 @@ const LoginAdmin = () => {
               >
                 Log In
               </LogButton>
-              <Divider sx={{m:2}}>or</Divider>
+              <Divider sx={{ m: 2 }}>or</Divider>
               <LogButton
                 type="submit"
                 fullWidth

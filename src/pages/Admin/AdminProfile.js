@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   CardContent,
@@ -23,16 +23,17 @@ import {
   AdminProfileCard,
 } from "../../assets/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { EditAccountThunk, clearError, clearSuccess, UpdatePasswordThunk, } from "../../redux/slices/AdminSlices";
+import {
+  EditAccountThunk,
+  clearError,
+  clearSuccess,
+  UpdatePasswordThunk,
+} from "../../redux/slices/AdminSlices";
 
 export const AdminProfile = () => {
-  const {
-    user
-  } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
 
-  const { loading, errors, success } = useSelector(
-    (state) => state.admin
-  );
+  const { loading, errors, success } = useSelector((state) => state.admin);
   const [passwordmatcherror, setpasswordmatcherror] = useState(false);
 
   const dispatch = useDispatch();
@@ -89,7 +90,7 @@ export const AdminProfile = () => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        bgcolor: "background.paper"
+        bgcolor: "background.paper",
       }}
     >
       <CssBaseline />
@@ -134,17 +135,15 @@ export const AdminProfile = () => {
         </Snackbar>
       )}
 
-      <Grid item xs={12} sm={12} md={12} >
-        <Container component="main" sx={{ mt: 12, mb: 2 }} >
+      <Grid item xs={12} sm={12} md={12}>
+        <Container component="main" sx={{ mt: 12, mb: 2 }}>
           {!loading && user && (
-            <AdminProfileCard >
+            <AdminProfileCard>
               <CardContent>
-                <AdminHeading>
-                  {user.admin_name}
-                </AdminHeading>
+                <AdminHeading>{user.admin_name}</AdminHeading>
                 <Subheader>{user.role}</Subheader>
                 <Subheader>{user.email}</Subheader>
-              </CardContent>                           
+              </CardContent>
             </AdminProfileCard>
           )}
         </Container>
@@ -170,10 +169,10 @@ export const AdminProfile = () => {
                       name="admin_name"
                       size="small"
                       value={values.admin_name}
-                        onChange={handleChange}
+                      onChange={handleChange}
                     />
                   </Grid>
-                  
+
                   <Grid item sm={12} md={6}>
                     <StyledTextField
                       size="small"
@@ -202,7 +201,6 @@ export const AdminProfile = () => {
                       onChange={handleChange}
                     />
                   </Grid>
-                  
                 </Grid>
               )}
 
@@ -212,7 +210,7 @@ export const AdminProfile = () => {
                   flexDirection: "column",
                   backgroundColor: "white",
                   alignItems: "center",
-                  mt:3
+                  mt: 3,
                 }}
               >
                 <StyledButton
