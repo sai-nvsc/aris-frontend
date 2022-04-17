@@ -29,3 +29,18 @@ a {
 a:visited {
   text-decoration: none;
 }
+
+.intro {
+  /*display: table;
+   max-width: 100%; 
+  height: auto;
+  padding: 0;*/
+  background: url(../build/img/intro-bg.jpg);
+  background-color: #e5e5e5;
+  background-repeat:no-repeat;
+-webkit-background-size:cover;
+-moz-background-size:cover;
+-o-background-size:cover;
+background-size:cover;
+background-position:center center;
+}

@@ -19,14 +19,13 @@ import {
   FormHelperText,
   LinearProgress,
 } from "@mui/material";
-
+import { Edit } from "@mui/icons-material";
 import PersistentDrawerLeft from "../../components/Layouts/UserSidebar";
 import Footer from "../../components/Layouts/Footer";
 import moment from "moment";
 import DateAdapterMoment from "@mui/lab/AdapterMoment";
 import DatePicker from "@mui/lab/DatePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-
 import {
   StyledButton,
   StyledTextField,
@@ -204,7 +203,7 @@ export const UserProfile = () => {
                     }}
                     src={user.avatar.url}
                   />
-                  <StyledButton variant="contained" component="label">
+                  <StyledButton variant="contained" component="label" startIcon={<Edit />}>
                     <input
                       type="file"
                       name="avatar"
@@ -212,7 +211,7 @@ export const UserProfile = () => {
                       onChange={UpdateAvatar}
                       hidden
                     />
-                    Choose New Profile Picture
+                    New Profile Picture
                   </StyledButton>
 
                   <ProfileHeading>

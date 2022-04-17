@@ -23,6 +23,7 @@ const EditInventory = ({ data, id }) => {
     generic_name: data.generic_name,
     batch_no: data.batch_no,
     stock: data.stock,
+    delivery_date: data.delivery_date,
     exp_date: data.exp_date,
   });
 
@@ -40,6 +41,7 @@ const EditInventory = ({ data, id }) => {
     formData.append("stock", values.stock);
     formData.append("exp_date", values.exp_date);
     formData.append("clinic", user.clinic);
+    formData.append("delivery_date", values.delivery_date);
 
     dispatch(EditInvThunk({ data: formData, id: data._id }));
     setOpen(false);
@@ -52,6 +54,7 @@ const EditInventory = ({ data, id }) => {
       generic_name: data.generic_name,
       batch_no: data.batch_no,
       stock: data.stock,
+      delivery_date: data.delivery_date,
       exp_date: data.exp_date,
     });
   };
@@ -143,6 +146,32 @@ const EditInventory = ({ data, id }) => {
                     onChange={onInputChange}
                   />
                 </Grid>
+                <Grid item xs={12} sm={12} md={6}>
+                  <LocalizationProvider dateAdapter={DateAdapterMoment}>
+                    <DatePicker
+                      label="Delivery Date"
+                      openTo="year"
+                      views={["year", "month", "day"]}
+                      value={moment(values.delivery_date)}
+                      name="delivery_date"
+                      InputProps={{ readOnly: true }}
+                      onChange={(newDate) =>
+                        setvalues({
+                          ...values,
+                          delivery_date: newDate.startOf("day").toDate(),
+                        })
+                      }
+                      renderInput={(params) => (
+                        <StyledTextField
+                          {...params}
+                          fullWidth
+                          required
+                          size="small"
+                        />
+                      )}
+                    />
+                  </LocalizationProvider>
+                </Grid>
 
                 <Grid item sm={12} md={6}>
                   <LocalizationProvider dateAdapter={DateAdapterMoment}>
@@ -156,7 +185,7 @@ const EditInventory = ({ data, id }) => {
                       onChange={(newDate) =>
                         setvalues({
                           ...values,
-                          exp_date: newDate.toDate().toISOString(),
+                          exp_date: newDate.startOf("day").toDate(),
                         })
                       }
                       renderInput={(params) => (

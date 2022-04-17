@@ -41,7 +41,8 @@ const Inventory = () => {
     generic_name: "",
     batch_no: "",
     stock: "",
-    exp_date: new Date(),
+    exp_date: moment().startOf("day"),
+    delivery_date: moment().startOf("day"),
   });
   const handleChange = (e) => {
     setvalues({ ...values, [e.target.name]: e.target.value });
@@ -54,6 +55,7 @@ const Inventory = () => {
     formData.append("batch_no", values.batch_no);
     formData.append("stock", values.stock);
     formData.append("exp_date", values.exp_date);
+    formData.append("delivery_date", values.delivery_date);
     formData.append("clinic", user.clinic);
     dispatch(AddInvThunk({ data: formData }));
     setOpen(false);
@@ -65,7 +67,17 @@ const Inventory = () => {
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setvalues({
+      ...values,
+      brand_name: "",
+      generic_name: "",
+      batch_no: "",
+      stock: "",
+      exp_date: moment.startOf("day"),
+      delivery_date: moment().startOf("day"),
+    });
+  };
   const onClose = (e) => {
     dispatch(clearSuccess());
     dispatch(clearError());
@@ -112,6 +124,17 @@ const Inventory = () => {
       minWidth: 65,
     },
     {
+      field: "delivery_date",
+      headerName: "Deliver Date",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      minWidth: 140,
+      renderCell: (cellValues) => {
+        return moment(cellValues.row.delivery_date).format("MMM. DD, YYYY");
+      },
+    },
+    {
       field: "exp_date",
       headerName: "Exp. Date",
       flex: 1,
@@ -138,9 +161,9 @@ const Inventory = () => {
               startIcon={<Edit style={{ color: "#ff8a80" }} />}
             />
             <AdminDelete
-              id={inventory._id}
+              id={cellValues.row._id}
               //name={"this entry"}
-              collection="bitecases"
+              collection="inventory"
               data={cellValues.row}
             />
           </>
@@ -365,6 +388,32 @@ const Inventory = () => {
                   onChange={handleChange}
                 />
               </Grid>
+              <Grid item xs={12} sm={12} md={6}>
+                <LocalizationProvider dateAdapter={DateAdapterMoment}>
+                  <DatePicker
+                    label="Delivery Date"
+                    openTo="year"
+                    views={["year", "month", "day"]}
+                    value={moment(values.delivery_date)}
+                    name="delivery_date"
+                    InputProps={{ readOnly: true }}
+                    onChange={(newDate) =>
+                      setvalues({
+                        ...values,
+                        delivery_date: newDate.startOf("day").toDate(),
+                      })
+                    }
+                    renderInput={(params) => (
+                      <StyledTextField
+                        {...params}
+                        fullWidth
+                        required
+                        size="small"
+                      />
+                    )}
+                  />
+                </LocalizationProvider>
+              </Grid>
 
               <Grid item xs={12} sm={12} md={6}>
                 <LocalizationProvider dateAdapter={DateAdapterMoment}>
@@ -378,7 +427,7 @@ const Inventory = () => {
                     onChange={(newDate) =>
                       setvalues({
                         ...values,
-                        exp_date: newDate.toDate().toISOString(),
+                        exp_date: newDate.startOf("day").toDate(),
                       })
                     }
                     renderInput={(params) => (

@@ -10,6 +10,7 @@ import {
   Container,
   CssBaseline,
   Grid,
+  IconButton,
   Modal,
   Snackbar,
   Typography,
@@ -28,7 +29,11 @@ import EditPet from "./CRUD/EditPets";
 import Delete from "../../components/Layouts/Dialogs/Delete";
 import AddPetVaxxDetail from "./CRUD/AddPetVaxxDetail";
 import EditPetVaxxDetail from "./CRUD/EditPetVaxxDetails";
+import {StyledLink } from "../../assets/styles";
+import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
+
 const moment = require("moment");
+
 const style2 = {
   position: "absolute",
   top: "50%",
@@ -150,7 +155,15 @@ const PetsProfile = () => {
             </Alert>
           </Snackbar>
         )}
-
+        
+         <IconButton
+              component={StyledLink}
+              to="/user/mypets"
+              size="large"
+            >
+              <ArrowBackIosRoundedIcon />
+              <Typography sx={{fontSize: 40}}>Pets</Typography>
+            </IconButton>
         {/* <div className="app"> */}
         {!loading && pets && (
           <Card sx={{ display: "flex" }}>
@@ -169,7 +182,7 @@ const PetsProfile = () => {
             <Grid item xs container direction="column">
               <CardContent sx={{ flex: "auto" }}>
                 <Grid item xs container direction="column">
-                  <Typography>Name: {pets[0].name}</Typography>
+                  <Typography variant="h5">Name: {pets[0].name}</Typography>
                   <Typography>Breed: {pets[0].breed}</Typography>
                   <Typography>Color: {pets[0].color}</Typography>
                   <Typography>Age: {pets[0].age} mos.</Typography>
@@ -177,7 +190,7 @@ const PetsProfile = () => {
                   <Typography>
                     Date Registered:{" "}
                     {moment(pets[0].created_at).format(
-                      "MMM. D, YYYY [at] h:mmA "
+                      "MMM. D, YYYY [at] h:mm A "
                     )}
                   </Typography>
                 </Grid>

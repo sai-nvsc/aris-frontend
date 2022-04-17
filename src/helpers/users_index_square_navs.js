@@ -1,16 +1,27 @@
-import React from "react";
+import React, {useState} from "react";
 import { RiFolderHistoryFill } from "react-icons/ri";
 import { BsFillCalendarCheckFill, BsPersonFill } from "react-icons/bs";
 import { MdAnnouncement, MdPets } from "react-icons/md";
 import { HiDocumentReport } from "react-icons/hi";
 import { AiFillHome } from "react-icons/ai";
 import { RiLogoutBoxFill } from "react-icons/ri";
-import { useDispatch } from "react-redux";
-import { List, ListItem, ListItemIcon, Typography } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { Box, Button,Dialog, DialogActions, DialogContent, DialogTitle, List, ListItem, ListItemIcon, Paper, Typography } from "@mui/material";
 import { LogoutUserThunk } from "../redux/slices/UserSlices";
 import HdrAutoIcon from "@mui/icons-material/HdrAuto";
-
+import QrCode2RoundedIcon from '@mui/icons-material/QrCode2Rounded';
 import { StyledLink, StyledListItem } from "../assets/styles";
+import Draggable from 'react-draggable';
+
+function PaperComponent(props) {
+  return (
+    <Draggable
+      id="draggable-dialog-title"
+    >
+      <Paper {...props} />
+    </Draggable>
+  );
+};
 
 export const user_services = [
   {
@@ -52,6 +63,10 @@ export const user_services = [
 ];
 
 export const UserNavMenu = ({ handleDrawerClose }) => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const Logout = (e) => {
     dispatch(LogoutUserThunk());
@@ -65,8 +80,14 @@ export const UserNavMenu = ({ handleDrawerClose }) => {
       onclick: handleDrawerClose,
     },
     {
+      title: "My QR Code",
+      icon: <QrCode2RoundedIcon sx={{fontSize:'large'}} />,
+      path: "#",
+      onclick: handleOpen,
+    },
+    {
       title: "ARIS",
-      icon: <HdrAutoIcon />,
+      icon: <HdrAutoIcon sx={{fontSize:'large'}} />,
       path: "/user/ARIS",
       onclick: handleDrawerClose,
     },
@@ -80,11 +101,11 @@ export const UserNavMenu = ({ handleDrawerClose }) => {
 
   return (
     <>
-      <List>
+      <List sx={{ml:2}}>
         {user_nav.map((item) => (
           <StyledLink to={item.path} key={item.title}>
             <ListItem button key={item.title} onClick={item.onclick}>
-              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemIcon sx={{ color: "#f32727" }}>{item.icon}</ListItemIcon>
 
               <StyledListItem
                 primary={item.title}
@@ -95,6 +116,33 @@ export const UserNavMenu = ({ handleDrawerClose }) => {
           </StyledLink>
         ))}
       </List>
+
+  <Dialog 
+    open={open} 
+    onClose={handleClose} 
+    maxWidth="md"
+    PaperComponent={PaperComponent}
+>
+    <DialogTitle sx={{ cursor: 'move' }} id="draggable-dialog-title">
+      My QR Code
+    </DialogTitle>
+      <DialogContent >    
+        <Box
+            component="img"
+            src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${user._id}`}
+            alt="ARIS QR CODE"
+            sx={{height: 300}}
+                  />
+      </DialogContent>
+      <DialogActions>
+        <Button
+          sx={{ mt: 3, mb: 1 }}
+          onClick={handleClose}
+        >
+          Close
+        </Button>
+      </DialogActions>
+  </Dialog>
     </>
   );
 };

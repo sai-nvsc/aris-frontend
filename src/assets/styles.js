@@ -199,3 +199,15 @@ export const LogLink = styled(Link)({
     textShadow: "-2px 2px 10px #fff",
   },
 });
+
+export const BackBtn = styled(Button)({
+  background: "#ffb8b2", //button color
+  color: "black", //text-color
+  marginTop: 1,
+  borderRadius:4,
+
+  "&:hover": {
+    background: "#fff",
+    borderColor: "black",
+    color:"#f32727"  },
+});

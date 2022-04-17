@@ -136,7 +136,7 @@ const Analytics = () => {
                   }}
                   width="800"
                   height="600"
-                  src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6234e0e6-ceb9-4b03-8a49-ae864ed0b9ed&maxDataAge=3600&theme=light&autoRefresh=true"
+                  src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6234e0e6-ceb9-4b03-8a49-ae864ed0b9ed&maxDataAge=300&theme=light&autoRefresh=true"
                 ></iframe>
               </>
             </Paper>

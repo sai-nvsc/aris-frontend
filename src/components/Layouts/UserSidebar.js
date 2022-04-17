@@ -249,15 +249,14 @@ export default function PersistentDrawerLeft({ title }) {
           "& .MuiDrawer-paper": {
             width: drawerWidth,
             boxSizing: "border-box",
-            backgroundColor: "#ff8a80",
+            backgroundColor: "#fff",
           },
         }}
         variant="persistent"
         anchor="left"
         open={open}
       >
-        <Divider />
-        <DrawerHeader sx={{ backgroundColor: "#333" }}>
+        <DrawerHeader sx={{ backgroundColor: "#fff" }}>
           <Box
             component="div"
             sx={{
@@ -274,18 +273,17 @@ export default function PersistentDrawerLeft({ title }) {
               />
             </Box>
             <Box component="div" sx={{ m: 2 }}>
-              <Typography variant="body1" sx={{ color: "white" }}>
+              <Typography variant="body1" sx={{ color: "black" }}>
                 {user.first_name + " " + user.last_name}
               </Typography>
-              <Typography variant="caption" sx={{ color: "white" }}>
+              <Typography variant="caption" sx={{ color: "black" }}>
                 {user.email}
               </Typography>
             </Box>
           </Box>
         </DrawerHeader>
-        <Divider />
+        <Divider/>
         <UserNavMenu handleDrawerClose={handleDrawerClose} />
-        <Divider />
       </Drawer>
     </Box>
   );

@@ -16,7 +16,7 @@ import {
   Typography,
 } from "@mui/material";
 import Footer from "../../components/Layouts/Footer";
-import { LogButton, StyledTextField } from "../../assets/styles";
+import { LogButton, StyledTextField, StyledLink, BackBtn } from "../../assets/styles";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -97,7 +97,7 @@ const LoginAdmin = () => {
           </Alert>
         </Snackbar>
       )}
-
+<BackBtn component={StyledLink} to="/">Back to Homepage</BackBtn>
       <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
         <Box
           sx={{

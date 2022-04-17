@@ -13,6 +13,7 @@ import ResetPasswordUser from "./pages/Auth/ResetPassword_User";
 
 import LoginUser from "./pages/Auth/Login_User";
 import Home from "./pages/Home";
+import Policies from "./components/Layouts/PrivacyPolicy"
 
 // import Feedback from "./pages/Index/Feedback";
 import RegisterUser from "./pages/Auth/Register_User";
@@ -53,6 +54,7 @@ function App() {
                 path="/account/verify/:token"
                 element={<AccountVerification />}
               />
+              <Route path="/policies" element={<Policies />} />
 
               <Route path="/admin/*" element={<AdminOutlets />} />
               <Route path="/user/*" element={<UserOutlet />} />

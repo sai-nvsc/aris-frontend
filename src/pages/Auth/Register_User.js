@@ -21,12 +21,13 @@ import DateAdapterMoment from "@mui/lab/AdapterMoment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import wave from "../../assets/wave.svg";
-import { StyledButton, StyledTextField } from "../../assets/styles";
+import { StyledButton, StyledTextField, BackBtn, StyledLink } from "../../assets/styles";
 import { SignUpUserThunk } from "../../redux/slices/UserSlices";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { taguig_baarangay } from "../../helpers/barangays";
 import { useNavigate } from "react-router-dom";
+
 const RegisterUser = () => {
   const dispatch = useDispatch();
   const [avatar, setAvatar] = useState("");
@@ -81,6 +82,11 @@ const RegisterUser = () => {
     dispatch(SignUpUserThunk(formData));
   };
 
+  const [agree, setChange] = useState(true);
+function buttonHandler(){
+  setChange(!agree)
+}
+
   useEffect(() => {
     if (isAuthenticated) {
       role === "user" ? navigate("/user") : navigate("/admin");
@@ -96,8 +102,9 @@ const RegisterUser = () => {
       }}
     >
       <CssBaseline />
+      <BackBtn component={StyledLink} to="/">Back to Homepage</BackBtn>
 
-      <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="lg">
+      <Container component="main" sx={{ mt: 2, mb: 2 }} maxWidth="lg">
         <Box
           sx={{
             display: "flex",
@@ -127,9 +134,11 @@ const RegisterUser = () => {
             />
             Upload Avatar
           </StyledButton>
+
           <Divider sx={{ m: 2, width: "100%" }}>PERSONAL INFORMATION</Divider>
+          
           <Grid container spacing={3}>
-            <Grid item sm={12} md={6}>
+            <Grid item xs={12} sm={12} md={6}>
               <StyledTextField
                 required
                 fullWidth
@@ -144,7 +153,7 @@ const RegisterUser = () => {
                 helperText={errors ? errors.first_name : ""}
               />
             </Grid>
-            <Grid item sm={12} md={6}>
+            <Grid item xs={12}sm={12} md={6}>
               <StyledTextField
                 required
                 fullWidth
@@ -158,7 +167,7 @@ const RegisterUser = () => {
                 helperText={errors ? errors.last_name : ""}
               />
             </Grid>
-            <Grid item sm={12} md={6}>
+            <Grid item xs={12} sm={12} md={6}>
               <LocalizationProvider dateAdapter={DateAdapterMoment}>
                 <DatePicker
                   disableFuture
@@ -189,7 +198,7 @@ const RegisterUser = () => {
                 />
               </LocalizationProvider>
             </Grid>
-            <Grid item sm={12} md={6}>
+            <Grid item xs={12} sm={12} md={6}>
               <FormControl
                 fullWidth
                 size="small"
@@ -213,7 +222,7 @@ const RegisterUser = () => {
                 )}
               </FormControl>
             </Grid>
-            <Grid item sm={12} md={6}>
+            <Grid item xs={12} sm={12} md={6}>
               <FormControl
                 fullWidth
                 size="small"
@@ -245,7 +254,7 @@ const RegisterUser = () => {
           <Divider sx={{ m: 2, width: "100%" }}>ACCOUNT INFORMATION</Divider>
           <FormControl fullWidth>
             <Grid container spacing={2}>
-              <Grid item sm={12} md={6}>
+              <Grid item xs={12} sm={12} md={6}>
                 <StyledTextField
                   size="small"
                   sx={{ backgroundColor: "white" }}
@@ -258,7 +267,7 @@ const RegisterUser = () => {
                   helperText={errors ? errors.email : ""}
                 />
               </Grid>
-              <Grid item sm={12} md={6}>
+              <Grid item xs={12} sm={12} md={6}>
                 <StyledTextField
                   size="small"
                   sx={{ backgroundColor: "white" }}
@@ -271,7 +280,7 @@ const RegisterUser = () => {
                   helperText={errors ? errors.username : ""}
                 />
               </Grid>
-              <Grid item sm={12} md={6}>
+              <Grid item xs={12} sm={12} md={6}>
                 <StyledTextField
                   size="small"
                   sx={{ backgroundColor: "white" }}
@@ -285,7 +294,7 @@ const RegisterUser = () => {
                   helperText={errors ? errors.password : ""}
                 />
               </Grid>
-              <Grid item sm={12} md={6}>
+              <Grid item xs={12} sm={12} md={6}>
                 <StyledTextField
                   size="small"
                   sx={{ backgroundColor: "white" }}
@@ -299,7 +308,7 @@ const RegisterUser = () => {
                   helperText={errors ? errors.password : ""}
                 />
               </Grid>
-              <Grid item sm={12} md={6}>
+              <Grid item xs={12} sm={12} md={6}>
                 <StyledTextField
                   size="small"
                   sx={{ backgroundColor: "white" }}
@@ -312,13 +321,15 @@ const RegisterUser = () => {
                   helperText={errors ? errors.phone_number : ""}
                 />
               </Grid>
-              <Grid item sm={12} md={6}>
-                <FormControlLabel
+              <Grid item xs={12} sm={12} md={6}>
+                <FormControlLabel               
                   control={
                     <Checkbox value="agree" color="primary" size="small" />
                   }
-                  label="By Signing up, You agree on ARIS' Terms and Conditions"
+                  onChange={buttonHandler}
+                  label="By Signing up, You agree on"
                 />
+                <Link href="/policies">ARIS' Terms and Conditions</Link>
               </Grid>
             </Grid>
           </FormControl>
@@ -334,6 +345,7 @@ const RegisterUser = () => {
               type="submit"
               variant="contained"
               onClick={handleSubmit}
+              disabled={agree}
             >
               Register
             </StyledButton>

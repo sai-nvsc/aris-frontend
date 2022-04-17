@@ -1,157 +1,62 @@
 import React from "react";
-import PersistentDrawerLeft from "../../components/Layouts/AdminSidebar";
 import {
   Box,
   Card,
-  CardActionArea,
-  CardContent,
   CardMedia,
   Container,
   Grid,
-  Typography,
-  Divider,
   IconButton,
+  Divider,  
+  Typography,
 } from "@mui/material";
+import { BackBtn, StyledLink } from "../../assets/styles";
+import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import CssBaseline from "@mui/material/CssBaseline";
 import Footer from "../../components/Layouts/Footer";
-import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
-import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
-import PermPhoneMsgRoundedIcon from "@mui/icons-material/PermPhoneMsgRounded";
-// //icons
-// const ash = require("../../assets/01.jpg").default;
-// const jen = require("../../assets/03.jpg").default;
-// const mat = require("../../assets/02.jpg").default;
-// const sai = require("../../assets/04.jpg").default;
-const person = require("../../assets/person.svg").default;
+import tc from "../../assets/tc.jpg";
 
 const Aris = () => {
-  const cards = [
-    {
-      title: "Sairyl H. Navasca",
-      desc: "Lead Developer",
-      image: person,
-      alt: "Sai",
-      fb: "https://www.facebook.com/saipot0620",
-      mail: "mailto:sairyl.navasca@tup.edu.ph",
-      no: "09669922375",
-    },
-    {
-      title: "Jenny Gel Castor",
-      desc: "Mobile Developer",
-      image: person,
-      alt: "Jen",
-      fb: "https://www.facebook.com/jenny.castor.5454",
-      mail: "mailto:jenny.castor@tup.edu.ph",
-      no: "09657218242",
-    },
-    {
-      title: "Mathew Jose Matanguihan",
-      desc: "Mobile Developer",
-      image: person,
-      alt: "Mat",
-      fb: "https://www.facebook.com/mathewmatanguihan01",
-      mail: "mailto:mathewjose.matanguihan@tup.edu.ph",
-      no: "09773932863",
-    },
-    {
-      title: "Ashley Jullien Supnet",
-      desc: "Web Developer",
-      image: person,
-      alt: "Ash",
-      fb: "https://www.facebook.com/aj.supnet/",
-      mail: "mailto:ashleyjullien.supnet@tup.edu.ph",
-      no: "09755895101",
-    },
-  ];
-
+  
   return (
     <Box
       sx={{
         bgcolor: "background.paper",
-        pt: 6,
+        pt: 1,
         minHeight: "100vh",
       }}
     >
       <CssBaseline />
-      <PersistentDrawerLeft title="ARIS" />
-
-      <Container sx={{ py: 5 }} maxWidth="lg">
-        <Typography
-          variant="h2"
-          sx={{ textTransform: "capitalize" }}
-          align="center"
+      <Container maxWidth="lg">
+        <IconButton
+            component={StyledLink}
+            to="/"
+            size="large"
         >
-          <b>
-            <i>Meet the ARIS Team</i>
-          </b>
-        </Typography>
-        <Typography variant="h6" color="text.secondary" align="center">
-          For Questions, Concerns, and Reports related to ARIS, you may contact
-          us!
-        </Typography>
+              <ArrowBackIosRoundedIcon />
+            <Typography sx={{fontSize: 40}}>Back</Typography>
+        </IconButton>
 
-        <br />
-
-        <Grid container spacing={3}>
-          {cards.map((card) => (
-            <Grid item key={card} xs={12} sm={6} md={3} lg={3}>
-              <Card
+        <Grid container spacing={3}>         
+            <Grid item xs>
+             <Card
                 sx={{
-                  height: "100%",
-                  width: "108%",
-                  display: "flex",
-                  position: "sticky",
-                  flexDirection: "column",
+                  width: "100%",               
                 }}
               >
-                <CardActionArea>
                   <CardMedia
-                    sx={{
-                      pt: "100%",
-                    }}
-                    image={card.image}
-                    alt={card.alt}
-                  />
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography
-                      gutterBottom
-                      variant="h5"
-                      component="h2"
-                      sx={{ alignSelf: "center" }}
-                    >
-                      {card.title}
-                    </Typography>
-                    <Typography color="text.secondary">{card.desc}</Typography>
-                  </CardContent>
-
-                  <IconButton>
-                    <a href={card.fb} target="_blank" rel="noreferrer">
-                      <FacebookRoundedIcon />
-                    </a>
-                  </IconButton>
-                  <IconButton>
-                    <address>
-                      <a href={card.mail} target="_blank" rel="noreferrer">
-                        <EmailRoundedIcon />
-                      </a>
-                    </address>
-                  </IconButton>
-
-                  <IconButton>
-                    <PermPhoneMsgRoundedIcon />
-                    <Typography>{card.no}</Typography>
-                  </IconButton>
-                </CardActionArea>
+                  height="auto"
+                    component="img"
+                    image={tc}
+                    alt="privacy policy"
+                  />                          
               </Card>
-            </Grid>
-          ))}
+            </Grid>        
         </Grid>
         <br />
         <br />
-        <br />
 
-        <Grid container xs>
-        <Typography variant="h4"><b>ARIS Terms and Conditions</b></Typography>
+      <Grid container xs>
+          <Typography variant="h4"><b>ARIS Terms and Conditions</b></Typography>
           <Divider width="100%"></Divider>
           <Typography variant="p" align="justify" sx={{mt:2}}>I hereby authorize the Anti-Rabies Immunoinformatics System, to collect, process, and store the data indicated herein to conduct rabies vaccination monitoring & other relevant steps to combat rabies virus. I understand that my personal information is protected by RA 10173 or the Data Privacy Act of 2012.</Typography>
           <br/>
@@ -231,7 +136,7 @@ const Aris = () => {
 <Typography variant="p" align="justify" sx={{mb:4}}> We have implemented technical, organizational, and physical measures designed to protect the confidentiality, integrity, and availability of your Personal Data and Collected Data and secure such Data from destruction, unauthorized access, alteration, disclosure, fraudulent misuse and/or any other unlawful processing, as well as other natural and human dangers.</Typography>
        
        <Typography variant="p" color="text.secondary"><i>Last Updated: April 17, 2022</i></Typography>
-</Grid>
+      </Grid>
       </Container>
       <Footer />
     </Box>

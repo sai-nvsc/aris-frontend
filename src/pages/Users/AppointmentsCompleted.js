@@ -25,7 +25,9 @@ const AppointmentsCompleted = ({ completed }) => {
                 }}
               >
                 <Typography sx={{ margin: 2 }} variant="h4">
-                  {appointment.clinicId[0].name}
+                  {Array.isArray(appointment.clinicId)
+                    ? appointment.clinicId[0].name
+                    : null}
                 </Typography>
                 <Typography
                   variant="subtitle1"

@@ -196,11 +196,11 @@ const Dashboard = () => {
           <Grid item xl={3} md={4} sm={6} xs={12}>
             <Paper
               elevation={12}
-              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
+              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727", textAlign: 'center' }}
             >
               <StyledLink to="/admin/analytics">
-                <Typography component="h2" align="center">
-                  Animal Bite Cases in the Philippines 2007–2018
+                <Typography variant="caption" align="center" sx={{fontWeight:'medium'}}>
+                  Animal Bite Cases in the Philippines (2007–2018)
                 </Typography>
 
                 <StyledChart data={bite} className={classes.chart}>
@@ -220,16 +220,17 @@ const Dashboard = () => {
           <Grid item xl={3} md={4} sm={6} xs={12}>
             <Paper
               elevation={12}
-              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
+              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727", textAlign: 'center', }}
             >
               <StyledLink to="/admin/analytics">
                 <Typography
-                  component="h2"
+                  variant="caption"
                   align="center"
                   aria-owns={openPop ? "mouse-over-popover" : undefined}
                   aria-haspopup="true"
                   onMouseEnter={handlePopoverOpen}
                   onMouseLeave={handlePopoverClose}
+                  sx={{fontWeight:'medium'}}
                 >
                   Human Rabies Exposures by Region per Category, Philippines,
                   2018
@@ -299,10 +300,10 @@ const Dashboard = () => {
           <Grid item xl={3} md={4} sm={6} xs={12}>
             <Paper
               elevation={12}
-              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
+              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727", textAlign: 'center'}}
             >
               <StyledLink to="/admin/analytics">
-                <Typography component="h2" align="center">
+                <Typography variant="caption" align="center" sx={{fontWeight:'medium'}}>
                   Total Human Rabies Incidence in Philippines (2007-2018)
                 </Typography>
                 <StyledChart data={dataa} rootComponent={ChartRoot}>
@@ -327,51 +328,35 @@ const Dashboard = () => {
             >
               <StyledLink to="/admin/bitecases">
                 <Typography variant="h6" align="center">
-                  Total Bite Cases
+                  Total Rabies Exposures
                 </Typography>
                 <Typography align="center" variant="h1">
                   {clinic_counts ? clinic_counts.bitecase : 0}
+                </Typography>                          
+                <Typography align="center" variant="h6">
+                  On-going: {clinic_counts ? clinic_counts.on_going : 0}
                 </Typography>
-                <Typography align="center" variant="h6" color="text.secondary">
+                <Typography align="center" variant="h6">
+                  Cleared: {clinic_counts ? clinic_counts.cleared : 0}
+                </Typography>
+                <Typography align="center" variant="h6">
+                  Untracked: {clinic_counts ? clinic_counts.untracked : 0}
+                </Typography>
+                 <Typography align="center" variant="subtitle2" color="text.secondary">
                   <i>As of {moment().format("MMMM DD, YYYY")}</i>
                 </Typography>
               </StyledLink>
             </Paper>
-            <br />
-            <Paper
-              elevation={12}
-              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
-            >
-              <StyledLink to="/admin/appointments">
-                <Typography variant="h6" align="center">
-                  Total Appointments
-                </Typography>
-                <br />
-                <Typography align="center" variant="h4">
-                  Pending:{" "}
-                  {clinic_counts ? clinic_counts.appointments_pending : 0}
-                </Typography>
-
-                <Typography align="center" variant="h4">
-                  Completed:{" "}
-                  {clinic_counts ? clinic_counts.appointments_completed : 0}
-                </Typography>
-
-                <Typography align="center" variant="h4">
-                  Cancelled:{" "}
-                  {clinic_counts ? clinic_counts.appointments_cancelled : 0}
-                </Typography>
-              </StyledLink>
-            </Paper>
           </Grid>
 
           <Grid item xl={3} md={4} sm={6} xs={12}>
             <Paper
               elevation={12}
-              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
+              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727",textAlign:'center' }}
             >
               <StyledLink to="/admin/bitecases">
                 <ClinicCategoryCountGraph />
+                <br/>
               </StyledLink>
             </Paper>
           </Grid>
@@ -379,10 +364,11 @@ const Dashboard = () => {
           <Grid item xl={3} md={4} sm={6} xs={12}>
             <Paper
               elevation={12}
-              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
+              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727",textAlign:'center' }}
             >
               <StyledLink to="/admin/bitecases">
                 <ClinicGenderCountGraph />
+                <br/>
               </StyledLink>
             </Paper>
           </Grid>
@@ -390,10 +376,11 @@ const Dashboard = () => {
           <Grid item xl={3} md={4} sm={6} xs={12}>
             <Paper
               elevation={12}
-              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
+              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727",textAlign:'center' }}
             >
               <StyledLink to="/admin/bitecases">
                 <BiteCasePerSourceExposure />
+                <br/>
               </StyledLink>
             </Paper>
           </Grid>
@@ -401,32 +388,11 @@ const Dashboard = () => {
           <Grid item xl={3} md={4} sm={6} xs={12}>
             <Paper
               elevation={12}
-              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
+              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727", textAlign:'center' }}
             >
               <StyledLink to="/admin/bitecases">
                 <BiteCasePerExpoType />
-              </StyledLink>
-            </Paper>
-          </Grid>
-
-          <Grid item xl={3} md={4} sm={6} xs={12}>
-            <Paper
-              elevation={12}
-              style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
-            >
-              <StyledLink to="/admin/bitecases">
-                <Typography variant="h4" align="center">
-                  Total Exposures
-                </Typography>
-                <Typography align="center" variant="h5">
-                  [On-going]{clinic_counts ? clinic_counts.on_going : 0}
-                </Typography>
-                <Typography align="center" variant="h5">
-                  [Cleared]{clinic_counts ? clinic_counts.cleared : 0}
-                </Typography>
-                <Typography align="center" variant="h5">
-                  [Untracked]{clinic_counts ? clinic_counts.untracked : 0}
-                </Typography>
+                <br/>
               </StyledLink>
             </Paper>
           </Grid>
@@ -434,7 +400,7 @@ const Dashboard = () => {
       </Container>
 
       <Divider light />
-      <Container sx={{ py: 7 }} maxWidth="xl">
+      <Container sx={{}} maxWidth="xl">
         <Grid container spacing={3}>
           {cards.map((card) => (
             <Grid item key={card} xs={12} sm={6} md={4} lg={2.4} xl={2.4}>
@@ -465,7 +431,7 @@ const Dashboard = () => {
                           horizontal: "right",
                         }}
                       >
-                        <Typography gutterBottom variant="h5" component="h2">
+                        <Typography gutterBottom variant="h5">
                           {card.title}
                         </Typography>
                       </Badge>

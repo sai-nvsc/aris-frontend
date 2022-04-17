@@ -239,7 +239,11 @@ const AppointmentSlice = createSlice({
     },
     [createAppointment.rejected]: (state, action) => {
       state.loading = false;
-      state.errors = action.payload;
+      try {
+        state.errors = JSON.parse(action.payload);
+      } catch (error) {
+        state.appt_error = action.payload;
+      }
     },
 
     //users

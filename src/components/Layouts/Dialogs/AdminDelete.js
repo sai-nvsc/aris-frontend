@@ -31,6 +31,7 @@ const Delete = ({ id, name, collection, ...rest }) => {
   const handleYes = () => {
     switch (collection) {
       case "inventory":
+        console.log(id);
         dispatch(DeleteInvThunk({ id: id }));
         navigate("/admin/inventory");
         break;

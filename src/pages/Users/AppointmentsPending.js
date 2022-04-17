@@ -35,7 +35,9 @@ const AppointmentsPending = ({ pending }) => {
                 }}
               >
                 <Typography sx={{ margin: 2 }} variant="h4">
-                  {appointment.clinicId[0].name}
+                  {Array.isArray(appointment.clinicId)
+                    ? appointment.clinicId[0].name
+                    : null}
                 </Typography>
                 <Typography
                   variant="subtitle1"
@@ -67,7 +69,11 @@ const AppointmentsPending = ({ pending }) => {
                 </Typography>
                 <Box sx={{ justifyContent: "flex-end", display: "flex", m: 2 }}>
                   <Cancellation
-                    name={appointment.clinicId[0].name}
+                    name={
+                      Array.isArray(appointment.clinicId)
+                        ? appointment.clinicId[0].name
+                        : null
+                    }
                     date={moment(appointment.date).format("MMMM DD, YYYY")}
                     id={appointment._id}
                   />

@@ -25,7 +25,9 @@ const CancelledAppoinment = ({ cancelled }) => {
                 }}
               >
                 <Typography component="div" variant="h4" sx={{ margin: 2 }}>
-                  {appointment.clinicId[0].name}
+                  {Array.isArray(appointment.clinicId)
+                    ? appointment.clinicId[0].name
+                    : null}
                 </Typography>
                 <Typography
                   variant="subtitle1"
