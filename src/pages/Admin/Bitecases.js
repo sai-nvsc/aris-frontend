@@ -61,7 +61,7 @@ const Bitecases = () => {
   const [values, setvalues] = useState({
     user: "",
     exposure_category: "",
-    date: "",
+    date: moment().startOf("day"),
     place: "",
     type_of_exposure: "",
     route: "",
@@ -541,7 +541,7 @@ const Bitecases = () => {
                     onChange={(newDate) =>
                       setvalues({
                         ...values,
-                        date: newDate.toDate().toISOString(),
+                        date: newDate.startOf("day").toDate(),
                       })
                     }
                     renderInput={(params) => (

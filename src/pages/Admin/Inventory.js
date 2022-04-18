@@ -74,7 +74,7 @@ const Inventory = () => {
       generic_name: "",
       batch_no: "",
       stock: "",
-      exp_date: moment.startOf("day"),
+      exp_date: moment().startOf("day"),
       delivery_date: moment().startOf("day"),
     });
   };

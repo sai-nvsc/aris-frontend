@@ -220,8 +220,9 @@ const MyVaccineDetails = () => {
                     </Typography>
                     <Typography variant="h5" component="div">
                       <b>
-                        {bites[0].history_of_exposure.type_of_exposure} -{" "}
                         {bites[0].history_of_exposure.source_of_exposure}{" "}
+                        {bites[0].history_of_exposure.type_of_exposure} on{" "}
+                        {bites[0].history_of_exposure.bodypart}{" "}
                       </b>
                     </Typography>
 
@@ -230,10 +231,10 @@ const MyVaccineDetails = () => {
                       component="div"
                       color="text.secondary"
                     >
-                      Site:
+                      Classification:
                     </Typography>
                     <Typography variant="h5" component="div">
-                      <b>{bites[0].history_of_exposure.bodypart} </b>
+                      <b>{bites[0].classification} </b>
                     </Typography>
                   </Grid>
 

@@ -283,7 +283,7 @@ const BiteCaseSlice = createSlice({
       state.loading = false;
       state.success = action.payload.success;
       state.errors = null;
-      state.bitecase = [...state.bitecase, action.payload.bitecase];
+      state.bitecase = action.payload.bitecase;
     },
     [AddCaseThunk.rejected]: (state, action) => {
       state.loading = false;
