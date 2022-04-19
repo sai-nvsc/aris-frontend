@@ -51,6 +51,7 @@ import {
 } from "../../../redux/slices/VaccineSlice";
 import { Comments } from "../../Users/Comments";
 import EditBiteStatus from "../../Admin/AdminCRUD/EditBiteStatus";
+import CaseNotFound from "../../extra/CaseNotFound";
 
 const ViewBiteCase = () => {
   const { bites, loading, reports, vaxx, errors, success } = useSelector(
@@ -110,7 +111,7 @@ const ViewBiteCase = () => {
       }}
     >
       <CssBaseline />
-      <PersistentDrawerLeft />
+      <PersistentDrawerLeft title="View Bite Case" />
       <Container maxWidth="xl">
         {success && (
           <Snackbar
@@ -139,7 +140,7 @@ const ViewBiteCase = () => {
           </Snackbar>
         )}
 
-        {!loading && (
+        {!loading && bites && bites.length > 0 ? (
           <Grid container spacing={2}>
             <IconButton
               component={StyledLink}
@@ -405,6 +406,10 @@ const ViewBiteCase = () => {
               <Comments reports={reports} />
             </Grid>
           </Grid>
+        ) : !loading ? (
+          <CaseNotFound />
+        ) : (
+          <></>
         )}
         <div>
           <br />

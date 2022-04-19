@@ -174,7 +174,7 @@ const Appointments = () => {
       renderCell: (cellValues) => {
         return (
           <CancelApt
-            id={appointments.id}
+            id={cellValues.row._id}
             data={cellValues.row}
             startIcon={<Cancel style={{ color: "#ff8a80" }} />}
           />

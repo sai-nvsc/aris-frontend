@@ -138,7 +138,8 @@ export const cancelApt = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.patch(
-        `${process.env.REACT_APP_API_HOST}api/appointments/cancel/${obj.id}`,
+        `${process.env.REACT_APP_API_HOST}api/appointments/cancel-admin/${obj.id}`,
+        obj.data,
         {
           headers: { Authorization: "Bearer " + localStorage.getItem("token") },
         }
@@ -220,7 +221,7 @@ const AppointmentSlice = createSlice({
     },
     [cancelApt.fulfilled]: (state, action) => {
       state.loading = false;
-      state.success = action.payload.message;
+      state.success = action.payload.success;
       state.appointments = action.payload.appointments;
       //state.appointments = action.payload.appointments;
     },

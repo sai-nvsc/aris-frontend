@@ -52,7 +52,7 @@ const Bitecases = () => {
   );
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(GetAllCaseThunk({ id: user.clinic }));
     return () => {};
@@ -74,6 +74,7 @@ const Bitecases = () => {
     animal_status: "",
     patient_status: "",
     clinic: "",
+    search: "",
   });
 
   const handleChange = (e) => {
@@ -276,7 +277,7 @@ const Bitecases = () => {
 
   const PressedEnter = (e) => {
     if (e.code === "Enter" && e.target.value !== "") {
-      navigate(`/admin/bitecase/get/${e.target.value}`);
+      window.location.assign(`/admin/bitecase/get/${e.target.value}`);
     }
   };
   return (
@@ -339,7 +340,10 @@ const Bitecases = () => {
               Scan Bite Case QR Code:{" "}
               <StyledTextField
                 size="small"
+                name="search"
+                value={values.search}
                 label="Press 'Enter' After Scan"
+                onChange={handleChange}
                 onKeyUp={PressedEnter}
               />
             </Typography>

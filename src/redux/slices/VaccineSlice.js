@@ -233,7 +233,7 @@ const VaccineSlices = createSlice({
       state.loading = false;
       state.success = action.payload.success;
       state.errors = null;
-      state.vaxx = [...state.vaxx, action.payload.vaxx];
+      state.vaxx = action.payload.vaxx;
     },
     [AddVaxxThunk.rejected]: (state, action) => {
       state.loading = false;
@@ -245,9 +245,9 @@ const VaccineSlices = createSlice({
     },
     [EditVaxxThunk.fulfilled]: (state, action) => {
       state.loading = false;
-      state.succes = action.payload.message;
+      state.success = action.payload.message;
       state.errors = null;
-      state.vaxx = [...state.vaxx, action.payload.vaxx];
+      state.vaxx = action.payload.vaxx;
     },
     [DeleteVaxxThunk.pending]: (state) => {
       state.loading = true;

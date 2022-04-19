@@ -10,7 +10,7 @@ import {
 import { useDispatch } from "react-redux";
 
 import moment from "moment";
-import { AcceptAptThunk } from "../../redux/slices/AppointmentSlice";
+import { cancelApt } from "../../redux/slices/AppointmentSlice";
 import { Cancel } from "@mui/icons-material";
 import { useState } from "react";
 
@@ -24,7 +24,9 @@ const CancelApt = ({ data }) => {
     e.preventDefault();
     const formData = new FormData();
     formData.set("status", "Cancelled");
-    dispatch(AcceptAptThunk({ data: formData, id: data._id }));
+    formData.set("cancelled_by", "admin");
+    formData.set("cancelled_on", moment().toDate());
+    dispatch(cancelApt({ data: formData, id: data._id }));
     setOpen(false);
   };
 
