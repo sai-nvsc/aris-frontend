@@ -146,6 +146,11 @@ const InventorySlice = createSlice({
       state.errors = null;
       state.inventory = action.payload.inventory;
     },
+    [EditInvThunk.rejected]: (state, action) => {
+      state.loading = false;
+      state.success = null;
+      state.errors = action.payload;
+    },
     [GetInvDetailsThunk.pending]: (state) => {
       state.loading = true;
     },

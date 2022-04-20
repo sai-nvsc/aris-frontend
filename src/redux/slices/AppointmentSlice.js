@@ -211,7 +211,7 @@ const AppointmentSlice = createSlice({
     },
     [AcceptAptThunk.fulfilled]: (state, action) => {
       state.loading = false;
-      state.succes = action.payload.message;
+      state.success = action.payload.message;
       state.errors = null;
       state.appointments = action.payload.appointments;
       //state.appointments = action.payload.appointments;

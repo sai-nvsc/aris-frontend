@@ -300,6 +300,13 @@ const BiteCaseSlice = createSlice({
       state.bitecase = action.payload.bitecase;
       //window.location.reload();
     },
+    [EditCaseThunk.rejected]: (state, action) => {
+      state.loading = false;
+      state.success = null;
+      state.errors = action.payload;
+
+      //window.location.reload();
+    },
     // [EditCaseStatusThunk.pending]: (state) => {
     //   state.loading = true;
     // },
