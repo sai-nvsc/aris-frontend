@@ -239,42 +239,33 @@ export default function PersistentDrawerLeft({ title }) {
               <ListItemText primary="Home" />
             </ListItemButton>
           </ListItem>
-          {(user.role === "admin" ||
-            user.role === "superadmin" ||
-            user.role === "vaccinator") && (
-            <ListItem>
-              <ListItemButton component={StyledLink} to="/admin/bitecases">
-                <ListItemIcon sx={{ color: "#f32727" }}>
-                  <MonitorHeartIcon />
-                </ListItemIcon>
-                <ListItemText primary="Bite Cases" />
-              </ListItemButton>
-            </ListItem>
-          )}
-          {user.role === "admin" ||
-            user.role === "superadmin" ||
-            (user.role === "vaccinator" && (
-              <ListItem>
-                <ListItemButton component={StyledLink} to="/admin/appointments">
-                  <ListItemIcon sx={{ color: "#f32727" }}>
-                    <DateRangeOutlinedIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Appointments" />
-                </ListItemButton>
-              </ListItem>
-            ))}
 
-          {user.role === "inventory" ||
-            (user.role === "superadmin" && (
-              <ListItem>
-                <ListItemButton component={StyledLink} to="/admin/inventory">
-                  <ListItemIcon sx={{ color: "#f32727" }}>
-                    <WarehouseIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Inventory" />
-                </ListItemButton>
-              </ListItem>
-            ))}
+          <ListItem>
+            <ListItemButton component={StyledLink} to="/admin/bitecases">
+              <ListItemIcon sx={{ color: "#f32727" }}>
+                <MonitorHeartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Bite Cases" />
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem>
+            <ListItemButton component={StyledLink} to="/admin/appointments">
+              <ListItemIcon sx={{ color: "#f32727" }}>
+                <DateRangeOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Appointments" />
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem>
+            <ListItemButton component={StyledLink} to="/admin/inventory">
+              <ListItemIcon sx={{ color: "#f32727" }}>
+                <WarehouseIcon />
+              </ListItemIcon>
+              <ListItemText primary="Inventory" />
+            </ListItemButton>
+          </ListItem>
 
           <ListItem>
             <ListItemButton component={StyledLink} to="/admin/analytics">

@@ -14,6 +14,10 @@ import {
   Select,
   Typography,
   FormHelperText,
+  Snackbar,
+  AlertTitle,
+  Alert,
+  Backdrop,
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import Footer from "../../components/Layouts/Footer";
@@ -21,8 +25,17 @@ import DateAdapterMoment from "@mui/lab/AdapterMoment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import wave from "../../assets/wave.svg";
-import { StyledButton, StyledTextField, BackBtn, StyledLink } from "../../assets/styles";
-import { SignUpUserThunk } from "../../redux/slices/UserSlices";
+import {
+  StyledButton,
+  StyledTextField,
+  BackBtn,
+  StyledLink,
+} from "../../assets/styles";
+import {
+  clearError,
+  clearSuccess,
+  SignUpUserThunk,
+} from "../../redux/slices/UserSlices";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { taguig_baarangay } from "../../helpers/barangays";
@@ -34,7 +47,9 @@ const RegisterUser = () => {
   const [avatarPreview, setAvatarPreview] = useState(
     "assets/images/default_avatar.jpg"
   );
-  const { isAuthenticated, errors, role } = useSelector((state) => state.user);
+  const { isAuthenticated, errors, role, register_loading } = useSelector(
+    (state) => state.user
+  );
   const navigate = useNavigate();
   const [values, setvalues] = useState({
     first_name: "",
@@ -83,9 +98,13 @@ const RegisterUser = () => {
   };
 
   const [agree, setChange] = useState(true);
-function buttonHandler(){
-  setChange(!agree)
-}
+  function buttonHandler() {
+    setChange(!agree);
+  }
+  const onClose = (e) => {
+    dispatch(clearSuccess());
+    dispatch(clearError());
+  };
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -102,7 +121,28 @@ function buttonHandler(){
       }}
     >
       <CssBaseline />
-      <BackBtn component={StyledLink} to="/">Back to Homepage</BackBtn>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={register_loading}
+      >
+        <img src={require("../../assets/paw.gif")} alt="loading" />
+      </Backdrop>
+      {errors && errors.avatar && (
+        <Snackbar
+          open={true}
+          autoHideDuration={3000}
+          onClose={onClose}
+          name="error"
+        >
+          <Alert severity="error" variant="filled">
+            <AlertTitle>Error Sign Up</AlertTitle>
+            {errors.avatar}
+          </Alert>
+        </Snackbar>
+      )}
+      <BackBtn component={StyledLink} to="/">
+        Back to Homepage
+      </BackBtn>
 
       <Container component="main" sx={{ mt: 2, mb: 2 }} maxWidth="lg">
         <Box
@@ -136,7 +176,7 @@ function buttonHandler(){
           </StyledButton>
 
           <Divider sx={{ m: 2, width: "100%" }}>PERSONAL INFORMATION</Divider>
-          
+
           <Grid container spacing={3}>
             <Grid item xs={12} sm={12} md={6}>
               <StyledTextField
@@ -149,11 +189,11 @@ function buttonHandler(){
                 autoComplete="f_name"
                 autoFocus
                 onChange={handleChange}
-                error={errors ? true : false}
+                error={errors && errors.first_name ? true : false}
                 helperText={errors ? errors.first_name : ""}
               />
             </Grid>
-            <Grid item xs={12}sm={12} md={6}>
+            <Grid item xs={12} sm={12} md={6}>
               <StyledTextField
                 required
                 fullWidth
@@ -163,7 +203,7 @@ function buttonHandler(){
                 autoComplete="l_name"
                 size="small"
                 onChange={handleChange}
-                error={errors ? true : false}
+                error={errors && errors.last_name ? true : false}
                 helperText={errors ? errors.last_name : ""}
               />
             </Grid>
@@ -322,7 +362,7 @@ function buttonHandler(){
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6}>
-                <FormControlLabel               
+                <FormControlLabel
                   control={
                     <Checkbox value="agree" color="primary" size="small" />
                   }

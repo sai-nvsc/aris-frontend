@@ -231,6 +231,8 @@ const initialState = {
   errors: null,
   success: null,
   isAuthenticated: null,
+  register_loading: false,
+  login_loading: false,
   resend_loading: false,
   verification_loading: true,
   role: null,
@@ -257,18 +259,18 @@ const userSlice = createSlice({
   },
   extraReducers: {
     [LoginUserThunk.pending]: (state) => {
-      state.loading = true;
+      state.login_loading = true;
     },
     [LoginUserThunk.fulfilled]: (state, action) => {
       state.isAuthenticated = true;
-      state.loading = false;
+      state.login_loading = false;
       state.user = action.payload.user;
       state.role = action.payload.role;
       // localStorage.setItem("token", action.payload.token);
     },
     [LoginUserThunk.rejected]: (state, action) => {
       state.isAuthenticated = false;
-      state.loading = false;
+      state.login_loading = false;
       state.errors = action.payload;
     },
     [LoginAdminThunk.pending]: (state) => {
@@ -288,20 +290,24 @@ const userSlice = createSlice({
     },
 
     [SignUpUserThunk.pending]: (state) => {
-      state.loading = true;
+      state.register_loading = true;
     },
     [SignUpUserThunk.fulfilled]: (state, action) => {
       state.isAuthenticated = true;
-      state.loading = false;
+      state.register_loading = false;
       state.role = action.payload.role;
       state.user = action.payload.user;
       // localStorage.setItem("token", action.payload.token);
     },
     [SignUpUserThunk.rejected]: (state, action) => {
       state.isAuthenticated = false;
-      state.loading = false;
+      state.register_loading = false;
       state.role = null;
-      state.errors = JSON.parse(action.payload);
+      try {
+        state.errors = JSON.parse(action.payload);
+      } catch (error) {
+        state.errors = action.payload;
+      }
     },
     [GetAuthDetails.pending]: (state) => {
       state.loading = true;

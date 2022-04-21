@@ -3,6 +3,7 @@ import pawwave2 from "../../assets/pawwave2.svg";
 import {
   Alert,
   AlertTitle,
+  Backdrop,
   Box,
   Checkbox,
   Container,
@@ -15,7 +16,13 @@ import {
   Typography,
 } from "@mui/material";
 import Footer from "../../components/Layouts/Footer";
-import { LogButton, StyledTextField,StyledLink, BackBtn, LogLink } from "../../assets/styles";
+import {
+  LogButton,
+  StyledTextField,
+  StyledLink,
+  BackBtn,
+  LogLink,
+} from "../../assets/styles";
 import { useDispatch, useSelector } from "react-redux";
 import {
   clearError,
@@ -25,9 +32,8 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const LoginUser = () => {
-  const { loading, isAuthenticated, errors, role, success } = useSelector(
-    (state) => state.user
-  );
+  const { loading, login_loading, isAuthenticated, errors, role, success } =
+    useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -68,6 +74,12 @@ const LoginUser = () => {
       }}
     >
       <CssBaseline />
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={login_loading}
+      >
+        <img src={require("../../assets/paw.gif")} alt="loading" />
+      </Backdrop>
       {success && (
         <Snackbar
           open={success}
@@ -95,7 +107,9 @@ const LoginUser = () => {
           </Alert>
         </Snackbar>
       )}
-<BackBtn component={StyledLink} to="/">Back to Homepage</BackBtn>
+      <BackBtn component={StyledLink} to="/">
+        Back to Homepage
+      </BackBtn>
       <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
         <Box
           sx={{

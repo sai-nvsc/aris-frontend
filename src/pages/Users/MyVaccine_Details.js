@@ -33,6 +33,10 @@ const MyVaccineDetails = () => {
   const { loading, bites, vaxx, reports } = useSelector(
     (state) => state.vaccine
   );
+  const onBackHandler = () => {
+    // eslint-disable-next-line no-restricted-globals
+    history.back();
+  };
   useEffect(() => {
     dispatch(GetVaxxPerBiteCasThunk({ id: params.id }));
     return () => {};
@@ -50,12 +54,7 @@ const MyVaccineDetails = () => {
       <Container component="main" sx={{ mt: 8, mb: 2 }}>
         {!loading && (
           <Grid container spacing={2}>
-            <IconButton
-              component={StyledLink}
-              to="/user/myvaxx"
-              size="large"
-              sx={{ mt: 2 }}
-            >
+            <IconButton onClick={onBackHandler} size="large" sx={{ mt: 2 }}>
               <ArrowBackIosRoundedIcon />
             </IconButton>
             <Typography variant="h4" marginTop={2}>
