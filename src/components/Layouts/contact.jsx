@@ -1,7 +1,7 @@
 import { useState } from "react";
 // import emailjs from "emailjs-com";
-import Copyright from "./Copyright";
-import { Alert, AlertTitle, Snackbar, Typography } from "@mui/material";
+
+import { Alert, AlertTitle, Snackbar } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {
   clearError,

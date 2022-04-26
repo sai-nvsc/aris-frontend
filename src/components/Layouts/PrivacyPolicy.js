@@ -5,12 +5,10 @@ import {
   CardMedia,
   Container,
   Grid,
-  IconButton,
   Divider,
   Typography,
 } from "@mui/material";
-import { StyledLink } from "../../assets/styles";
-import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
+
 import CssBaseline from "@mui/material/CssBaseline";
 import Footer from "../../components/Layouts/Footer";
 import tc from "../../assets/tc.jpg";
