@@ -130,6 +130,8 @@ const InventorySlice = createSlice({
       state.loading = false;
       state.success = action.payload.success;
       state.errors = null;
+      state.stock_alert = action.payload.stock_alert;
+      state.expiration_alert = action.payload.expiration_alert;
       state.inventory = [...state.inventory, action.payload.inventory];
     },
     [AddInvThunk.rejected]: (state, action) => {
@@ -145,6 +147,8 @@ const InventorySlice = createSlice({
       state.success = action.payload.success;
       state.errors = null;
       state.inventory = action.payload.inventory;
+      state.stock_alert = action.payload.stock_alert;
+      state.expiration_alert = action.payload.expiration_alert;
     },
     [EditInvThunk.rejected]: (state, action) => {
       state.loading = false;
@@ -177,6 +181,8 @@ const InventorySlice = createSlice({
       state.loading = false;
       state.success = action.payload.success;
       state.inventory = new_inv;
+      state.stock_alert = action.payload.stock_alert;
+      state.expiration_alert = action.payload.expiration_alert;
       state.errors = null;
     },
     [DeleteInvThunk.rejected]: (state, action) => {

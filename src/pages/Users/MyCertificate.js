@@ -95,7 +95,7 @@ const VaxCertificate = () => {
                         marginLeft: "auto",
                       }}
                     >
-                      <Box component="div">
+                      <Box component="div" sx={{ml:4, flexWrap:"nowrap"}}>
                         <Typography sx={{ textTransform: "capitalize" }}>
                           Name:{" "}
                           <b>
@@ -127,7 +127,7 @@ const VaxCertificate = () => {
                     </Box>
                   </Grid>
 
-                  <Grid item sm={6} md={6}>
+                  <Grid item xs={12} sm={6} md={6}>
                     <Box
                       component="img"
                       src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${params.id}`}
@@ -143,6 +143,7 @@ const VaxCertificate = () => {
                 <Grid container spacing={2}>
                   <Grid
                     item
+                    xs={12}
                     sm={6}
                     md={6}
                     sx={{
@@ -176,7 +177,7 @@ const VaxCertificate = () => {
                       </b>
                     </Typography>
                   </Grid>
-                  <Grid item sm={6} md={6}>
+                  <Grid item xs={12} sm={6} md={6}>
                     <Typography variant="subtitle1" color="text.secondary">
                       Exposure Category:
                     </Typography>

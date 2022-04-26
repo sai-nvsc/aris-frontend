@@ -198,14 +198,14 @@ export const Contact = (props) => {
                 {props.data ? props.data.address : "loading"}
               </p>
             </div>
-            <div className="contact-item">
+            {/*  <div className="contact-item">
               <p>
                 <span>
                   <i className="fa fa-phone"></i> Phone
                 </span>{" "}
                 {props.data ? props.data.phone : "loading"}
               </p>
-            </div>
+            </div> */}
             <div className="contact-item">
               <p>
                 <span>
@@ -215,7 +215,8 @@ export const Contact = (props) => {
               </p>
             </div>
           </div>
-          <div className="col-md-12">
+
+          {/* <div className="col-md-12">
             <div className="row">
               <div className="social">
                 <ul>
@@ -237,17 +238,7 @@ export const Contact = (props) => {
                 </ul>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div id="footer">
-        <div className="container text-center">
-          <Typography variant="body1" align="center">
-            Anti-Rabies Immunoinformatics System (A.R.I.S)
-          </Typography>
-          <p>
-            <Copyright />
-          </p>
+          </div> */}
         </div>
       </div>
     </div>

@@ -42,9 +42,9 @@ const Announcements = () => {
     >
       <CssBaseline />
       <PersistentDrawerLeft title="Announcements" />
-      <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="lg">
+      <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="xl">
         <Box sx={{ width: "100%" }}>
-          <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4, xl: 4 }} spacing={2}>
+          <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4, xl: 5 }} spacing={2}>
             {!loading &&
               announcement &&
               announcement.map((ann) => (

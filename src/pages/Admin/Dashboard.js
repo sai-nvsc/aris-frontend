@@ -149,7 +149,7 @@ const Dashboard = () => {
       image: inv,
       alt: "Inventory",
       to: "/admin/inventory",
-      alert: clinic_counts ? clinic_counts.inventory_stock_alert : null,
+      alert: clinic_counts ? clinic_counts.inventory_stock_alert && clinic_counts.inventory_expiry_alert : null,
     },
     {
       title: "Analytics",

@@ -5,7 +5,7 @@
     },
     "About": {
       "paragraph1": "Vaccination has undeniably been very beneficial in promoting a healthy global population. In terms of computational approaches, immunoinformatics systems such as ARIS have paved the way for a better understanding of the rabies virus. This could be a significant step forward in addressing a critical global health challenge per population.",
-      "paragraph": "A.R.I.S (Anti-Rabies Immunoinformatics System) is a system that aims to provide anti-rabies immunization services to animal bite centers and other facilities that are legible to administer anti rabies vaccines in Taguig City. As a result, the system is solely capable of administering anti-rabies vaccines. The system is a requirement for the subject course IT Capstone of BSIT Fourth Year students from TUP-Taguig. ",
+      "paragraph": "A.R.I.S (Anti-Rabies Immunoinformatics System) is a system that aims to provide anti-rabies immunization services to animal bite centers and other facilities that are legible to administer anti rabies vaccines in Taguig City. As a result, the system is solely capable of monitoring anti-rabies vaccines.",
       "Why": [
         "Lorem ipsum dolor",
         "Tempor incididunt",
@@ -69,12 +69,12 @@
     "Services": [
       {
         "img": "img/icons/step1.png",
-        "name": "Wash the Wound Immediately",
+        "name": "Wash the wound immediately",
         "text": "Wash the wound with soap or detergent as soon as possible under running tap water for at least 10 minutes. "
       },
       {
         "img": "img/icons/step2.png",
-        "name": "Dry the Wound",
+        "name": "Dry the wound",
         "text": "After thorough washing, pat the wound dry with a clean cloth."
       },
       {
@@ -84,17 +84,17 @@
       },
       {
         "img": "img/icons/step4.png",
-        "name": "Don't Apply Irritants",
+        "name": "Don't apply irritants",
         "text": "Irritants, such as bleach, Chilli, soil, oils, turmeric, lime, salt, and plant juice are just a few examples that should not be applied on the wounds."
       },
       {
         "img": "img/icons/step5.png",
-        "name": "Avoid Touching the Wound with Bare Hands",
+        "name": "Avoid touching the wound with bare hands",
         "text": "Don't touch the wound with bare hands."
       },
       {
         "img": "img/icons/step6.png",
-        "name": "Postpone Suturing if Possible",
+        "name": "Postpone suturing if possible",
         "text": "If suturing is at all necessary, it should be performed after cleaning and infiltrating RIG at the depth of wound and only minimum number of loose suture should be applied."
       },
      {
@@ -104,7 +104,7 @@
       },
       {
         "img": "img/icons/step8.png",
-         "name": "Watch for Signs of Infection",
+         "name": "Watch for signs of infection",
          "text": "Seek help if you suspect infection or possible exposure to rabies, or if the wound is severe"
        }
     ],
@@ -170,26 +170,31 @@
     "Contact": {
       "address": "Km 14. East Service Road, Western Bicutan, 1630, Taguig City ",
       "phone": "+1 123 456 1234",
-      "email": "aris@company.com",
+      "email": "aris.dev1@gmail.com",
       "facebook": "fb.com",
       "twitter": "twitter.com",
-      "youtube": "youtube.com"
+      "youtube": "youtube.com/"
     },
     "Features": [
       {
-        "icon": "fa fa-list-alt",
+        "icon": "fa fa-calendar-check-o",
         "title": "Vaccination Tracker",
         "text": "It enables you to track your vaccination status from time to time."
       },
       {
         "icon": "fa fa-calendar",
         "title": "Appointment System",
-        "text": "It enables you to set an appointment ahead of time for future and emergency purposes."
+        "text": "It enables you to set an appointment ahead of time for future."
       },
       {
-        "icon": "fa fa-hospital-o",
+        "icon": "fa fa-medkit",
         "title": "Nearby Treatment Centers",
         "text": "It enables you to see the nearby Treatment Centers on your location."
+      },
+      {
+        "icon": "fa fa-bar-chart",
+        "title": "Real-time Statistics",
+        "text": "It enables you to see rabies-related statistical reports."
       }
     
     ]

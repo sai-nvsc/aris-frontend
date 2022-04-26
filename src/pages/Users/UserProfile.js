@@ -226,6 +226,7 @@ export const UserProfile = () => {
                   component="img"
                   src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${user._id}`}
                   alt="ARIS QR CODE"
+                  height={250}
                 />
                 <Box display={"flex"} justifyContent="center">
                   <Box
@@ -281,7 +282,7 @@ export const UserProfile = () => {
                   </Typography>
                   {!loading && (
                     <Grid container spacing={2}>
-                      <Grid item sm={12} md={6}>
+                      <Grid item xs={12} sm={12} md={6}>
                         <StyledTextField
                           required
                           fullWidth
@@ -296,7 +297,7 @@ export const UserProfile = () => {
                           onChange={handleChange}
                         />
                       </Grid>
-                      <Grid item sm={12} md={6}>
+                      <Grid item xs={12} sm={12} md={6}>
                         <StyledTextField
                           required
                           fullWidth
@@ -311,7 +312,7 @@ export const UserProfile = () => {
                           onChange={handleChange}
                         />
                       </Grid>
-                      <Grid item sm={12} md={6}>
+                      <Grid item xs={12} sm={12} md={6}>
                         <LocalizationProvider dateAdapter={DateAdapterMoment}>
                           <DatePicker
                             disableFuture
@@ -345,7 +346,7 @@ export const UserProfile = () => {
                         </LocalizationProvider>
                       </Grid>
 
-                      <Grid item sm={12} md={6}>
+                      <Grid item xs={12} sm={12} md={6}>
                         <FormControl
                           fullWidth
                           size="small"
@@ -372,7 +373,7 @@ export const UserProfile = () => {
                           )}
                         </FormControl>
                       </Grid>
-                      <Grid item sm={12} md={6}>
+                      <Grid item xs={12} sm={12} md={6}>
                         <StyledTextField
                           size="small"
                           sx={{ backgroundColor: "white" }}
@@ -386,7 +387,7 @@ export const UserProfile = () => {
                           onChange={handleChange}
                         />
                       </Grid>
-                      <Grid item sm={12} md={6}>
+                      <Grid item xs={12} sm={12} md={6}>
                         <StyledTextField
                           size="small"
                           sx={{ backgroundColor: "white" }}
@@ -400,7 +401,7 @@ export const UserProfile = () => {
                           onChange={handleChange}
                         />
                       </Grid>
-                      <Grid item sm={12} md={6}>
+                      <Grid item xs={12} sm={12} md={6}>
                         <FormControl
                           fullWidth
                           size="small"
@@ -424,7 +425,7 @@ export const UserProfile = () => {
                           )}
                         </FormControl>
                       </Grid>
-                      <Grid item sm={12} md={6}>
+                      <Grid item xs={12} sm={12} md={6}>
                         <StyledTextField
                           size="small"
                           sx={{ backgroundColor: "white" }}

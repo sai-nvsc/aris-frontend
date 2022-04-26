@@ -54,18 +54,21 @@ const MyVaccineDetails = () => {
       <Container component="main" sx={{ mt: 8, mb: 2 }}>
         {!loading && (
           <Grid container spacing={2}>
-            <IconButton onClick={onBackHandler} size="large" sx={{ mt: 2 }}>
-              <ArrowBackIosRoundedIcon />
+            <IconButton
+              component={StyledLink}
+              to="#"
+              size="large"
+              onClick={onBackHandler}
+            >
+              <ArrowBackIosRoundedIcon /> Vaccination Details
             </IconButton>
-            <Typography variant="h4" marginTop={2}>
-              Vaccination Details
-            </Typography>
 
-            <Grid item sm={12}>
+            <Grid item xs={12} sm={12}>
               <ProfileCard>
                 <Grid container spacing={2}>
                   <Grid
                     item
+                    xs={12}
                     sm={12}
                     md={6}
                     sx={{
@@ -116,7 +119,7 @@ const MyVaccineDetails = () => {
                           <b>{user.sex} </b>
                         </Typography>
                       </Box>
-                      <Box component="div" sx={{ marginLeft: 10 }}>
+                      <Box component="div" sx={{ marginLeft: "auto" }}>
                         <Typography
                           variant="subtitle1"
                           component="div"
@@ -153,11 +156,12 @@ const MyVaccineDetails = () => {
                     </Box>
                   </Grid>
 
-                  <Grid item sm={12} md={6}>
+                  <Grid item xs={12} sm={12} md={6}>
                     <Box
                       component="img"
                       src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${params.id}`}
                       alt="ARIS QR CODE"
+                      alignSelf={"center"}
                     />
                     <Typography
                       variant="subtitle1"
@@ -180,6 +184,7 @@ const MyVaccineDetails = () => {
                 <Grid container spacing={2}>
                   <Grid
                     item
+                    xs={12}
                     sm={12}
                     md={6}
                     sx={{
@@ -237,7 +242,7 @@ const MyVaccineDetails = () => {
                     </Typography>
                   </Grid>
 
-                  <Grid item sm={12} md={6}>
+                  <Grid item xs={12} sm={12} md={6}>
                     <Typography
                       variant="subtitle1"
                       component="div"
@@ -283,7 +288,7 @@ const MyVaccineDetails = () => {
                 </Grid>
               </ProfileCard>
             </Grid>
-            <Grid item sm={12}>
+            <Grid item xs={12} sm={12}>
               <ProfileCard>
                 <TableContainer component={Paper}>
                   <Table sx={{ minWidth: 650 }} size="small">
@@ -329,7 +334,7 @@ const MyVaccineDetails = () => {
                 </TableContainer>
               </ProfileCard>
               <Grid item sm={12}></Grid>
-              <Divider sx={{ mt: 5 }}>Health Status Repors</Divider>
+              <Divider sx={{ mt: 5 }}>Health Status Reports</Divider>
               <Box
                 component="main"
                 sx={{ display: "flex", justifyContent: "end" }}

@@ -120,7 +120,7 @@ export const UserNavMenu = ({ handleDrawerClose }) => {
   <Dialog 
     open={open} 
     onClose={handleClose} 
-    maxWidth="md"
+    maxWidth="sm"
     PaperComponent={PaperComponent}
 >
     <DialogTitle sx={{ cursor: 'move' }} id="draggable-dialog-title">
@@ -131,7 +131,7 @@ export const UserNavMenu = ({ handleDrawerClose }) => {
             component="img"
             src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${user._id}`}
             alt="ARIS QR CODE"
-            sx={{height: 300}}
+            sx={{height: 275}}
                   />
       </DialogContent>
       <DialogActions>

@@ -275,7 +275,7 @@ const VaccineSlices = createSlice({
       state.loading = false;
       state.succes = action.payload.message;
       state.errors = null;
-      window.location.reload();
+      state.reports = action.payload.reports;
     },
     [ReplyThunk.rejected]: (state, action) => {
       state.loading = false;

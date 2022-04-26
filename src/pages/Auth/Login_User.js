@@ -124,7 +124,7 @@ const LoginUser = () => {
             boxShadow: 3,
           }}
         >
-          <Typography variant="h4" sx={{ fontWeight: "bold" }}>
+          <Typography variant="h4" sx={{ fontWeight: "bold", }}>
             LOG IN
           </Typography>
 

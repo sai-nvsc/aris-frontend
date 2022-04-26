@@ -20,17 +20,12 @@ const Aris = () => {
     <Box
       sx={{
         bgcolor: "background.paper",
-        pt: 1,
         minHeight: "100vh",
       }}
+      id="policies"
     >
       <CssBaseline />
       <Container maxWidth="lg">
-        <IconButton component={StyledLink} to="/" size="large">
-          <ArrowBackIosRoundedIcon />
-          <Typography sx={{ fontSize: 40 }}>Back</Typography>
-        </IconButton>
-
         <Grid container spacing={3}>
           <Grid item xs>
             <Card
@@ -42,7 +37,7 @@ const Aris = () => {
                 height="auto"
                 component="img"
                 image={tc}
-                alt="privacy policy"
+                alt="policies"
               />
             </Card>
           </Grid>
@@ -78,7 +73,7 @@ const Aris = () => {
             <b>ARIS Privacy Policy</b>
           </Typography>
           <Divider width="100%"></Divider>
-          <Typography variant="p" align="justify" sx={{ mt: 2 }}>
+          <Typography variant="p" align="justify" sx={{ mt: 2, mb: 1 }}>
             A.R.I.S (Anti-Rabies Immunoinformatics System) is a system that aims
             to provide anti-rabies immunization services to animal bite centers
             and other facilities that are legible to administer anti rabies
@@ -92,7 +87,6 @@ const Aris = () => {
             status and history, read and view the latest data and news related
             to rabies exposures.
           </Typography>
-          <br />
           <Typography variant="p" align="justify">
             The system, which is made available in desktop and mobile phones,
             aims to help the city to collect, manage, analyze and monitor
@@ -106,12 +100,11 @@ const Aris = () => {
             disclosure of Personal Information if anyone decided to use our
             Service.
           </Typography>
-          <br />
-          <br />
+
           <Typography sx={{ mt: 4, mb: 4 }}>
             <b>WHAT INFORMATION WE COLLECT FROM THE USER</b>
           </Typography>
-          <br />
+
           <Typography variant="p" align="justify">
             The personal information that is collected by ARIS will be handled,
             stored, and protected in accordance with the Republic Act 10173 or
@@ -170,8 +163,8 @@ const Aris = () => {
             reports.
           </Typography>
           <Typography variant="p" align="justify" sx={{ mb: 4 }}>
-            10. Consent for using the ARIS - to know the user’s consent if they
-            want to use the service.
+            10. Consent for using ARIS - to know the user’s consent if they want
+            to use the service.
           </Typography>
 
           <Typography variant="p" align="justify">
@@ -251,8 +244,8 @@ const Aris = () => {
             re-authenticated before access can be granted.
           </Typography>
 
-          <Typography sx={{ mt: 4, mb: 4, textTransform: "uppercase" }}>
-            <b>what do we do with the collected data</b>
+          <Typography sx={{ mt: 4, mb: 4 }}>
+            <b>WHAT DO WE DO WITH THE COLLECTED DATA</b>
           </Typography>
           <Typography variant="p" align="justify">
             This data would only be retained and used specifically for the
@@ -262,8 +255,8 @@ const Aris = () => {
             available both in web and mobile.
           </Typography>
 
-          <Typography sx={{ mt: 4, mb: 4, textTransform: "uppercase" }}>
-            <b>Retention of Personal Data and Collected Data</b>
+          <Typography sx={{ mt: 4, mb: 4 }}>
+            <b>RETENTION OF PERSONAL DATA AND COLLECTED DATA</b>
           </Typography>
           <Typography variant="p" align="justify">
             We and/or our duly authorized third party shall retain the Personal

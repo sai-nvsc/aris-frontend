@@ -5,7 +5,7 @@ import ReplyHealthReport from "../Admin/AdminCRUD/ReplyHealthReport";
 export const Comments = ({ reports }) => {
   return (
     <>
-      <Paper style={{ padding: "40px 20px" }}>
+      <Paper sx={{ padding: "40px 20px" }}>
         {reports &&
           reports.map((report) => (
             <>

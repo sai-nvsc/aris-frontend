@@ -17,20 +17,18 @@ import Footer from "../../components/Layouts/Footer";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
 import PermPhoneMsgRoundedIcon from "@mui/icons-material/PermPhoneMsgRounded";
-//icons
-// const ash = require("../../assets/01.jpg").default;
-// const jen = require("../../assets/03.jpg").default;
-// const mat = require("../../assets/02.jpg").default;
-// const sai = require("../../assets/04.jpg").default;
-const person = require("../../assets/person.svg").default;
 
+import ash from "../../assets/01.jpg";
+import jen from "../../assets/02.jpg";
+import mat from "../../assets/03.jpg";
+import sai from "../../assets/04.jpg";
 const Aris = () => {
   const cards = [
     {
       title: "Sairyl H. Navasca",
       desc: "Lead Developer",
-      image: person,
-      alt: "Sai",
+      image: sai,
+      alt: "Sairyl",
       fb: "https://www.facebook.com/saipot0620",
       mail: "mailto:sairyl.navasca@tup.edu.ph",
       no: "09669922375",
@@ -38,8 +36,8 @@ const Aris = () => {
     {
       title: "Jenny Gel Castor",
       desc: "Mobile Developer",
-      image: person,
-      alt: "Jen",
+      image: jen,
+      alt: "Jenny",
       fb: "https://www.facebook.com/jenny.castor.5454",
       mail: "mailto:jenny.castor@tup.edu.ph",
       no: "09657218242",
@@ -47,8 +45,8 @@ const Aris = () => {
     {
       title: "Mathew Jose Matanguihan",
       desc: "Mobile Developer",
-      image: person,
-      alt: "Mat",
+      image: mat,
+      alt: "Mathew",
       fb: "https://www.facebook.com/mathewmatanguihan01",
       mail: "mailto:mathewjose.matanguihan@tup.edu.ph",
       no: "09773932863",
@@ -56,8 +54,8 @@ const Aris = () => {
     {
       title: "Ashley Jullien Supnet",
       desc: "Web Developer",
-      image: person,
-      alt: "Ash",
+      image: ash,
+      alt: "Ashley",
       fb: "https://www.facebook.com/aj.supnet/",
       mail: "mailto:ashleyjullien.supnet@tup.edu.ph",
       no: "09755895101",

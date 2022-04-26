@@ -11,6 +11,7 @@ import {
   Grid,
   Radio,
   RadioGroup,
+  Typography,
 } from "@mui/material";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -115,6 +116,11 @@ const SendHealthReport = () => {
 
         <form encType="multipart/form-data" noValidate onSubmit={formHandler}>
           <DialogContent>
+            <Typography variant="body1" marginBottom={3}>
+              Note: Health Reports cannot be deleted once it was submitted. We
+              in ARIS take every health reports seriously. Please be cautious of
+              your reports.
+            </Typography>
             <Grid container spacing={2} sx={{ p: 2 }}>
               <Grid item xs={12}>
                 <FormControl>

@@ -17,19 +17,18 @@ import Footer from "../../components/Layouts/Footer";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
 import PermPhoneMsgRoundedIcon from "@mui/icons-material/PermPhoneMsgRounded";
-// //icons
-// const ash = require("../../assets/01.jpg").default;
-// const jen = require("../../assets/03.jpg").default;
-// const mat = require("../../assets/02.jpg").default;
-// const sai = require("../../assets/04.jpg").default;
-const person = require("../../assets/person.svg").default;
+import ash from "../../assets/01.jpg";
+import jen from "../../assets/02.jpg";
+import mat from "../../assets/03.jpg";
+import sai from "../../assets/04.jpg";
+//const person = require("../../assets/person.svg").default;
 
 const Aris = () => {
   const cards = [
     {
       title: "Sairyl H. Navasca",
       desc: "Lead Developer",
-      image: person,
+      image: sai,
       alt: "Sai",
       fb: "https://www.facebook.com/saipot0620",
       mail: "mailto:sairyl.navasca@tup.edu.ph",
@@ -38,7 +37,7 @@ const Aris = () => {
     {
       title: "Jenny Gel Castor",
       desc: "Mobile Developer",
-      image: person,
+      image: jen,
       alt: "Jen",
       fb: "https://www.facebook.com/jenny.castor.5454",
       mail: "mailto:jenny.castor@tup.edu.ph",
@@ -47,7 +46,7 @@ const Aris = () => {
     {
       title: "Mathew Jose Matanguihan",
       desc: "Mobile Developer",
-      image: person,
+      image: mat,
       alt: "Mat",
       fb: "https://www.facebook.com/mathewmatanguihan01",
       mail: "mailto:mathewjose.matanguihan@tup.edu.ph",
@@ -56,7 +55,7 @@ const Aris = () => {
     {
       title: "Ashley Jullien Supnet",
       desc: "Web Developer",
-      image: person,
+      image: ash,
       alt: "Ash",
       fb: "https://www.facebook.com/aj.supnet/",
       mail: "mailto:ashleyjullien.supnet@tup.edu.ph",

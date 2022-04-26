@@ -29,10 +29,12 @@ import {
 import AdminDelete from "../../components/Layouts/Dialogs/AdminDelete";
 import EditInventory from "../Admin/AdminCRUD/EditInventory";
 import moment from "moment";
+import InventoryAlert from "../../helpers/InventoryAlerts";
 
 const Inventory = () => {
-  const { inventory, loading, errors, success, stock_alert, expiration_alert } =
-    useSelector((state) => state.inventory);
+  const { inventory, loading, errors, success } = useSelector(
+    (state) => state.inventory
+  );
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -184,7 +186,6 @@ const Inventory = () => {
       sx={{
         bgcolor: "background.paper",
         pt: 8,
-        pb: 6,
       }}
     >
       <PersistentDrawerLeft title="Clinic's Inventory" />
@@ -246,12 +247,12 @@ const Inventory = () => {
           </Grid>
         </Grid>
 
-        <Grid item sm flexDirection={"column"}>
+        <Grid item xs flexDirection={"column"}>
           <Box
             sx={{
               bgcolor: "background.paper",
               pt: 3,
-              pb: 6,
+              pb: 17,
 
               "& .restock": {
                 backgroundColor: "#ff8a80",
@@ -266,28 +267,7 @@ const Inventory = () => {
             <div style={{ height: 450, width: "auto" }}>
               {!loading && inventory && (
                 <>
-                  {stock_alert.length > 0 && (
-                    <Alert severity="warning">
-                      <AlertTitle>Vaccine low on stock</AlertTitle>
-                      {stock_alert[0].brand_name}{" "}
-                      {stock_alert.length > 1
-                        ? `and ${
-                            stock_alert.length - 1
-                          } other/s are low in stock`
-                        : "is low on stock"}
-                    </Alert>
-                  )}
-                  {expiration_alert.length > 0 && (
-                    <Alert severity="error">
-                      <AlertTitle>Vaccine Expiring</AlertTitle>
-                      {expiration_alert[0].brand_name}{" "}
-                      {expiration_alert.length > 1
-                        ? `and ${
-                            expiration_alert.length - 1
-                          } other/s are expiring`
-                        : "is expiring"}
-                    </Alert>
-                  )}
+                  <InventoryAlert />
                   <DataGrid
                     rows={inventory}
                     columns={columns}

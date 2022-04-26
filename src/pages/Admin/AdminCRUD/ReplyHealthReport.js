@@ -44,7 +44,14 @@ const ReplyHealthReport = ({ reports, id }) => {
     formData.set("admin", user._id);
     formData.set("text", dialog.text);
     formData.set("report", reports._id);
+    formData.set("email", reports.user[0].email);
+    formData.set(
+      "name",
+      reports.user[0].first_name + reports.user[0].last_name
+    );
+    formData.set("type", dialog.type);
     formData.set("id", id);
+    formData.set("bitecase", params.id);
     dispatch(ReplyThunk(formData));
 
     setOpenn(false);

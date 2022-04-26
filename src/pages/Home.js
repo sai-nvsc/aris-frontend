@@ -8,6 +8,7 @@ import { Services } from "../components/Layouts/services";
 import { Testimonials } from "../components/Layouts/testimonials";
 import { Team } from "../components/Layouts/Team";
 import { Contact } from "../components/Layouts/contact";
+import Policies from "../components/Layouts/PrivacyPolicy";
 import JsonData from "../data/data.json";
 import SmoothScroll from "smooth-scroll";
 import "../App.css";
@@ -90,6 +91,8 @@ const Home = () => {
         <Testimonials data={landingPageData.Testimonials} />
         <Team data={landingPageData.Team} />
         <Contact data={landingPageData.Contact} />
+        <Policies />
+
       </div>
     </HelmetProvider>
   );
