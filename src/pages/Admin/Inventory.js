@@ -6,8 +6,8 @@ import {
   AlertTitle,
   Box,
   Container,
+  Dialog,
   Grid,
-  Modal,
   Snackbar,
   Typography,
 } from "@mui/material";
@@ -32,7 +32,7 @@ import moment from "moment";
 import InventoryAlert from "../../helpers/InventoryAlerts";
 
 const Inventory = () => {
-  const { inventory, loading, errors, success } = useSelector(
+  const { inventory, loading, errors, success, add_errors } = useSelector(
     (state) => state.inventory
   );
   const { user } = useSelector((state) => state.user);
@@ -60,7 +60,7 @@ const Inventory = () => {
     formData.append("delivery_date", values.delivery_date);
     formData.append("clinic", user.clinic);
     dispatch(AddInvThunk({ data: formData }));
-    setOpen(false);
+    // setOpen(false);
   };
 
   function refreshPage() {
@@ -79,6 +79,7 @@ const Inventory = () => {
       exp_date: moment().startOf("day"),
       delivery_date: moment().startOf("day"),
     });
+    setOpen(false);
   };
   const onClose = (e) => {
     dispatch(clearSuccess());
@@ -217,6 +218,19 @@ const Inventory = () => {
             </Alert>
           </Snackbar>
         )}
+        {add_errors && (
+          <Snackbar
+            open={add_errors}
+            autoHideDuration={3000}
+            onClose={onClose}
+            name="error"
+          >
+            <Alert severity="error" variant="filled">
+              <AlertTitle>Error</AlertTitle>
+              Error Submitting the data. Please fill in required fields.
+            </Alert>
+          </Snackbar>
+        )}
         <Grid
           container
           direction="row"
@@ -288,17 +302,7 @@ const Inventory = () => {
           </Box>
         </Grid>
       </Container>
-
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-        justifyContent="center"
-        transform="translate(-50%, -50%)"
-        top="50%"
-        position="absolute"
-      >
+      <Dialog open={open} onClose={handleClose} maxWidth="md">
         <Box
           sx={{
             display: "flex",
@@ -330,6 +334,12 @@ const Inventory = () => {
                   name="brand_name"
                   size="small"
                   onChange={handleChange}
+                  error={add_errors && add_errors.brand_name ? true : false}
+                  helperText={
+                    add_errors && add_errors.brand_name
+                      ? add_errors.brand_name
+                      : ""
+                  }
                 />
               </Grid>
 
@@ -342,6 +352,12 @@ const Inventory = () => {
                   name="generic_name"
                   size="small"
                   onChange={handleChange}
+                  error={add_errors && add_errors.generic_name ? true : false}
+                  helperText={
+                    add_errors && add_errors.generic_name
+                      ? add_errors.generic_name
+                      : ""
+                  }
                 />
               </Grid>
 
@@ -354,6 +370,10 @@ const Inventory = () => {
                   name="batch_no"
                   size="small"
                   onChange={handleChange}
+                  error={add_errors && add_errors.batch_no ? true : false}
+                  helperText={
+                    add_errors && add_errors.batch_no ? add_errors.batch_no : ""
+                  }
                 />
               </Grid>
 
@@ -366,6 +386,10 @@ const Inventory = () => {
                   name="stock"
                   size="small"
                   onChange={handleChange}
+                  error={add_errors && add_errors.brand_name ? true : false}
+                  helperText={
+                    add_errors && add_errors.stock ? add_errors.stock : ""
+                  }
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6}>
@@ -441,7 +465,7 @@ const Inventory = () => {
             </Box>
           </Container>
         </Box>
-      </Modal>
+      </Dialog>
       <br />
       <Footer />
     </Box>

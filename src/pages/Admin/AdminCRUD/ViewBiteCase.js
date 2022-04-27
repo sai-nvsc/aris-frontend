@@ -65,7 +65,7 @@ const ViewBiteCase = () => {
   //AddVax
   const [values, setvalues] = useState({
     bitecase: "",
-    date_injected: new Date(),
+    date_injected: moment().startOf("day").toDate().toISOString(),
     day: "",
     vaccine: "",
     lot: "",
@@ -475,7 +475,10 @@ const ViewBiteCase = () => {
                       onChange={(newDate) =>
                         setvalues({
                           ...values,
-                          date_injected: newDate.toDate().toISOString(),
+                          date_injected: newDate
+                            .startOf("day")
+                            .toDate()
+                            .toISOString(),
                         })
                       }
                       renderInput={(params) => (

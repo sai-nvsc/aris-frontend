@@ -12,6 +12,7 @@ import {
   DialogContent,
   DialogTitle,
   FormControl,
+  FormHelperText,
   Grid,
   InputLabel,
   MenuItem,
@@ -42,7 +43,7 @@ import CompleteAppointment from "../Admin/AdminCRUD/CompleteAppointment";
 import CancelApt from "../Admin/Admin_CancelApt";
 
 const Appointments = () => {
-  const { success, errors, appointments, loading } = useSelector(
+  const { success, errors, appointments, loading, appt_error } = useSelector(
     (state) => state.appointments
   );
   const dispatch = useDispatch();
@@ -193,7 +194,7 @@ const Appointments = () => {
   const [values, setValues] = useState({
     user: "",
     time_slot: "",
-    date: moment(),
+    date: moment().startOf("day"),
     purpose: "",
     status: "Ongoing",
   });
@@ -213,7 +214,7 @@ const Appointments = () => {
     formData.append("status", values.status);
     dispatch(createAppointment({ data: formData }));
 
-    setOpen(false);
+    // setOpen(false);
   };
 
   function refreshPage() {
@@ -343,6 +344,12 @@ const Appointments = () => {
                   name="user"
                   size="small"
                   onChange={handleChange}
+                  error={appt_error && appt_error.user ? true : false}
+                  helperText={
+                    appt_error && appt_error.user
+                      ? "Scan the valid ARIS QR Code"
+                      : ""
+                  }
                 />
               </Grid>
 
@@ -375,7 +382,11 @@ const Appointments = () => {
               </Grid>
 
               <Grid item xs={12} sm={12} md={6}>
-                <FormControl fullWidth required>
+                <FormControl
+                  fullWidth
+                  required
+                  error={appt_error && appt_error.time_slot ? true : false}
+                >
                   <InputLabel>Time Slot</InputLabel>
                   <Select
                     name="time_slot"
@@ -393,6 +404,11 @@ const Appointments = () => {
                         );
                       })}
                   </Select>
+                  {appt_error && appt_error.time_slot ? (
+                    <FormHelperText>{appt_error.time_slot}</FormHelperText>
+                  ) : (
+                    ""
+                  )}
                 </FormControl>
               </Grid>
 
@@ -404,6 +420,10 @@ const Appointments = () => {
                   label="Purpose"
                   name="purpose"
                   onChange={handleChange}
+                  error={appt_error && appt_error.purpose ? true : false}
+                  helperText={
+                    appt_error && appt_error.purpose ? appt_error.purpose : ""
+                  }
                 />
               </Grid>
             </Grid>

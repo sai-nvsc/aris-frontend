@@ -196,6 +196,8 @@ const initialState = {
   errors: null,
   success: null,
   gettingappointment_loading: false,
+  add_case_errors: null,
+  add_case_loading: false,
 };
 
 const BiteCaseSlice = createSlice({
@@ -277,18 +279,22 @@ const BiteCaseSlice = createSlice({
       state.errors = action.payload;
     },
     [AddCaseThunk.pending]: (state) => {
-      state.loading = true;
+      state.add_case_loading = true;
     },
     [AddCaseThunk.fulfilled]: (state, action) => {
-      state.loading = false;
+      state.add_case_loading = false;
       state.success = action.payload.success;
       state.errors = null;
       state.bitecase = action.payload.bitecase;
     },
     [AddCaseThunk.rejected]: (state, action) => {
-      state.loading = false;
+      state.add_case_loading = false;
       state.success = null;
-      state.errors = action.payload;
+      try {
+        state.add_case_errors = JSON.parse(action.payload);
+      } catch (error) {
+        state.errors = action.payload;
+      }
     },
     [EditCaseThunk.pending]: (state) => {
       state.loading = true;

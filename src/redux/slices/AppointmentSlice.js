@@ -1,26 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-// axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
-//   "token"
-// )}`;
-/* export const getAdminAppointments = createAsyncThunk(
-  "appointments/admin-appointment",
-  async (obj, { rejectWithValue }) => {
-    try {
-      const response = await axios.get("/api/appointments/get/appointments");
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response.data.message);
-    }
-  }
-); */
+
 export const createAppointment = createAsyncThunk(
   "appointment/new/create",
   async (obj, { rejectWithValue }) => {
     try {
-      const response = await axios.post("/api/appointments/add", obj.data, {
-        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_HOST}api/appointments/add`,
+        obj.data,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
+      );
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -234,17 +225,19 @@ const AppointmentSlice = createSlice({
     },
     [createAppointment.fulfilled]: (state, action) => {
       state.loading = false;
-      state.success = action.payload.success;
+      state.success = action.payload.message;
       state.errors = null;
-      state.appointments = [...state.appointments, action.payload.appointment];
+      state.appointments = action.payload.appointment;
+      state.appt_error = null;
     },
     [createAppointment.rejected]: (state, action) => {
       state.loading = false;
       try {
-        state.errors = JSON.parse(action.payload);
+        state.appt_error = JSON.parse(action.payload);
       } catch (error) {
-        state.appt_error = action.payload;
+        state.errors = action.payload;
       }
+      state.success = null;
     },
 
     //users

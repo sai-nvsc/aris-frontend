@@ -97,6 +97,7 @@ const initialState = {
   loading: false,
   errors: null,
   success: null,
+  add_errors: null,
 };
 const InventorySlice = createSlice({
   name: "inventory",
@@ -104,6 +105,7 @@ const InventorySlice = createSlice({
   reducers: {
     clearError: (state) => {
       state.errors = null;
+      state.add_errors = null;
     },
     clearSuccess: (state) => {
       state.success = null;
@@ -130,6 +132,7 @@ const InventorySlice = createSlice({
       state.loading = false;
       state.success = action.payload.success;
       state.errors = null;
+      state.add_errors = null;
       state.stock_alert = action.payload.stock_alert;
       state.expiration_alert = action.payload.expiration_alert;
       state.inventory = [...state.inventory, action.payload.inventory];
@@ -137,7 +140,11 @@ const InventorySlice = createSlice({
     [AddInvThunk.rejected]: (state, action) => {
       state.loading = false;
       state.success = null;
-      state.errors = action.payload;
+      try {
+        state.add_errors = JSON.parse(action.payload);
+      } catch (error) {
+        state.errors = action.payload;
+      }
     },
     [EditInvThunk.pending]: (state) => {
       state.loading = true;
@@ -153,7 +160,11 @@ const InventorySlice = createSlice({
     [EditInvThunk.rejected]: (state, action) => {
       state.loading = false;
       state.success = null;
-      state.errors = action.payload;
+      try {
+        state.add_errors = JSON.parse(action.payload);
+      } catch (error) {
+        state.errors = action.payload;
+      }
     },
     [GetInvDetailsThunk.pending]: (state) => {
       state.loading = true;
