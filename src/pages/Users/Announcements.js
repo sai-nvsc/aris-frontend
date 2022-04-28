@@ -69,6 +69,9 @@ const Announcements = () => {
                       <Typography color="text.secondary">
                         Posted: {moment(ann.date).format("MMM. D, YYYY")}
                       </Typography>
+                      <Typography color="text.secondary">
+                        Posted By: {ann.clinic[0].name}
+                      </Typography>
                     </CardContent>
                   </Card>
                 </>

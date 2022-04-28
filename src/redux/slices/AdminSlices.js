@@ -106,6 +106,23 @@ export const EditAccountThunk = createAsyncThunk(
     }
   }
 );
+export const EditAccountSuperAdminThunk = createAsyncThunk(
+  "admin/editaccount/superadmin",
+  async (obj, { rejectWithValue }) => {
+    try {
+      const response = await axios.patch(
+        `${process.env.REACT_APP_API_HOST}api/admin/auth/super-admin/edit-acc/${obj.id}`,
+        obj.data,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
 
 export const UpdatePasswordThunk = createAsyncThunk(
   "admin/updatepassword",
@@ -220,6 +237,24 @@ const adminSlice = createSlice({
       state.loading = false;
       state.success = null;
       state.errors = JSON.parse(action.payload);
+    },
+    [EditAccountSuperAdminThunk.pending]: (state) => {
+      state.loading = true;
+    },
+    [EditAccountSuperAdminThunk.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.success = action.payload.success;
+      state.admin = action.payload.admin;
+      state.errors = null;
+    },
+    [EditAccountSuperAdminThunk.rejected]: (state, action) => {
+      state.loading = false;
+      state.success = null;
+      try {
+        state.errors = JSON.parse(action.payload);
+      } catch (error) {
+        state.errors = action.payload;
+      }
     },
     [UpdatePasswordThunk.pending]: (state) => {
       state.loading = true;

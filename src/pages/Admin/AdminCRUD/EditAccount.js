@@ -17,7 +17,7 @@ import {
   EditButton,
 } from "../../../assets/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { EditAccountThunk } from "../../../redux/slices/AdminSlices";
+import { EditAccountSuperAdminThunk } from "../../../redux/slices/AdminSlices";
 
 const EditAcc = ({ data }) => {
   const { user } = useSelector((state) => state.user);
@@ -44,7 +44,7 @@ const EditAcc = ({ data }) => {
     formData.append("email", values.email);
     formData.append("username", values.username);
 
-    dispatch(EditAccountThunk({ data: formData, id: data._id }));
+    dispatch(EditAccountSuperAdminThunk({ data: formData, id: data._id }));
 
     setOpen(false);
     setvalues({
