@@ -15,7 +15,7 @@ export const Header = (props) => {
                   Sign In
                 </a>{" "}
                 <br/><br></br>
-                <a href="path/to/app-debug.apk" className="btn btn-custom btn-lg page-scroll" download rel="noopener noreferrer" target="_blank">
+                <a href="path/to/ARIS.apk" className="btn btn-custom btn-lg page-scroll" download rel="noopener noreferrer" target="_blank">
                   Download Mobile App
                 </a>{" "}
               </div>

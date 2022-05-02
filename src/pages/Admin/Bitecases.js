@@ -6,7 +6,7 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Edit } from "@mui/icons-material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import PrintIcon from "@mui/icons-material/Print";
-
+import LinearProgress from '@mui/material/LinearProgress';
 import {
   Alert,
   AlertTitle,
@@ -75,24 +75,52 @@ const Bitecases = () => {
       sortComparator: (v1, v2) => v1.localeCompare(v2),
     },
     {
-      field: "exposure_category",
-      headerName: "Cat.",
+      field: "sex",
+      headerName: "Sex",
       flex: 1,
       headerAlign: "center",
       align: "center",
-      minWidth: 60,
+      minWidth: 100,
+      valueGetter: (cellValues) => {
+        return (cellValues.row.user[0].sex);
+      },
+      sortComparator: (v1, v2) => v1.localeCompare(v2),
+    },
+    {
+      field: "address",
+      headerName: "Add.",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      minWidth: 160,
+      valueGetter: (cellValues) => {
+        return (cellValues.row.user[0].address);
+      },
+      sortComparator: (v1, v2) => v1.localeCompare(v2),
     },
     {
       field: "date",
-      headerName: "Date",
+      headerName: "When",
       flex: 1,
       headerAlign: "center",
       align: "center",
-      minWidth: 140,
+      minWidth: 150,
       type: "date",
       valueGetter: (cellValues) =>
         moment(cellValues.row.history_of_exposure.date).format("MMM. DD, YYYY"),
       sortComparator: (v1, v2) => new Date(v1) - new Date(v2),
+    },
+    {
+      field: "place",
+      headerName: "Where",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      minWidth: 150,
+      valueGetter: (cellValues) => {
+        return cellValues.row.history_of_exposure.place;
+      },
+      sortComparator: (v1, v2) => v1.localeCompare(v2),
     },
     {
       field: "source_of_exposure",
@@ -113,9 +141,18 @@ const Bitecases = () => {
       headerAlign: "center",
       align: "center",
       minWidth: 90,
-      renderCell: (cellValues) => {
+      valueGetter: (cellValues) => {
         return cellValues.row.history_of_exposure.type_of_exposure;
       },
+    },
+  
+    {
+      field: "exposure_category",
+      headerName: "Cat.",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      minWidth: 60,
     },
     {
       field: "vaccine",
@@ -303,7 +340,9 @@ const Bitecases = () => {
                   getRowId={(row) => row._id}
                   onCellClick={handleCellClick}
                   onRowClick={handleRowClick}
-                  components={{ Toolbar: GridToolbar }}
+                  components={{Toolbar: GridToolbar, LoadingOverlay: LinearProgress, }}
+                  loading
+                  {...bitecase}
                   getCellClassName={(params) => {
                     if (
                       params.field.status_of_vaccination ===

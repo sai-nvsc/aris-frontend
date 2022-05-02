@@ -29,6 +29,7 @@ import {
   clearError,
   clearSuccess,
 } from "../../redux/slices/AdminSlices";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const Accounts = () => {
   const { user } = useSelector((state) => state.user);
@@ -93,15 +94,17 @@ const Accounts = () => {
       renderCell: (cellValues) => {
         return (
           <>
-          <EditAccount
-            id={admin.id}
-            data={cellValues.row}
-            startIcon={<Edit style={{ color: "#ff8a80" }} />} />
-          <AdminDelete
-            id={admin._id}
-            name={admin.admin_name}
-            collection="admins"
-            data={cellValues.row}/>
+            <EditAccount
+              id={admin.id}
+              data={cellValues.row}
+              startIcon={<Edit style={{ color: "#ff8a80" }} />}
+            />
+            <AdminDelete
+              id={cellValues.row._id}
+              name={admin.admin_name}
+              collection="admins"
+              data={cellValues.row}
+            />
           </>
         );
       },
@@ -231,7 +234,12 @@ const Accounts = () => {
                   getRowId={(row) => row._id}
                   onCellClick={handleCellClick}
                   onRowClick={handleRowClick}
-                  components={{ Toolbar: GridToolbar }}
+                  components={{
+                    Toolbar: GridToolbar,
+                    LoadingOverlay: LinearProgress,
+                  }}
+                  loading
+                  {...admin}
                 />
               )}
             </div>

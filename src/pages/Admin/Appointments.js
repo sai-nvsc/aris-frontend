@@ -34,6 +34,7 @@ import {
   getAdminApts,
   createAppointment,
 } from "../../redux/slices/AppointmentSlice";
+import { MyClinicThunk } from "../../redux/slices/Clinic";
 import { Cancel } from "@mui/icons-material";
 import { BsCalendarPlusFill } from "react-icons/bs";
 import DatePicker from "@mui/lab/DatePicker";
@@ -41,11 +42,13 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AcceptAppointment from "../Admin/AdminCRUD/AcceptAppointment";
 import CompleteAppointment from "../Admin/AdminCRUD/CompleteAppointment";
 import CancelApt from "../Admin/Admin_CancelApt";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const Appointments = () => {
   const { success, errors, appointments, loading, appt_error } = useSelector(
     (state) => state.appointments
   );
+  const { myclinic, clinic_loading } = useSelector((state) => state.clinic);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 
@@ -59,6 +62,7 @@ const Appointments = () => {
 
   useEffect(() => {
     dispatch(getAdminApts({ id: user.clinic }));
+    dispatch(MyClinicThunk());
     return () => {};
   }, [dispatch, user]);
 
@@ -316,7 +320,12 @@ const Appointments = () => {
                   getRowId={(row) => row._id}
                   onCellClick={handleCellClick}
                   onRowClick={handleRowClick}
-                  components={{ Toolbar: GridToolbar }}
+                  components={{
+                    Toolbar: GridToolbar,
+                    LoadingOverlay: LinearProgress,
+                  }}
+                  loading={loading}
+                  {...appointments}
                   getCellClassName={(params) => {
                     if (params.field.status === "status") {
                       return "";
@@ -391,15 +400,16 @@ const Appointments = () => {
                   <Select
                     name="time_slot"
                     value={values.time_slot}
-                    label="TimeSlot"
+                    label="Time Slot"
                     size="small"
                     onChange={handleChange}
                   >
-                    {appointments &&
-                      appointments.map((time) => {
+                    {myclinic &&
+                      !clinic_loading &&
+                      myclinic.time_slot.map((time) => {
                         return (
-                          <MenuItem key={time} value={time.time_slot}>
-                            {time.time_slot}
+                          <MenuItem key={time} value={time}>
+                            {time}
                           </MenuItem>
                         );
                       })}
