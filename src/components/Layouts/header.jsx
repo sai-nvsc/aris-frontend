@@ -12,7 +12,11 @@ export const Header = (props) => {
                 </h1>
                 <p>{props.data ? props.data.paragraph : "Loading"}</p>
                 <a href="login" className="btn btn-custom btn-lg page-scroll">
-                  Get Started
+                  Sign In
+                </a>{" "}
+                <br/><br></br>
+                <a href="path/to/app-debug.apk" className="btn btn-custom btn-lg page-scroll" download rel="noopener noreferrer" target="_blank">
+                  Download Mobile App
                 </a>{" "}
               </div>
             </div>

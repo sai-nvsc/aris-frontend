@@ -106,8 +106,6 @@ const ViewBiteCase = () => {
     <Box
       sx={{
         pt: 8,
-        pb: 6,
-        minHeight: "100vh",
       }}
     >
       <CssBaseline />
@@ -153,13 +151,14 @@ const ViewBiteCase = () => {
             <Typography variant="h4" marginTop={2}>
               Exposure Case# {bites[0].bite_case_no}
             </Typography>
-            <Grid item sm={12}>
+            <Grid item xs={12} sm={12} md={12}>
               <ProfileCard>
                 <Grid container spacing={2}>
                   <Grid
                     item
+                    xs={12}
                     sm={12}
-                    md={12}
+                    md={6}
                     lg={6}
                     sx={{
                       borderRadius: 4,
@@ -169,11 +168,10 @@ const ViewBiteCase = () => {
                       component="div"
                       sx={{
                         textAlign: "left",
-                        paddingLeft: 2,
                         paddingBottom: 2,
                         display: "flex",
                         flexDirection: "row",
-                        marginLeft: 8,
+                        marginLeft: 3,
                       }}
                     >
                       <Box component="div">
@@ -228,12 +226,12 @@ const ViewBiteCase = () => {
                     </Box>
                   </Grid>
 
-                  <Grid item sm={12} md={6}>
+                  <Grid item xs={12} sm={12} md={6}>
                     <Box
                       component="img"
                       src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${params.id}`}
                       alt="ARIS QR CODE"
-                      sx={{ height: "90%" }}
+                      sx={{ height: "85%"}}
                     />
                     <Typography variant="subtitle1" color="text.secondary">
                       Bite Case ID
@@ -241,10 +239,12 @@ const ViewBiteCase = () => {
                   </Grid>
                 </Grid>
                 <br />
-                <Divider>Exposure Detail</Divider>
+                <Divider>Exposure Details</Divider>
+
                 <Grid container spacing={2}>
                   <Grid
                     item
+                    xs={12}
                     sm={12}
                     md={6}
                     sx={{
@@ -284,7 +284,8 @@ const ViewBiteCase = () => {
                       <b>{bites[0].exposure_category} </b>
                     </Typography>
                   </Grid>
-                  <Grid item sm={12} md={6}>
+
+                  <Grid item xs={12} sm={12} md={6}>
                     <Typography variant="subtitle1" color="text.secondary">
                       Vaccination Status:
                     </Typography>
@@ -321,7 +322,7 @@ const ViewBiteCase = () => {
               </ProfileCard>
             </Grid>
 
-            <Grid item sm={12}>
+            <Grid item xs={12} sm={12}>
               <Button
                 variant="contained"
                 sx={{
@@ -338,7 +339,7 @@ const ViewBiteCase = () => {
               <ProfileCard>
                 <TableContainer component={Paper}>
                   <Table
-                    sx={{ minWidth: 650, alignContent: "center" }}
+                    sx={{ minWidth: 625, alignContent: "center"}}
                     size="small"
                   >
                     <TableHead>
@@ -349,8 +350,7 @@ const ViewBiteCase = () => {
                         <StyledTableCell>Lot#</StyledTableCell>
                         <StyledTableCell>Vaccinator</StyledTableCell>
                         <StyledTableCell>Remarks</StyledTableCell>
-                        <StyledTableCell>Edit</StyledTableCell>
-                        <StyledTableCell>Delete</StyledTableCell>
+                        <StyledTableCell colSpan={2}>Actions</StyledTableCell>
                       </StyledTableRow>
                     </TableHead>
                     <TableBody>
@@ -550,7 +550,7 @@ const ViewBiteCase = () => {
                   />
                 </Grid>
 
-                <Grid item xs={12} sm={12} md={6}>
+                 {/*<Grid item xs={12} sm={12} md={6}>
                   <StyledTextField
                     required
                     fullWidth
@@ -563,7 +563,7 @@ const ViewBiteCase = () => {
                   />
                 </Grid>
 
-                {/*  <Grid item xs={12} sm={12} md={6}>
+                 <Grid item xs={12} sm={12} md={6}>
                 <StyledTextField
                   required
                   fullWidth

@@ -216,7 +216,7 @@ export const Contact = (props) => {
             </div>
           </div>
 
-          {/* <div className="col-md-12">
+          <div className="col-md-12">
             <div className="row">
               <div className="social">
                 <ul>
@@ -230,15 +230,15 @@ export const Contact = (props) => {
                       <i className="fa fa-twitter"></i>
                     </a>
                   </li>
-                  <li>
+                  {/* <li>
                     <a href={props.data ? props.data.youtube : "/"}>
                       <i className="fa fa-youtube"></i>
                     </a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>

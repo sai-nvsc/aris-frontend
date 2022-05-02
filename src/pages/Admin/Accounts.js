@@ -65,7 +65,7 @@ const Accounts = () => {
       flex: 1,
       headerAlign: "center",
       align: "center",
-      minWidth: 110,
+      minWidth: 90,
     },
     {
       field: "email",
@@ -73,7 +73,7 @@ const Accounts = () => {
       flex: 1,
       headerAlign: "center",
       align: "center",
-      minWidth: 100,
+      minWidth: 120,
     },
     {
       field: "username",
@@ -81,44 +81,31 @@ const Accounts = () => {
       flex: 1,
       headerAlign: "center",
       align: "center",
-      minWidth: 80,
+      minWidth: 85,
     },
     {
       field: "Edit",
-      headerName: "Edit",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      minWidth: 85,
-      renderCell: (cellValues) => {
-        return (
-          <EditAccount
-            id={admin.id}
-            data={cellValues.row}
-            startIcon={<Edit style={{ color: "#ff8a80" }} />}
-          />
-        );
-      },
-      sortable: false,
-    },
-    {
-      field: "Delete",
-      headerName: "Delete",
+      headerName: "Actions",
       flex: 1,
       headerAlign: "center",
       align: "center",
       minWidth: 90,
-      sortable: false,
       renderCell: (cellValues) => {
         return (
+          <>
+          <EditAccount
+            id={admin.id}
+            data={cellValues.row}
+            startIcon={<Edit style={{ color: "#ff8a80" }} />} />
           <AdminDelete
             id={admin._id}
             name={admin.admin_name}
             collection="admins"
-            data={cellValues.row}
-          />
+            data={cellValues.row}/>
+          </>
         );
       },
+      sortable: false,
     },
   ];
   const handleCellClick = (param, e) => {

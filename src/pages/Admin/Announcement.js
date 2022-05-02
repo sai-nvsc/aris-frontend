@@ -9,9 +9,11 @@ import {
   CardActions,
   CardContent,
   Container,
+  Dialog,
+  DialogContent,
+  DialogTitle,
   Divider,
   Grid,
-  Modal,
   Snackbar,
   TextField,
   Typography,
@@ -72,7 +74,6 @@ const Announcement = () => {
   };
 
   useEffect(() => {
-    //console.log(announcement);
     dispatch(GetAllAnnThunk({ id: user._id }));
     return () => {};
   }, [dispatch, user]);
@@ -192,7 +193,6 @@ const Announcement = () => {
 
                       <AdminDelete
                         id={ann._id}
-                        //name={ann.brand_name}
                         collection="announcements"
                       />
                     </CardActions>
@@ -203,16 +203,10 @@ const Announcement = () => {
         </Box>
       </Container>
 
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-        justifyContent="center"
-        transform="translate(-50%, -50%)"
-        top="50%"
-        position="absolute"
-      >
+
+  <Dialog open={open} onClose={handleClose} maxWidth="md">
+    <DialogTitle>Add New Announcement</DialogTitle>
+      <DialogContent>
         <Box
           autoComplete="off"
           sx={{
@@ -220,21 +214,10 @@ const Announcement = () => {
             flexDirection: "column",
             backgroundColor: "white",
             alignItems: "center",
-            p: 2,
-            borderRadius: 5,
-            boxShadow: 3,
+            p: 2,    
           }}
         >
-          <Container maxWidth="lg">
-            <Typography
-              component="h1"
-              variant="h4"
-              color="text.primary"
-              marginBottom={4}
-            >
-              Add New Announcement
-            </Typography>
-
+          <Container maxWidth="md">
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <StyledTextField
@@ -311,7 +294,8 @@ const Announcement = () => {
             </Box>
           </Container>
         </Box>
-      </Modal>
+      </DialogContent>
+    </Dialog>
       <Footer />
     </Box>
   );

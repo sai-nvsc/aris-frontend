@@ -278,7 +278,7 @@ const Inventory = () => {
               },
             }}
           >
-            <div style={{ height: 450, width: "auto" }}>
+            <div style={{ height: 500, width: "auto" }}>
               {!loading && inventory && (
                 <>
                   <InventoryAlert />

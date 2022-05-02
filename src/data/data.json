@@ -171,7 +171,7 @@
       "address": "Km 14. East Service Road, Western Bicutan, 1630, Taguig City ",
       "phone": "+1 123 456 1234",
       "email": "aris.dev1@gmail.com",
-      "facebook": "fb.com",
+      "facebook": "https://facebook.com/service.aris",
       "twitter": "twitter.com",
       "youtube": "youtube.com/"
     },
@@ -184,12 +184,12 @@
       {
         "icon": "fa fa-calendar",
         "title": "Appointment System",
-        "text": "It enables you to set an appointment ahead of time for future."
+        "text": "It enables you to set an appointment ahead of time."
       },
       {
         "icon": "fa fa-medkit",
         "title": "Nearby Treatment Centers",
-        "text": "It enables you to see the nearby Treatment Centers on your location."
+        "text": "It enables you to see the nearby Treatment Centers from your current location."
       },
       {
         "icon": "fa fa-bar-chart",

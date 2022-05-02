@@ -193,7 +193,7 @@ const Dashboard = () => {
         </Typography>
         <br />
         <Grid container item xs={12} spacing={2}>
-          <Grid item xl={3} md={4} sm={6} xs={12}>
+          <Grid item xl={3} l={3} md={4} sm={4} xs={12}>
             <Paper
               elevation={12}
               style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727", textAlign: 'center' }}
@@ -217,7 +217,7 @@ const Dashboard = () => {
             </Paper>
           </Grid>
 
-          <Grid item xl={3} md={4} sm={6} xs={12}>
+          <Grid item xl={3} l={3} md={4} sm={4} xs={12}>
             <Paper
               elevation={12}
               style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727", textAlign: 'center', }}
@@ -297,7 +297,7 @@ const Dashboard = () => {
             </Paper>
           </Grid>
 
-          <Grid item xl={3} md={4} sm={6} xs={12}>
+          <Grid item xl={3}  l={3} md={4} sm={4} xs={12}>
             <Paper
               elevation={12}
               style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727", textAlign: 'center'}}
@@ -321,35 +321,34 @@ const Dashboard = () => {
             </Paper>
           </Grid>
 
-          <Grid item xl={3} md={4} sm={6} xs={12}>
-            <Paper
-              elevation={12}
+          <Grid item xl={3} l={3} md={12} sm={12} xs={12}>
+            <Paper elevation={12}
               style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727" }}
-            >
+            >   
               <StyledLink to="/admin/bitecases">
                 <Typography variant="h6" align="center">
                   Total Rabies Exposures
-                </Typography>
-                <Typography align="center" variant="h1">
+                </Typography>                
+                  <Typography align="center" variant="h1">
                   {clinic_counts ? clinic_counts.bitecase : 0}
-                </Typography>                          
+                </Typography>                                      
                 <Typography align="center" variant="h6">
                   On-going: {clinic_counts ? clinic_counts.on_going : 0}
-                </Typography>
-                <Typography align="center" variant="h6">
+                </Typography>               
+                <Typography align="center" variant="h6" >
                   Cleared: {clinic_counts ? clinic_counts.cleared : 0}
-                </Typography>
+                </Typography>             
                 <Typography align="center" variant="h6">
                   Untracked: {clinic_counts ? clinic_counts.untracked : 0}
-                </Typography>
+                </Typography>               
                  <Typography align="center" variant="subtitle2" color="text.secondary">
                   <i>As of {moment().format("MMMM DD, YYYY")}</i>
                 </Typography>
-              </StyledLink>
+              </StyledLink>          
             </Paper>
           </Grid>
 
-          <Grid item xl={3} md={4} sm={6} xs={12}>
+          <Grid item xl={3} md={3} sm={6} xs={12}>
             <Paper
               elevation={12}
               style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727",textAlign:'center' }}
@@ -361,7 +360,7 @@ const Dashboard = () => {
             </Paper>
           </Grid>
 
-          <Grid item xl={3} md={4} sm={6} xs={12}>
+          <Grid item xl={3} md={3} sm={6} xs={12}>
             <Paper
               elevation={12}
               style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727",textAlign:'center' }}
@@ -373,7 +372,7 @@ const Dashboard = () => {
             </Paper>
           </Grid>
 
-          <Grid item xl={3} md={4} sm={6} xs={12}>
+          <Grid item xl={3} md={3} sm={6} xs={12}>
             <Paper
               elevation={12}
               style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727",textAlign:'center' }}
@@ -385,7 +384,7 @@ const Dashboard = () => {
             </Paper>
           </Grid>
 
-          <Grid item xl={3} md={4} sm={6} xs={12}>
+          <Grid item xl={3} md={3} sm={6} xs={12}>
             <Paper
               elevation={12}
               style={{ margin: "0px 0px 8px 0px", border: "2px solid #f32727", textAlign:'center' }}

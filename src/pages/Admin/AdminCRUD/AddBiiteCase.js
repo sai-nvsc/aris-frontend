@@ -9,7 +9,6 @@ import {
   FormControl,
   FormControlLabel,
   FormHelperText,
-  FormLabel,
   Grid,
   InputLabel,
   MenuItem,
@@ -34,9 +33,11 @@ const AddBiiteCase = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   function refreshPage() {
     window.location.reload(false);
   }
+
   const [values, setvalues] = useState({
     user: "",
     exposure_category: "",
@@ -85,17 +86,28 @@ const AddBiiteCase = () => {
   };
   //Popover
   const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl2, setAnchorEl2] = useState(null);
+
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handlePopoverClose = () => {
     setAnchorEl(null);
   };
+  const handlePopoverrOpen = (event) => {
+    setAnchorEl2(event.currentTarget);
+  };
+  const handlePopoverrClose = () => {
+    setAnchorEl2(null);
+  };
   const openPop = Boolean(anchorEl);
+  const openPopover = Boolean(anchorEl2);
+
 
   const handleChange = (e) => {
     setvalues({ ...values, [e.target.name]: e.target.value });
   };
+
   return (
     <>
       <StyledButton onClick={handleOpen} margin="10" startIcon={<AddIcon />}>
@@ -112,7 +124,6 @@ const AddBiiteCase = () => {
             p: 2,
             borderRadius: 5,
             boxShadow: 3,
-            maxHeight: "100vh",
           }}
         >
           <Container maxWidth="lg">
@@ -122,11 +133,11 @@ const AddBiiteCase = () => {
               color="text.primary"
               marginBottom={2}
             >
-              New Bite Case Record
+              New Case Record
             </Typography>
 
             <Grid container spacing={0.5}>
-              <Grid item xs={6} sm={6} md={6}>
+              <Grid item xs={12} sm={6} md={6}>
                 <StyledTextField
                   required
                   fullWidth
@@ -139,7 +150,7 @@ const AddBiiteCase = () => {
                 />
               </Grid>
 
-              <Grid item xs={6} sm={6} md={6}>
+              <Grid item xs={12} sm={6} md={6}>
                 <FormControl
                   required
                   fullWidth
@@ -153,14 +164,15 @@ const AddBiiteCase = () => {
                 >
                   <InputLabel>Category</InputLabel>
                   <Select
+                    id="category"
                     label="Category"
                     onChange={handleChange}
                     name="exposure_category"
                     value={values.exposure_category}
                   >
-                    <MenuItem value="1">1</MenuItem>
-                    <MenuItem value="2">2</MenuItem>
-                    <MenuItem value="3">3</MenuItem>
+                    <MenuItem id="c1" value="1">1</MenuItem>
+                    <MenuItem id="c2" value="2">2</MenuItem>
+                    <MenuItem id="c3" value="3">3</MenuItem>
                   </Select>
                   {add_case_errors && add_case_errors.exposure_category ? (
                     <FormHelperText>
@@ -172,7 +184,7 @@ const AddBiiteCase = () => {
                 </FormControl>
                 {/* </Grid>
 
-              <Grid item xs={6} sm={6} md={6}> */}
+              <Grid item xs={12} sm={6} md={6}> */}
                 <Typography
                   aria-owns={openPop ? "mouse-over-popover" : undefined}
                   aria-haspopup="true"
@@ -180,7 +192,7 @@ const AddBiiteCase = () => {
                   onMouseLeave={handlePopoverClose}
                   color="text.secondary"
                 >
-                  *Bite Categories?
+                  *Exposure Categories?
                 </Typography>
 
                 <Popover
@@ -237,7 +249,7 @@ const AddBiiteCase = () => {
                 <Chip label="History of Exposure" color="primary"></Chip>
               </Divider>
 
-              <Grid item xs={6} sm={6} md={6}>
+              <Grid item xs={12} sm={6} md={6}>
                 <LocalizationProvider dateAdapter={DateAdapterMoment}>
                   <DatePicker
                     disableFuture
@@ -265,7 +277,7 @@ const AddBiiteCase = () => {
                 </LocalizationProvider>
               </Grid>
 
-              <Grid item xs={6} sm={6} md={6}>
+              <Grid item xs={12} sm={6} md={6}>
                 <FormControl
                   required
                   fullWidth
@@ -302,7 +314,7 @@ const AddBiiteCase = () => {
                 </FormControl>
               </Grid>
 
-              <Grid item xs={6} sm={6} md={6}>
+              <Grid item xs={12} sm={6} md={6}>
                 <FormControl
                   required
                   fullWidth
@@ -338,7 +350,7 @@ const AddBiiteCase = () => {
                 </FormControl>
               </Grid>
 
-              <Grid item xs={6} sm={6} md={6}>
+              <Grid item xs={12} sm={6} md={6}>
                 <FormControl
                   required
                   fullWidth
@@ -377,7 +389,7 @@ const AddBiiteCase = () => {
                 </FormControl>
               </Grid>
 
-              <Grid item xs={6} sm={6} md={6}>
+              <Grid item xs={12} sm={6} md={6}>
                 <StyledTextField
                   required
                   fullWidth
@@ -403,7 +415,7 @@ const AddBiiteCase = () => {
               </Grid>
 
               {/* <Divider><Chip variant="filled">PEP</Chip></Divider> */}
-              <Grid item xs={6} sm={6} md={6}>
+              <Grid item xs={12} sm={6} md={6}>
                 <FormControl
                   required
                   fullWidth
@@ -425,6 +437,7 @@ const AddBiiteCase = () => {
                   >
                     <MenuItem value="IM">IM</MenuItem>
                     <MenuItem value="ID">ID</MenuItem>
+                    <MenuItem value="NA">Not Applicable</MenuItem>
                   </Select>
                   {add_case_errors &&
                   add_case_errors["history_of_exposure.route"] ? (
@@ -437,7 +450,7 @@ const AddBiiteCase = () => {
                 </FormControl>
               </Grid>
 
-              <Grid item xs={6} sm={6} md={6}>
+              <Grid item xs={12} sm={6} md={6}>
                 <FormControl
                   error={
                     add_case_errors && add_case_errors.anti_tetanus
@@ -445,14 +458,49 @@ const AddBiiteCase = () => {
                       : false
                   }
                 >
-                  <FormLabel>ERIG/HRIG Administered?</FormLabel>
+                  <Typography
+                  aria-owns={openPopover ? "RIGinfo" : undefined}
+                  aria-haspopup="true"
+                  onMouseEnter={handlePopoverrOpen}
+                  onMouseLeave={handlePopoverrClose}
+                  >
+                    ERIG/HRIG Administered?
+                    </Typography>
+                  <Popover
+                  id="RIGinfo"
+                  sx={{
+                    pointerEvents: "none",
+                  }}
+                  open={openPopover}
+                  anchorEl={anchorEl2}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "left",
+                  }}
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                  }}
+                  onClose={handlePopoverrClose}
+                  disableRestoreFocus
+                >
+                  <Typography sx={{ p: 1, display: "inline-block" }}>
+                    {" "}
+                    RIG is not required for people who have been previously vaccinated against rabies and Cat.1 patients.
+                  </Typography>
+                </Popover>
+
                   <RadioGroup row name="anti_tetanus" onChange={handleChange}>
                     <FormControlLabel
+                    id="yes"
                       value="true"
                       control={<Radio />}
                       label="Yes"
+
+                      
                     />
                     <FormControlLabel
+                    id="no"
                       value="false"
                       control={<Radio />}
                       label="No"
@@ -468,7 +516,7 @@ const AddBiiteCase = () => {
                 </FormControl>
               </Grid>
 
-              <Grid item xs={6} sm={6} md={6}>
+              <Grid item xs={12} sm={6} md={6}>
                 <StyledTextField
                   required
                   fullWidth
@@ -489,7 +537,7 @@ const AddBiiteCase = () => {
                 />
               </Grid>
 
-              <Grid item xs={6} sm={6} md={6}>
+              <Grid item xs={12} sm={6} md={6}>
                 <FormControl
                   required
                   fullWidth
@@ -522,19 +570,42 @@ const AddBiiteCase = () => {
                 </FormControl>
               </Grid>
 
-              <Grid item xs={6} sm={6} md={6}>
-                <StyledTextField
+              <Grid item xs={12} sm={6} md={6}>
+              <FormControl
+                  required
                   fullWidth
-                  id="classification"
-                  label="Classification"
-                  name="classification"
                   size="small"
-                  autoFocus
-                  onChange={handleChange}
-                />
+                  sx={{ backgroundColor: "white" }}
+                  error={
+                    add_case_errors && add_case_errors.classification
+                      ? true
+                      : false
+                  }
+                >
+                  <InputLabel>Classification</InputLabel>
+                  <Select
+                    label="Patient Classification"
+                    onChange={handleChange}
+                    name="classification"
+                    value={values.classification}
+                  >
+                    <MenuItem value="Healthy">Healthy</MenuItem>
+                    <MenuItem value="Non-Traceable">Non-Traceable</MenuItem>
+                    <MenuItem value="Rabies Suspect">Rabies Suspect</MenuItem>
+                    <MenuItem value="Rabies Probable">Rabies Probable</MenuItem>
+                    <MenuItem value="Rabies Confirmed">Rabies Confirmed</MenuItem>
+                  </Select>
+                  {add_case_errors && add_case_errors.classification ? (
+                    <FormHelperText>
+                      {add_case_errors.classification}
+                    </FormHelperText>
+                  ) : (
+                    ""
+                  )}
+                </FormControl>
               </Grid>
 
-              <Grid item xs={6} sm={6} md={6}>
+              <Grid item xs={12} sm={6} md={6}>
                 <FormControl
                   required
                   fullWidth
@@ -567,7 +638,7 @@ const AddBiiteCase = () => {
                 </FormControl>
               </Grid>
 
-              <Grid item xs={6} sm={6} md={6}>
+              <Grid item xs={12} sm={6} md={6}>
                 <StyledTextField
                   required
                   size="small"

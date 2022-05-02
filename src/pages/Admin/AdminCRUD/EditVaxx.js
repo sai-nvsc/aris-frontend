@@ -6,13 +6,14 @@ import { EditVaxxThunk } from "../../../redux/slices/VaccineSlice";
 import {
   Box,
   Container,
+  Dialog,
+  DialogContent,
+  DialogTitle,
   FormControl,
   Grid,
   InputLabel,
   MenuItem,
-  Modal,
   Select,
-  Typography,
 } from "@mui/material";
 import {
   StyledTextField,
@@ -79,16 +80,9 @@ const EditVaxx = ({ eVax }) => {
         startIcon={<Edit style={{ color: "#ff8a80", fontSize: "large" }} />}
       ></EditButton>
 
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-        justifyContent="center"
-        transform="translate(-50%, -50%)"
-        top="50%"
-        position="absolute"
-      >
+    <Dialog open={open} onClose={handleClose} maxWidth="md">
+        <DialogTitle>Edit Post Exposure Vaccination</DialogTitle>
+        <DialogContent>
         <form encType="multipart/form-data" noValidate onSubmit={formHandler}>
           <Box
             sx={{
@@ -97,19 +91,10 @@ const EditVaxx = ({ eVax }) => {
               backgroundColor: "white",
               alignItems: "center",
               p: 2,
-              borderRadius: 5,
-              boxShadow: 3,
+             
             }}
           >
-            <Container maxWidth="lg">
-              <Typography
-                component="h1"
-                variant="h4"
-                color="text.primary"
-                marginBottom={2}
-              >
-                Post Exposure Vaccination
-              </Typography>
+            <Container maxWidth="md">          
 
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={12} md={6}>
@@ -213,19 +198,6 @@ const EditVaxx = ({ eVax }) => {
                     onChange={handleChange}
                   />
                 </Grid>
-
-                <Grid item xs={12} sm={12} md={6}>
-                  <StyledTextField
-                    required
-                    fullWidth
-                    id="clinic"
-                    label="Clinic"
-                    name="clinic"
-                    size="small"
-                    value={user.clinic}
-                    disabled="true"
-                  />
-                </Grid>
               </Grid>
 
               <Box
@@ -235,6 +207,7 @@ const EditVaxx = ({ eVax }) => {
                   backgroundColor: "white",
                   alignItems: "center",
                   justifyContent: "center",
+                  mt:3
                 }}
               >
                 <StyledButton type="submit" variant="contained">
@@ -242,7 +215,6 @@ const EditVaxx = ({ eVax }) => {
                 </StyledButton>
                 <StyledButton
                   variant="outlined"
-                  //sx={{ mt: 3, mb: 2 }}
                   onClick={handleClose}
                 >
                   Cancel
@@ -251,7 +223,8 @@ const EditVaxx = ({ eVax }) => {
             </Container>
           </Box>
         </form>
-      </Modal>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

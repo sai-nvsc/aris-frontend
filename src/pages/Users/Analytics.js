@@ -82,17 +82,16 @@ const Analytics = () => {
     <Box
       sx={{
         bgcolor: "background.paper",
-        pt: 7,
-        pb: 12,
-        minHeight: "100vh",
+        pt: 3,
       }}
     >
       <CssBaseline />
       <PersistentDrawerLeft title="ARIS Statistic Reports" />
+      
+      <Container sx={{ py: 5 }} maxWidth="xl">
       <Divider light>
         <Chip label="Latest Statistics from ARIS" color="primary"></Chip>
       </Divider>
-      <Container sx={{ py: 5 }} maxWidth="xl">
         <Grid container item xs={12} spacing={2}>
           {/* Total Bite Cases  */}
           <Grid item xl={12} md={12} lg={12} sm={12} xs={12}>
@@ -198,7 +197,7 @@ const Analytics = () => {
             </Paper>
           </Grid>
           {/* Cases per Brgy by Source */}
-          <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
+          <Grid item xl={6} lg={6} md={12} sm={12} xs={12}>
             <Paper elevation={12}>
               <>
                 <iframe
@@ -209,15 +208,15 @@ const Analytics = () => {
                     borderRadius: "2px",
                     maxWidth: "100%",
                   }}
-                  width="800"
-                  height="600"
+                  width="1400"
+                  height="720"
                   src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6237e564-ceb9-4dcd-8187-ae864e112cf8&maxDataAge=300&theme=light&autoRefresh=true"
                 ></iframe>
               </>
             </Paper>
           </Grid>
           {/* Cases per Brgy by Type */}
-          <Grid item xl={6} lg={6} md={6} sm={12} xs={12}>
+          <Grid item xl={6} lg={6} md={12} sm={12} xs={12}>
             <Paper elevation={12}>
               <>
                 <iframe
@@ -228,9 +227,28 @@ const Analytics = () => {
                     borderRadius: "2px",
                     maxWidth: "100%",
                   }}
-                  width="800"
-                  height="600"
+                  width="1400"
+                  height="720"
                   src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6237e7b7-ba30-423b-8bf7-3581ceb9f952&maxDataAge=300&theme=light&autoRefresh=true"
+                ></iframe>
+              </>
+            </Paper>
+          </Grid>
+          {/* Total Exposures by Brgy per Year */}
+          <Grid item xl={12} md={12} lg={12} sm={12} xs={12}>
+            <Paper elevation={12}>
+              <>
+                <iframe
+                  title="tebpy"
+                  style={{
+                    background: "#FFFFFF",
+                    border: "none",
+                    borderRadius: "2px",
+                    maxWidth: "100%",
+                  }}
+                  width="1400"
+                  height="720"
+                  src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6238a131-e005-4e8c-8847-02cbb4e1a1f1&maxDataAge=300&theme=light&autoRefresh=true"
                 ></iframe>
               </>
             </Paper>

@@ -12,7 +12,6 @@ import {
   Radio,
   RadioGroup,
   Select,
-  Typography,
   Divider,
   FormControlLabel,
   Dialog,
@@ -25,7 +24,6 @@ import {
   EditButton,
   StyledButton,
 } from "../../../assets/styles";
-//import MaterialTable from 'material-table'
 import DateAdapterMoment from "@mui/lab/AdapterMoment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
@@ -55,6 +53,7 @@ const EditBiteCase = ({ data, id }) => {
     status_of_vaccination: data.status_of_vaccination,
     classification: data.classification,
     clinic: user.clinic,
+    animal_status: data.animal_status,
     patient_status: data.patient_status,
   });
 
@@ -84,6 +83,7 @@ const EditBiteCase = ({ data, id }) => {
     formData.append("status_of_vaccination", values.status_of_vaccination);
     formData.append("classification", values.classification);
     formData.append("clinic", user.clinic);
+    formData.append("animal_status", values.animal_status);
     formData.append("patient_status", values.patient_status);
     dispatch(EditCaseThunk({ data: formData, id: data._id }));
     setOpen(false);
@@ -96,7 +96,7 @@ const EditBiteCase = ({ data, id }) => {
       <EditButton onClick={handleOpen} startIcon={<Edit />}></EditButton>
 
       <Dialog open={open} onClose={handleClose} maxWidth="md">
-        <DialogTitle>Edit Bite Case Exposure</DialogTitle>
+        <DialogTitle>Edit Exposure Case</DialogTitle>
         <DialogContent>
           <form
             encType="multipart/form-data"
@@ -110,15 +110,11 @@ const EditBiteCase = ({ data, id }) => {
                 backgroundColor: "white",
                 alignItems: "center",
                 p: 2,
-                borderRadius: 5,
-                boxShadow: 3,
               }}
             >
               <Container maxWidth="lg">
-                <Typography>Name {values.user[0].first_name}</Typography>
-
-                <Grid container spacing={3}>
-                  <Grid item sm={6} md={6}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={6} md={6}>
                     <StyledTextField
                       required
                       fullWidth
@@ -133,7 +129,7 @@ const EditBiteCase = ({ data, id }) => {
                     />
                   </Grid>
 
-                  <Grid item sm={6} md={6}>
+                  <Grid item xs={12} sm={6} md={6}>
                     <FormControl
                       required
                       fullWidth
@@ -160,7 +156,7 @@ const EditBiteCase = ({ data, id }) => {
                     <Chip label="History of Exposure" color="primary"></Chip>
                   </Divider>
 
-                  <Grid item sm={6} md={6}>
+                  <Grid item xs={12} sm={6} md={6}>
                     <LocalizationProvider dateAdapter={DateAdapterMoment}>
                       <DatePicker
                         disableFuture
@@ -188,7 +184,7 @@ const EditBiteCase = ({ data, id }) => {
                     </LocalizationProvider>
                   </Grid>
 
-                  <Grid item sm={6} md={6}>
+                  <Grid item xs={12} sm={6} md={6}>
                     <FormControl
                       required
                       fullWidth
@@ -211,7 +207,7 @@ const EditBiteCase = ({ data, id }) => {
                     </FormControl>
                   </Grid>
 
-                  <Grid item sm={6} md={6}>
+                  <Grid item xs={12} sm={6} md={6}>
                     <FormControl
                       required
                       fullWidth
@@ -233,7 +229,7 @@ const EditBiteCase = ({ data, id }) => {
                     </FormControl>
                   </Grid>
 
-                  <Grid item xs={6} sm={6} md={6}>
+                  <Grid item xs={12} sm={6} md={6}>
                     <StyledTextField
                       required
                       fullWidth
@@ -247,7 +243,7 @@ const EditBiteCase = ({ data, id }) => {
                     />
                   </Grid>
 
-                  <Grid item sm={6} md={6}>
+                  <Grid item xs={12} sm={6} md={6}>
                     <FormControl
                       required
                       fullWidth
@@ -263,11 +259,12 @@ const EditBiteCase = ({ data, id }) => {
                       >
                         <MenuItem value="IM">IM</MenuItem>
                         <MenuItem value="ID">ID</MenuItem>
+                        <MenuItem value="NA">Not Applicable</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>
 
-                  <Grid item sm={6} md={6}>
+                  <Grid item xs={12} sm={6} md={6}>
                     <FormControl
                       required
                       fullWidth
@@ -288,9 +285,9 @@ const EditBiteCase = ({ data, id }) => {
                     </FormControl>
                   </Grid>
 
-                  <Grid item sm={6} md={6}>
+                  <Grid item xs={12} sm={6} md={6}>
                     <FormControl>
-                      <FormLabel>HRIG Administered?</FormLabel>
+                      <FormLabel>ERIG/HRIG Administered?</FormLabel>
                       <RadioGroup
                         row
                         name="anti_tetanus"
@@ -311,7 +308,7 @@ const EditBiteCase = ({ data, id }) => {
                     </FormControl>
                   </Grid>
 
-                  <Grid item sm={6} md={6}>
+                  <Grid item xs={12} sm={6} md={6}>
                     <StyledTextField
                       required
                       fullWidth
@@ -325,14 +322,14 @@ const EditBiteCase = ({ data, id }) => {
                     />
                   </Grid>
 
-                  <Grid item sm={6} md={6}>
+                  <Grid item xs={12} sm={6} md={6}>
                     <FormControl
                       required
                       fullWidth
                       size="small"
                       sx={{ backgroundColor: "white" }}
                     >
-                      <InputLabel>Status</InputLabel>
+                      <InputLabel>Vaccination Status</InputLabel>
                       <Select
                         label="Source"
                         onChange={handleChange}
@@ -346,31 +343,63 @@ const EditBiteCase = ({ data, id }) => {
                     </FormControl>
                   </Grid>
 
-                  <Grid item sm={6} md={6}>
-                    <StyledTextField
-                      required
-                      fullWidth
-                      id="classification"
-                      label="Classification"
-                      name="classification"
-                      size="small"
-                      autoFocus
-                      onChange={handleChange}
-                      value={values.classification}
-                    />
-                  </Grid>
+                  <Grid item xs={12} sm={6} md={6}>
+              <FormControl
+                  required
+                  fullWidth
+                  size="small"
+                  sx={{ backgroundColor: "white" }}
+                >
+                  <InputLabel>Classification</InputLabel>
+                  <Select
+                    label="Patient Classification"
+                    onChange={handleChange}
+                    name="classification"
+                    value={values.classification}
+                  >
+                    <MenuItem value="Healthy">Healthy</MenuItem>
+                    <MenuItem value="Non-Traceable">Non-Traceable</MenuItem>
+                    <MenuItem value="Rabies Suspect">Rabies Suspect</MenuItem>
+                    <MenuItem value="Rabies Probable">Rabies Probable</MenuItem>
+                    <MenuItem value="Rabies Confirmed">Rabies Confirmed</MenuItem>
+                  </Select>                
+                </FormControl>
+              </Grid>
 
-                  <Grid item sm={6} md={6}>
-                    <StyledTextField
-                      size="small"
-                      sx={{ backgroundColor: "white" }}
-                      label="Patient Status"
-                      name="patient_status"
-                      fullWidth
-                      onChange={handleChange}
-                      value={values.patient_status}
-                    />
-                  </Grid>
+                  <Grid item xs={12} sm={6} md={6}>
+                <FormControl
+                  required
+                  fullWidth
+                  size="small"
+                  sx={{ backgroundColor: "white" }}                 
+                >
+                  <InputLabel>Animal Status</InputLabel>
+                  <Select
+                    label="Animal Status"
+                    onChange={handleChange}
+                    name="animal_status"
+                    value={values.animal_status}
+                  >
+                    <MenuItem value="Dead">Dead</MenuItem>
+                    <MenuItem value="Alive">Alive</MenuItem>
+                    <MenuItem value="Killed">Killed</MenuItem>
+                  </Select>
+                  
+                </FormControl>
+              </Grid>
+
+              <Grid item xs={12} sm={6} md={6}>
+                <StyledTextField
+                  required
+                  size="small"
+                  sx={{ backgroundColor: "white" }}
+                  label="Patient Status"
+                  name="patient_status"
+                  fullWidth
+                  onChange={handleChange}
+                  value={values.patient_status}
+                />
+              </Grid>
                 </Grid>
 
                 <Box
@@ -380,6 +409,7 @@ const EditBiteCase = ({ data, id }) => {
                     backgroundColor: "white",
                     alignItems: "center",
                     justifyContent: "center",
+                    mt:3
                   }}
                 >
                   <StyledButton type="submit" variant="contained">
@@ -387,7 +417,6 @@ const EditBiteCase = ({ data, id }) => {
                   </StyledButton>
                   <StyledButton
                     variant="outlined"
-                    //sx={{ mt: 3, mb: 2 }}
                     onClick={handleClose}
                   >
                     Cancel

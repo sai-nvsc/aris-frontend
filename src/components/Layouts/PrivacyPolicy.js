@@ -213,7 +213,7 @@ const Aris = () => {
             reports or update the clinic with your rabies-related concerns.
           </Typography>
 
-          <Typography sx={{ mt: 4, mb: 4 }}>
+         {/*  <Typography sx={{ mt: 4, mb: 4 }}>
             <b>LOG DATA</b>
           </Typography>
           <Typography variant="p" align="justify">
@@ -226,7 +226,7 @@ const Aris = () => {
             the Service, and other statistics. The Log Data are statistical and
             technical data that does not contain personal information and are
             merely collected to improve the application’s services.
-          </Typography>
+          </Typography> */}
 
           <Typography sx={{ mt: 4, mb: 4 }}>
             <b>TOKENS</b>
@@ -273,7 +273,7 @@ const Aris = () => {
             need to know basis, and in all cases only for legitimate business
             purposes, as follows:
           </Typography>
-          <Typography variant="p" align="justify">
+          <Typography variant="p" align="justify" sx={{mt:2}}>
             <ul>
               <li>
                 {" "}
