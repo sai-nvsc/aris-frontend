@@ -236,9 +236,7 @@ const Accounts = () => {
                   onRowClick={handleRowClick}
                   components={{
                     Toolbar: GridToolbar,
-                    LoadingOverlay: LinearProgress,
                   }}
-                  loading
                   {...admin}
                 />
               )}

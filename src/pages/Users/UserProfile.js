@@ -127,6 +127,7 @@ export const UserProfile = () => {
     dispatch(clearSuccess());
     dispatch(clearError());
     setpasswordmatcherror(false);
+    window.location.reload();
   };
   useEffect(() => {
     dispatch(getUsersAnalyticsCounts());
@@ -203,7 +204,11 @@ export const UserProfile = () => {
                     }}
                     src={user.avatar.url}
                   />
-                  <StyledButton variant="contained" component="label" startIcon={<Edit />}>
+                  <StyledButton
+                    variant="contained"
+                    component="label"
+                    startIcon={<Edit />}
+                  >
                     <input
                       type="file"
                       name="avatar"

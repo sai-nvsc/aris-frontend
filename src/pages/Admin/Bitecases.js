@@ -6,7 +6,7 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Edit } from "@mui/icons-material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import PrintIcon from "@mui/icons-material/Print";
-import LinearProgress from '@mui/material/LinearProgress';
+import LinearProgress from "@mui/material/LinearProgress";
 import {
   Alert,
   AlertTitle,
@@ -82,7 +82,7 @@ const Bitecases = () => {
       align: "center",
       minWidth: 100,
       valueGetter: (cellValues) => {
-        return (cellValues.row.user[0].sex);
+        return cellValues.row.user[0].sex;
       },
       sortComparator: (v1, v2) => v1.localeCompare(v2),
     },
@@ -94,7 +94,7 @@ const Bitecases = () => {
       align: "center",
       minWidth: 160,
       valueGetter: (cellValues) => {
-        return (cellValues.row.user[0].address);
+        return cellValues.row.user[0].address;
       },
       sortComparator: (v1, v2) => v1.localeCompare(v2),
     },
@@ -145,7 +145,7 @@ const Bitecases = () => {
         return cellValues.row.history_of_exposure.type_of_exposure;
       },
     },
-  
+
     {
       field: "exposure_category",
       headerName: "Cat.",
@@ -340,7 +340,7 @@ const Bitecases = () => {
                   getRowId={(row) => row._id}
                   onCellClick={handleCellClick}
                   onRowClick={handleRowClick}
-                  components={{Toolbar: GridToolbar, LoadingOverlay: LinearProgress, }}
+                  components={{ Toolbar: GridToolbar }}
                   loading
                   {...bitecase}
                   getCellClassName={(params) => {

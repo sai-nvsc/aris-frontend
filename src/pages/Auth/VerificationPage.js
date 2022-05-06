@@ -80,6 +80,9 @@ const VerificationPage = () => {
                   you to verify your account by clicking the link sent to your
                   email address <b>{user.email}</b>
                 </Typography>
+                <Typography component="span">
+                  Didn't received code? Click Resend button.
+                </Typography>
 
                 <Grid container>
                   <Grid item xs>

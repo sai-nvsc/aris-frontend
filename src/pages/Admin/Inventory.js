@@ -30,7 +30,7 @@ import AdminDelete from "../../components/Layouts/Dialogs/AdminDelete";
 import EditInventory from "../Admin/AdminCRUD/EditInventory";
 import moment from "moment";
 import InventoryAlert from "../../helpers/InventoryAlerts";
-import LinearProgress from '@mui/material/LinearProgress';
+import LinearProgress from "@mui/material/LinearProgress";
 
 const Inventory = () => {
   const { inventory, loading, errors, success, add_errors } = useSelector(
@@ -289,8 +289,7 @@ const Inventory = () => {
                     getRowId={(row) => row._id}
                     onCellClick={handleCellClick}
                     onRowClick={handleRowClick}
-                    components={{Toolbar: GridToolbar, LoadingOverlay: LinearProgress, }}
-                    loading
+                    components={{ Toolbar: GridToolbar }}
                     {...inventory}
                     getCellClassName={(params) => {
                       if (params.field.stock === "stock") {

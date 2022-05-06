@@ -322,7 +322,6 @@ const Appointments = () => {
                   onRowClick={handleRowClick}
                   components={{
                     Toolbar: GridToolbar,
-                    LoadingOverlay: LinearProgress,
                   }}
                   loading={loading}
                   {...appointments}
