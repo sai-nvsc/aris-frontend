@@ -1,4 +1,4 @@
-import { Grid, Skeleton, Typography } from "@mui/material";
+import { Button, Grid, Skeleton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import moment from "moment";
 import CreateAppointment from "./CRUD/CreateAppointment";
@@ -77,6 +77,12 @@ const AppointmentsPending = ({ pending }) => {
                     date={moment(appointment.date).format("MMMM DD, YYYY")}
                     id={appointment._id}
                   />
+                  <Button
+                    href={`https://www.google.com/maps/search/?api=1&query=${appointment.clinicId[0].location.coordinates[1]},${appointment.clinicId[0].location.coordinates[0]}`}
+                    target="_blank"
+                  >
+                    View in Map
+                  </Button>
                 </Box>
               </Box>
             </Grid>

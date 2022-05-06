@@ -35,6 +35,7 @@ const Cancellation = ({ id, name, collection, ...rest }) => {
         color="error"
         onClick={dialogOpen}
         disabled={rest.status === "Ongoing"}
+        sx={{ marginRight: 3 }}
       >
         Cancel
       </Button>
