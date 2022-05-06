@@ -29,7 +29,6 @@ import {
   clearError,
   clearSuccess,
 } from "../../redux/slices/AdminSlices";
-import LinearProgress from "@mui/material/LinearProgress";
 
 const Accounts = () => {
   const { user } = useSelector((state) => state.user);

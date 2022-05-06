@@ -6,7 +6,6 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Edit } from "@mui/icons-material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import PrintIcon from "@mui/icons-material/Print";
-import LinearProgress from "@mui/material/LinearProgress";
 import {
   Alert,
   AlertTitle,

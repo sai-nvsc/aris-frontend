@@ -30,7 +30,6 @@ import AdminDelete from "../../components/Layouts/Dialogs/AdminDelete";
 import EditInventory from "../Admin/AdminCRUD/EditInventory";
 import moment from "moment";
 import InventoryAlert from "../../helpers/InventoryAlerts";
-import LinearProgress from "@mui/material/LinearProgress";
 
 const Inventory = () => {
   const { inventory, loading, errors, success, add_errors } = useSelector(

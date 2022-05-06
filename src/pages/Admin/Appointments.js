@@ -42,7 +42,6 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AcceptAppointment from "../Admin/AdminCRUD/AcceptAppointment";
 import CompleteAppointment from "../Admin/AdminCRUD/CompleteAppointment";
 import CancelApt from "../Admin/Admin_CancelApt";
-import LinearProgress from "@mui/material/LinearProgress";
 
 const Appointments = () => {
   const { success, errors, appointments, loading, appt_error } = useSelector(
