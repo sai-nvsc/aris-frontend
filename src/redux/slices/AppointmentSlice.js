@@ -270,10 +270,14 @@ const AppointmentSlice = createSlice({
     },
     [requestAppointment.fulfilled]: (state, action) => {
       state.appointment_request_loading = false;
-      state.pending = action.payload.appointment;
-      state.errors = null;
-      state.appt_error = null;
-      state.success = action.payload.success;
+      if (action.payload.eligibility) {
+        state.pending = action.payload.appointment;
+        state.errors = null;
+        state.appt_error = null;
+        state.success = action.payload.success;
+      } else {
+        state.appt_error = action.payload;
+      }
     },
     [requestAppointment.rejected]: (state, action) => {
       state.appointment_request_loading = false;
