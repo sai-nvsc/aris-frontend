@@ -49,7 +49,7 @@ import {
   clearError,
   clearSuccess,
 } from "../../../redux/slices/VaccineSlice";
-import {GetAllInvThunk} from "../../../redux/slices/InventorySlice";
+import { GetAllInvThunk } from "../../../redux/slices/InventorySlice";
 import { Comments } from "../../Users/Comments";
 import EditBiteStatus from "../../Admin/AdminCRUD/EditBiteStatus";
 import CaseNotFound from "../../extra/CaseNotFound";
@@ -58,7 +58,7 @@ const ViewBiteCase = () => {
   const { bites, loading, reports, vaxx, errors, success } = useSelector(
     (state) => state.vaccine
   );
-  const {inventory} = useSelector((state) => state.inventory);
+  const { inventory } = useSelector((state) => state.inventory);
   const { user } = useSelector((state) => state.user);
   const params = useParams();
   const dispatch = useDispatch();
@@ -239,7 +239,7 @@ const ViewBiteCase = () => {
                       component="img"
                       src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${params.id}`}
                       alt="ARIS QR CODE"
-                      sx={{ height: "85%"}}
+                      sx={{ height: "85%" }}
                     />
                     <Typography variant="subtitle1" color="text.secondary">
                       Bite Case ID
@@ -347,7 +347,7 @@ const ViewBiteCase = () => {
               <ProfileCard>
                 <TableContainer component={Paper}>
                   <Table
-                    sx={{ minWidth: 625, alignContent: "center"}}
+                    sx={{ minWidth: 625, alignContent: "center" }}
                     size="small"
                   >
                     <TableHead>
@@ -375,7 +375,9 @@ const ViewBiteCase = () => {
                             <StyledTableCell>{vaccine.vaccine}</StyledTableCell>
                             <StyledTableCell>{vaccine.lot}</StyledTableCell>
                             <StyledTableCell>
-                              {vaccine.admin[0].admin_name}
+                              {vaccine.admin[0]
+                                ? vaccine.admin[0].admin_name
+                                : "NULL"}
                             </StyledTableCell>
                             <StyledTableCell>{vaccine.remarks}</StyledTableCell>
                             <StyledTableCell>
@@ -524,8 +526,8 @@ const ViewBiteCase = () => {
                   </FormControl>
                 </Grid>
 
-                <Grid item xs={12} sm={12} md={6}>                  
-                <FormControl
+                <Grid item xs={12} sm={12} md={6}>
+                  <FormControl
                     required
                     fullWidth
                     size="small"
@@ -537,12 +539,14 @@ const ViewBiteCase = () => {
                       name="vaccine"
                       id="vaccine"
                       onChange={handleChange}
-                      
                     >
-                      {!loading && inventory && inventory.map((vax) => (
-                      <MenuItem value={vax.brand_name} key={vax}>{vax.brand_name + ` (L#` + vax.batch_no +`)`}</MenuItem>
-                      ))}
-
+                      {!loading &&
+                        inventory &&
+                        inventory.map((vax) => (
+                          <MenuItem value={vax.brand_name} key={vax}>
+                            {vax.brand_name + ` (L#` + vax.batch_no + `)`}
+                          </MenuItem>
+                        ))}
                     </Select>
                   </FormControl>
                 </Grid>
@@ -569,7 +573,7 @@ const ViewBiteCase = () => {
                   />
                 </Grid>
 
-                 {/*<Grid item xs={12} sm={12} md={6}>
+                {/*<Grid item xs={12} sm={12} md={6}>
                   <StyledTextField
                     required
                     fullWidth
