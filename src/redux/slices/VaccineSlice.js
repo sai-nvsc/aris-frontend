@@ -130,7 +130,7 @@ export const EditCaseStatusThunk = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.patch(
-        `${process.env.REACT_APP_API_HOST}api/bitecase/update/${obj.id}`,
+        `${process.env.REACT_APP_API_HOST}api/bitecase/update/case-status/${obj.id}`,
         obj.data
       );
       return response.data;

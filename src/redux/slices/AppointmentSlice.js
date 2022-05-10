@@ -276,7 +276,7 @@ const AppointmentSlice = createSlice({
         state.appt_error = null;
         state.success = action.payload.success;
       } else {
-        state.appt_error = action.payload;
+        state.appt_error = action.payload.message;
       }
     },
     [requestAppointment.rejected]: (state, action) => {
