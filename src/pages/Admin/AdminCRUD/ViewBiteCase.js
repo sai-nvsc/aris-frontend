@@ -49,6 +49,7 @@ import {
   clearError,
   clearSuccess,
 } from "../../../redux/slices/VaccineSlice";
+import {GetAllInvThunk} from "../../../redux/slices/InventorySlice";
 import { Comments } from "../../Users/Comments";
 import EditBiteStatus from "../../Admin/AdminCRUD/EditBiteStatus";
 import CaseNotFound from "../../extra/CaseNotFound";
@@ -57,7 +58,7 @@ const ViewBiteCase = () => {
   const { bites, loading, reports, vaxx, errors, success } = useSelector(
     (state) => state.vaccine
   );
-
+  const {inventory} = useSelector((state) => state.inventory);
   const { user } = useSelector((state) => state.user);
   const params = useParams();
   const dispatch = useDispatch();
@@ -102,6 +103,13 @@ const ViewBiteCase = () => {
     dispatch(GetVaxxPerBiteCasThunk({ id: params.id }));
     return () => {};
   }, [dispatch, params]);
+
+  useEffect(() => {
+    //console.log(user._id);
+    dispatch(GetAllInvThunk({ id: user._id }));
+    return () => {};
+  }, [dispatch, user]);
+
   return (
     <Box
       sx={{
@@ -516,16 +524,27 @@ const ViewBiteCase = () => {
                   </FormControl>
                 </Grid>
 
-                <Grid item xs={12} sm={12} md={6}>
-                  <StyledTextField
+                <Grid item xs={12} sm={12} md={6}>                  
+                <FormControl
                     required
                     fullWidth
-                    id="vaccine"
-                    label="Vaccine"
-                    name="vaccine"
                     size="small"
-                    onChange={handleChange}
-                  />
+                    sx={{ backgroundColor: "white" }}
+                  >
+                    <InputLabel>Vaccine</InputLabel>
+                    <Select
+                      label="Vaccine"
+                      name="vaccine"
+                      id="vaccine"
+                      onChange={handleChange}
+                      
+                    >
+                      {!loading && inventory && inventory.map((vax) => (
+                      <MenuItem value={vax.brand_name} key={vax}>{vax.brand_name + ` (L#` + vax.batch_no +`)`}</MenuItem>
+                      ))}
+
+                    </Select>
+                  </FormControl>
                 </Grid>
 
                 <Grid item xs={12} sm={12} md={6}>

@@ -180,7 +180,7 @@ const MyVaccineDetails = () => {
                     </Grid>
                   </Grid>
                 </Grid>
-                <Divider>Exposure Detail</Divider>
+                <Divider>Exposure Details</Divider>
                 <Grid container spacing={2}>
                   <Grid
                     item
@@ -210,7 +210,7 @@ const MyVaccineDetails = () => {
                       component="div"
                       color="text.secondary"
                     >
-                      Place of Incident:
+                      Place of Exposure:
                     </Typography>
                     <Typography variant="h5" component="div">
                       <b>Barangay {bites[0].history_of_exposure.place} </b>
@@ -296,7 +296,7 @@ const MyVaccineDetails = () => {
                       <TableRow>
                         <TableCell>Day</TableCell>
                         <TableCell>Date</TableCell>
-                        <TableCell>Brand</TableCell>
+                        <TableCell>Vaccine</TableCell>
                         <TableCell>Lot#</TableCell>
                         <TableCell>Vaccinator</TableCell>
                         <TableCell>Remarks</TableCell>

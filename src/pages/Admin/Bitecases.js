@@ -340,7 +340,6 @@ const Bitecases = () => {
                   onCellClick={handleCellClick}
                   onRowClick={handleRowClick}
                   components={{ Toolbar: GridToolbar }}
-                  loading
                   {...bitecase}
                   getCellClassName={(params) => {
                     if (

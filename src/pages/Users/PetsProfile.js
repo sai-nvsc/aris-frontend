@@ -61,14 +61,16 @@ const PetsProfile = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const columns = [
-    { field: "vaccine_name", headerName: "Vaccine Used", flex: 1 },
+    { field: "vaccine_name", headerName: "Vaccine", flex: 1, align: "center" },
     {
       field: "date_of_vaccination",
       headerName: "Vaccination Date",
       flex: 1,
+      minWidth: 90,
+      align: "center",
       renderCell: (cellValues) => {
         return moment(cellValues.row.date_of_vaccination).format(
-          "MMMM DD, YYYY"
+          "MMM. DD, YYYY"
         );
       },
     },
@@ -76,9 +78,11 @@ const PetsProfile = () => {
       field: "revaccination_schedule",
       headerName: "Revaccination Schedule",
       flex: 1,
+      minWidth: 100,
+      align: "center",
       renderCell: (cellValues) => {
         return moment(cellValues.row.revaccination_schedule).format(
-          "MMMM DD, YYYY"
+          "MMM. DD, YYYY"
         );
       },
     },
@@ -220,7 +224,7 @@ const PetsProfile = () => {
                 <>
                   <AddPetVaxxDetail />
                 </>
-                <div style={{ height: 350, width: "auto" }}>
+                <div style={{ height: 400, width: "auto"}}>
                   <DataGrid
                     rows={pets[0].vaccine_history}
                     columns={columns}

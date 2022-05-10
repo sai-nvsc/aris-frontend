@@ -128,7 +128,7 @@ const Inventory = () => {
     },
     {
       field: "delivery_date",
-      headerName: "Deliver Date",
+      headerName: "Delivery Date",
       flex: 1,
       headerAlign: "center",
       align: "center",
@@ -333,7 +333,7 @@ const Inventory = () => {
                   id="brand_name"
                   label="Brand Name"
                   name="brand_name"
-                  size="small"
+                  size="small"               
                   onChange={handleChange}
                   error={add_errors && add_errors.brand_name ? true : false}
                   helperText={

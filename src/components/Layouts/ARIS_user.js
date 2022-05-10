@@ -76,12 +76,10 @@ const Aris = () => {
       <Container sx={{ py: 5 }} maxWidth="lg">
         <Typography
           variant="h2"
-          sx={{ textTransform: "capitalize" }}
+          sx={{ textTransform: "capitalize", fontWeight:"bold" }}
           align="center"
-        >
-          <b>
-            <i>Meet the ARIS Team</i>
-          </b>
+        >          
+            <i>Meet the ARIS Team</i>          
         </Typography>
         <Typography variant="h6" color="text.secondary" align="center">
           For Questions, Concerns, and Reports related to ARIS, you may contact
@@ -319,22 +317,7 @@ const Aris = () => {
             4. During your active rabies vaccination, you can send health
             reports or update the clinic with your rabies-related concerns.
           </Typography>
-
-          <Typography sx={{ mt: 4, mb: 4 }}>
-            <b>LOG DATA</b>
-          </Typography>
-          <Typography variant="p" align="justify">
-            We want to inform you that whenever you use our Service, in a case
-            of an error in the app we collect data and information (through
-            third party products) on your device called Log Data. This Log Data
-            may include information such as your device Internet Protocol (“IP”)
-            address, device name, operating system version, the configuration of
-            the app when utilizing our Service, the time and date of your use of
-            the Service, and other statistics. The Log Data are statistical and
-            technical data that does not contain personal information and are
-            merely collected to improve the application’s services.
-          </Typography>
-
+          
           <Typography sx={{ mt: 4, mb: 4 }}>
             <b>TOKENS</b>
           </Typography>

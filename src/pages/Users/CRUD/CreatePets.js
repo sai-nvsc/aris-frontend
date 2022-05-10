@@ -220,7 +220,7 @@ const CreatePet = () => {
                     onChange={onChange}
                     hidden
                   />
-                  Upload Pictures
+                  Upload Pet's Avatar
                 </Button>
               </Grid>
             </Grid>

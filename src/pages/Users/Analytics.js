@@ -134,7 +134,7 @@ const Analytics = () => {
                   }}
                   width="800"
                   height="600"
-                  src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6234e0e6-ceb9-4b03-8a49-ae864ed0b9ed&maxDataAge=3600&theme=light&autoRefresh=true"
+                  src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6234e0e6-ceb9-4b03-8a49-ae864ed0b9ed&maxDataAge=300&theme=light&autoRefresh=true"
                 ></iframe>
               </>
             </Paper>
@@ -241,14 +241,14 @@ const Analytics = () => {
                 <iframe
                   title="tebpy"
                   style={{
-                    background: "#FFFFFF",
+                    background: "#1c1c1c",
                     border: "none",
                     borderRadius: "2px",
                     maxWidth: "100%",
                   }}
                   width="1400"
                   height="720"
-                  src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6238a131-e005-4e8c-8847-02cbb4e1a1f1&maxDataAge=300&theme=light&autoRefresh=true"
+                  src="https://charts.mongodb.com/charts-project-0-cayrv/embed/charts?id=6238a131-e005-4e8c-8847-02cbb4e1a1f1&maxDataAge=300&theme=dark&autoRefresh=true"
                 ></iframe>
               </>
             </Paper>

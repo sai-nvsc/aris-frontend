@@ -241,15 +241,6 @@ export default function PersistentDrawerLeft({ title }) {
           </ListItem>
 
           <ListItem>
-            <ListItemButton component={StyledLink} to="/admin/bitecases">
-              <ListItemIcon sx={{ color: "#f32727" }}>
-                <MonitorHeartIcon />
-              </ListItemIcon>
-              <ListItemText primary="Bite Cases" />
-            </ListItemButton>
-          </ListItem>
-
-          <ListItem>
             <ListItemButton component={StyledLink} to="/admin/appointments">
               <ListItemIcon sx={{ color: "#f32727" }}>
                 <DateRangeOutlinedIcon />
@@ -259,6 +250,15 @@ export default function PersistentDrawerLeft({ title }) {
           </ListItem>
 
           <ListItem>
+            <ListItemButton component={StyledLink} to="/admin/bitecases">
+              <ListItemIcon sx={{ color: "#f32727" }}>
+                <MonitorHeartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Bite Cases" />
+            </ListItemButton>
+          </ListItem>
+         
+          <ListItem>
             <ListItemButton component={StyledLink} to="/admin/inventory">
               <ListItemIcon sx={{ color: "#f32727" }}>
                 <WarehouseIcon />
@@ -266,15 +266,7 @@ export default function PersistentDrawerLeft({ title }) {
               <ListItemText primary="Inventory" />
             </ListItemButton>
           </ListItem>
-
-          <ListItem>
-            <ListItemButton component={StyledLink} to="/admin/analytics">
-              <ListItemIcon sx={{ color: "#f32727" }}>
-                <AssessmentIcon />
-              </ListItemIcon>
-              <ListItemText primary="Analytics" />
-            </ListItemButton>
-          </ListItem>
+          
           <ListItem>
             <ListItemButton component={StyledLink} to="/admin/announcements">
               <ListItemIcon sx={{ color: "#f32727" }}>
@@ -284,7 +276,15 @@ export default function PersistentDrawerLeft({ title }) {
             </ListItemButton>
           </ListItem>
         </List>
-
+              
+          <ListItem>
+            <ListItemButton component={StyledLink} to="/admin/analytics">
+              <ListItemIcon sx={{ color: "#f32727" }}>
+                <AssessmentIcon />
+              </ListItemIcon>
+              <ListItemText primary="Analytics" />
+            </ListItemButton>
+          </ListItem>
         <Divider />
         <List>
           <AdminNavMenu handleDrawerClose={handleDrawerClose} />

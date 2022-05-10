@@ -127,15 +127,7 @@ const Dashboard = () => {
   };
   const openPop = Boolean(anchorEl);
   const cards = [
-    {
-      title: "Bite Cases",
-      desc: "View Animal Bite/Scratch Cases Records...",
-      image: px,
-      alt: "Patients",
-      to: "/admin/bitecases",
-      alert: null,
-    },
-    {
+     {
       title: "Appointments",
       desc: "View Active/Pending appointments...",
       image: apt,
@@ -144,20 +136,20 @@ const Dashboard = () => {
       alert: clinic_counts ? clinic_counts.appointments_pending : null,
     },
     {
+      title: "Bite Cases",
+      desc: "View Animal Bite/Scratch Cases Records...",
+      image: px,
+      alt: "Patients",
+      to: "/admin/bitecases",
+      alert: null,
+    }, 
+    {
       title: "Inventory",
       desc: "View clinic's inventory...",
       image: inv,
       alt: "Inventory",
       to: "/admin/inventory",
-      alert: clinic_counts ? clinic_counts.inventory_stock_alert && clinic_counts.inventory_expiry_alert : null,
-    },
-    {
-      title: "Analytics",
-      desc: "View rabies reports and analytics...",
-      image: chart,
-      alt: "Analytics",
-      to: "/admin/analytics",
-      alert: null,
+      alert: clinic_counts ? clinic_counts.inventory_stock_alert + clinic_counts.inventory_expiry_alert : null,
     },
     {
       title: "Announcements",
@@ -167,6 +159,14 @@ const Dashboard = () => {
       to: "/admin/announcements",
       alert: null,
     },
+    {
+      title: "Analytics",
+      desc: "View rabies reports and analytics...",
+      image: chart,
+      alt: "Analytics",
+      to: "/admin/analytics",
+      alert: null,
+    },   
   ];
 
   return (

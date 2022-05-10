@@ -69,11 +69,12 @@ const AddPetVaxxDetail = () => {
   return (
     //   Render Block
     <>
-      <Button variant="contained" onClick={handleOpen} startIcon={<Add />}>
-        Add Vaccination Detail
+      <Button variant="contained" onClick={handleOpen} startIcon={<Add />} sx={{mb:2}}>
+        Add Vaccination
       </Button>
+
       <Dialog fullWidth open={open} onClose={handleClose}>
-        <DialogTitle>Add Pet Vaccination Details</DialogTitle>
+        <DialogTitle>Add {pets ? pets[0].name +`'s` : "Loading..."} vaccination</DialogTitle>
 
         <form encType="multipart/form-data" noValidate onSubmit={formHandler}>
           <DialogContent>
