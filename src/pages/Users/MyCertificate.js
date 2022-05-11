@@ -95,7 +95,7 @@ const VaxCertificate = () => {
                         marginLeft: "auto",
                       }}
                     >
-                      <Box component="div" sx={{ml:4, flexWrap:"nowrap"}}>
+                      <Box component="div" sx={{ ml: 4, flexWrap: "nowrap" }}>
                         <Typography sx={{ textTransform: "capitalize" }}>
                           Name:{" "}
                           <b>
@@ -226,7 +226,9 @@ const VaxCertificate = () => {
                             <StyledTableCell>{vaccine.vaccine}</StyledTableCell>
                             <StyledTableCell>{vaccine.lot}</StyledTableCell>
                             <StyledTableCell>
-                              {vaccine.admin[0].admin_name}
+                              {vaccine.admin[0]
+                                ? vaccine.admin[0].admin_name
+                                : "NULL"}
                             </StyledTableCell>
                             <StyledTableCell>{vaccine.remarks}</StyledTableCell>
                           </StyledTableRow>
