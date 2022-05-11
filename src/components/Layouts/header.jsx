@@ -17,7 +17,7 @@ export const Header = (props) => {
                 <br />
                 <br></br>
                 <a
-                  href="ARISv1.apk"
+                  href="https://drive.google.com/file/d/1dh8NWpQMw5sLJZIoR4RZz13pOhhafFcK/view?usp=sharing"
                   className="btn btn-custom btn-lg page-scroll"
                   download
                   rel="noopener noreferrer"
