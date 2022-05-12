@@ -50,7 +50,7 @@ const CreateAppointment = () => {
   const [value, setvalue] = useState({
     purpose: "",
     time_slot: "",
-    date: moment().startOf("day"),
+    date: moment().startOf("day").toDate().toISOString(),
   });
   const [selected_clinic, setselected_clinic] = useState({});
 
@@ -258,7 +258,7 @@ const CreateAppointment = () => {
                   onChange={(newDate) =>
                     setvalue({
                       ...value,
-                      date: newDate.startOf("day").toDate(),
+                      date: newDate.startOf("day").toDate().toISOString(),
                     })
                   }
                   renderInput={(params) => (

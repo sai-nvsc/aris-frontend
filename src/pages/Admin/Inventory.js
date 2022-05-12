@@ -133,9 +133,10 @@ const Inventory = () => {
       headerAlign: "center",
       align: "center",
       minWidth: 140,
-      renderCell: (cellValues) => {
-        return moment(cellValues.row.delivery_date).format("MMM. DD, YYYY");
-      },
+      type: "date",
+      valueGetter: (cellValues) =>
+        moment(cellValues.row.delivery_date).format("MMM. DD, YYYY"),
+      sortComparator: (v1, v2) => new Date(v1) - new Date(v2),
     },
     {
       field: "exp_date",
@@ -144,9 +145,10 @@ const Inventory = () => {
       headerAlign: "center",
       align: "center",
       minWidth: 140,
-      renderCell: (cellValues) => {
-        return moment(cellValues.row.exp_date).format("MMM. DD, YYYY");
-      },
+      type: "date",
+      valueGetter: (cellValues) =>
+        moment(cellValues.row.exp_date).format("MMM DD, YYYY"),
+      sortComparator: (v1, v2) => new Date(v1) - new Date(v2),
     },
     {
       field: "actions",
@@ -333,7 +335,7 @@ const Inventory = () => {
                   id="brand_name"
                   label="Brand Name"
                   name="brand_name"
-                  size="small"               
+                  size="small"
                   onChange={handleChange}
                   error={add_errors && add_errors.brand_name ? true : false}
                   helperText={

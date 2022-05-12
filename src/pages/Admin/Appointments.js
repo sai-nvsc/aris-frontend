@@ -89,11 +89,11 @@ const Appointments = () => {
       flex: 1,
       headerAlign: "center",
       align: "center",
+      type: "date",
       minWidth: 140,
-      renderCell: (cellValues) => {
-        return moment(cellValues.row.date).format("MMM. DD, YYYY");
-      },
-      sortComparator: (v1, v2) => v1.localeCompare(v2),
+      valueGetter: (cellValues) =>
+        moment(cellValues.row.date).format("MMM DD, YYYY"),
+      sortComparator: (v1, v2) => new Date(v1) - new Date(v2),
     },
     {
       field: "time_slot",
