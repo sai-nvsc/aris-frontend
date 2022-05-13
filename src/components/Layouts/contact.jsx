@@ -138,12 +138,12 @@ export const Contact = (props) => {
                   <div className="col-md-6">
                     <div className="form-group">
                       <input
-                        type="tel"
+                        type="text"
                         id="phone"
                         name="contact_number"
-                        pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}"
+                        pattern="^(09|\+639)\d{9}$"
                         className="form-control"
-                        placeholder="Contact Number e.g 09xx-xxx-xxxx"
+                        placeholder="Contact Number e.g 09xxxxxxxxx or +639xxxxxxxxx"
                         title="Please enter a valid phone number"
                         required
                         value={contact_number}
