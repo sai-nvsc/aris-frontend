@@ -1,15 +1,28 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Container, CssBaseline, Grid, Typography } from "@mui/material";
+import {
+  Alert,
+  AlertTitle,
+  Box,
+  Container,
+  CssBaseline,
+  Grid,
+  Snackbar,
+  Typography,
+} from "@mui/material";
 
 import Footer from "../../components/Layouts/Footer";
 import { StyledButton } from "../../assets/styles";
 import {
+  clearError,
+  clearSuccess,
   LogoutUserThunk,
   ResendVerificationThunk,
 } from "../../redux/slices/UserSlices";
 import { useEffect } from "react";
 const VerificationPage = () => {
-  const { user, loading, isAuthenticated } = useSelector((state) => state.user);
+  const { user, loading, isAuthenticated, success } = useSelector(
+    (state) => state.user
+  );
   const dispatch = useDispatch();
   const onLogOutClick = () => {
     dispatch(LogoutUserThunk());
@@ -23,12 +36,17 @@ const VerificationPage = () => {
       window.location.assign("/login");
     }
     if (!loading && isAuthenticated && user) {
-      if (user.verificationToken === null && user.verified_at === null) {
+      if (user.verified_at === null) {
         dispatch(ResendVerificationThunk());
       }
     }
     return () => {};
-  });
+  }, [dispatch, isAuthenticated]);
+
+  const onClose = (e) => {
+    dispatch(clearSuccess());
+    dispatch(clearError());
+  };
   return (
     <>
       {!loading &&
@@ -71,6 +89,19 @@ const VerificationPage = () => {
                   boxShadow: 3,
                 }}
               >
+                {success && (
+                  <Snackbar
+                    open={true}
+                    autoHideDuration={3000}
+                    name="success"
+                    onClose={onClose}
+                  >
+                    <Alert severity="success" variant="filled">
+                      <AlertTitle>Success</AlertTitle>
+                      {success}
+                    </Alert>
+                  </Snackbar>
+                )}
                 <Typography variant="h4" sx={{ fontWeight: "bold" }}>
                   Verify your Email Address
                 </Typography>

@@ -127,7 +127,6 @@ export const UserProfile = () => {
     dispatch(clearSuccess());
     dispatch(clearError());
     setpasswordmatcherror(false);
-    window.location.reload();
   };
   useEffect(() => {
     dispatch(getUsersAnalyticsCounts());

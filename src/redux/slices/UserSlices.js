@@ -335,7 +335,11 @@ const userSlice = createSlice({
     [UpdateProfileThunk.rejected]: (state, action) => {
       state.update_profile_loading = false;
       state.success = null;
-      state.errors = JSON.parse(action.payload);
+      try {
+        state.errors = JSON.parse(action.payload);
+      } catch (error) {
+        state.errors = action.payload;
+      }
     },
     [UpdateAvatarThunk.pending]: (state) => {
       state.avatar_loading = true;
@@ -419,7 +423,7 @@ const userSlice = createSlice({
     },
     [ResendVerificationThunk.fulfilled]: (state, action) => {
       state.resend_loading = false;
-      state.success = action.payload.success;
+      state.success = action.payload.data;
     },
     [ResendVerificationThunk.rejected]: (state, action) => {
       state.resend_loading = false;
