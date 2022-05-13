@@ -41,7 +41,7 @@ const VerificationPage = () => {
       }
     }
     return () => {};
-  }, [dispatch, isAuthenticated]);
+  }, [dispatch, isAuthenticated, loading, user]);
 
   const onClose = (e) => {
     dispatch(clearSuccess());
