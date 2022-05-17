@@ -7,12 +7,8 @@ import {
   AlertTitle,
   Box,
   Container,
-  FormControl,
   Grid,
-  InputLabel,
-  MenuItem,
   Modal,
-  Select,
   Snackbar,
   Typography,
 } from "@mui/material";
@@ -24,14 +20,13 @@ import AdminDelete from "../../components/Layouts/Dialogs/AdminDelete";
 import PersistentDrawerLeft from "../../components/Layouts/SuperSidebar";
 import Footer from "../../components/Layouts/Footer";
 import {
-    CreateAdminThunk,
-    clearError,
-    clearSuccess,
-    GetAllAdmin,
-  } from "../../redux/slices/AdminSlices";
+  CreateAdminThunk,
+  clearError,
+  clearSuccess,
+  GetAllAdmin,
+} from "../../redux/slices/AdminSlices";
 
 const SuperAdmin = () => {
-  const { user } = useSelector((state) => state.user);
   const { loading, admin, errors, success } = useSelector(
     (state) => state.admin
   );
@@ -83,7 +78,7 @@ const SuperAdmin = () => {
       align: "center",
       minWidth: 85,
     },
-     {
+    {
       field: "Edit",
       headerName: "Actions",
       flex: 1,
@@ -143,7 +138,7 @@ const SuperAdmin = () => {
     refreshPage();
   };
 
-   useEffect(() => {
+  useEffect(() => {
     dispatch(GetAllAdmin());
     return () => {};
   }, [dispatch]);
@@ -288,7 +283,7 @@ const SuperAdmin = () => {
                 />
               </Grid>
 
-             {/*  <Grid item xs={12} sm={12} md={6}>
+              {/*  <Grid item xs={12} sm={12} md={6}>
                 <FormControl
                   required
                   fullWidth
@@ -349,7 +344,7 @@ const SuperAdmin = () => {
                   required
                   fullWidth
                   disabled={true}
-                  inputProps={{readOnly: true}}
+                  inputProps={{ readOnly: true }}
                   id="password"
                   label="Password"
                   name="password"
