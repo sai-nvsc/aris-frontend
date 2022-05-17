@@ -15,12 +15,12 @@ import {
   StyledTextField,
   StyledButton,
   EditButton,
-} from "../../../assets/styles";
-import { useDispatch, useSelector } from "react-redux";
-import { EditAccountSuperAdminThunk } from "../../../redux/slices/AdminSlices";
+} from "../../assets/styles";
+import { useDispatch } from "react-redux";
+import { EditAccountSuperAdminThunk } from "../../redux/slices/AdminSlices";
 
 const EditAcc = ({ data }) => {
-  const { user } = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
@@ -29,6 +29,7 @@ const EditAcc = ({ data }) => {
     role: data.role,
     email: data.email,
     username: data.username,
+    clinic: data.clinic,
   });
 
   const onInputChange = (e) => {
@@ -40,7 +41,7 @@ const EditAcc = ({ data }) => {
     const formData = new FormData();
     formData.append("admin_name", values.admin_name);
     formData.append("role", values.role);
-    formData.append("clinic", user.clinic);
+    formData.append("clinic", values.clinic);
     formData.append("email", values.email);
     formData.append("username", values.username);
 
@@ -62,7 +63,6 @@ const EditAcc = ({ data }) => {
       role: data.role,
       email: data.email,
       username: data.username,
-      //password: data.password,
     });
   };
   const handleOpen = () => {
@@ -134,9 +134,6 @@ const EditAcc = ({ data }) => {
                       value={values.role}
                       onChange={onInputChange}
                     >
-                       <MenuItem value="superadmin" disabled="true">
-                        superadmin
-                      </MenuItem>
                       <MenuItem value="admin">admin</MenuItem>
                       <MenuItem value="vaccinator">vaccinator</MenuItem>
                       <MenuItem value="inventory">inventory</MenuItem>
@@ -153,7 +150,7 @@ const EditAcc = ({ data }) => {
                     name="clinic"
                     size="small"
                     value={values.clinic}
-                    disabled="true"
+                    onChange={onInputChange}
                   />
                 </Grid>
 

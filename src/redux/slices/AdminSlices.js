@@ -142,6 +142,24 @@ export const UpdatePasswordThunk = createAsyncThunk(
   }
 );
 
+export const GetAllAdmin = createAsyncThunk(
+  "admin/all-admin",
+  async (obj, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_HOST}api/admin/auth/all`,
+        obj,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 const initialState = {
   admin: null,
   isAuthenticated: null,
@@ -270,7 +288,18 @@ const adminSlice = createSlice({
       state.success = null;
       state.errors = action.payload;
     },
+    [GetAllAdmin.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [GetAllAdmin.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.admin = action.payload.admin;
+    },
+    [GetAllAdmin.rejected]: (state, action) => {
+      state.loading = false;
+      state.errors = action.payload;
   },
+},
 });
 export const { clearError, clearSuccess } = adminSlice.actions;
 export default adminSlice.reducer;

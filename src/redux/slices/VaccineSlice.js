@@ -161,8 +161,13 @@ export const ReplyThunk = createAsyncThunk(
 const initialState = {
   loading: true,
   bites: null,
+  my_bitecases: null,
   vaxx: null,
   reports: null,
+  success: null,
+  errors: null,
+  report_loading: false,
+  input_errors: null,
 };
 const VaccineSlices = createSlice({
   name: "vaxx",
@@ -181,7 +186,7 @@ const VaccineSlices = createSlice({
     },
     [GetBiteCasesThunk.fulfilled]: (state, action) => {
       state.loading = false;
-      state.bites = action.payload.bitecase;
+      state.my_bitecases = action.payload.bitecase;
     },
     [GetBiteCasesThunk.rejected]: (state, action) => {
       state.loading = false;
@@ -212,10 +217,10 @@ const VaccineSlices = createSlice({
       state.errors = action.payload;
     },
     [SendHealthReportThunk.pending]: (state) => {
-      state.loading = true;
+      state.report_loading = true;
     },
     [SendHealthReportThunk.fulfilled]: (state, action) => {
-      state.loading = false;
+      state.report_loading = false;
       state.success = action.payload.success;
       state.errors = null;
       state.reports = action.payload.report;
@@ -223,7 +228,11 @@ const VaccineSlices = createSlice({
     [SendHealthReportThunk.rejected]: (state, action) => {
       state.loading = false;
       state.success = false;
-      state.errors = action.payload;
+      try {
+        state.input_errors = JSON.parse(action.payload);
+      } catch (error) {
+        state.errors = action.payload;
+      }
     },
 
     [AddVaxxThunk.pending]: (state) => {

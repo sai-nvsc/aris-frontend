@@ -19,7 +19,7 @@ import moment from "moment";
 const MyVaccine = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
-  const { loading, bites } = useSelector((state) => state.vaccine);
+  const { loading, my_bitecases } = useSelector((state) => state.vaccine);
   useEffect(() => {
     dispatch(GetBiteCasesThunk({ id: user._id }));
     return () => {};
@@ -37,9 +37,9 @@ const MyVaccine = () => {
 
       <Container component="main" sx={{ mt: 8, mb: 2 }}>
         {!loading ? (
-          bites &&
-          Array.isArray(bites) &&
-          bites.map((bite) => (
+          my_bitecases &&
+          Array.isArray(my_bitecases) &&
+          my_bitecases.map((bite) => (
             <Grid container spacing={2} sx={{ mt: 2 }} key={bite._id}>
               <Grid item sm={12}>
                 <Card sx={{ display: "flex" }}>

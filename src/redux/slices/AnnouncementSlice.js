@@ -93,6 +93,8 @@ export const ViewAllAnnouncement = createAsyncThunk(
 const initialState = {
   announcement: null,
   loading: false,
+  cud_loading: false,
+  input_errors: null,
   errors: null,
   success: null,
 };
@@ -120,27 +122,42 @@ const AnnouncementSlice = createSlice({
       state.errors = action.payload;
     },
     [AddAnnThunk.pending]: (state) => {
-      state.loading = true;
+      state.cud_loading = true;
     },
     [AddAnnThunk.fulfilled]: (state, action) => {
-      state.loading = false;
+      state.cud_loading = false;
       state.success = action.payload.success;
+      state.input_errors = null;
       state.errors = null;
-      state.announcement = [...state.announcement, action.payload.announcement];
+      state.announcement = [action.payload.announcement, ...state.announcement];
     },
     [AddAnnThunk.rejected]: (state, action) => {
-      state.loading = false;
+      state.cud_loading = false;
       state.success = null;
-      state.errors = action.payload;
+      try {
+        state.input_errors = JSON.parse(action.payload);
+      } catch (error) {
+        state.errors = action.payload;
+      }
     },
     [EditAnnThunk.pending]: (state) => {
-      state.loading = true;
+      state.cud_loading = true;
     },
     [EditAnnThunk.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.succes = action.payload.message;
+      state.cud_loading = false;
+      state.success = action.payload.message;
       state.errors = null;
-      state.announcement = [...state.announcement, action.payload.announcement];
+      state.input_errors = null;
+      state.announcement = action.payload.announcement;
+    },
+    [EditAnnThunk.rejected]: (state, action) => {
+      state.cud_loading = false;
+      state.success = null;
+      try {
+        state.input_errors = JSON.parse(action.payload);
+      } catch (error) {
+        state.errors = action.payload;
+      }
     },
     [DeleteAnnThunk.pending]: (state) => {
       state.loading = true;

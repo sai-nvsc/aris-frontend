@@ -20,6 +20,7 @@ import {
   Snackbar,
   Alert,
   AlertTitle,
+  Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { BsCalendarPlusFill } from "react-icons/bs";
@@ -122,8 +123,8 @@ const CreateAppointment = () => {
         // );
       });
     } else {
-      localStorage.setItem("latitude", "");
-      localStorage.setItem("longitude", "");
+      localStorage.setItem("latitude", "0");
+      localStorage.setItem("longitude", "0");
     }
     return () => {};
   }, []);
@@ -167,6 +168,17 @@ const CreateAppointment = () => {
         <DialogTitle>Set an Appointment</DialogTitle>
         <DialogContent>
           <Grid container spacing={2}>
+            <Grid item sm={12}>
+              <Typography>
+                Note: Kindly allow your browser to access your location for you
+                to be able to choose from nearby clinics
+              </Typography>
+              <Typography variant="caption">
+                Every user is eligible to add appointment once per day. 2
+                cancelled appointments within 5 days will prohibit the user to
+                create another appointment
+              </Typography>
+            </Grid>
             <Grid item sm={12}>
               <FormControl>
                 <FormLabel>Clinic</FormLabel>

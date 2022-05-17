@@ -6,6 +6,7 @@ import {
   DialogContent,
   DialogTitle,
   FormControl,
+  FormHelperText,
   Grid,
   ImageList,
   ImageListItem,
@@ -16,11 +17,16 @@ import {
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StyledTextField } from "../../../assets/styles";
-import { EditPetsThunk } from "../../../redux/slices/PetSlice";
+import {
+  clearError,
+  clearSuccess,
+  EditPetsThunk,
+} from "../../../redux/slices/PetSlice";
 // import { addPerson, getAllPerson } from "../../redux/action/PersonActions";
 
 const EditPet = ({ petToEdit }) => {
   const { user } = useSelector((state) => state.user);
+  const { edit_errors } = useSelector((state) => state.pets);
   const dispatch = useDispatch();
   const [imagePreview, setimagePreview] = useState(petToEdit.images);
   const [imageChanged, setimageChanged] = useState(false);
@@ -80,17 +86,17 @@ const EditPet = ({ petToEdit }) => {
     }
 
     dispatch(EditPetsThunk({ data: formData, id: petToEdit._id }));
-    setopen(false);
-    setvalues({
-      name: petToEdit.name,
-      species: petToEdit.species,
-      breed: petToEdit.breed,
-      age: petToEdit.age,
-      gender: petToEdit.gender,
-      color: petToEdit.color,
-    });
-    setimagePreview(petToEdit.images);
-    setImages([]);
+    // setopen(false);
+    // setvalues({
+    //   name: petToEdit.name,
+    //   species: petToEdit.species,
+    //   breed: petToEdit.breed,
+    //   age: petToEdit.age,
+    //   gender: petToEdit.gender,
+    //   color: petToEdit.color,
+    // });
+    // setimagePreview(petToEdit.images);
+    // setImages([]);
   };
 
   const handleClose = () => {
@@ -105,6 +111,8 @@ const EditPet = ({ petToEdit }) => {
     });
     setimagePreview(petToEdit.images);
     setImages([]);
+    dispatch(clearError());
+    dispatch(clearSuccess());
   };
   const handleOpen = () => {
     setopen(true);
@@ -132,6 +140,8 @@ const EditPet = ({ petToEdit }) => {
                   label="Name"
                   value={values.name}
                   onChange={onInputChange}
+                  error={edit_errors && edit_errors.name ? true : false}
+                  helperText={edit_errors ? edit_errors.name : ""}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -140,6 +150,7 @@ const EditPet = ({ petToEdit }) => {
                   size="small"
                   margin="normal"
                   sx={{ backgroundColor: "white" }}
+                  error={edit_errors && edit_errors.gender ? true : false}
                 >
                   <InputLabel>Sex</InputLabel>
                   <Select
@@ -152,6 +163,11 @@ const EditPet = ({ petToEdit }) => {
                     <MenuItem value="Female">Female</MenuItem>
                   </Select>
                 </FormControl>
+                {edit_errors && edit_errors.gender ? (
+                  <FormHelperText>{edit_errors.gender}</FormHelperText>
+                ) : (
+                  false
+                )}
               </Grid>
               <Grid item xs={6}>
                 <FormControl
@@ -159,6 +175,7 @@ const EditPet = ({ petToEdit }) => {
                   size="small"
                   margin="normal"
                   sx={{ backgroundColor: "white" }}
+                  error={edit_errors && edit_errors.species ? true : false}
                 >
                   <InputLabel>Specie</InputLabel>
                   <Select
@@ -171,6 +188,11 @@ const EditPet = ({ petToEdit }) => {
                     <MenuItem value="Cat">Cat</MenuItem>
                     <MenuItem value="Others">Others</MenuItem>
                   </Select>
+                  {edit_errors && edit_errors.species ? (
+                    <FormHelperText>{edit_errors.species}</FormHelperText>
+                  ) : (
+                    ""
+                  )}
                 </FormControl>
               </Grid>
               <Grid item xs={6}>
@@ -183,6 +205,8 @@ const EditPet = ({ petToEdit }) => {
                   label="Age in months"
                   value={values.age}
                   onChange={onInputChange}
+                  error={edit_errors && edit_errors.age ? true : false}
+                  helperText={edit_errors ? edit_errors.age : ""}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -195,6 +219,8 @@ const EditPet = ({ petToEdit }) => {
                   label="Color"
                   value={values.color}
                   onChange={onInputChange}
+                  error={edit_errors && edit_errors.color ? true : false}
+                  helperText={edit_errors ? edit_errors.color : ""}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -207,6 +233,8 @@ const EditPet = ({ petToEdit }) => {
                   label="Breed"
                   value={values.breed}
                   onChange={onInputChange}
+                  error={edit_errors && edit_errors.breed ? true : false}
+                  helperText={edit_errors ? edit_errors.breed : ""}
                 />
               </Grid>
               <Grid item xs={12}>

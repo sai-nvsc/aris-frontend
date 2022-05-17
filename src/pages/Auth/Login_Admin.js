@@ -16,7 +16,12 @@ import {
   Typography,
 } from "@mui/material";
 import Footer from "../../components/Layouts/Footer";
-import { LogButton, StyledTextField, StyledLink, BackBtn } from "../../assets/styles";
+import {
+  LogButton,
+  StyledTextField,
+  StyledLink,
+  BackBtn,
+} from "../../assets/styles";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -41,7 +46,17 @@ const LoginAdmin = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      role === "user" ? navigate("/user") : navigate("/admin");
+      switch (role) {
+        case "user":
+          navigate("/user");
+          break;
+        case "admin":
+          navigate("/admin");
+          break;
+        default:
+          navigate("/s-admin");
+          break;
+      }
     }
     return () => {};
   }, [isAuthenticated, role, navigate]);
@@ -97,7 +112,9 @@ const LoginAdmin = () => {
           </Alert>
         </Snackbar>
       )}
-<BackBtn component={StyledLink} to="/">Back to Homepage</BackBtn>
+      <BackBtn component={StyledLink} to="/">
+        Back to Homepage
+      </BackBtn>
       <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
         <Box
           sx={{

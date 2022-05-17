@@ -98,6 +98,7 @@ const initialState = {
   errors: null,
   success: null,
   add_errors: null,
+  edit_loading: false,
 };
 const InventorySlice = createSlice({
   name: "inventory",
@@ -147,10 +148,10 @@ const InventorySlice = createSlice({
       }
     },
     [EditInvThunk.pending]: (state) => {
-      state.loading = true;
+      state.edit_loading = true;
     },
     [EditInvThunk.fulfilled]: (state, action) => {
-      state.loading = false;
+      state.edit_loading = false;
       state.success = action.payload.success;
       state.errors = null;
       state.inventory = action.payload.inventory;
@@ -158,7 +159,7 @@ const InventorySlice = createSlice({
       state.expiration_alert = action.payload.expiration_alert;
     },
     [EditInvThunk.rejected]: (state, action) => {
-      state.loading = false;
+      state.edit_loading = false;
       state.success = null;
       try {
         state.add_errors = JSON.parse(action.payload);

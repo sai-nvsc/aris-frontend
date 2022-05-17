@@ -18,7 +18,7 @@ const EditInventory = ({ data, id }) => {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const { add_errors } = useSelector((state) => state.inventory);
+  const { add_errors, edit_loading } = useSelector((state) => state.inventory);
   const [values, setvalues] = useState({
     brand_name: data.brand_name,
     generic_name: data.generic_name,
@@ -106,6 +106,7 @@ const EditInventory = ({ data, id }) => {
                       ? add_errors.brand_name
                       : ""
                   }
+                  disabled={edit_loading}
                 />
               </Grid>
 
@@ -124,6 +125,7 @@ const EditInventory = ({ data, id }) => {
                       ? add_errors.generic_name
                       : ""
                   }
+                  disabled={edit_loading}
                 />
               </Grid>
 
@@ -140,6 +142,7 @@ const EditInventory = ({ data, id }) => {
                   helperText={
                     add_errors && add_errors.batch_no ? add_errors.batch_no : ""
                   }
+                  disabled={edit_loading}
                 />
               </Grid>
 
@@ -156,6 +159,7 @@ const EditInventory = ({ data, id }) => {
                   helperText={
                     add_errors && add_errors.stock ? add_errors.stock : ""
                   }
+                  disabled={edit_loading}
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6}>
@@ -167,6 +171,7 @@ const EditInventory = ({ data, id }) => {
                     value={moment(values.delivery_date)}
                     name="delivery_date"
                     InputProps={{ readOnly: true }}
+                    disableFuture
                     onChange={(newDate) =>
                       setvalues({
                         ...values,
@@ -179,6 +184,7 @@ const EditInventory = ({ data, id }) => {
                         fullWidth
                         required
                         size="small"
+                        disabled={edit_loading}
                       />
                     )}
                   />
@@ -193,6 +199,7 @@ const EditInventory = ({ data, id }) => {
                     views={["year", "month", "day"]}
                     value={moment(values.exp_date)}
                     name="exp_date"
+                    disablePast
                     InputProps={{ readOnly: true }}
                     onChange={(newDate) =>
                       setvalues({
@@ -206,6 +213,13 @@ const EditInventory = ({ data, id }) => {
                         fullWidth
                         required
                         size="small"
+                        disabled={edit_loading}
+                        error={add_errors && add_errors.exp_date ? true : false}
+                        helperText={
+                          add_errors && add_errors.exp_date
+                            ? add_errors.exp_date
+                            : ""
+                        }
                       />
                     )}
                   />

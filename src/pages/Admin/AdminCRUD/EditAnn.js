@@ -3,8 +3,8 @@ import { Edit } from "@mui/icons-material";
 import {
   Box,
   Container,
+  Dialog,
   Grid,
-  Modal,
   TextField,
   Typography,
 } from "@mui/material";
@@ -18,16 +18,18 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import { useDispatch, useSelector } from "react-redux";
 import { EditAnnThunk } from "../../../redux/slices/AnnouncementSlice";
+import moment from "moment";
 
 const EditAnn = ({ annEdit }) => {
   const { user } = useSelector((state) => state.user);
+  const { input_errors } = useSelector((state) => state.announcement);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
   const [values, setvalues] = useState({
     title: annEdit.title,
     desc: annEdit.desc,
-    date: new Date(),
+    date: moment().startOf("day").toDate().toISOString(),
   });
 
   const onInputChange = (e) => {
@@ -42,7 +44,7 @@ const EditAnn = ({ annEdit }) => {
     formData.append("date", values.date);
     formData.append("clinic", user.clinic);
     dispatch(EditAnnThunk({ data: formData, id: annEdit._id }));
-    setOpen(false);
+    // setOpen(false);
   };
 
   const handleClose = () => {
@@ -50,7 +52,7 @@ const EditAnn = ({ annEdit }) => {
     setvalues({
       title: annEdit.title,
       desc: annEdit.desc,
-      date: new Date(),
+      date: moment().startOf("day").toDate().toISOString(),
     });
   };
   const handleOpen = () => {
@@ -61,16 +63,7 @@ const EditAnn = ({ annEdit }) => {
     <>
       <EditButton onClick={handleOpen} startIcon={<Edit />}></EditButton>
 
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-        justifyContent="center"
-        transform="translate(-50%, -50%)"
-        top="50%"
-        position="absolute"
-      >
+      <Dialog open={open} onClose={handleClose}>
         <form encType="multipart/form-data" noValidate onSubmit={formHandler}>
           <Box
             sx={{
@@ -104,6 +97,12 @@ const EditAnn = ({ annEdit }) => {
                     size="small"
                     value={values.title}
                     onChange={onInputChange}
+                    error={input_errors && input_errors.title ? true : false}
+                    helperText={
+                      input_errors && input_errors.title
+                        ? input_errors.title
+                        : ""
+                    }
                   />
                 </Grid>
 
@@ -119,6 +118,10 @@ const EditAnn = ({ annEdit }) => {
                     size="small"
                     value={values.desc}
                     onChange={onInputChange}
+                    error={input_errors && input_errors.desc ? true : false}
+                    helperText={
+                      input_errors && input_errors.desc ? input_errors.desc : ""
+                    }
                   />
                 </Grid>
 
@@ -135,7 +138,7 @@ const EditAnn = ({ annEdit }) => {
                       onChange={(newDate) =>
                         setvalues({
                           ...values,
-                          date: newDate.toDate().toISOString(),
+                          date: newDate.startOf("day").toDate().toISOString(),
                         })
                       }
                       renderInput={(params) => (
@@ -174,7 +177,7 @@ const EditAnn = ({ annEdit }) => {
             </Container>
           </Box>
         </form>
-      </Modal>
+      </Dialog>
     </>
   );
 };

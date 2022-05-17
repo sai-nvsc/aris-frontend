@@ -51,6 +51,7 @@ const RegisterUser = () => {
     (state) => state.user
   );
   const navigate = useNavigate();
+  const [password_error, setpassword_error] = useState(null);
   const [values, setvalues] = useState({
     first_name: "",
     last_name: "",
@@ -83,18 +84,22 @@ const RegisterUser = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(values);
-    const formData = new FormData();
-    formData.set("avatar", avatar);
-    formData.append("first_name", values.first_name);
-    formData.append("last_name", values.last_name);
-    formData.append("birthday", values.birthday);
-    formData.append("sex", values.sex);
-    formData.append("address", values.address);
-    formData.append("username", values.username);
-    formData.append("email", values.email);
-    formData.append("password", values.password);
-    formData.append("phone_number", values.phone_number);
-    dispatch(SignUpUserThunk(formData));
+    if (values.password === values.c_password) {
+      const formData = new FormData();
+      formData.set("avatar", avatar);
+      formData.append("first_name", values.first_name);
+      formData.append("last_name", values.last_name);
+      formData.append("birthday", values.birthday);
+      formData.append("sex", values.sex);
+      formData.append("address", values.address);
+      formData.append("username", values.username);
+      formData.append("email", values.email);
+      formData.append("password", values.password);
+      formData.append("phone_number", values.phone_number);
+      dispatch(SignUpUserThunk(formData));
+    } else {
+      setpassword_error("Password do not match! Please try again");
+    }
   };
 
   const [agree, setChange] = useState(true);
@@ -104,11 +109,22 @@ const RegisterUser = () => {
   const onClose = (e) => {
     dispatch(clearSuccess());
     dispatch(clearError());
+    setpassword_error(null);
   };
 
   useEffect(() => {
     if (isAuthenticated) {
-      role === "user" ? navigate("/user") : navigate("/admin");
+      switch (role) {
+        case "user":
+          navigate("/user");
+          break;
+        case "admin":
+          navigate("/admin");
+          break;
+        default:
+          navigate("/s-admin");
+          break;
+      }
     }
     return () => {};
   });
@@ -137,6 +153,20 @@ const RegisterUser = () => {
           <Alert severity="error" variant="filled">
             <AlertTitle>Error Sign Up</AlertTitle>
             {errors.avatar}
+          </Alert>
+        </Snackbar>
+      )}
+
+      {password_error && (
+        <Snackbar
+          open={true}
+          autoHideDuration={3000}
+          onClose={onClose}
+          name="error"
+        >
+          <Alert severity="error" variant="filled">
+            <AlertTitle>Password not Match</AlertTitle>
+            {password_error}
           </Alert>
         </Snackbar>
       )}

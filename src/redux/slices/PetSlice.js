@@ -148,6 +148,9 @@ const initialState = {
   loading: false,
   errors: null,
   success: null,
+  add_errors: null,
+  edit_errors: null,
+  edit_loading: false,
 };
 const PetSlice = createSlice({
   name: "pets",
@@ -155,6 +158,8 @@ const PetSlice = createSlice({
   reducers: {
     clearError: (state) => {
       state.errors = null;
+      state.edit_errors = null;
+      state.add_errors = null;
     },
     clearSuccess: (state) => {
       state.success = null;
@@ -179,21 +184,36 @@ const PetSlice = createSlice({
       state.loading = false;
       state.success = action.payload.success;
       state.errors = null;
+      state.add_errors = null;
       state.pets = [...state.pets, action.payload.pet];
     },
     [AddPetsThunk.rejected]: (state, action) => {
       state.loading = false;
       state.success = null;
-      state.errors = action.payload;
+      try {
+        state.add_errors = JSON.parse(action.payload);
+      } catch (error) {
+        state.errors = action.payload;
+      }
     },
     [EditPetsThunk.pending]: (state) => {
-      state.loading = true;
+      state.edit_loading = true;
     },
     [EditPetsThunk.fulfilled]: (state, action) => {
-      state.loading = false;
+      state.edit_loading = false;
       state.success = action.payload.message;
       state.pets = action.payload.pet;
       state.errors = null;
+      state.edit_errors = null;
+    },
+    [EditPetsThunk.rejected]: (state, action) => {
+      state.edit_loading = false;
+      state.success = null;
+      try {
+        state.edit_errors = JSON.parse(action.payload);
+      } catch (error) {
+        state.errors = action.payload;
+      }
     },
     [GetPetDetailsThunk.pending]: (state) => {
       state.loading = true;
@@ -234,6 +254,7 @@ const PetSlice = createSlice({
       state.vaxx_loading = false;
       state.pets = action.payload.pet_vaxx;
       state.success = action.payload.message;
+      state.add_errors = null;
     },
     [AddVaxxDetailThunk.rejected]: (state, action) => {
       state.vaxx_loading = false;

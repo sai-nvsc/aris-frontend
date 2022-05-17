@@ -44,7 +44,17 @@ const LoginUser = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      role === "user" ? navigate("/user") : navigate("/admin");
+      switch (role) {
+        case "user":
+          navigate("/user");
+          break;
+        case "admin":
+          navigate("/admin");
+          break;
+        default:
+          navigate("/s-admin");
+          break;
+      }
     }
     return () => {};
   }, [isAuthenticated, role, navigate]);
@@ -124,7 +134,7 @@ const LoginUser = () => {
             boxShadow: 3,
           }}
         >
-          <Typography variant="h4" sx={{ fontWeight: "bold", }}>
+          <Typography variant="h4" sx={{ fontWeight: "bold" }}>
             LOG IN
           </Typography>
 

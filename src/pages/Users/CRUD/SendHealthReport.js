@@ -7,6 +7,7 @@ import {
   DialogTitle,
   FormControl,
   FormControlLabel,
+  FormHelperText,
   FormLabel,
   Grid,
   Radio,
@@ -21,7 +22,7 @@ import { SendHealthReportThunk } from "../../../redux/slices/VaccineSlice";
 
 const SendHealthReport = () => {
   const { user } = useSelector((state) => state.user);
-  const { bites } = useSelector((state) => state.vaccine);
+  const { bites, input_errors } = useSelector((state) => state.vaccine);
   const dispatch = useDispatch();
   const [open, setopen] = useState(false);
 
@@ -117,13 +118,17 @@ const SendHealthReport = () => {
         <form encType="multipart/form-data" noValidate onSubmit={formHandler}>
           <DialogContent>
             <Typography variant="body1" marginBottom={3}>
-              <i>Note: Health Reports cannot be deleted once it was submitted. We
-              in ARIS take every health reports seriously. Please be cautious of
-              your reports and send rabies-related reports only.</i>
+              <i>
+                Note: Health Reports cannot be deleted once it was submitted. We
+                in ARIS take every health reports seriously. Please be cautious
+                of your reports and send rabies-related reports only.
+              </i>
             </Typography>
             <Grid container spacing={2} sx={{ p: 2 }}>
               <Grid item xs={12}>
-                <FormControl>
+                <FormControl
+                  error={input_errors && input_errors.type ? true : false}
+                >
                   <FormLabel id="demo-row-radio-buttons-group-label">
                     Report Type:
                   </FormLabel>
@@ -150,6 +155,11 @@ const SendHealthReport = () => {
                       label="Other"
                     />
                   </RadioGroup>
+                  {input_errors && input_errors.type ? (
+                    <FormHelperText>{input_errors.type}</FormHelperText>
+                  ) : (
+                    ""
+                  )}
                 </FormControl>
               </Grid>
               <Grid item xs={12}>
@@ -163,7 +173,15 @@ const SendHealthReport = () => {
                   name="desc"
                   onChange={onInputChange}
                   value={values.desc}
-                ></StyledTextField>
+                  error={
+                    input_errors && input_errors.description ? true : false
+                  }
+                  helperText={
+                    input_errors && input_errors.description
+                      ? input_errors.description
+                      : ""
+                  }
+                />
               </Grid>
             </Grid>
           </DialogContent>

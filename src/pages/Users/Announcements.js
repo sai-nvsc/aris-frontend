@@ -44,6 +44,7 @@ const Announcements = () => {
       <PersistentDrawerLeft title="Announcements" />
       <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="xl">
         <Box sx={{ width: "100%" }}>
+          <Typography variant="h4">Announcements of the Month</Typography>
           <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4, xl: 5 }} spacing={2}>
             {!loading &&
               announcement &&

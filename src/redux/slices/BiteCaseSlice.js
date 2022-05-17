@@ -3,6 +3,8 @@ import axios from "axios";
 axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
   "token"
 )}`;
+
+//All cases from all clinics
 export const GetAllCasesThunk = createAsyncThunk(
   "bitecase/cases",
   async (obj, { rejectWithValue }) => {
@@ -190,12 +192,32 @@ export const getActiveBiteCase = createAsyncThunk(
     }
   }
 );
+
+export const ForceAddCaseThunk = createAsyncThunk(
+  "bitecase/add-force",
+  async (obj, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_HOST}api/bitecase/add-force`,
+        obj.data,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
 const initialState = {
   bitecase: null,
   loading: false,
   errors: null,
   success: null,
   gettingappointment_loading: false,
+  existing_bites: null,
+  existing_dialog_open: false,
   add_case_errors: null,
   add_case_loading: false,
 };
@@ -206,9 +228,15 @@ const BiteCaseSlice = createSlice({
   reducers: {
     clearError: (state) => {
       state.errors = null;
+      state.add_case_errors = null;
+      state.existing_bites = null;
     },
     clearSuccess: (state) => {
       state.success = null;
+      state.existing_bites = null;
+    },
+    closeDialog: (state) => {
+      state.existing_dialog_open = false;
     },
   },
   extraReducers: {
@@ -218,7 +246,7 @@ const BiteCaseSlice = createSlice({
     },
     [GetAllCasesThunk.fulfilled]: (state, action) => {
       state.loading = false;
-      state.cases = action.payload.cases;
+      state.bitecase = action.payload.cases;
     },
     [GetAllCasesThunk.rejected]: (state, action) => {
       state.loading = false;
@@ -283,11 +311,39 @@ const BiteCaseSlice = createSlice({
     },
     [AddCaseThunk.fulfilled]: (state, action) => {
       state.add_case_loading = false;
-      state.success = action.payload.success;
       state.errors = null;
-      state.bitecase = action.payload.bitecase;
+      if (action.payload.record_existing) {
+        state.existing_bites = action.payload.bites;
+        state.existing_dialog_open = true;
+      } else {
+        state.success = action.payload.success;
+        state.bitecase = action.payload.bitecase;
+      }
     },
     [AddCaseThunk.rejected]: (state, action) => {
+      state.add_case_loading = false;
+      state.success = null;
+      try {
+        state.add_case_errors = JSON.parse(action.payload);
+      } catch (error) {
+        state.errors = action.payload;
+      }
+    },
+    [ForceAddCaseThunk.pending]: (state) => {
+      state.add_case_loading = true;
+    },
+    [ForceAddCaseThunk.fulfilled]: (state, action) => {
+      state.add_case_loading = false;
+      state.errors = null;
+      if (action.payload.record_existing) {
+        state.existing_bites = action.payload.bites;
+        state.existing_dialog_open = true;
+      } else {
+        state.success = action.payload.success;
+        state.bitecase = action.payload.bitecase;
+      }
+    },
+    [ForceAddCaseThunk.rejected]: (state, action) => {
       state.add_case_loading = false;
       state.success = null;
       try {
@@ -374,5 +430,5 @@ const BiteCaseSlice = createSlice({
     },
   },
 });
-export const { clearError, clearSuccess } = BiteCaseSlice.actions;
+export const { clearError, clearSuccess, closeDialog } = BiteCaseSlice.actions;
 export default BiteCaseSlice.reducer;

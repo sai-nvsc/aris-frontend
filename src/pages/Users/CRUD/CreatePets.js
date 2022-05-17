@@ -6,6 +6,7 @@ import {
   DialogContent,
   DialogTitle,
   FormControl,
+  FormHelperText,
   Grid,
   ImageList,
   ImageListItem,
@@ -21,6 +22,7 @@ import { AddPetsThunk } from "../../../redux/slices/PetSlice";
 
 const CreatePet = () => {
   const { user } = useSelector((state) => state.user);
+  const { add_errors } = useSelector((state) => state.pets);
   const dispatch = useDispatch();
   const [imagePreview, setimagePreview] = useState([]);
   const [images, setImages] = useState([]);
@@ -71,23 +73,22 @@ const CreatePet = () => {
     formData.append("age", values.age);
     formData.append("owner", user._id);
     images.forEach((image) => {
-      /**
-       * Use append() here instead of set(). in order not replace the current value of the image...
-       */
+      // /**
+      //  * Use append() here instead of set(). in order not replace the current value of the image...
+      //  */
       formData.append("images", image);
     });
     dispatch(AddPetsThunk(formData));
-    setopen(false);
-    setvalues({
-      name: "",
-      species: "",
-      breed: "",
-      age: "",
-      gender: "",
-      color: "",
-    });
-    setimagePreview([]);
-    setImages([]);
+    // setvalues({
+    //   name: "",
+    //   species: "",
+    //   breed: "",
+    //   age: "",
+    //   gender: "",
+    //   color: "",
+    // });
+    // setimagePreview([]);
+    // setImages([]);
   };
 
   const handleClose = () => {
@@ -133,6 +134,8 @@ const CreatePet = () => {
                   label="Name"
                   value={values.name}
                   onChange={onInputChange}
+                  error={add_errors && add_errors.name ? true : false}
+                  helperText={add_errors ? add_errors.name : ""}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -141,6 +144,7 @@ const CreatePet = () => {
                   size="small"
                   margin="normal"
                   sx={{ backgroundColor: "white" }}
+                  error={add_errors && add_errors.gender ? true : false}
                 >
                   <InputLabel>Sex</InputLabel>
                   <Select
@@ -152,6 +156,11 @@ const CreatePet = () => {
                     <MenuItem value="Male">Male</MenuItem>
                     <MenuItem value="Female">Female</MenuItem>
                   </Select>
+                  {add_errors && add_errors.gender ? (
+                    <FormHelperText>{add_errors.gender}</FormHelperText>
+                  ) : (
+                    false
+                  )}
                 </FormControl>
               </Grid>
               <Grid item xs={6}>
@@ -160,6 +169,7 @@ const CreatePet = () => {
                   size="small"
                   margin="normal"
                   sx={{ backgroundColor: "white" }}
+                  error={add_errors && add_errors.species ? true : false}
                 >
                   <InputLabel>Specie</InputLabel>
                   <Select
@@ -172,6 +182,11 @@ const CreatePet = () => {
                     <MenuItem value="Cat">Cat</MenuItem>
                     <MenuItem value="Others">Others</MenuItem>
                   </Select>
+                  {add_errors && add_errors.species ? (
+                    <FormHelperText>{add_errors.species}</FormHelperText>
+                  ) : (
+                    ""
+                  )}
                 </FormControl>
               </Grid>
               <Grid item xs={6}>
@@ -184,6 +199,8 @@ const CreatePet = () => {
                   label="Age in months"
                   value={values.age}
                   onChange={onInputChange}
+                  error={add_errors && add_errors.age ? true : false}
+                  helperText={add_errors ? add_errors.age : ""}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -196,6 +213,8 @@ const CreatePet = () => {
                   label="Color"
                   value={values.color}
                   onChange={onInputChange}
+                  error={add_errors && add_errors.color ? true : false}
+                  helperText={add_errors ? add_errors.color : ""}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -208,6 +227,8 @@ const CreatePet = () => {
                   label="Breed"
                   value={values.breed}
                   onChange={onInputChange}
+                  error={add_errors && add_errors.breed ? true : false}
+                  helperText={add_errors ? add_errors.breed : ""}
                 />
               </Grid>
               <Grid item xs={12}>

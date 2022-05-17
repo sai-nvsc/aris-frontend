@@ -225,6 +225,23 @@ export const ResendVerificationThunk = createAsyncThunk(
     }
   }
 );
+
+export const LoginSuperAdminThunk = createAsyncThunk(
+  "users/admin_login",
+  async (formdata, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_HOST}api/superadmin/auth/login`,
+        formdata
+      );
+      localStorage.setItem("token", response.data.token);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
 const initialState = {
   user: null,
   loading: false,

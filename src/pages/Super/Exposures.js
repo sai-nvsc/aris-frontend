@@ -1,59 +1,39 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import AdminDelete from "../../components/Layouts/Dialogs/AdminDelete";
 import CssBaseline from "@mui/material/CssBaseline";
 import { DataGrid } from "@mui/x-data-grid";
-import { Edit } from "@mui/icons-material";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import PrintIcon from "@mui/icons-material/Print";
 import {
   Alert,
   AlertTitle,
   Box,
-  Button,
   Container,
   Chip,
   Grid,
   Snackbar,
   Typography,
 } from "@mui/material";
-import { StyledTextField, StyledLink } from "../../assets/styles";
-
 import moment from "moment";
 import Footer from "../../components/Layouts/Footer";
-import PersistentDrawerLeft from "../../components/Layouts/AdminSidebar";
+import PersistentDrawerLeft from "../../components/Layouts/SuperSidebar";
 import {
-  GetAllCaseThunk,
+  GetAllCasesThunk,
   clearError,
   clearSuccess,
 } from "../../redux/slices/BiteCaseSlice";
-import EditBiteCase from "./AdminCRUD/EditBiteCase";
-import AddBiiteCase from "./AdminCRUD/AddBiiteCase";
 import { CustomBiteCaseGrid } from "../../helpers/GridExport";
 const Bitecases = () => {
   const { bitecase, loading, errors, success } = useSelector(
     (state) => state.bitecase
   );
-  const { user } = useSelector((state) => state.user);
-
   const dispatch = useDispatch();
-  const [values, setvalues] = useState({
-    search: "",
-  });
-  const handleChange = (e) => {
-    setvalues({ ...values, [e.target.name]: e.target.value });
-  };
-  useEffect(() => {
-    dispatch(GetAllCaseThunk({ id: user.clinic }));
-    return () => {};
-  }, [dispatch, user]);
-
-  //modals
-
   const onClose = (e) => {
     dispatch(clearSuccess());
     dispatch(clearError());
   };
+  useEffect(() => {
+    dispatch(GetAllCasesThunk());
+    return () => {};
+  }, [dispatch]);
 
   //Datagrid
   const columns = [
@@ -63,7 +43,7 @@ const Bitecases = () => {
       flex: 1,
       headerAlign: "center",
       align: "center",
-      minWidth: 150,
+      minWidth: 240,
       valueGetter: (cellValues) => {
         return (
           cellValues.row.user[0].first_name +
@@ -115,7 +95,7 @@ const Bitecases = () => {
       flex: 1,
       headerAlign: "center",
       align: "center",
-      minWidth: 150,
+      minWidth: 160,
       valueGetter: (cellValues) => {
         return cellValues.row.history_of_exposure.place;
       },
@@ -144,6 +124,18 @@ const Bitecases = () => {
         return cellValues.row.history_of_exposure.type_of_exposure;
       },
     },
+    {
+        field: "bodypart",
+        headerName: "Site",
+        flex: 1,
+        headerAlign: "center",
+        align: "center",
+        minWidth: 90,
+        valueGetter: (cellValues) => {
+          return cellValues.row.history_of_exposure.bodypart;
+         },
+        sortComparator: (v1, v2) => v1.localeCompare(v2),
+      },
 
     {
       field: "exposure_category",
@@ -162,8 +154,20 @@ const Bitecases = () => {
       minWidth: 100,
     },
     {
+      field: "route",
+      headerName: "Route",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      minWidth: 90,
+      valueGetter: (cellValues) => {
+        return cellValues.row.history_of_exposure.route;
+       },
+      sortComparator: (v1, v2) => v1.localeCompare(v2),
+    },
+    {
       field: "status_of_vaccination",
-      headerName: "Status",
+      headerName: "Vax",
       flex: 1,
       headerAlign: "center",
       align: "center",
@@ -189,42 +193,33 @@ const Bitecases = () => {
       },
     },
     {
-      field: "Actions",
-      headerName: "Actions",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      minWidth: 240,
-      sortable: false,
-      renderCell: (cellValues) => {
-        return (
-          <>
-            <Button
-              component={StyledLink}
-              to={`/admin/bitecase/print/${cellValues.row._id}`}
-            >
-              <PrintIcon style={{ fontSize: "medium", color: "#000" }} />
-            </Button>
-            <Button
-              component={StyledLink}
-              to={`/admin/bitecase/get/${cellValues.row._id}`}
-            >
-              <VisibilityIcon style={{ fontSize: "medium", color: "#000" }} />
-            </Button>
-            <EditBiteCase
-              id={bitecase.id}
-              data={cellValues.row}
-              startIcon={<Edit style={{ color: "#ff8a80" }} />}
-            />
-            <AdminDelete
-              id={cellValues.id}
-              collection="bitecases"
-              data={cellValues.row}
-            />
-          </>
-        );
+        field: "patient_status",
+        headerName: "Px",
+        flex: 1,
+        headerAlign: "center",
+        align: "center",
+        minWidth: 100,
       },
-    },
+      {
+        field: "animal_status",
+        headerName: "Animal",
+        flex: 1,
+        headerAlign: "center",
+        align: "center",
+        minWidth: 100,
+      },
+      {
+        field: "clinic",
+        headerName: "Clinic",
+        flex: 1,
+        headerAlign: "center",
+        align: "center",
+        minWidth: 250,
+        valueGetter: (cellValues) => {
+          return (cellValues.row.clinic[0].name);
+        },
+        sortComparator: (v1, v2) => v1.localeCompare(v2),
+      },
   ];
   const handleCellClick = (param, e) => {
     e.stopPropagation();
@@ -233,20 +228,15 @@ const Bitecases = () => {
     e.stopPropagation();
   };
 
-  const PressedEnter = (e) => {
-    if (e.code === "Enter" && e.target.value !== "") {
-      window.location.assign(`/admin/bitecase/get/${e.target.value}`);
-    }
-  };
   return (
     <Box
       sx={{
         bgcolor: "background.paper",
         pt: 8,
-        pb: 6,
+        pb: 5,
       }}
     >
-      <PersistentDrawerLeft title="Bite Cases" />
+      <PersistentDrawerLeft title="Exposures" />
       <CssBaseline />
       <Container maxWidth="xl">
         {success && (
@@ -289,27 +279,10 @@ const Bitecases = () => {
               color="text.primary"
               gutterBottom
             >
-              Bite Cases
+              Exposures
             </Typography>
           </Grid>
-
-          <Grid item>
-            <Typography component="span">
-              Scan Bite Case QR Code:{" "}
-              <StyledTextField
-                size="small"
-                name="search"
-                value={values.search}
-                label="Press 'Enter' After Scan"
-                onChange={handleChange}
-                onKeyUp={PressedEnter}
-              />
-            </Typography>
-          </Grid>
-
-          <Grid item>
-            <AddBiiteCase />
-          </Grid>
+          
         </Grid>
         <Grid item sm flexDirection={"column"}>
           <Box

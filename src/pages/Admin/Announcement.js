@@ -47,7 +47,7 @@ const bull = (
 );
 
 const Announcement = () => {
-  const { announcement, loading, errors, success } = useSelector(
+  const { announcement, loading, errors, success, input_errors } = useSelector(
     (state) => state.announcement
   );
   const { user } = useSelector((state) => state.user);
@@ -56,7 +56,7 @@ const Announcement = () => {
   const [values, setvalues] = useState({
     title: "",
     desc: "",
-    date: new Date(),
+    date: moment().startOf("day").toDate().toISOString(),
   });
   const handleChange = (e) => {
     setvalues({ ...values, [e.target.name]: e.target.value });
@@ -66,11 +66,10 @@ const Announcement = () => {
     const formData = new FormData();
     formData.append("title", values.title);
     formData.append("desc", values.desc);
-    formData.append("date", values.date);
     formData.append("clinic", user.clinic);
     dispatch(AddAnnThunk({ data: formData }));
 
-    setOpen(false);
+    // setOpen(false);
   };
 
   useEffect(() => {
@@ -84,7 +83,14 @@ const Announcement = () => {
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setvalues({
+      title: "",
+      desc: "",
+      date: moment().startOf("day").toDate().toISOString(),
+    });
+    setOpen(false);
+  };
   const onClose = (e) => {
     dispatch(clearSuccess());
     dispatch(clearError());
@@ -191,10 +197,7 @@ const Announcement = () => {
                     <CardActions>
                       <EditAnn annEdit={ann} startIcon={<Edit />} />
 
-                      <AdminDelete
-                        id={ann._id}
-                        collection="announcements"
-                      />
+                      <AdminDelete id={ann._id} collection="announcements" />
                     </CardActions>
                   </Card>
                 </>
@@ -203,99 +206,108 @@ const Announcement = () => {
         </Box>
       </Container>
 
-
-  <Dialog open={open} onClose={handleClose} maxWidth="md">
-    <DialogTitle>Add New Announcement</DialogTitle>
-      <DialogContent>
-        <Box
-          autoComplete="off"
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            backgroundColor: "white",
-            alignItems: "center",
-            p: 2,    
-          }}
-        >
-          <Container maxWidth="md">
-            <Grid container spacing={3}>
-              <Grid item xs={12}>
-                <StyledTextField
-                  required
-                  fullWidth
-                  id="title"
-                  label="Title"
-                  name="title"
-                  size="small"
-                  onChange={handleChange}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="desc"
-                  label="Description"
-                  name="desc"
-                  multiline
-                  rows={8}
-                  size="small"
-                  onChange={handleChange}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <LocalizationProvider dateAdapter={DateAdapterMoment}>
-                  <DatePicker
-                    disabled="true"
-                    label="Date"
-                    openTo="year"
-                    views={["year", "month", "day"]}
-                    value={moment(values.date)}
-                    name="exp_date"
-                    InputProps={{ readOnly: true }}
-                    onChange={(newDate) =>
-                      setvalues({
-                        ...values,
-                        date: newDate.toDate().toISOString(),
-                      })
+      <Dialog open={open} onClose={handleClose} maxWidth="md">
+        <DialogTitle>Add New Announcement</DialogTitle>
+        <DialogContent>
+          <Box
+            autoComplete="off"
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              backgroundColor: "white",
+              alignItems: "center",
+              p: 2,
+            }}
+          >
+            <Container maxWidth="md">
+              <Grid container spacing={3}>
+                <Grid item xs={12}>
+                  <StyledTextField
+                    required
+                    fullWidth
+                    id="title"
+                    label="Title"
+                    name="title"
+                    size="small"
+                    onChange={handleChange}
+                    error={input_errors && input_errors.title ? true : false}
+                    helperText={
+                      input_errors && input_errors.title
+                        ? input_errors.title
+                        : ""
                     }
-                    renderInput={(params) => (
-                      <StyledTextField
-                        {...params}
-                        fullWidth
-                        required
-                        size="small"
-                      />
-                    )}
                   />
-                </LocalizationProvider>
-              </Grid>
-            </Grid>
+                </Grid>
 
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                backgroundColor: "white",
-                alignItems: "center",
-              }}
-            >
-              {" "}
-              <br />
-              <StyledButton
-                type="submit"
-                variant="contained"
-                onClick={handleSubmit}
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="desc"
+                    label="Description"
+                    name="desc"
+                    multiline
+                    rows={8}
+                    size="small"
+                    onChange={handleChange}
+                    error={input_errors && input_errors.desc ? true : false}
+                    helperText={
+                      input_errors && input_errors.desc ? input_errors.desc : ""
+                    }
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <LocalizationProvider dateAdapter={DateAdapterMoment}>
+                    <DatePicker
+                      disabled="true"
+                      label="Date"
+                      openTo="year"
+                      views={["year", "month", "day"]}
+                      value={moment(values.date)}
+                      name="exp_date"
+                      InputProps={{ readOnly: true }}
+                      onChange={(newDate) =>
+                        setvalues({
+                          ...values,
+                          date: newDate.startOf("day").toDate().toISOString(),
+                        })
+                      }
+                      renderInput={(params) => (
+                        <StyledTextField
+                          {...params}
+                          fullWidth
+                          required
+                          size="small"
+                        />
+                      )}
+                    />
+                  </LocalizationProvider>
+                </Grid>
+              </Grid>
+
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  backgroundColor: "white",
+                  alignItems: "center",
+                }}
               >
-                Post
-              </StyledButton>
-            </Box>
-          </Container>
-        </Box>
-      </DialogContent>
-    </Dialog>
+                {" "}
+                <br />
+                <StyledButton
+                  type="submit"
+                  variant="contained"
+                  onClick={handleSubmit}
+                >
+                  Post
+                </StyledButton>
+              </Box>
+            </Container>
+          </Box>
+        </DialogContent>
+      </Dialog>
       <Footer />
     </Box>
   );

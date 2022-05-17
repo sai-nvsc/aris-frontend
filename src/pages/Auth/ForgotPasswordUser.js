@@ -33,7 +33,17 @@ const ForgotPasswordUser = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      user.role === "user" ? navigate("/user") : navigate("/admin");
+      switch (user.role) {
+        case "user":
+          navigate("/user");
+          break;
+        case "admin":
+          navigate("/admin");
+          break;
+        default:
+          navigate("/s-admin");
+          break;
+      }
     }
     return () => {};
   });

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import {
   Alert,
   AlertTitle,
@@ -30,7 +30,7 @@ import AdminDelete from "../../components/Layouts/Dialogs/AdminDelete";
 import EditInventory from "../Admin/AdminCRUD/EditInventory";
 import moment from "moment";
 import InventoryAlert from "../../helpers/InventoryAlerts";
-
+import { CustomInventoryGrid } from "../../helpers/GridExport";
 const Inventory = () => {
   const { inventory, loading, errors, success, add_errors } = useSelector(
     (state) => state.inventory
@@ -80,6 +80,8 @@ const Inventory = () => {
       delivery_date: moment().startOf("day"),
     });
     setOpen(false);
+    dispatch(clearSuccess());
+    dispatch(clearError());
   };
   const onClose = (e) => {
     dispatch(clearSuccess());
@@ -220,19 +222,7 @@ const Inventory = () => {
             </Alert>
           </Snackbar>
         )}
-        {add_errors && (
-          <Snackbar
-            open={add_errors}
-            autoHideDuration={3000}
-            onClose={onClose}
-            name="error"
-          >
-            <Alert severity="error" variant="filled">
-              <AlertTitle>Error</AlertTitle>
-              Error Submitting the data. Please fill in required fields.
-            </Alert>
-          </Snackbar>
-        )}
+
         <Grid
           container
           direction="row"
@@ -290,7 +280,7 @@ const Inventory = () => {
                     getRowId={(row) => row._id}
                     onCellClick={handleCellClick}
                     onRowClick={handleRowClick}
-                    components={{ Toolbar: GridToolbar }}
+                    components={{ Toolbar: CustomInventoryGrid }}
                     {...inventory}
                     getCellClassName={(params) => {
                       if (params.field.stock === "stock") {
@@ -314,7 +304,6 @@ const Inventory = () => {
             alignItems: "center",
             p: 2,
             borderRadius: 5,
-            boxShadow: 3,
           }}
         >
           <Container maxWidth="lg">
@@ -403,6 +392,7 @@ const Inventory = () => {
                     views={["year", "month", "day"]}
                     value={moment(values.delivery_date)}
                     name="delivery_date"
+                    disableFuture={true}
                     InputProps={{ readOnly: true }}
                     onChange={(newDate) =>
                       setvalues({
@@ -430,6 +420,7 @@ const Inventory = () => {
                     views={["year", "month", "day"]}
                     value={moment(values.exp_date)}
                     name="exp_date"
+                    disablePast={true}
                     InputProps={{ readOnly: true }}
                     onChange={(newDate) =>
                       setvalues({
@@ -443,6 +434,13 @@ const Inventory = () => {
                         fullWidth
                         required
                         size="small"
+                        readOnly
+                        error={add_errors && add_errors.exp_date ? true : false}
+                        helperText={
+                          add_errors && add_errors.exp_date
+                            ? add_errors.exp_date
+                            : ""
+                        }
                       />
                     )}
                   />

@@ -217,6 +217,7 @@ const AppointmentSlice = createSlice({
       //state.appointments = action.payload.appointments;
     },
     [cancelApt.rejected]: (state, action) => {
+      state.loading = false;
       state.appointment_cancellation_loading = false;
       state.errors = action.payload;
     },

@@ -26,7 +26,7 @@ import Footer from "../../components/Layouts/Footer";
 import DateAdapterMoment from "@mui/lab/AdapterMoment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import moment from "moment";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import { StyledButton, StyledTextField } from "../../assets/styles";
 import {
   clearError,
@@ -42,6 +42,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AcceptAppointment from "../Admin/AdminCRUD/AcceptAppointment";
 import CompleteAppointment from "../Admin/AdminCRUD/CompleteAppointment";
 import CancelApt from "../Admin/Admin_CancelApt";
+import { CustomAppointmentGrid } from "../../helpers/GridExport";
 
 const Appointments = () => {
   const { success, errors, appointments, loading, appt_error } = useSelector(
@@ -286,6 +287,7 @@ const Appointments = () => {
             <StyledButton
               startIcon={<BsCalendarPlusFill />}
               onClick={handleOpen}
+              disabled={user && user.role === "inventory" ? true : false}
             >
               Create Appointment
             </StyledButton>
@@ -320,7 +322,7 @@ const Appointments = () => {
                   onCellClick={handleCellClick}
                   onRowClick={handleRowClick}
                   components={{
-                    Toolbar: GridToolbar,
+                    Toolbar: CustomAppointmentGrid,
                   }}
                   loading={loading}
                   {...appointments}

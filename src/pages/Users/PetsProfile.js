@@ -29,7 +29,7 @@ import EditPet from "./CRUD/EditPets";
 import Delete from "../../components/Layouts/Dialogs/Delete";
 import AddPetVaxxDetail from "./CRUD/AddPetVaxxDetail";
 import EditPetVaxxDetail from "./CRUD/EditPetVaxxDetails";
-import {StyledLink } from "../../assets/styles";
+import { StyledLink } from "../../assets/styles";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 
 const moment = require("moment");
@@ -159,15 +159,11 @@ const PetsProfile = () => {
             </Alert>
           </Snackbar>
         )}
-        
-         <IconButton
-              component={StyledLink}
-              to="/user/mypets"
-              size="large"
-            >
-              <ArrowBackIosRoundedIcon />
-              <Typography sx={{fontSize: 40}}>Pets</Typography>
-            </IconButton>
+
+        <IconButton component={StyledLink} to="/user/mypets" size="large">
+          <ArrowBackIosRoundedIcon />
+          <Typography sx={{ fontSize: 40 }}>Pets</Typography>
+        </IconButton>
         {/* <div className="app"> */}
         {!loading && pets && (
           <Card sx={{ display: "flex" }}>
@@ -224,7 +220,7 @@ const PetsProfile = () => {
                 <>
                   <AddPetVaxxDetail />
                 </>
-                <div style={{ height: 400, width: "auto"}}>
+                <div style={{ height: 400, width: "auto" }}>
                   <DataGrid
                     rows={pets[0].vaccine_history}
                     columns={columns}
