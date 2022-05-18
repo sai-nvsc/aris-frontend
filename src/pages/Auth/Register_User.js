@@ -368,7 +368,7 @@ const RegisterUser = () => {
                 <StyledTextField
                   size="small"
                   sx={{ backgroundColor: "white" }}
-                  label="Cofirm Password"
+                  label="Confirm Password"
                   type="password"
                   required
                   name="c_password"
