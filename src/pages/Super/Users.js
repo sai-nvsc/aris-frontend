@@ -22,7 +22,7 @@ import {
 import { CustomBiteCaseGrid } from "../../helpers/GridExport";
 
 const Users = () => {
-  const { user, loading, errors, success } = useSelector(
+  const { users, loading, errors, success } = useSelector(
     (state) => state.user
   );
   const dispatch = useDispatch();
@@ -39,20 +39,20 @@ const Users = () => {
   //Datagrid
   const columns = [
     {
-        field: "first_name",
-        headerName: "Fname",
-        flex: 1,
-        headerAlign: "center",
-        align: "center",
-        minWidth: 150,
+      field: "first_name",
+      headerName: "Fname",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      minWidth: 150,
     },
     {
-        field: "last_name",
-        headerName: "Lname",
-        flex: 1,
-        headerAlign: "center",
-        align: "center",
-        minWidth: 150,
+      field: "last_name",
+      headerName: "Lname",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      minWidth: 150,
     },
     {
       field: "sex",
@@ -180,7 +180,6 @@ const Users = () => {
               Registered Users
             </Typography>
           </Grid>
-          
         </Grid>
         <Grid item md flexDirection={"column"}>
           <Box
@@ -188,19 +187,18 @@ const Users = () => {
               bgcolor: "background.paper",
               pt: 2,
               pb: 6,
-
             }}
           >
             <div style={{ height: 520, width: "100%" }}>
-              {!loading && user && (
+              {!loading && users && (
                 <DataGrid
-                  rows={user}
+                  rows={users}
                   columns={columns}
                   getRowId={(row) => row._id}
                   onCellClick={handleCellClick}
                   onRowClick={handleRowClick}
                   components={{ Toolbar: CustomBiteCaseGrid }}
-                  {...user}
+                  {...users}
                 />
               )}
             </div>
