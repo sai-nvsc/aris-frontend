@@ -23,7 +23,7 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import AssessmentIcon from "@mui/icons-material/Assessment";
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { AccountBox, MedicalServices } from "@mui/icons-material";
+import { MedicalServices } from "@mui/icons-material";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { LogoutUserThunk } from "../../redux/slices/UserSlices";
@@ -69,12 +69,12 @@ export default function PersistentDrawerLeft({ title }) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
- 
+
   const AdminLogout = (e) => {
     dispatch(LogoutUserThunk());
   };
 
-return (
+  return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
@@ -91,10 +91,10 @@ return (
           <Typography variant="h6" noWrap component="div">
             {title}
           </Typography>
-           <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ flexGrow: 1 }} />
         </Toolbar>
       </AppBar>
-      
+
       <Drawer
         sx={{
           width: drawerWidth,
@@ -157,33 +157,33 @@ return (
             </ListItemButton>
           </ListItem>
 
-          <ListItem>
+          {/** <ListItem>
             <ListItemButton component={StyledLink} to="/s-admin/users">
               <ListItemIcon sx={{ color: "#f32727" }}>
                 <AccountBox />
               </ListItemIcon>
               <ListItemText primary="Users" />
             </ListItemButton>
-          </ListItem>                   
+          </ListItem>                */}
         </List>
-              
-          <ListItem>
-            <ListItemButton component={StyledLink} to="/s-admin/analytics">
-              <ListItemIcon sx={{ color: "#f32727" }}>
-                <AssessmentIcon />
-              </ListItemIcon>
-              <ListItemText primary="Analytics" />
-            </ListItemButton>
-          </ListItem>
 
-          <ListItem>
-            <ListItemButton onClick={AdminLogout}>
-              <ListItemIcon sx={{ color: "#f32727" }}>
-                <LogoutIcon />
-              </ListItemIcon>
-              <ListItemText primary="Logout" />
-            </ListItemButton>
-          </ListItem>       
+        <ListItem>
+          <ListItemButton component={StyledLink} to="/s-admin/analytics">
+            <ListItemIcon sx={{ color: "#f32727" }}>
+              <AssessmentIcon />
+            </ListItemIcon>
+            <ListItemText primary="Analytics" />
+          </ListItemButton>
+        </ListItem>
+
+        <ListItem>
+          <ListItemButton onClick={AdminLogout}>
+            <ListItemIcon sx={{ color: "#f32727" }}>
+              <LogoutIcon />
+            </ListItemIcon>
+            <ListItemText primary="Logout" />
+          </ListItemButton>
+        </ListItem>
       </Drawer>
     </Box>
   );
