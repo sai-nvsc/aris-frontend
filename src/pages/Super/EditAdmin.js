@@ -20,7 +20,6 @@ import { useDispatch } from "react-redux";
 import { EditAccountSuperAdminThunk } from "../../redux/slices/AdminSlices";
 
 const EditAcc = ({ data }) => {
-
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 

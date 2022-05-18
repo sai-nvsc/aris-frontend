@@ -23,7 +23,7 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import AssessmentIcon from "@mui/icons-material/Assessment";
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { MedicalServices } from "@mui/icons-material";
+import { AccountBox, MedicalServices } from "@mui/icons-material";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { LogoutUserThunk } from "../../redux/slices/UserSlices";
@@ -155,7 +155,16 @@ return (
               </ListItemIcon>
               <ListItemText primary="Admins" />
             </ListItemButton>
-          </ListItem>                
+          </ListItem>
+
+          <ListItem>
+            <ListItemButton component={StyledLink} to="/s-admin/users">
+              <ListItemIcon sx={{ color: "#f32727" }}>
+                <AccountBox />
+              </ListItemIcon>
+              <ListItemText primary="Users" />
+            </ListItemButton>
+          </ListItem>                   
         </List>
               
           <ListItem>
@@ -168,7 +177,7 @@ return (
           </ListItem>
 
           <ListItem>
-            <ListItemButton  onClick={AdminLogout}>
+            <ListItemButton onClick={AdminLogout}>
               <ListItemIcon sx={{ color: "#f32727" }}>
                 <LogoutIcon />
               </ListItemIcon>

@@ -181,7 +181,7 @@ export const GetAllUserThunk = createAsyncThunk(
   async (obj, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_HOST}api/user/auth/`,
+        `${process.env.REACT_APP_API_HOST}api/user/auth/all`,
         obj,
         {
           headers: { Authorization: "Bearer " + localStorage.getItem("token") },
@@ -193,6 +193,7 @@ export const GetAllUserThunk = createAsyncThunk(
     }
   }
 );
+
 export const VerificationThunk = createAsyncThunk(
   "user/verification",
   async (obj, { rejectWithValue }) => {

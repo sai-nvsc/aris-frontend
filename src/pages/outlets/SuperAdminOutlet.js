@@ -7,6 +7,7 @@ import Clinic from "../Super/Clinic";
 import SuperAdmins from "../Super/SuperAdmins";
 import Analytics from "../Super/Analytics";
 import Expo from "../Super/Exposures";
+import Users from "../Super/Users";
 /* import Announcements from "../Admin/Announcement";
 import ARIS from "../../components/Layouts/ARIS_Admin";
  */
@@ -24,6 +25,8 @@ const SuperAdminOutlet = () => {
             <Route path="/clinics" element={<Clinic />} />
             <Route path="/admins" element={<SuperAdmins />} />
             <Route path="/exposures" element={<Expo />} />
+            <Route path="/users" element={<Users />} />
+
         </Routes>
       ) : loading === false && isAuthenticated && role !== "superadmin" ? (
         <Navigate to={"/login"} />

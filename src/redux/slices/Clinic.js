@@ -93,6 +93,24 @@ export const DeleteClinic = createAsyncThunk(
   }
 );
 
+export const UpdateClinic = createAsyncThunk(
+  "clinic/update-clinic",
+  async (obj, { rejectWithValue }) => {
+    try {
+      const response = await axios.patch(
+        `${process.env.REACT_APP_API_HOST}api/clinic/update/${obj.id}`,
+        obj.data,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 const initialState = {
   loading: false,
   success: null,
@@ -188,6 +206,24 @@ const ClinicSlice = createSlice({
       state.succes = null;
       state.errors = action.payload;
       state.isAuthenticated = false;
+    },
+    [UpdateClinic.pending]: (state) => {
+      state.loading = true;
+    },
+    [UpdateClinic.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.success = action.payload.success;
+      state.clinic = action.payload.clinic;
+      state.errors = null;
+    },
+    [UpdateClinic.rejected]: (state, action) => {
+      state.loading = false;
+      state.success = null;
+      try {
+        state.errors = JSON.parse(action.payload);
+      } catch (error) {
+        state.errors = action.payload;
+      }
     },
   },
 });

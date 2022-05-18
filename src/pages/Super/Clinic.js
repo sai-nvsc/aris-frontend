@@ -23,9 +23,9 @@ import {
   Typography,
 } from "@mui/material";
 import { StyledTextField, StyledButton } from "../../assets/styles";
-// import { Edit } from "@mui/icons-material";
+import { Edit } from "@mui/icons-material";
 import MedicalServicesIcon from "@mui/icons-material/MedicalServices";
-//import EditAccount from "../Admin/AdminCRUD/EditAccount";
+import EditClinic from "./EditClinic";
 import DeleteClinic from "../../components/Layouts/Dialogs/DeleteClinic";
 import PersistentDrawerLeft from "../../components/Layouts/SuperSidebar";
 import Footer from "../../components/Layouts/Footer";
@@ -153,11 +153,11 @@ const Clinic = () => {
      renderCell: (cellValues) => {
         return (
           <>
-          {/*    <EditAccount
-              id={admin.id}
+            <EditClinic
+              id={clinic.id}
               data={cellValues.row}
               startIcon={<Edit style={{ color: "#ff8a80" }} />}
-            /> */}
+            /> 
             <DeleteClinic
               id={cellValues.row._id}
               name={clinic[0].name}
