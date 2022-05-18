@@ -34,7 +34,7 @@ const Users = () => {
   useEffect(() => {
     dispatch(GetAllUserThunk());
     return () => {};
-  }, [dispatch]);
+  });
 
   //Datagrid
   const columns = [
