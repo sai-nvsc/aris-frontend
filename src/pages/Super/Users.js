@@ -19,10 +19,11 @@ import {
   clearError,
   clearSuccess,
 } from "../../redux/slices/UserSlices";
-import { CustomBiteCaseGrid } from "../../helpers/GridExport";
+import { CustomUsersGrid } from "../../helpers/GridExport";
+// import { CustomBiteCaseGrid } from "../../helpers/GridExport";
 
 const Users = () => {
-  const { users, loading, errors, success } = useSelector(
+  const { users, loading_users, errors, success } = useSelector(
     (state) => state.user
   );
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ const Users = () => {
   useEffect(() => {
     dispatch(GetAllUserThunk());
     return () => {};
-  });
+  }, [dispatch]);
 
   //Datagrid
   const columns = [
@@ -114,8 +115,13 @@ const Users = () => {
       align: "center",
       minWidth: 150,
       type: "date",
-      valueGetter: (cellValues) =>
-        moment(cellValues.row.verified_at).format("MMM. DD, YYYY"),
+      valueGetter: (cellValues) => {
+        if (cellValues.row.verified_at) {
+          return moment(cellValues.row.verified_at).format("MMM. DD, YYYY");
+        } else {
+          return null;
+        }
+      },
       sortComparator: (v1, v2) => new Date(v1) - new Date(v2),
     },
   ];
@@ -190,14 +196,14 @@ const Users = () => {
             }}
           >
             <div style={{ height: 520, width: "100%" }}>
-              {!loading && users && (
+              {!loading_users && users && (
                 <DataGrid
                   rows={users}
                   columns={columns}
                   getRowId={(row) => row._id}
                   onCellClick={handleCellClick}
                   onRowClick={handleRowClick}
-                  components={{ Toolbar: CustomBiteCaseGrid }}
+                  components={{ Toolbar: CustomUsersGrid }}
                   {...users}
                 />
               )}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useDispatch, useSelector } from "react-redux";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import {
   Alert,
   AlertTitle,
@@ -35,6 +35,7 @@ import {
   clearError,
   clearSuccess,
 } from "../../redux/slices/Clinic";
+import { CustomClinicGrid } from "../../helpers/GridExport";
 
 const Clinic = () => {
   const { loading, clinic, errors, success } = useSelector(
@@ -49,7 +50,7 @@ const Clinic = () => {
     dispatch(clearSuccess());
     dispatch(clearError());
   };
- 
+
   function refreshPage() {
     window.location.reload(false);
   }
@@ -150,14 +151,14 @@ const Clinic = () => {
       headerAlign: "center",
       align: "center",
       minWidth: 100,
-     renderCell: (cellValues) => {
+      renderCell: (cellValues) => {
         return (
           <>
             <EditClinic
               id={clinic.id}
               data={cellValues.row}
               startIcon={<Edit style={{ color: "#ff8a80" }} />}
-            /> 
+            />
             <DeleteClinic
               id={cellValues.row._id}
               name={clinic[0].name}
@@ -184,29 +185,28 @@ const Clinic = () => {
     } = e;
     setTimeSlot(
       // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
+      typeof value === "string" ? value.split(",") : value
     );
-    
   };
 
   const time = [
-  '6am-7am',
-  '7am-8am',
-  '8am-9am',
-  '9am-10am',
-  '10am-11am',
-  '11am-12nn',
-  '12nn-1pm',
-  '1pm-2pm',
-  '2pm-3pm',
-  '3pm-4pm',
-  '4pm-5pm',
-  '5pm-6pm',
-  '6pm-7pm',
-  '7pm-8pm',
+    "6am-7am",
+    "7am-8am",
+    "8am-9am",
+    "9am-10am",
+    "10am-11am",
+    "11am-12nn",
+    "12nn-1pm",
+    "1pm-2pm",
+    "2pm-3pm",
+    "3pm-4pm",
+    "4pm-5pm",
+    "5pm-6pm",
+    "6pm-7pm",
+    "7pm-8pm",
   ];
 
-  const [values, setvalues,] = useState({
+  const [values, setvalues] = useState({
     code: "",
     name: "",
     type: "Point",
@@ -223,7 +223,7 @@ const Clinic = () => {
   });
 
   const handleChange = (e) => {
-    setvalues({ ...values, [e.target.name]: e.target.value, });
+    setvalues({ ...values, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
@@ -334,7 +334,7 @@ const Clinic = () => {
                   onCellClick={handleCellClick}
                   onRowClick={handleRowClick}
                   components={{
-                    Toolbar: GridToolbar,
+                    Toolbar: CustomClinicGrid,
                   }}
                   {...clinic}
                 />
@@ -348,7 +348,6 @@ const Clinic = () => {
         <DialogTitle>Add Clinic</DialogTitle>
         <form encType="multipart/form-data" noValidate onSubmit={handleSubmit}>
           <DialogContent>
-
             <Grid container spacing={2} xs={12} sm={12} md={12}>
               <Grid item xs={12} sm={12} md={6}>
                 <StyledTextField
@@ -412,22 +411,22 @@ const Clinic = () => {
               </Grid>
 
               <Grid item xs={12} sm={12} md={6}>
-              <FormControl fullWidth>
-                <InputLabel>Time Slots</InputLabel>
-                <Select
-                multiple
-                onChange={handleTime}
-                value={timeSlot}
-                renderValue={(selected) => selected.join(', ')}
-                >
-                  {time.map((timeslot) => (
-                    <MenuItem key={timeslot} value={timeslot}>
-                      <Checkbox checked={timeSlot.indexOf(timeslot) > -1}/>
-                      <ListItemText primary={timeslot} />
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+                <FormControl fullWidth>
+                  <InputLabel>Time Slots</InputLabel>
+                  <Select
+                    multiple
+                    onChange={handleTime}
+                    value={timeSlot}
+                    renderValue={(selected) => selected.join(", ")}
+                  >
+                    {time.map((timeslot) => (
+                      <MenuItem key={timeslot} value={timeslot}>
+                        <Checkbox checked={timeSlot.indexOf(timeslot) > -1} />
+                        <ListItemText primary={timeslot} />
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
               </Grid>
 
               <Grid item xs={12} sm={12} md={6}>
@@ -511,7 +510,7 @@ const Clinic = () => {
               </Grid>
             </Grid>
 
-           <DialogActions>
+            <DialogActions>
               <StyledButton
                 type="submit"
                 variant="contained"
@@ -520,16 +519,16 @@ const Clinic = () => {
                 Add
               </StyledButton>
               <Button
-              variant="outlined"
-              sx={{ mt: 3, mb: 2 }}
-              onClick={handleClose}
-            >
-              Cancel
-            </Button>
-           </DialogActions>
+                variant="outlined"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={handleClose}
+              >
+                Cancel
+              </Button>
+            </DialogActions>
           </DialogContent>
-          </form>
-        </Dialog>
+        </form>
+      </Dialog>
 
       <Footer />
     </Box>

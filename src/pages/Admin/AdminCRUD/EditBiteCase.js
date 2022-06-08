@@ -124,6 +124,7 @@ const EditBiteCase = ({ data, id }) => {
                       size="small"
                       //autoComplete="user"
                       autoFocus
+                      disabled
                       onChange={handleChange}
                       value={values.user}
                     />
@@ -313,10 +314,12 @@ const EditBiteCase = ({ data, id }) => {
                       required
                       fullWidth
                       id="vaccine"
+                      aria-readonly
                       label="Vaccine"
                       name="vaccine"
                       size="small"
                       autoFocus
+                      disabled
                       onChange={handleChange}
                       value={values.vaccine}
                     />
@@ -344,62 +347,67 @@ const EditBiteCase = ({ data, id }) => {
                   </Grid>
 
                   <Grid item xs={12} sm={6} md={6}>
-              <FormControl
-                  required
-                  fullWidth
-                  size="small"
-                  sx={{ backgroundColor: "white" }}
-                >
-                  <InputLabel>Classification</InputLabel>
-                  <Select
-                    label="Patient Classification"
-                    onChange={handleChange}
-                    name="classification"
-                    value={values.classification}
-                  >
-                    <MenuItem value="Healthy">Healthy</MenuItem>
-                    <MenuItem value="Non-Traceable">Non-Traceable</MenuItem>
-                    <MenuItem value="Rabies Suspect">Rabies Suspect</MenuItem>
-                    <MenuItem value="Rabies Probable">Rabies Probable</MenuItem>
-                    <MenuItem value="Rabies Confirmed">Rabies Confirmed</MenuItem>
-                  </Select>                
-                </FormControl>
-              </Grid>
+                    <FormControl
+                      required
+                      fullWidth
+                      size="small"
+                      sx={{ backgroundColor: "white" }}
+                    >
+                      <InputLabel>Classification</InputLabel>
+                      <Select
+                        label="Patient Classification"
+                        onChange={handleChange}
+                        name="classification"
+                        value={values.classification}
+                      >
+                        <MenuItem value="Healthy">Healthy</MenuItem>
+                        <MenuItem value="Non-Traceable">Non-Traceable</MenuItem>
+                        <MenuItem value="Rabies Suspect">
+                          Rabies Suspect
+                        </MenuItem>
+                        <MenuItem value="Rabies Probable">
+                          Rabies Probable
+                        </MenuItem>
+                        <MenuItem value="Rabies Confirmed">
+                          Rabies Confirmed
+                        </MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
 
                   <Grid item xs={12} sm={6} md={6}>
-                <FormControl
-                  required
-                  fullWidth
-                  size="small"
-                  sx={{ backgroundColor: "white" }}                 
-                >
-                  <InputLabel>Animal Status</InputLabel>
-                  <Select
-                    label="Animal Status"
-                    onChange={handleChange}
-                    name="animal_status"
-                    value={values.animal_status}
-                  >
-                    <MenuItem value="Dead">Dead</MenuItem>
-                    <MenuItem value="Alive">Alive</MenuItem>
-                    <MenuItem value="Killed">Killed</MenuItem>
-                  </Select>
-                  
-                </FormControl>
-              </Grid>
+                    <FormControl
+                      required
+                      fullWidth
+                      size="small"
+                      sx={{ backgroundColor: "white" }}
+                    >
+                      <InputLabel>Animal Status</InputLabel>
+                      <Select
+                        label="Animal Status"
+                        onChange={handleChange}
+                        name="animal_status"
+                        value={values.animal_status}
+                      >
+                        <MenuItem value="Dead">Dead</MenuItem>
+                        <MenuItem value="Alive">Alive</MenuItem>
+                        <MenuItem value="Killed">Killed</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
 
-              <Grid item xs={12} sm={6} md={6}>
-                <StyledTextField
-                  required
-                  size="small"
-                  sx={{ backgroundColor: "white" }}
-                  label="Patient Status"
-                  name="patient_status"
-                  fullWidth
-                  onChange={handleChange}
-                  value={values.patient_status}
-                />
-              </Grid>
+                  <Grid item xs={12} sm={6} md={6}>
+                    <StyledTextField
+                      required
+                      size="small"
+                      sx={{ backgroundColor: "white" }}
+                      label="Patient Status"
+                      name="patient_status"
+                      fullWidth
+                      onChange={handleChange}
+                      value={values.patient_status}
+                    />
+                  </Grid>
                 </Grid>
 
                 <Box
@@ -409,16 +417,13 @@ const EditBiteCase = ({ data, id }) => {
                     backgroundColor: "white",
                     alignItems: "center",
                     justifyContent: "center",
-                    mt:3
+                    mt: 3,
                   }}
                 >
                   <StyledButton type="submit" variant="contained">
                     Edit
                   </StyledButton>
-                  <StyledButton
-                    variant="outlined"
-                    onClick={handleClose}
-                  >
+                  <StyledButton variant="outlined" onClick={handleClose}>
                     Cancel
                   </StyledButton>
                 </Box>

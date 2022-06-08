@@ -3,7 +3,7 @@ import { Alert, AlertTitle } from "@mui/material";
 import { useSelector } from "react-redux";
 
 const InventoryAlert = () => {
-  const { stock_alert, expiration_alert } = useSelector(
+  const { stock_alert, expiration_alert, expired_alert } = useSelector(
     (state) => state.inventory
   );
 
@@ -24,6 +24,16 @@ const InventoryAlert = () => {
           {expiration_alert[0].brand_name}{" "}
           {expiration_alert.length > 1
             ? `and ${expiration_alert.length - 1} other/s are expiring`
+            : "is expiring"}
+        </Alert>
+      )}
+
+      {expired_alert.length > 0 && (
+        <Alert severity="error">
+          <AlertTitle>Vaccine Already Expired</AlertTitle>
+          {expired_alert[0].brand_name}{" "}
+          {expired_alert.length > 1
+            ? `and ${expired_alert.length - 1} other/s are already expired`
             : "is expiring"}
         </Alert>
       )}

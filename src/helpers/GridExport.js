@@ -47,3 +47,31 @@ export function CustomInventoryGrid() {
     </GridToolbarContainer>
   );
 }
+
+export function CustomUsersGrid() {
+  return (
+    <GridToolbarContainer>
+      <GridToolbarColumnsButton />
+      <GridToolbarFilterButton />
+      <GridToolbarDensitySelector />
+      <GridToolbarExport
+        printOptions={{ disableToolbarButton: true }}
+        csvOptions={{ fileName: "users_" + Date.now() }}
+      />
+    </GridToolbarContainer>
+  );
+}
+
+export function CustomClinicGrid() {
+  return (
+    <GridToolbarContainer>
+      <GridToolbarColumnsButton />
+      <GridToolbarFilterButton />
+      <GridToolbarDensitySelector />
+      <GridToolbarExport
+        printOptions={{ disableToolbarButton: true }}
+        csvOptions={{ fileName: "clinics_" + Date.now() }}
+      />
+    </GridToolbarContainer>
+  );
+}

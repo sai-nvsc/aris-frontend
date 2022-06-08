@@ -659,7 +659,11 @@ const AddBiiteCase = () => {
                   >
                     {inventory &&
                       inventory.map((vax) => (
-                        <MenuItem value={vax.brand_name} key={vax}>
+                        <MenuItem
+                          value={vax.brand_name}
+                          key={vax}
+                          disabled={vax.IsExpired}
+                        >
                           {vax.brand_name + ` (L#` + vax.batch_no + `)`}
                         </MenuItem>
                       ))}

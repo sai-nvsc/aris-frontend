@@ -199,6 +199,7 @@ const EditInventory = ({ data, id }) => {
                     views={["year", "month", "day"]}
                     value={moment(values.exp_date)}
                     name="exp_date"
+                    disabled
                     disablePast
                     InputProps={{ readOnly: true }}
                     onChange={(newDate) =>

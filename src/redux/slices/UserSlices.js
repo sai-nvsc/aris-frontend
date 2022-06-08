@@ -246,6 +246,7 @@ export const LoginSuperAdminThunk = createAsyncThunk(
 const initialState = {
   user: null,
   users: null,
+  loading_users: false,
   loading: false,
   errors: null,
   success: null,
@@ -427,14 +428,14 @@ const userSlice = createSlice({
     },
 
     [GetAllUserThunk.pending]: (state, action) => {
-      state.loading = true;
+      state.loading_users = true;
     },
     [GetAllUserThunk.fulfilled]: (state, action) => {
-      state.loading = false;
+      state.loading_users = false;
       state.users = action.payload.user;
     },
     [GetAllUserThunk.rejected]: (state, action) => {
-      state.loading = false;
+      state.loading_users = false;
       state.errors = action.payload;
     },
     [ResendVerificationThunk.pending]: (state, action) => {
