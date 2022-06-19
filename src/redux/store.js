@@ -13,8 +13,8 @@ export const store = configureStore({
   reducer: {
     user: UserReducer,
     pets: PetReducer,
-    inventory: InventoryReducer,
     vaccine: VaccineReducer,
+    inventory: InventoryReducer,
     bitecase: BiteCaseReducer,
     appointments: AppointmentReducer,
     admin: AdminReducer,
