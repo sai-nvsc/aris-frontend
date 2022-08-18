@@ -234,8 +234,9 @@ const Bitecases = () => {
   };
 
   const PressedEnter = (e) => {
-    if (e.code === "Enter" && e.target.value !== "") {
-      window.location.assign(`/admin/bitecase/get/${e.target.value}`);
+    e.preventDefault();
+    if (values.search !== "") {
+      window.location.assign(`/admin/bitecase/get/${values.search}`);
     }
   };
   return (
@@ -294,6 +295,7 @@ const Bitecases = () => {
           </Grid>
 
           <Grid item>
+            <form onSubmit={PressedEnter}>
             <Typography component="span">
               Scan Bite Case QR Code:{" "}
               <StyledTextField
@@ -302,9 +304,10 @@ const Bitecases = () => {
                 value={values.search}
                 label="Press 'Enter' After Scan"
                 onChange={handleChange}
-                onKeyUp={PressedEnter}
+                // onKeyUp={PressedEnter}
               />
             </Typography>
+            </form>
           </Grid>
 
           <Grid item>

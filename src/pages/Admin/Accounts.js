@@ -7,6 +7,7 @@ import {
   AlertTitle,
   Box,
   Container,
+  Dialog,
   FormControl,
   Grid,
   InputLabel,
@@ -91,6 +92,8 @@ const Accounts = () => {
       align: "center",
       minWidth: 90,
       renderCell: (cellValues) => {
+        console.log(cellValues)
+        console.log(user._id)
         return (
           <>
             <EditAccount
@@ -103,6 +106,8 @@ const Accounts = () => {
               name={admin.admin_name}
               collection="admins"
               data={cellValues.row}
+              user={user._id}
+              
             />
           </>
         );
@@ -244,15 +249,11 @@ const Accounts = () => {
         </Grid>
       </Container>
 
-      <Modal
+      <Dialog
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-        justifyContent="center"
-        transform="translate(-50%, -50%)"
-        top="50%"
-        position="absolute"
+        maxWidth="md"
+       
       >
         <Box
           sx={{
@@ -381,7 +382,7 @@ const Accounts = () => {
             </Box>
           </Container>
         </Box>
-      </Modal>
+      </Dialog>
       <Footer />
     </Box>
   );

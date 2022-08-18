@@ -66,6 +66,7 @@ const Delete = ({ id, name, collection, ...rest }) => {
         startIcon={<DeleteForever color="error" />}
         color="error"
         onClick={dialogOpen}
+        disabled={rest.user===id}
       ></Button>
       <Dialog onClose={handleClose} open={OpemModal}>
         <DialogTitle>Delete {name} ?</DialogTitle>
