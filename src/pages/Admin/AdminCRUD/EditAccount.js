@@ -29,6 +29,7 @@ const EditAcc = ({ data }) => {
     role: data.role,
     email: data.email,
     username: data.username,
+    clinic:data.clinic
   });
 
   const onInputChange = (e) => {
@@ -52,6 +53,7 @@ const EditAcc = ({ data }) => {
       role: data.role,
       email: data.email,
       username: data.username,
+      clinic:data.clinic
     });
   };
 
@@ -62,7 +64,7 @@ const EditAcc = ({ data }) => {
       role: data.role,
       email: data.email,
       username: data.username,
-      //password: data.password,
+      clinic:data.clinic
     });
   };
   const handleOpen = () => {
