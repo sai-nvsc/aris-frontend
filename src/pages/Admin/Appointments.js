@@ -349,7 +349,7 @@ const Appointments = () => {
                   required
                   fullWidth
                   id="user"
-                  label="Patient"
+                  label="ARIS USER ID (Scan QR Code)"
                   name="user"
                   size="small"
                   onChange={handleChange}
