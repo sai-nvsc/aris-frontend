@@ -153,7 +153,6 @@ const EditAcc = ({ data }) => {
                     name="clinic"
                     size="small"
                     value={values.clinic}
-                    disabled="true"
                   />
                 </Grid>
 
