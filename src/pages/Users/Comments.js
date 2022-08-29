@@ -47,7 +47,7 @@ export const Comments = ({ reports }) => {
                     {report.reply.length > 0 && (
                       <Grid justifyContent="left" item xs zeroMinWidth>
                         <h4 style={{ margin: 0, textAlign: "left" }}>
-                          {report.admin[0].admin_name} (Admin)
+                          {report.admin[0] ? report.admin[0].admin_name:'Clinic'} (Admin)
                         </h4>
                         <p style={{ textAlign: "left" }}>
                           {report.reply[0].text}{" "}
